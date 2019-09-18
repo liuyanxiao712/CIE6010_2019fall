@@ -1,0 +1,31 @@
+%% page 32
+%% fig 4
+\def\RightAngle[size=#1](#2,#3,#4){%
+ \draw ($(#3)!#1!(#2)$) -- 
+       ($($(#3)!#1!(#2)$)!#1!90:(#2)$) --
+       ($(#3)!#1!(#4)$);
+ \path (#3) --
+ ($($(#3)!#1!(#2)$)!#1!90:(#2)$);
+}
+\begin{tikzpicture}
+\draw[thick,-stealth] (-3, 0) -- (3, 0);
+\draw[thick,-stealth] (0, -2) -- (0, 4);
+
+\coordinate (A) at (-3, -1.5);
+\coordinate (B) at (3, 1.5);
+\coordinate (C) at (-0.8, 1.1);
+\draw (A) -- (B) node[right]{$\mathcal{S}$};
+
+\coordinate (A1) at (-4, -0.5);
+\coordinate (B1) at (3, 3);
+\coordinate (C1) at (0.8, 3.4);
+\draw (A1) -- (B1) node[right]{$\mathcal{A}$};
+
+\coordinate (D1) at ($(A1)!(C1)!(B1)$);
+\draw[dashed] (C1)node[above]{$x$} -- (D1)node[below right]{$x^{*} = x_{\mathcal{S}} + x^{(0)}$};
+\draw [dashed, -stealth] ($(A)!(C)!(B)$)node[below]{$x_{\mathcal{S}}$} -- (D1);
+
+%% right angle
+\RightAngle[size=10pt](B1,D1,C1);
+
+\end{tikzpicture}

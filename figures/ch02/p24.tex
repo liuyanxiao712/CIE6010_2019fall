@@ -1,0 +1,25 @@
+%% page 24
+\def\RightAngle[size=#1](#2,#3,#4){%
+ \draw ($(#3)!#1!(#2)$) -- 
+       ($($(#3)!#1!(#2)$)!#1!90:(#2)$) --
+       ($(#3)!#1!(#4)$);
+ \path (#3) --
+ ($($(#3)!#1!(#2)$)!#1!90:(#2)$);
+}
+\begin{tikzpicture}
+ \coordinate (A) at (-1, -0.75);
+ \coordinate (B) at (4, 3);
+ \coordinate (O) at (0, 0);
+
+ \draw (A) -- (B) node[pos=1.15, font=\small]{$\mathcal{S}$};
+ \filldraw[black] (O) circle (1pt) node[anchor=west] {$O$};
+ \draw [ -stealth] (A) -- (3, 2.25) coordinate (yn) node[right]{$v$};
+ \draw [ -stealth] (O) -- (1, 2.7) coordinate (yn) node[right]{$x$};
+ \draw[dashed] (yn) -- ($(A)!(yn)!(B)$);
+ \draw [ -stealth] (0,0) -- ($(A)!(yn)!(B)$) node[right]{$x_S$};
+ 
+ \coordinate (S) at ($(A)!(yn)!(B)$);
+ %% right angle
+ \RightAngle[size=10pt](yn,S,B);
+
+\end{tikzpicture}

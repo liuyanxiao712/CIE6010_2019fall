@@ -1,0 +1,22 @@
+%% page 28
+%% fig 3
+\begin{tikzpicture}
+\coordinate (O) at (0, 0);
+\coordinate (A) at (3, 0);
+\coordinate (B) at (2, 2);
+\coordinate (C) at (0, 3);
+
+\draw [ -stealth] (O) -- (A) node[pos=1.15, font=\small]{$x^{(1)}$};
+\draw [ -stealth] (O) -- (B) node[pos=1.15, font=\small]{$x^{(2)}$};
+
+\draw[dashed] (B) -- ($(O)!(B)!(A)$);
+
+\draw [ -stealth] (O) -- ($(O)!(B)!(A)$) node[below]{$u$};
+\draw [ -stealth] (O) -- (1, 0) node[below]{$z^{(1)}$};
+
+\draw (O) -- (C);
+\draw[dashed] (B) -- ($(O)!(B)!(C)$);
+
+\draw [ -stealth] (O) -- ($(O)!(B)!(C)$) node[left]{$x^{(2)}-u$};
+\draw [ -stealth] (O) -- (0, 1) node[left]{$z^{(2)}$};
+\end{tikzpicture}

@@ -1,0 +1,16 @@
+%% page 18
+\begin{tikzpicture}
+\coordinate (O) at (0, 0);
+\coordinate (A) at (4, 2);
+\coordinate (B) at (1, 2);
+
+\draw [ -stealth] (O) -- (A)node[below]{$x$};
+\draw [ -stealth] (O) -- (B)node[above]{$y$};
+
+\draw[dashed, -stealth] ($(O)!(B)!(A)$) -- (B)node[above, midway]{$\vec e$};
+
+\draw [ -stealth] (O) -- ($(O)!(B)!(A)$)node[below right]{$x^{'}$};
+
+\draw (A) -- (O) -- (B)
+pic [draw= black, angle radius= 0.5cm, "$\theta$"] {angle = A--O--B};
+\end{tikzpicture}

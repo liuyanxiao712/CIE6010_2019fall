@@ -1,0 +1,15 @@
+%% page 23
+%% fig 1
+\begin{tikzpicture}[dot/.style={circle,inner sep=1pt,fill,label={#1},name=#1},
+  extended line/.style={shorten >=-#1,shorten <=-#1},
+  extended line/.default=1cm]
+ \draw[thick,-stealth] (-2.5, 0) -- (4.5, 0);
+ \draw[thick,-stealth] (0, -2.5) -- (0, 4.5);
+
+ \coordinate (A) at (-1, -0.75);
+ \coordinate (B) at (4, 3);
+ \draw [extended line=0cm, -] (A) -- (B) node[pos=1.15, font=\small]{$\mathcal{S}$};     
+ \draw [ -stealth] (0,0) -- (1.3, 2.15) coordinate (yn) node[right]{$x$};
+ \draw[dashed] (yn) -- ($(A)!(yn)!(B)$);
+ \draw [ -stealth] (0,0) -- ($(A)!(yn)!(B)$);
+\end{tikzpicture}

@@ -1,0 +1,22 @@
+%% page 33
+
+\begin{tikzpicture}
+\draw[thick,-stealth] (-3, 0) -- (3, 0);
+\draw[thick,-stealth] (0, -2) -- (0, 4);
+
+\coordinate (A1) at (-4, -0.5);
+\coordinate (B1) at (3, 3);
+\coordinate (C1) at (0.8, 3.4);
+\coordinate (O) at (0, 0);
+
+\draw (A1) -- (B1) node[right]{$\mathcal{A}$};
+
+\node [above] at (C1) {$x$};
+\draw[dashed, -stealth] ($(A1)!(C1)!(B1)$) -- (C1)node[above, midway]{$\vec e$};
+
+\draw [ -stealth] (O) -- ($(A1)!(C1)!(B1)$)node[below right]{$x^{*}$};
+
+\draw (C1) -- ($(A1)!(C1)!(B1)$) coordinate (D) -- (O)
+pic [draw= black, angle radius= 0.5cm, "$e$"] {angle = C1--D--O};
+
+\end{tikzpicture}

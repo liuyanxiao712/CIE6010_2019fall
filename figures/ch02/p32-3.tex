@@ -1,0 +1,25 @@
+%% page 32
+%% fig 3
+\def\RightAngle[size=#1](#2,#3,#4){%
+ \draw ($(#3)!#1!(#2)$) -- 
+       ($($(#3)!#1!(#2)$)!#1!90:(#2)$) --
+       ($(#3)!#1!(#4)$);
+ \path (#3) --
+ ($($(#3)!#1!(#2)$)!#1!90:(#2)$);
+}
+\begin{tikzpicture}
+\draw[thick,-stealth] (-3, 0) -- (3, 0);
+\draw[thick,-stealth] (0, -2) -- (0, 4);
+
+\coordinate (A) at (-3, -1.5);
+\coordinate (B) at (3, 1.5);
+\coordinate (C) at (-0.8, 1.1);
+\coordinate (D) at ($(A)!(C)!(B)$);
+
+\draw (A) -- (B) node[right]{$\mathcal{S}$};
+\draw [dashed] (C)node[left]{$x-x^{(0)}$} -- (D)node[below]{$x_{\mathcal{S}}$};
+
+%% right angle
+\RightAngle[size=10pt](B,D,C);
+
+\end{tikzpicture}

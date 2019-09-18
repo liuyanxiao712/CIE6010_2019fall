@@ -1,0 +1,104 @@
+%% Placeholder for introductory chapter
+
+This class will introduce you to the fundamental theory and models of
+optimization as well as the geometry that underlies them.  The first
+portion of the course focuses on geometry: recalling and generalizing
+linear algebraic concepts you first met in your linear algebra course.
+The second portion focuses on optimization.  Presentation of
+applications is woven throughout.  We will draw examples from diverse
+areas of the engineering and natural sciences.  The material covered
+in this course will prove of interest to students from all areas of
+engineering, from the computer sciences and, more generally, from
+disciplines wherein mathematical structure and the use of numerical
+data is of central importance.
+
+The main prior courses that we will be building on are vector
+calculus and linear algebra.  No prior exposure to optimization is assumed.
+
+The course text is {\em Optimization Models}, by G.~Calafiore and
+L.~El Ghaoui, Cambridge Univ.~Press, 2014.  These notes are provided
+as a supplement to, and not a replacement for, the course text.  Many problem set problems will be drawn from the course text.
+
+\section*{Notation}
+
+We work mainly with finite-dimensional real-valued vectors in the
+course.  Lower-case is used for vectors.  A length-$n$ real vector $x$
+is an ordered collection of real numbers where the $i$th coordinate of
+$x$ is denoted $x_i \in \reals$.  The default will be column vectors
+so
+\begin{equation*}
+x = \left[ \begin{array}{c} x_1 \\ x_2 \\ \vdots \\ x_n\end{array} \right].
+\end{equation*}
+The length $n$ of the vector is also termed the ``dimension'' of the vector, which will subsequently be defined formally.  Alternately, the elements of $x$ may be complex, i.e., $x_i \in \complex$, or in some other field, $x_i \in \field$.  Again, our focus will be in the reals and we compactly denote the space of $x$ as $x \in \reals^n$.
+The transpose of a column vector is a row vector. The transpose $x^\trans$ of $x$ is
+\begin{equation*}
+x^\trans = [ x_1 \ x_2 \ \ldots x_n].
+\end{equation*}
+
+We often need to work with a set (or a list) of vectors,
+\begin{equation*}
+\{ \vecx{1}, \vecx{2}, \ldots, \vecx{m}\}
+\end{equation*}
+where $\vecx{i} \in \reals^n$, $i \in \{1, 2, \ldots, m\}$ and
+$(\vecx{i})^\trans = [ \vecx[1]{i} \ \vecx[2]{i} \ \ldots \ \vecx[n]{i} ] $.  The
+set $\{1, 2, \ldots, m\}$ is the index set of $m$ elements.  We often
+use the shorthand $[m]$ for the index set; in the above we would have
+written $i \in [m]$.  We note that the book is not one hundred percent
+consistent on this notation.  It sometimes reverts to the (simpler)
+notation $\{x_1, x_2, \ldots x_m\}$ where $x_i \in \reals^n$ and $i
+\in [m]$ for sets of vectors.  This less burdensome notation is used n
+settings where sets of vectors are considered, but it is not necessary
+also to index individual elements of the vectors.
+
+Uppercase is used for matrices.  A matrix $A$ consisting of $n$ rows
+and $m$ columns of real numbers is denoted $A \in \reals^{n \times
+  m}$.  The element in the $i$th row and $j$th column of $A$ is
+denoted $[A]_{ij}$ (alternately $a_{ij}$).  The transpose of $A$,
+$A^\trans$ is the matrix the element in the $i$th row and $j$th
+column of which is $[A]_{ji}$ (alternately $a_{ji}$).
+
+Sets are denoted using calligraphic font.  (I will say ``script'' in
+class since ``calligraphic'' is a mouthful.)  For example, the set of
+vectors described above might be denoted $\calX = \{ \vecx{1}, \vecx{2},
+\ldots, \vecx{m}\}$.  The cardinality of the set $\calX$ is denoted $|\calX|$;
+in the above example $|\calX| = m$.  For some special sets we make an
+exception.  In particular to denote real numbers, complex numbers, and
+integers we respectively write $\reals$, $\complex$, and $\integers$.
+Occassionally we have need to refer to the sets of non-negative and
+positive real numbers, respectively denoted $\reals_+$ and
+$\reals_{++}$.
+
+Functions map elements of one set to another.  As with vectors we use
+lowercase letters to denote functions.  While we typically use letters
+towards the end of the Latin alphabet for vectors ($u$, $v$, $w$, $x$,
+$y$, $z$), we typically use letters earlier in the alphabet for
+functions ($f$, $g$, $h$), and letters in the middle for indexing
+($i$, $j$, $k$, $l$, $m$, $n$).  
+
+We write $f: \calX \rightarrow \calY$ to denote a function $f$ that
+maps elements of $\calX$ to elements of $\calY$.  This notation is
+akin to strongly-typed programming languages.  The function $f$ needs
+an input in $\calX$ to be able to process it.  Elements not in $\calX$
+are not acceptable as inputs.  That said, not every element of $\calX$
+may be acceptable to $f$.  (E.g., if $f$ calculates the average age of
+students in a class, no age inputted into the function should be
+negative.)  The acceptable subset of $\calX$ is the domain of $f$,
+denoted ${\rm dom} f$.  It is often convenient to define $f(x)
+= \infty$ for all $x \notin {\rm dom} f$.  In that case ${\rm dom} f
+= \{x \in \calX | \, |f(x)| < \infty\}$.  In this course we mostly
+consider functions of the form $f : \reals^n \rightarrow
+\reals^m$.  Some terminology that you might be aware of concerns the relationship
+between $n$ and $m$.  If $n \neq m$ then $f$ is  a ``map''.
+If $n = m$ then $f$ is an ``operator''.  If $m = 1$ then $f$ is a
+``functional''.  An example of an $f: \reals \rightarrow \reals$ where ${\rm dom} f = \reals_+$ is plotted in Fig.~\ref{fig.oneDfunc}.
+
+
+\begin{marginfigure}
+  \centering
+  \resizebox{7.5cm}{3cm}{
+  \input{./figures/ch01/oneDimSignal}
+  }
+  \caption{A function $f: \reals \rightarrow \reals$.}
+  \label{fig.oneDfunc}
+\end{marginfigure}
+

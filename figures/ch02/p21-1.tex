@@ -1,0 +1,28 @@
+%% page 21
+%% fig 1
+\def\RightAngle[size=#1](#2,#3,#4){%
+ \draw ($(#3)!#1!(#2)$) -- 
+       ($($(#3)!#1!(#2)$)!#1!90:(#2)$) --
+       ($(#3)!#1!(#4)$);
+ \path (#3) --
+ ($($(#3)!#1!(#2)$)!#1!90:(#2)$);
+}
+\begin{tikzpicture}
+\node [below right] at (2, -1) {orthogonal};
+\draw [<-] (0, 5) -- (0, -3);
+\draw [->] (-3, 0) -- (5, 0);
+
+\coordinate (A) at (5, -5);
+\coordinate (B) at (-3, -3);
+\coordinate (O) at (0, 0);
+
+\draw [-latex, ultra thick] (O) -- (A);
+\node [below] at (5, -5) {$x^{1}$};
+
+\draw [-latex, ultra thick] (O) -- (B);
+\node [below right] at (-3, -3) {$x^{2}$};
+
+%% right angle
+\RightAngle[size=10pt](B,O,A);
+
+\end{tikzpicture}

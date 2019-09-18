@@ -1,0 +1,27 @@
+%% page 28
+%% fig 2
+\def\RightAngle[size=#1](#2,#3,#4){%
+ \draw ($(#3)!#1!(#2)$) -- 
+       ($($(#3)!#1!(#2)$)!#1!90:(#2)$) --
+       ($(#3)!#1!(#4)$);
+ \path (#3) --
+ ($($(#3)!#1!(#2)$)!#1!90:(#2)$);
+}
+\begin{tikzpicture}
+\coordinate (O) at (0, 0);
+\coordinate (A) at (3, 0);
+\coordinate (B) at (2, 2);
+
+\draw [ -stealth] (O) -- (A) node[pos=1.15, font=\small]{$x^{(1)}$};
+\draw [ -stealth] (O) -- (B) node[pos=1.15, font=\small]{$x^{(2)}$};
+
+\coordinate (C) at ($(O)!(B)!(A)$);
+\draw[dashed] (B) -- (C);
+
+%% right angle
+\RightAngle[size=10pt](A,C,B);
+
+\draw [ -stealth] (O) -- (C) node[below]{$u$};
+\draw [ -stealth] (O) -- (1, 0) node[below]{$z^{(1)}$};
+
+\end{tikzpicture}

@@ -1,0 +1,19 @@
+%\begin{tikzpicture}[domain=0:10,samples = 200]
+\begin{tikzpicture}[domain=0:10,samples = 60]
+	  \draw[very thin,color=gray] (0,4) ;
+%	  \draw[->] (-1,0) -- (10,0) node[font=\fontsize{120}{144},right]{$t$};
+%	  \draw[->] (0,-2) -- (0,3) node[font=\fontsize{120}{144},above] {$x(t)$};
+	  \draw[->] (-1,0) -- (10,0) node[font=\normalsize,right]{$\reals$};
+	  \draw[->] (0,-2) -- (0,3) node[font=\normalsize,above] {$f$};
+	  \draw[color=blue]   plot (\x,{(3+0.3517*sin(0.0759*3* \x r) +
+		  0.8308*sin(0.0540*3* \x r) +0.5853*sin(0.5308*3* \x r) +
+		  0.5497*sin(0.7792*3* \x r) +0.9172*sin(0.9340*3* \x r) +
+		  0.2858*sin(0.1299*3* \x r) +0.7572*sin(0.5688*3* \x r) +
+		  0.7537*sin(0.4694*3* \x r) +0.3804*sin(0.0119*3* \x r) +
+		  0.5678*sin(0.3371*3* \x r) -(0.3517*cos(0.0759*3* \x r) +
+		  0.8308*cos(0.0540*3* \x r) +0.5853*cos(0.5308*3* \x r) +
+		  0.5497*cos(0.7792*3* \x r) +0.9172*cos(0.9340*3* \x r) +
+		  0.2858*cos(0.1299*3* \x r) +0.7572*cos(0.5688*3* \x r) +
+		  0.7537*cos(0.4694*3* \x r) +0.3804*cos(0.0119*3* \x r) +
+		  0.5678*cos(0.3371*3* \x r)))/2 }) ;
+  \end{tikzpicture}

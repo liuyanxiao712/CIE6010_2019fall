@@ -1,0 +1,29 @@
+%% page 30
+%% fig 2
+\def\RightAngle[size=#1](#2,#3,#4){%
+ \draw ($(#3)!#1!(#2)$) -- 
+       ($($(#3)!#1!(#2)$)!#1!90:(#2)$) --
+       ($(#3)!#1!(#4)$);
+ \path (#3) --
+ ($($(#3)!#1!(#2)$)!#1!90:(#2)$);
+}
+\begin{tikzpicture}[dot/.style={circle,inner sep=1pt,fill,label={#1},name=#1},
+  extended line/.style={shorten >=-#1,shorten <=-#1},
+  extended line/.default=1cm]
+\draw[thick,-stealth] (-2.5, 0) -- (4.5, 0);
+\draw[thick,-stealth] (0, -2.5) -- (0, 4.5);
+
+\coordinate (O) at (0, 0) node[below right]{$O$};
+\coordinate (A) at (4, 3);
+\coordinate (B) at (3, 4);
+\coordinate (C) at (0, 1);
+\coordinate (D) at ($(C)!(B)!(A)$);
+
+\draw [extended line=3cm, -] (C) -- (A) node[below, pos=1.5, font=\small]{$\mathcal{A}$};
+\draw [ -stealth] (O) -- (B);
+\draw[dashed] (B) -- (D);
+
+%% right angleS
+\RightAngle[size=10pt](B,D,C);
+
+\end{tikzpicture}
