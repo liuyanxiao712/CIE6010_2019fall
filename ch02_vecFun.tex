@@ -906,7 +906,29 @@ XXX to higher dimensions as needed
 
 Stacking up results to XXX yields "QR" decomposition
 
-matrix here
+\begin{align*}
+	A&=\left[\begin{matrix}
+	\vdots&\vdots&\cdots&\vdots\\
+	x^{1}&x^{2}&\cdots&x^{m}\\
+	\vdots&\vdots&\cdots&\vdots
+	\end{matrix}\right]=\left[\begin{matrix}
+	\vdots&\vdots&\cdots&\vdots\\
+	z^{1}&z^{2}&\cdots&z^{m}\\
+	\vdots&\vdots&\cdots&\vdots
+	\end{matrix}\right]
+	\left[\begin{matrix}
+	r_{11}&r_{12}&r_{13}&\cdots\\
+	0&r_{22}&r_{23}&\cdots\\
+	0&0&r_{33}&\cdots\\
+	\vdots&\ddots& & 
+	\end{matrix}\right]\\
+	&=QR\\
+	&=\left[\begin{matrix}
+	\vdots&\vdots&\cdots\\
+	r_{11}z^{1}&r_{12}z^{1}+r_{22}z^{1}&\cdots \\
+	\vdots&\vdots&\cdots 
+	\end{matrix}\right]
+\end{align*}
 
 To date what have seen in linear algebra class
 
@@ -1035,7 +1057,7 @@ and translating back,
 $x^{(*)}=z^{(*)}+x^{(0)}$
 
 
-What are the conditons for optimality?
+What are the conditions for optimality?
 
 $z^{(*)}-(x-x^{(0)})\perp S$ and $z^{*}$ by projection XXX
 
@@ -1453,7 +1475,6 @@ Before give formula, note that
 2. Helps to consider an intermediate value z
 
 3. First consider the k element of $\nabla\Phi$, i.e., $[\nabla\Phi(x)]_{k}$
-
 \begin{align*}
 [\nabla\Phi(x)]_{k}&=\frac{\partial\Phi (x)}{\partial x_{k}}\\
 &=[\frac{\partial g_{1}(x)}{\partial x_{k}} \frac{\partial g_{2}(x)}{\partial x_{k}} \cdots \frac{\partial g_{m}(x)}{\partial x_{k}}] \nabla F(z)|_{z=g(x)}\\
@@ -1462,8 +1483,26 @@ Before give formula, note that
 
 Stacking up 
 
-matrix here
-
+$$
+\nabla \phi (x)
+=
+\left[\begin{matrix}
+	\frac{\partial \phi (x)}{\partial x_{1}}\\
+	0\\
+	0\\
+	0\\
+	\vdots\\
+	\frac{\partial \phi (x)}{\partial x_{n}}\\
+\end{matrix}\right]
+=
+\left[\begin{matrix}
+	\frac{\partial g_{1}(x)}{\partial x_{1}}&\frac{\partial g_{2}(x)}{\partial x_{1}}&\cdots&\frac{\partial g_{m}(x)}{\partial x_{1}}\\
+	\frac{\partial g_{1}(x)}{\partial x_{1}}& & &\vdots\\
+	\vdots& & & \\
+	\frac{\partial g_{1}(x)}{\partial x_{n}}&\cdots&\cdots&\frac{\partial g_{m}(x)}{\partial x_{n}}
+\end{matrix}\right]
+\nabla F(g(x))
+$$
 
 Example: $\Phi(x)=F(g(x))$, where $g:\reals_{n}\mapsto\reals_{m}$ is affine. 
 
@@ -1486,34 +1525,234 @@ and $g_{i}(x)=a_{i}^{\trans} x +b_{i}, i\in [m]$, $a_{i}\in\reals_{n}$, $b_{i}\i
 
 Thus, $[\nabla\Phi(x)]_{k}=[a_{1k} a_{2k} \cdots a_{mk}]\nabla F(z)|_{z=g(x)}$
 
-Stacking up we have 
+Stacking up we have
 
-matrix here
-
-
-
-Affine approximation
-
-Consider the Taylor series for $F:\reals_{n}\mapsto\reals$
-
-$$F(x)=F(x_{0})+\nabla F(x_{0})^{\trans} (x-x_{0})+ \epsilon(x)$$
-
-
-Example here
-
-
-
-
-
+$$\nabla \phi (x)=
+\left[\begin{matrix}
+a_{11}&a_{21}&a_{31}&\cdots&a_{m1}\\
+a_{12}&a_{22}&a_{32}&\cdots&a_{m2}\\
+\vdots& & & & \\
+a_{1n}&\cdots&\cdots&\cdots&a_{mn}\\
+\end{matrix}\right]
+\left[
+\begin{matrix}
+\frac{\partial F(z)}{\partial z_{1}}&\\
+\vdots&\\
+\vdots&\\
+\frac{\partial F(z)}{\partial z_{n}}&
+\end{matrix}\right]
+$$
 
 
 
+\textbf{Affine approximations}
+
+Consider the Taylor series for $F\colon \mathbb{R}^n \to \mathbb{R}$.
+
+$F(x) = F(x_0) + \nabla F(x_0)^{T} (x - x_0) + \varepsilon (x) $
+
+$\lim_{x \to x_0} \frac{\varepsilon (x)}{\| x - x_0 \|_2} = 0$
+
+Example
+
+$F(x) = 2 x_1^2 + x_2^2$ XXX along $x_1$ axis XXX along $x_2$
+
+$\nabla F(x) = \begin{bmatrix} 4x_1\\ 2x_2\\ \end{bmatrix}$
+
+$F(x) \cong F(x^{(0)}) + \nabla F(x^{(0)})^{T} (x - x^{(0)})$
+$\left. \nabla F(x) \right|_{x}$
+(*)
+
+\begin{displaymath}
+\nabla F \left( \begin{bmatrix} 0\\ 0\\ \end{bmatrix} \right)  =
+\begin{bmatrix} 0\\ 0\\ \end{bmatrix}
+\end{displaymath}
+
+\begin{displaymath}
+\nabla F \left( \begin{bmatrix} 1\\ 0\\ \end{bmatrix} \right)  =
+\begin{bmatrix} 4\\ 0\\ \end{bmatrix}
+\end{displaymath}
+
+\begin{displaymath}
+\nabla F \left( \begin{bmatrix} 0\\ 1\\ \end{bmatrix} \right)  =
+\begin{bmatrix} 0\\ 2\\ \end{bmatrix}
+\end{displaymath}
+
+figure here
+
+$C_F(b) = {x \in \mathbb{R}^2 | F(x) = t}$
+
+
+Sketch "level set" in 2-D
+
+figure here
+
+\begin{displaymath}
+\nabla F \left( \begin{bmatrix} 1\\ 0\\ \end{bmatrix} \right)  =
+\begin{bmatrix} 4\\ 0\\ \end{bmatrix}
+\end{displaymath}
+
+\begin{displaymath}
+\nabla F \left( \begin{bmatrix} 0\\ -1\\ \end{bmatrix} \right)  =
+\begin{bmatrix} 0\\ -2\\ \end{bmatrix}
+\end{displaymath}
+
+Let's visualize the set such that the increment in (*) is, 
+the First order, constant.
+I.e., which $x \in \mathbb{R}^2$ satisfy the relation
+
+${x | \nabla F(x_0)^{T} (x-x_0) = c}$
+
+
+Consider case $c=0$
+
+There are points s.t., to approx (*), has some level as $F(x_0)$ when $c=0$
+
+${x | \nabla F(x_0)^{T} (x-x_0) = 0}$
+
+figure here
+
+
+Consider $c = \varepsilon > 0$, a small positive XXX. Then, 
+${x | \nabla F(x_0)^{T} (x-x_0) = \varepsilon}$
+is points flat, to first order, have slightly higher cost (value, level). Then $F(x_0)$, XXX value at $x=x_0$.
+
+figure here
+
+In general the set
+\begin{align*}
+&\{x | \nabla F(x_0)^{T} (x-x_0) = c\}\\
+&= \{x | \nabla F(x_0)^{T} x = \nabla F(x_0)^{T} x_0 + c\} \\
+&= \{x | a^{T}x = b\}
+\end{align*}
+which is a "hyperplane", a type of affine set. 
+
+
+Saw: - geometry of gradients connects to geometry of level sets. 
+
+But you might think that is a bit funny. You know a Taylor sense approx is of the function $F$ not the level sets of $F$. 
+
+You might also recall there is a tangent approximation involved somewhere, e.g. 
+
+figure here
+
+Taylor approx at $x = x_0$
+
+To develop the approximation need to consider the plot or "graph" at the function $F$
+
+$graph F = {(x, F(x) | x \in \mathbb{R}^n)} \subseteq \mathbb{R}^{n+1}$
+
+eg in above example $F(x) = x^2+1$, $F \colon \mathbb{R} \to \mathbb{R}$, $s-n=1$ and plot (graph) is in $\mathbb{R}^2$
+
+To find the tangent approximation, we will pick a point $t$ "above". The graph, is pick some pair $(x, t)$ s.t. $t \geq F(x)$
+
+aside $t \in epi F$ in the "epigraph" of $F$
+
+Use Taylor approximation above $x_0$ to approximate $F(x)$ 
+
+
+figure here
+
+Recap:
+
+(1) Pick $(x, t)$ s.t. $t \geq F(x)$
+ 
+(2) Assume $x$ and $x_0$ are "close" so approximation is accurate.
+
+(3) By Taylor
+$F(x) = F(x_0) + \nabla F(x_0)^{T} (x-x_0) + \varepsilon(x)$
+
+(4) By (1), $t \geq F(x) = F(x_0) + \nabla F(x_0)^{T} (x-x_0) + \varepsilon(x)$
+
+(5) By (2) will drop the $\varepsilon(x)$ XXX and assume inequality doesn't flip (because $x$ and $x_0$ are sufficiently close that $\varepsilon(x)$ is sufficient small)
+
+Yields $t \geq F(x_0) + \nabla F(x_0)^{T} (x-x_0)$  (*)
+Next, we re-arrange
+
+(6)
+\begin{align*}
+0 &\geq -(t-F(x_0)) + \nabla F(x_0)^{T} (x - x_0) \\
+&=\begin{bmatrix} \nabla F(x_0)^{T} -1\\ \end{bmatrix}  \begin{bmatrix} x-x_0\\ t-F(x_0)\\ \end{bmatrix} 
+\end{align*}
+
+
+Observe that:
+$(x-x_{0})\in \reals^{n}$ "so vectors are in $\reals_{n+1}$"
+
+$t-F(x_{0})\in\reals$ i.e., in example plot when $n=1$ in $\reals_{2}$.
+
+figure here
+
+
+Now recall connection between angles and inner products.
+1. If inner product of 2 vectors is negative, then the angles is obtuse.
+2. Matches picture.
+
+What about vectors when this inner product=0?
 
 
 
+$\{u\in\reals_{n+1}|<u, [\nabla F(x_{0}) , -1]^{trans}\}$
 
+writing $u=[x-x_{0}, t-F(x_{0}]^{\trans}$ and no longer require $t\geq F(x)$.
 
+The condition become
+$$
+\left[
+\begin{array}{c} 
+	x-x_{0}\\
+	t-F(x_{0})
+\end{array}
+\right]^{\trans}  
+\left[
+\begin{array}{c} 
+\nabla F(x_{0})\\
+-1
+\end{array}
+\right]
+=
+0
+$$
 
+So we recognize the set defines a hyperplane in $\reals_{n+1}$
+
+$H=\left\{\left[
+\begin{array}{c} 
+	x \\
+    t
+\end{array}
+\right]  
+\bigg|      
+\left[
+\begin{array}{c} 
+x^{\trans}t
+\end{array}
+\right]  
+\left[
+\begin{array}{c} 
+\nabla F(x_{0}) \\
+-1
+\end{array}
+\right]  
+=
+\left[
+\begin{array}{c} 
+x_{0}^{\trans}F(x_{0})
+\end{array}
+\right]  
+\left[
+\begin{array}{c} 
+	\nabla F(x_{0}) \\
+	-1
+\end{array}
+\right]  
+\right\}$
+
+Finally, let's look at Taylor approximation one last time (1st order approximation)
+\begin{align*}
+F(x)&\approx + \nabla F(x_{0})^{\trans}(x-x_{0})\\
+&=F(x_{0})+\Vert\nabla F(x_{0})\Vert \Vert x-x_{0}\Vert \left< \frac{\nabla F(x_{0})}{\Vert\nabla F(x_{0})\Vert},\frac{x-x_{0}}{\Vert x-x_{0}\Vert}\right>
+\end{align*}
 
 
 
