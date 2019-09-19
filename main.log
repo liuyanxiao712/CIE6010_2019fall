@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2019.1.23)  16 SEP 2019 16:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2019.1.23)  19 SEP 2019 11:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2332,31 +2332,80 @@ Package Fancyhdr Warning: \headheight is too small (14.0pt):
 
 ]
 Chapter 3.
-(./ch03_matEig.tex) [33] [34
+(./ch03_matEig.tex [33]
+
+Package Fancyhdr Warning: \headheight is too small (14.0pt): 
+ Make it at least 18.68999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[34] [35]
+
+Package Fancyhdr Warning: \headheight is too small (14.0pt): 
+ Make it at least 18.68999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[36] [37]
+
+Package Fancyhdr Warning: \headheight is too small (14.0pt): 
+ Make it at least 18.68999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[38]
+Underfull \vbox (badness 1067) has occurred while \output is active []
+
+ [39]
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 512.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 512.
+
+
+Package Fancyhdr Warning: \headheight is too small (14.0pt): 
+ Make it at least 18.68999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[40] [41]
+Overfull \hbox (36.27908pt too wide) detected at line 697
+\OML/zplm/m/it/10 x[] \OT1/zplm/m/n/10 = [] \OML/zplm/m/it/10 x[] \OT1/zplm/m/n
+/10 = [] \OML/zplm/m/it/10 x[] \OT1/zplm/m/n/10 = [] \OML/zplm/m/it/10 ^^V \OT1
+/zplm/m/n/10 = [] [] = [] [] = [] [] = []
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (14.0pt): 
+ Make it at least 18.68999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[42]) [43] [44
 
 ]
 Chapter 4.
-(./ch04_symmMat.tex) [35] [36
+(./ch04_symmMat.tex) [45] [46
 
 ]
 Chapter 5.
-(./ch05_svd.tex) [37] [38
+(./ch05_svd.tex) [47] [48
 
 ]
 Chapter 6.
-(./ch06_linEqLS.tex) [39] [40
+(./ch06_linEqLS.tex) [49] [50
 
 ]
 Chapter 7.
-(./ch07_linQuadGeom.tex) [41] [42
+(./ch07_linQuadGeom.tex) [51] [52
 
 ]
 Chapter 8.
-(./ch08_convex.tex) [43] [44
+(./ch08_convex.tex) [53] [54
 
 ]
 Chapter 9.
-(./ch09_algs.tex) [45] [46
+(./ch09_algs.tex) [55] [56
 
 ] (./main.bbl
 
@@ -2364,7 +2413,7 @@ Package natbib Warning: Empty `thebibliography' environment on input line 8.
 
 )
 No file main.ind.
-[47
+[57
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 342.
@@ -2373,7 +2422,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 342.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 342.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 342.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7B3B60918B302E4E7BB420253CDF3D62;1806.
+(rerunfilecheck)             Checksum: 2C50EB7404049E7AA6C2541B8B34E5ED;2200.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2384,11 +2433,11 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 342.
  ) 
 Here is how much of TeX's memory you used:
- 53099 strings out of 492649
- 1199726 string characters out of 6133384
- 1614830 words of memory out of 5000000
- 55774 multiletter control sequences out of 15000+600000
- 652700 words of font info for 349 fonts, out of 8000000 for 9000
+ 53184 strings out of 492649
+ 1200876 string characters out of 6133384
+ 1614833 words of memory out of 5000000
+ 55806 multiletter control sequences out of 15000+600000
+ 662341 words of font info for 377 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,15n,96p,10412b,1071s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2018/texm
@@ -2404,10 +2453,10 @@ pl/fplrij8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb
 ><c:/texlive/2018/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/20
 18/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2018/texmf-dist/f
 onts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (47 pages, 210319 bytes).
+Output written on main.pdf (57 pages, 246233 bytes).
 PDF statistics:
- 388 PDF objects out of 1000 (max. 8388607)
- 311 compressed objects within 4 object streams
- 61 named destinations out of 1000 (max. 500000)
- 67165 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 460 PDF objects out of 1000 (max. 8388607)
+ 373 compressed objects within 4 object streams
+ 87 named destinations out of 1000 (max. 500000)
+ 78965 words of extra memory for PDF output out of 89155 (max. 10000000)
 

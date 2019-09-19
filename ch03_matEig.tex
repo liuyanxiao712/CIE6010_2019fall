@@ -1,7 +1,757 @@
 %% Placeholder for chapter on matrices and eigendecomposition
+\section{Lecture Sep 11}
 
-s
 
+
+
+\subsection{Matrices: array of numbers}
+
+$$
+A = 
+\left[
+\begin{matrix}
+a_{11} & a_{12} & ... & a_{1n} \\
+a_{21} & a_{22} & ... & a_{2n} \\
+... & ... & ... & ...\\
+a_{m1} & a_{m2} & ... & a_{mn}
+\end{matrix}
+\right] \in \Re^{m\times n}
+$$
+
+
+The element in the $i^{th}$ row \& $j^{th}$ column: $a_{ij} = [A]_{ij}$(equivalent notation)
+
+$$
+A^T = 
+\left[
+\begin{matrix}
+a_{11} & a_{21} & ... & a_{1n} \\
+a_{12} & a_{22} & ... & a_{m2} \\
+... & ... & ... & ...\\
+a_{1n} & a_{2n} & ... & a_{mn}
+\end{matrix}
+\right] \in \Re^{m\times n}
+$$
+
+So $[A]_{ij}  = [A^T]_{ji}$ if $A\in \Re^{m\times n}$ and $A^T\in \Re^{n\times m}$
+
+
+1) $A + B = C$ where $[C] = [A]_{ij} + [B]_{ij}$
+]
+2) $\alpha A = B$ where $[B]l_{ij} = \alpha [A]_{ij}$
+
+The origin is a all-zero matrix. 
+
+\begin{definition}
+	$<A, B> = trace(A^TB) = trace(BA^T)$ where $A^TB\in \Re^{n\times n}$ and $B^TA\in \Re^{m\times m}$
+\end{definition}
+
+Norm: $||A||_F = \sqrt{<A, A>} = \sqrt{trace(A^TA)} = \sqrt{\sum^m_{i=1}\sum^m_{j=1}[A]^2_{ij}}$
+
+$$
+vec(A) = vec(
+\left[
+\begin{matrix}
+... & ... & ... & ... \\
+a_{1} & a_{2} & ... & a_{n} \\
+... & ... & ... & ...
+\end{matrix}
+\right]) = 
+\left[
+\begin{matrix}
+a_{1} \\
+a_{2} \\
+... \\
+a_{n}
+\end{matrix}
+\right]
+\in \Re^{m\times n}
+$$
+
+\subsection{Matrices as linear \& affine maps}
+
+
+$x\in \Re^n \rightarrow A \rightarrow y = Ax \in \Re^m$
+
+affine map $y = Ax + b$
+
+Matrix inverse: if $A$ is "invertible", $\exists$ unique $A^{-1}$ s.t. $AA^{-1} = A^{-1}A = I$
+
+\begin{itemize}
+	\item $(AB)^{-1} = B^{-1}A^{-1}$
+	
+	\item $(A^{-1})^T = (A^T)^{-1}$
+	
+	\item $det(A^{-1}) = \frac{1}{det(A)}$
+\end{itemize}
+
+\subsection{Orthogonal Matrices}
+
+$U\in \Re^{n\times m}$ is orthogonal if $U = [U^{(1)} ... U^{(m)}]$
+and 
+
+$$ U^{(1)^T}U^{(1)}=\left\{
+\begin{aligned}
+0\,\, \forall i\neq j \\
+1\,\, if \,\, i = j 
+\end{aligned}
+\right.
+$$
+
+Then $UU^T = U^TU = I$\\
+
+
+$x\rightarrow U \rightarrow y = Ux$
+
+\begin{equation*}
+||y||^2 = (Ux)^T(Ux) = x^TU^TUx = x^Tx = ||x||^2
+\end{equation*}
+
+$<Ux, Uw> = x^TU^TUw = x^Tw = <x, w>$
+
+1) Domain
+
+$dom(A)$ = $\Re^n$, $A = [a^{(1)}...a^{(m)}]$
+
+$dom(A^T)$ = $\Re^m$, $A^T = [a^{(1)}...a^{(m)}]$
+
+
+2) Range
+
+\begin{equation*}
+R(A) = \{y\in \Re^m | y = Ax = \sum^n_{i=1}x_ia^{(1)}\}
+\end{equation*}
+
+\begin{equation*}
+R(A^T) = \{w\in \Re^m | w = A^Tu = \sum^m_{i=1}u_ia^{(1)}\}
+\end{equation*}
+
+3) Rank:
+
+$rank(A) = dim\{R(A)\} = dim\{R(A^T)\} = rank(A^T)$
+
+4) Nullspace
+
+$N(A) = \{x\in \Re^n | Ax = 0\}$
+
+5) $\Re^n = \Re(A^T) \bigoplus N(A)$: $\forall x\in \Re^n$ there is a unique $x = x_{R(A^T)} = x_{N(A)}$ 
+
+6) $N(A) \perp R(A^T)$, $N(A^T) \perp R(A)$
+
+
+\section{Lecture Sep 16}
+
+Last Time:
+
+\begin{itemize}
+	\item Affine + $2^{nd}$-order approximations
+	
+	\item Matrices as elements of inner-product space
+	
+	\item Fundamental Theorem Linear Algorithm
+	
+	\item PageRank
+\end{itemize}
+
+
+
+Today;
+
+\begin{itemize}
+	\item Finish PageRank
+	
+	\item Eigen-decomposition \& diagonalizaion
+	
+	\item Geometry of Determinant
+	
+	\item Symmetric Matrices
+\end{itemize}
+
+For a graph like this:
+
+(TODO NEED A GRAPH)
+
+
+$$
+\left[
+\begin{matrix}
+x_1 \\
+x_2 \\
+x_3\\
+x_4\\
+\end{matrix}
+\right] =
+\left[
+\begin{matrix}
+0 & 0 & 1 & \frac{1}{2} \\
+\frac{1}{3} & 0 & 0& 0 \\
+\frac{1}{3}& \frac{1}{2} & 0 & \frac{1}{2} \\
+\frac{1}{3} & \frac{1}{2} & 0 & 0 
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+x_1 \\
+x_2 \\
+x_3\\
+x_4\\
+\end{matrix}
+\right]
+$$
+
+\begin{align*}
+x &= Ax \\
+Ax - x &= 0\\
+(A - I)x &= 0\\
+x&\in N(A-I)
+\end{align*}
+
+
+$$
+x = \frac{1}{s_1}
+\left[
+\begin{matrix}
+12 \\
+4 \\
+9\\
+6\\
+\end{matrix}
+\right]
+$$
+Note: 
+
+\begin{itemize}
+	\item $x^{(0)}$ is the initial distribution.
+	
+	\item $x^{(0)}_i = $Pr[start on page $i$]
+	
+	\item $u^{(i)}, \lambda_i$ is eigen-vector/value pair if $Au^{(i)} = \lambda_iu^{(i)}$
+\end{itemize}
+
+
+If $Au^{(i)} = \lambda_iu^{(i)}$, $\bar{A}$ is "diagonalizable" if it has a full set of linear independent eigenvectors. In this case $x^{(0)} = \sum^n_{i=1}\alpha_iu^{(i)}$
+
+\begin{align*}
+x^{(1)} &= Ax^{(0)} = A[\sum^n_{i=1}\alpha_iu^{(1)} = \sum_i\alpha_i(Au^{(i)})]\\
+x^{(2)} &= A(Ax^{(0)}) = \sum^n_{i=1}\alpha_i(A^2u^{(i)}) = \sum^n_{i=1}\alpha_i(\lambda_i^2u^{(i)})\\
+...\\
+x^{(k)} &= A^kx{(0)} = \sum^n_{i=1}\alpha_i(\lambda_i)^ku^{(i)}\\
+&= \alpha_1(\lambda_1)^ku^{(1)} + \sum^n_{i=2}\alpha_i(\lambda_i)^ku^{(i)} \\
+&= \alpha_1u^{(1)} + \sum^n_{i=2}\alpha_i(\lambda_i)^ku^{(i)}\\
+&when \,k \rightarrow \infty\\
+&= \alpha_1u^{(1)}
+\end{align*}
+
+\begin{equation*}
+lim_{k\rightarrow \infty}\frac{A^kx^{(0)}}{||A^kx^{(0)}||} =u^{(i)}
+\end{equation*}
+
+%What is an Internet Structure s.t. $dim[N(A-I)] = 2$?
+
+If have repeated eigenvalues:
+
+\begin{align*}
+Au^{(1)} =\lambda_1u^{(1)}\\
+Au^{(2)} =\lambda_2u^{(2)}
+\end{align*}
+
+clearly:
+
+\begin{equation*}
+A(\alpha_1u^{(1)} + \alpha_2u^{(2)}) = \alpha_1\lambda_1u^{(1)} + \alpha_2\lambda_2u^{(2)}
+\end{equation*}
+
+1) The "algebraic" multiplicity of an eignevalue $\lambda$ of a square matrix $A$ is \# of eigenvalues $\lambda_i, \lambda_2,...,\lambda_m$ equal to $\lambda$. $\rightarrow$ AM($\lambda$)
+
+2) The geometric multiplicity of an eigenvalue $\lambda$ of a square matrix $A$ is the dimension of $N(A - \lambda I)$. $\rightarrow$ GM($\lambda$)
+
+In general, $0 < GM(\lambda) \leq AM(\lambda)$ \& If $GM(\lambda_i) = AM(\lambda_i)$, $\forall i$, then $A$ is diagonalizable. 
+
+
+If diagonalizable, we can write $Au^{(i)} = \lambda_iu^{(i)} \forall$ assume all $\lambda_i$ distinct $GM(\lambda_i) = AM(\lambda_i) = 1, \forall i$
+
+$$
+\left[
+\begin{matrix}
+Au^{(1)} & Au^{(2)} &... &Au^{(n)} 
+\end{matrix}
+\right] =
+\left[
+\begin{matrix}
+\lambda_1u^{(1)} & \lambda_2u^{(2)}&... &\lambda_iu^{(i)}
+\end{matrix}
+\right]
+$$
+
+$$A
+\left[
+\begin{matrix}
+u^{(1)} & u^{(2)} &... &u^{(n)} 
+\end{matrix}
+\right] =
+\left[
+\begin{matrix}
+u^{(1)} & u^{(2)} &... &u^{(n)}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+\lambda_1 & 0 & ... & 0\\
+0& \lambda_2  &  ... & 0\\
+...  & ...  &   ...& \\
+0    &  ... &  0 & \lambda_n
+\end{matrix}
+\right]
+$$
+
+
+
+\begin{align*}
+AU &= U\Lambda\\
+A &= U\Lambda U^{-1}\\
+\Lambda &= U^{-1}AU
+\end{align*}
+
+Recall pagerank:
+
+\begin{align*}
+A^kx^{(0)} &= (U\Lambda U^{-1})^kx^{(0)}\\
+&=U\Lambda^kU^{-1}x^{(0)} \\
+&= U
+\begin{bmatrix}
+\lambda_1^k & 0 & ... & 0\\
+0& \lambda_2^k  &  ... & 0\\
+...  & ...  &   ...& \\
+0    &  ... &  0 & \lambda_n^k
+\end{bmatrix} U^{-1}x^{(0)}
+\end{align*}
+
+\subsection{Determinant}
+
+In eigen-decomposition, solve for $\lambda$ from $det(A - \lambda I) = 0$. 
+
+If $det(A) = 0$ then $A$ is non-invertible. 
+
+Example:
+
+$$A = 
+\left[
+\begin{matrix}
+a_{11} & a_{12}\\
+a_{21} & a_{22}
+\end{matrix}
+\right] =
+\left[
+\begin{matrix}
+a_{(1)} & a_{(2)}
+\end{matrix}
+\right]
+$$
+
+\begin{align*}
+U &= \{x\in \Re^2 | 0\leq x_1 \leq 1, 0\leq x_1 \leq 1 \}\\
+P &= \{Ax \ x\in \mathcal{U}\} 
+\end{align*}
+
+
+TODO: NEED A GRAPH
+
+Assume $A$ is diagonalizable:
+
+\begin{align*}
+A &= U\Lambda U^{-1}\\
+|det(A)| &= |det(U\Lambda U^{-1})| \\
+&= |det(U)det(\Lambda)det(U^{-1})|\\
+&= det(U)det(\Lambda)\frac{1}{det(U)}\\
+&= |det(\Lambda)|\\
+&= |\prod^n_{i=1}\lambda_i|
+\end{align*}
+
+\begin{align*}
+X: N(\mu, \Sigma)where(\mu \in \Re^n, \Sigma \in \Re^{n\times n})\\
+P_x(x) = \frac{1}{(2\pi)^{\frac{2}{n}}}\frac{1}{|det\Sigma|^{\frac{1}{2}}}exp[-\frac{1}{2}(x - \mu)^T\Sigma^{-1}(x - \mu)]
+\end{align*}
+
+
+
+
+\section{Lecture Sep 18}
+
+Last Time:
+
+\begin{itemize}
+	\item PageRank + eigenvectors/eigenvalues
+	
+	\item Diagonalizing a matrix
+	
+	\item Illustration of eignevectors (\&singular vectors)
+	
+	\item Genoetry of Determinant 
+\end{itemize}
+
+
+Today:
+
+\begin{itemize}
+	\item Symmetric Metrices \& Spectral Theorem(Chapter 4)
+	
+	\item Variational Characterization of eigenvalues
+	
+	\item Positive (Semi)Definite matrices
+\end{itemize}
+
+\subsection{Symmetric Matrices}
+
+\begin{equation*}
+S^n = \{A\in \Re^{n\times n} | A = A^T \}
+\end{equation*}
+
+Example: Hessian $[\nabla^2 F]_{ij} = \frac{\sigma}{\sigma x_i}\frac{\sigma}{\sigma x_j}F(x)$
+
+
+Example: Quatric Functions: $q: \Re^n \rightarrow \Re$
+
+\begin{align*}
+q(x) &= \sum^n_{i=1}\sum^n_{j=1}a_{ij}x_ix_j + \sum^n_{i=1}c_ix_i + d\\
+&= x^TAx + c^T + d\\
+&= \frac{1}{2}x^T(A + A^T)x + c^Tx + d\\
+&= \frac{1}{2}
+\begin{bmatrix}%
+x^T& 1
+\end{bmatrix}
+\begin{bmatrix}%
+A + A^T & C\\
+C^T & 2d
+\end{bmatrix}
+\begin{bmatrix}%
+x\\
+1
+\end{bmatrix}
+\end{align*}
+
+
+1) Let $F(x) = C^Tx = \sum^n_{i=1}c_ix_i$:
+
+\begin{align*}
+\frac{d}{dx_k}F(x) &+ \frac{d}{dx_k}(\sum^n_{i=1}c_ix_i) = c_k\\
+&= \nabla F(x) = 
+\begin{bmatrix}%
+\frac{\sigma F(x)}{\sigma x_1}\\
+...\\
+\frac{\sigma F(x)}{\sigma x_n}
+\end{bmatrix}=
+\begin{bmatrix}%
+c_1\\
+...\\
+c_n
+\end{bmatrix} = C
+\end{align*}
+
+2) Let
+\begin{align*}
+F(x) &= x^TAx = \sum_i\sum_ja_ijx_ix_j\\
+&= a_{11}x_1^2 + a_{12}x_1x_2 + ... + a_{21}x_2x_1 + ...\\
+\frac{d}{dx_k}F(x) &= \frac{d}{dx_k}(a_{kk}k_k^2 + \sum_{l\neq k}k_lx_k(a_{kk}+a_{kl}))\\
+&= (a_{kk} + a_{kk})x_k + \sum_{l\neq k}x_l(a_{lk} + a_{kl}) \\
+&= \sum^n_{i=1}(a_{lk} + a_{kl})x_l\\
+&= \sum^n_{i=1}([A]_{kl} + [A]_{lk})x_l
+\end{align*}
+
+\begin{align*}
+\nabla F(x) &= (A + A^T)x\\
+[\nabla^2F(x)]_{kj} &= \frac{d}{dx_j}(\frac{\sigma}{\sigma x_k}F(x))\\
+&= [A]_{kj} + [A]_{jk}\\
+\nabla^2F(x) &= (A + A^T)
+\end{align*}
+
+Because $q(x) = x^TAx + c^T + d$, take Taylor approximation of $q(x)$:
+
+\begin{align*}
+\tilde{q}(x) &= q(0) + \nabla q(0)^Tx + \frac{1}{2}x^T\nabla^2q(0)x\\
+&= d + c^Tx + \frac{1}{2}x^T(A + A^T)x
+\end{align*}
+
+\subsection{Symmetric Matrices + Eigenvectors}
+
+\begin{theorem}{4.18 \& 4.2 in textbook}
+	For any matrix in $S^n = \{A\in \Re^{n\times n} | A = A^T \}$:
+	
+	1) All eigenvalues are purely real(so eigenvectors can be picked purely real)
+	
+	2) $GM(\lambda_i) = AM(\lambda_i)$: means always disgonalizable
+	
+	3) Eigenvectors of distinct eigenvalues are $\perp$.
+	
+	"Eigenspace": $\xi_{x_i} = N(A - \lambda_iI)\perp \xi_{\lambda_i} = N(A - \lambda_jI$
+\end{theorem}
+
+Implication: If we pick basis for each eigenspace $\lambda_i$ to be an orthogonal basis, because have "Fullset" of eigenvectors can always write:
+
+"Spectral Decomposition":
+
+\begin{align*}
+A &= U\Lambda U^{-1}\\
+&= U\Lambda U^{T}\\
+&= 
+\begin{bmatrix}%
+u^{(1)} & u^{(2)} & ... & u^{(n)}\\
+\end{bmatrix}
+\begin{bmatrix}%
+\lambda_1 & ... & ...\\
+... & ... & ...\\
+... & ... & \lambda_n
+\end{bmatrix}
+\begin{bmatrix}%
+u^{(1)^T}\\
+...\\
+u^{(n)^T}
+\end{bmatrix}\\
+&= \sum^n_{i=1}\lambda_iU^{(i)}U^{(i)^T}
+\end{align*}
+
+\subsection{Variational Characterization of engenvalues of $\lambda_i$ where $A\in S^n$} 
+
+Since all $\lambda_i \in \Re$ can order(largest-to-smallest):
+
+\begin{equation*}
+\lambda_{max}(A) = \lambda_1 \geq \lambda_2 \geq ... \geq \lambda_n =\lambda_{min}(A)
+\end{equation*}
+
+Ratio $\frac{x^TAx}{x^Tx}$ for $x\neq 0$ is a "Reyleigh quotient"
+
+Thm(4.3): $\lambda_{min}(A) \leq \frac{x^TAx}{||x||^2}\leq lam
+_{max}(A), \forall x = 0$
+
+
+\begin{proof}
+	\begin{align*}
+	x^TAx &= x^TU\Lambda U^Tx\\
+	&= \bar{x}\Lambda\bar{x}\\
+	&= \sum^n_{i=1}(\bar{x}_i)^2\lambda_i\\
+	&\leq \sum^n_{i=1}(\bar{x}_i)^2\lambda_{max}(A)\\
+	&= ||\bar{x}||^2\lambda_{max}(A)
+	\end{align*}
+	
+	\begin{equation*}
+	\lambda(A)||\bar{x}||^2 \leq x^TAx \leq ||\bar{x}||^2\lambda_{max}(A)
+	\end{equation*}
+	
+	\begin{equation*}
+	\lambda(A)||\bar{x}||^2 \leq x^TAx \leq ||\bar{x}||^2\lambda_{max}(A)
+	\end{equation*}
+\end{proof}
+
+
+\subsection{Positive (Semi)Definite matrices $\rightarrow$ "PD" or "PSD"}
+
+\begin{definition}
+	A symmetrix matrix $A\in S^n$ is PD(alt PSD) if $x^TAx > 0$, $\forall x\in \Re^n$(alt $x^TAx\geq 0$)
+\end{definition}
+
+PSD: $S^n_{+} = \{A\in S^n | A\succeq 0\}$
+
+PD: $S^n_{++} = \{A\in S^n | A\succ 0\}$
+
+A symmetric matrix is PSD iff all its eigenvalues $\geq$ 0.
+
+A symmetric matrix is PD iff all its eigenvalues $>$ 0.
+
+
+(1) Assume $A\in S^n$ is PD $\rightarrow$ will show $\lambda_i > 0, \forall\,\,\, eigenvalues$.   
+
+\begin{equation*}
+x^TAx = x^TU\Lambda U^Tx = \bar{x}^T\Lambda\bar{x} - \sum^n_{i=1}\lambda_i(\bar{x}_i)^2 >0
+\end{equation*}
+Since A is PD and $x\neq 0$
+
+To show this implies $\lambda_j > 0, \forall j\in [n]$, set:
+$$\bar{x} = e_j = 
+\left[
+\begin{matrix}
+0\\
+0\\
+...\\
+1\\
+0\\
+0\\
+...
+\end{matrix}
+\right]
+$$
+where only $j^m$ entry is 1.
+
+\begin{equation*}
+0 < U^{(i)^T} U\Lambda U^TU^{(1)} =e_j^T\Lambda e_j \Lambda e_j = \lambda_j
+\end{equation*}
+
+
+
+(2) Assume all eigenvalues positive $\rightarrow$ want to show A is PD:
+
+\begin{equation*}
+x^TAx =x^TU\Lambda U^Tx = \bar{x}^T\Lambda \bar{x} = \sum^n_{i=1}(\bar{x}_i)^2\lambda_i > 0
+\end{equation*}
+
+Last note:
+
+$det(A) = \prod^n_{i=1}\lambda_i$
+
+$det(A) = 0$ iff there is a $\lambda_i = 0$:
+
+$\rightarrow$ PD matrices are invertible
+
+$\rightarrow$ PSD matrices are invertible only if PD
+
+
+
+
+\subsection{Ellipses} 
+
+Consider the set:
+
+\begin{equation*}
+\xi = \{x\in \Re^n | (x - x^{(a)})^T P(x - x^{(a)}) \leq 1 \}
+\end{equation*}
+
+wher P is PD.
+
+Note argument is a quadratic function:
+
+\begin{align*}
+(x - x^{(0)})^TP^{-1}(x - x^{(0)}) &= x^TP^{-1}x - 2x^{(0)^T}P^{-1}x + x^{(0)^T}P^{-1}x^{(0)}\\
+&= x^TAx + c^Tx + d
+\end{align*}
+
+Look at set $\xi$: $\rightarrow$ centered at $x = x^{(0)}$:
+
+\begin{align*}
+1 &\geq (x - x^{(0)})^TP^{-1}(x - x^{(0)})\\
+&= \bar{x}^TP^{-1}\bar{x}\\
+&= \bar{x}^T(U\Lambda U^T)^{-1}\bar{x}\\
+&= \bar{x}^T(U^T)^{-1}\Lambda^{-1}U^{-1}\bar{x}\\
+&= \bar{x}^TU\Lambda^{-1}U^T\bar{x}\\
+&= xxx\\
+&= \sum^n_{i=1}(\frac{\hat{x_i}}{\sqrt{\lambda_i}})^2\\
+&= \sum^n_{i=1}(\hat{x}_i)^2\\
+&= ||\hat{x}||^2
+\end{align*}
+
+graph
+
+
+Example: Sample covariance \& PSD matrices:
+
+Dataset $x^{(1)}, x^{(2)}, ..., x^{(m)}$ all $x^{(i)}\in \Re^n$
+
+Sample mean: $\mu = \frac{1}{m}]\sum^n_{i=1}x^{(i)}$
+
+Sample covariance: $\sum = \frac{1}{m}\sum^m_{i=1}(x^{(i)}-\mu)(x^{(i)}-\mu)^T$
+
+xxx
+
+m=3:
+
+$$x^{(1)} =
+\left[
+\begin{matrix}
+1\\
+2
+\end{matrix}
+\right]x^{(2)} =
+\left[
+\begin{matrix}
+4\\
+4
+\end{matrix}
+\right]x^{(3)} =
+\left[
+\begin{matrix}
+4\\
+0
+\end{matrix}
+\right]\mu =
+\left[
+\begin{matrix}
+3\\
+2
+\end{matrix}
+\right]\tilde{x}^{(1)} =
+\left[
+\begin{matrix}
+-2\\
+0
+\end{matrix}
+\right]\tilde{x}^{(2)} =
+\left[
+\begin{matrix}
+1\\
+2
+\end{matrix}
+\right]\tilde{x}^{(3)} =
+\left[
+\begin{matrix}
+1\\
+-2
+\end{matrix}
+\right]
+$$
+
+
+
+$$\Sigma = 
+\left[
+\begin{matrix}
+2&0\\
+0&\frac{8}{3}
+\end{matrix}
+\right]
+$$
+
+\begin{equation*}
+\xi_{\gamma} = \{(x - \mu)^T \Sigma^{-1}(x - \mu)\leq \gamma \}
+\end{equation*}
+($\gamma$ = 2)
+
+Proving $\Sigma\geq 0$, consider sample variances
+
+\begin{equation*}
+S^{(1)} =w^Tx^{(1)} = <w, x^{(1)}>\,\,\, when \,\,\, ||w|| = 1
+\end{equation*}
+
+sample mean:
+
+\begin{equation*}
+\tilde{S} = \frac{1}{m}\sum^m_{i=1}s^{(i)} = \frac{1}{m}\sum^m_{i=1}w^Tx^{(1)} = w^T\mu
+\end{equation*}
+
+
+
+sample variance: 
+
+\begin{align*}
+\sigma^2 &= \frac{1}{m}\sum^m_{i=1}(s^{(i)} - w^T\mu)^2 \\
+&= \frac{1}{m}\sum^m_{i=1}(w^T(x^{(i)} -\mu))^2\\
+&=\frac{1}{m}\sum^m_{i=1}w^T(x^{(i)}-\mu)(x^{(i)}-\mu)^Tw\\
+&= w^T[\frac{1}{m}\sum^m_{i=1}(x^{(i)}-\mu)x^{(i)}-\mu)^T]w\\
+&= w^T\sum w
+\end{align*}
+
+
+
+\subsection{Square-root matrix}
+
+For any PSD,
+
+\begin{align*}
+A &= U\Lambda U^{-1} \\
+&=U\Lambda^{\frac{1}{2}}\Lambda^{\frac{1}{2}}U^{T}\,\, where \,\,\, \Lambda^{\frac{1}{2}}
+\begin{bmatrix}%
+\sqrt{\lambda_1}&...&...\\
+...&...&...\\
+...&...&\sqrt{\lambda_n}
+\end{bmatrix}\\
+&= U\Lambda^{\frac{1}{2}}U^TU\Lambda^{\frac{1}{2}}U^T
+\end{align*}
 
 
 
