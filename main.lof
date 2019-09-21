@@ -1,45 +1,42 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces A function $f: \PazoBB {R}\rightarrow \PazoBB {R}$.}}{11}{chapter.1}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces A function $f: \PazoBB {R}\rightarrow \PazoBB {R}$.}}{11}{chapter.1}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Add}}{15}{chapter.2}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Scale}}{15}{chapter.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces }}{16}{chapter.2}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces }}{17}{chapter.2}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces }}{17}{chapter.2}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces }}{17}{chapter.2}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces }}{19}{chapter.2}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces }}{19}{chapter.2}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces }}{19}{chapter.2}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces }}{20}{chapter.2}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces }}{20}{chapter.2}
-\contentsline {figure}{\numberline {2.12}{\ignorespaces }}{20}{chapter.2}
-\contentsline {figure}{\numberline {2.13}{\ignorespaces }}{20}{chapter.2}
-\contentsline {figure}{\numberline {2.14}{\ignorespaces }}{21}{chapter.2}
-\contentsline {figure}{\numberline {2.15}{\ignorespaces }}{21}{chapter.2}
-\contentsline {figure}{\numberline {2.16}{\ignorespaces }}{21}{chapter.2}
-\contentsline {figure}{\numberline {2.17}{\ignorespaces }}{21}{chapter.2}
-\contentsline {figure}{\numberline {2.18}{\ignorespaces }}{21}{chapter.2}
-\contentsline {figure}{\numberline {2.19}{\ignorespaces }}{21}{chapter.2}
-\contentsline {figure}{\numberline {2.20}{\ignorespaces }}{21}{chapter.2}
-\contentsline {figure}{\numberline {2.21}{\ignorespaces }}{21}{chapter.2}
-\contentsline {figure}{\numberline {2.22}{\ignorespaces }}{22}{chapter.2}
-\contentsline {figure}{\numberline {2.23}{\ignorespaces }}{22}{chapter.2}
-\contentsline {figure}{\numberline {2.24}{\ignorespaces }}{22}{chapter.2}
-\contentsline {figure}{\numberline {2.25}{\ignorespaces }}{24}{chapter.2}
-\contentsline {figure}{\numberline {2.26}{\ignorespaces }}{24}{chapter.2}
-\contentsline {figure}{\numberline {2.27}{\ignorespaces }}{24}{chapter.2}
-\contentsline {figure}{\numberline {2.28}{\ignorespaces }}{24}{chapter.2}
-\contentsline {figure}{\numberline {2.29}{\ignorespaces }}{24}{chapter.2}
-\contentsline {figure}{\numberline {2.30}{\ignorespaces }}{24}{chapter.2}
-\contentsline {figure}{\numberline {2.31}{\ignorespaces }}{24}{chapter.2}
-\contentsline {figure}{\numberline {2.32}{\ignorespaces }}{24}{chapter.2}
-\contentsline {figure}{\numberline {2.33}{\ignorespaces }}{24}{chapter.2}
-\contentsline {figure}{\numberline {2.34}{\ignorespaces }}{25}{chapter.2}
-\contentsline {figure}{\numberline {2.35}{\ignorespaces }}{25}{chapter.2}
-\contentsline {figure}{\numberline {2.36}{\ignorespaces }}{26}{chapter.2}
-\contentsline {figure}{\numberline {2.37}{\ignorespaces }}{26}{chapter.2}
-\contentsline {figure}{\numberline {2.38}{\ignorespaces }}{26}{chapter.2}
-\contentsline {figure}{\numberline {2.39}{\ignorespaces }}{26}{chapter.2}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Addition}}{14}{chapter.2}% 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Scaling}}{14}{chapter.2}% 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Example 1}}{15}{chapter.2}% 
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Example 2}}{15}{chapter.2}% 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces }}{16}{chapter.2}% 
+\contentsline {figure}{\numberline {2.6}{\ignorespaces }}{16}{chapter.2}% 
+\contentsline {figure}{\numberline {2.7}{\ignorespaces $L_{1}$ level set}}{19}{chapter.2}% 
+\contentsline {figure}{\numberline {2.8}{\ignorespaces $L_{2}$ level set}}{19}{chapter.2}% 
+\contentsline {figure}{\numberline {2.9}{\ignorespaces $L_{\infty }$ level set}}{19}{chapter.2}% 
+\contentsline {figure}{\numberline {2.10}{\ignorespaces (a) $\qopname \relax o{cos}\theta = +1$}}{21}{chapter.2}% 
+\contentsline {figure}{\numberline {2.11}{\ignorespaces (a) $\qopname \relax o{cos}\theta = -1$}}{21}{chapter.2}% 
+\contentsline {figure}{\numberline {2.12}{\ignorespaces (b) $\qopname \relax o{cos}\theta = 0$}}{21}{chapter.2}% 
+\contentsline {figure}{\numberline {2.13}{\ignorespaces (c) $\qopname \relax o{cos}\theta >0$}}{21}{chapter.2}% 
+\contentsline {figure}{\numberline {2.14}{\ignorespaces (c) $\qopname \relax o{cos}\theta <0$}}{21}{chapter.2}% 
+\contentsline {figure}{\numberline {2.15}{\ignorespaces $S$ is a subspace of an inner product space}}{22}{chapter.2}% 
+\contentsline {figure}{\numberline {2.16}{\ignorespaces $S$ is an "affine" set}}{22}{chapter.2}% 
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Problem setting}}{24}{chapter.2}% 
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Step 1}}{24}{chapter.2}% 
+\contentsline {figure}{\numberline {2.19}{\ignorespaces Step 2}}{24}{chapter.2}% 
+\contentsline {figure}{\numberline {2.20}{\ignorespaces Subpace $S$}}{24}{chapter.2}% 
+\contentsline {figure}{\numberline {2.21}{\ignorespaces Affine set $\mathcal {A}$ as a shifted subspace}}{24}{chapter.2}% 
+\contentsline {figure}{\numberline {2.22}{\ignorespaces Step (0)}}{25}{chapter.2}% 
+\contentsline {figure}{\numberline {2.23}{\ignorespaces Step (1)}}{25}{chapter.2}% 
+\contentsline {figure}{\numberline {2.24}{\ignorespaces Step (2)}}{25}{chapter.2}% 
+\contentsline {figure}{\numberline {2.25}{\ignorespaces Step (3)}}{25}{chapter.2}% 
+\contentsline {figure}{\numberline {2.26}{\ignorespaces }}{29}{chapter.2}% 
+\contentsline {figure}{\numberline {2.27}{\ignorespaces }}{29}{chapter.2}% 
+\contentsline {figure}{\numberline {2.28}{\ignorespaces }}{29}{chapter.2}% 
+\contentsline {figure}{\numberline {2.29}{\ignorespaces Graph 1}}{30}{chapter.2}% 
+\contentsline {figure}{\numberline {2.30}{\ignorespaces Graph 2}}{30}{chapter.2}% 
+\contentsline {figure}{\numberline {2.31}{\ignorespaces Epigraph 1}}{30}{chapter.2}% 
+\contentsline {figure}{\numberline {2.32}{\ignorespaces Epigraph 2}}{30}{chapter.2}% 
+\contentsline {figure}{\numberline {2.33}{\ignorespaces Level set 1}}{31}{chapter.2}% 
+\contentsline {figure}{\numberline {2.34}{\ignorespaces Level set 2}}{31}{chapter.2}% 
+\contentsline {figure}{\numberline {2.35}{\ignorespaces Sub-level set 1}}{31}{chapter.2}% 
+\contentsline {figure}{\numberline {2.36}{\ignorespaces Sub-level set 2}}{31}{chapter.2}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

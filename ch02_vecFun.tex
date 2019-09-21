@@ -6,8 +6,8 @@
 -Inner product\\
 
 \noindent\textcircled{2} Projection\\
--On to subspace\\
--On to affine sets\\
+-Onto subspace\\
+-Onto affine sets\\
 -Non-Euclidean\\
 
 \noindent\textcircled{3} Functions\\
@@ -17,30 +17,11 @@
 
 \newpage
 
-As mentioned in introduction, the 1st part of this course will focus on geometry. Linear algebra is the mathematical study of geometry in (arbitrary large) dimensions.
-
-It turns out that your geometry xxx from $\reals^{2}$ to $\reals^{3}$(planes and space) is extremely helpful to conceive of large dimensional sets and understand operations on them.
-
-Lots(but not all) of what we cover in the first few topics will repeat what you saw in your linear algebra course(Math 188/185).
-
-\vspace{0.5cm}
-\noindent Why repeat?
-
--Linear algebra in year 1, perhaps semester 1.
-
--It takes time xxx, to "get" linear algebra. If you are in this course, you are likely to come up a lot going forward.
-
--In your linear algebra course may have concentrate more on the "algebra" side of linear algebra rather than the geometry side. Our focus will be on the latter. E.g., $y-x^{2}=0$ is an algebraic relation but defines a geometric object(a parabola).
-
--If you took ECE216 with me you will see some familiar examples, and I encourage you to  connecting questions (perhaps after class as xxx all students took ECE216).
-
-\newpage
-
-\noindent\textbf{Vector}:A collection of numbers.
+\noindent\textbf{Vector}: A collection of numbers.
 \begin{equation*}
 x = \left[ \begin{array}{c} x_1 \\ x_2 \\ \vdots \\ x_n\end{array} \right].
 \end{equation*}
-where each $x_i \in \reals$ or $x_i \in \complex$. The length $n$ of the vector is also termed the "dimension" of the vector, which will subsequently be defined formally.
+where each $x_i \in \reals$ or $x_i \in \complex$. The length $n$ of the vector is also termed as the "dimension" of the vector, which will subsequently be defined formally.
 
 Our default will be a column vector as we describe above. Transpose x yields a row vector,   
 \begin{equation*}
@@ -55,14 +36,12 @@ Also, we often need to work with a set(or list) of vectors,
 where $\vecx{i} \in \reals^n$, $i \in \{1, 2, \ldots, m\}$, $i \in [m] = \{1,2,\cdots,m\}$ and
 $(\vecx{i})^\trans = [ \vecx[1]{i} \ \vecx[2]{i} \ \ldots \ \vecx[n]{i} ]$.  
 
-Note: book not 100\% consistent, XXX
+Note: The notations in this material are not 100\% consistent.
 
 \vspace{0.5cm}
 \noindent\textbf{Vector Space}
 
-To this point a vector is just a lost of numbers.
-
-To get to geometry, we need to define how to add pairs of vectors and how to scale vectors.
+First, we define how to add pairs of vectors and how to scale vectors as follows:
 
 Addition: $u=v^{1}+v^{2}$, means $u_{i}=v_{i}^{1}+v_{i}^{2}$ for all $i\in [n]$.
 
@@ -73,102 +52,97 @@ Linear combination: $\sum_{i=1}^{m} a_{i}v^{(i)}$
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/add}}
-	\caption{Add}
+	\caption{Addition}
 	\label{fig.2-1}
 \end{marginfigure}
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/scale}}
-	\caption{Scale}
+	\caption{Scaling}
 	\label{fig.2-2}
 \end{marginfigure}
 
-Note that If $a=0$, then $u=av^{(1)}=0$.
-
 \vspace{0.5cm}
 
-With respect to the XXX at the origin can think of as xxx as a displacement(a move through the space) from the origin.
+\textbf{Vector Space}: a set of vectors that is closed under addition and scaling, and satisfy following axioms:
 
-For any vector $v\in\reals$, $v=v-0$.
+(1) Commutativity: $u+v=v+u$
 
-Note: XXX
+(2 )Associativity: $(u+v)+w=u+(v+w)$
 
+(3) Distributivity: $a(u+v)=au+av$,\ $(a+b)u=au+bu$
 
-Vector Space: a set of vectors that is closed under addition and scaling.
+(4) Identity element of addition: $\exists 0\in \gamma$ s.t. $u+0=u$
 
-Formally we need following axioms:
+(5) Inverse elements of addition: $\exists -u\in \gamma$ s.t. $u+(-u)=0$
 
-Commutativity: $u+v=v+u$
+(6) Identity element of scalar multiplication: $\exists a\in \reals\ \text{or}\ \complex$ s.t. $au=u$
 
-Associativity: $(u+v)+w=u+(v+w)$
+\vspace{0.5cm}
+In this course our focus is on $\reals^{n}$, i.e., finite-length vectors with real elements. It is also useful to note that the geometric ideas could apply to lots of other spaces, such as
 
-Distributivity: $a(u+v)=au+av$,\ $(a+b)u=au+bu$
-
-Identity element of addition: $\exists 0\in \gamma$ s.t. $u+0=u$
-
-Inverse elements of addition: $\exists -u\in \gamma$ s.t. $u+(-u)=0$
-
-Identity element of scalar multiplication: $\exists a\in \reals\ \text{or}\ \complex$ s.t. $au=u$
-
-In this course our focus is on $\reals^{n}$, i.e., finite-length vectors with real elements.
-
-It is also useful to note that the geometric ideas could apply to lots of other spaces.\\
 \textcircled{1} Finite-length complex vector\\
-we need this esp for discussion of eigenvalues and eigenvectors. But also important examples in quantum computing.\\
-\textcircled{2} $\infty$-length complex sequences(DT signals\&system)\\
-\textcircled{3} Complex functions defined on real line(CT signals\&system)\\
+we need this esp for discussion of eigenvalues and eigenvectors. But it is also important example in quantum computing.\\
+\textcircled{2} $\infty$-length complex sequences\\
+\textcircled{3} Complex functions defined on real line\\
 \textcircled{4} Polynomials of degree at most n-1\\
 $$P_{n-1}=\{P|p(t)=a_{n-1}t^{n-1}+a_{n-2}t^{n-2}+\cdots + a_{1}t+a_{0} \}$$
-It can xxx linear combinations of polynomials and doesn't increase degree, so closed.\\
-\textcircled{5} Sets of matrices(will discuss later)\\
 
+\textcircled{5} Sets of matrices(will discuss later)\\
+\vspace{0.3cm}
 Note: Some authors prefer “linear space" rather than "vector space" since elements of space are not always vectors in the sense of a list.
 
 \vspace{0.5cm}
 
-Span and subspace
+\textbf{Span and subspace}
 
-If I give you a set of vectors, thinking of each as a displacement, anywhere you can get to via linear combinations is the "span" at the set.
+Let $S$ be a set of vectors in a real vector space $V$, i.e.,$S=\{v^{(1)}, v^{(2)}, \cdots ,v^{(m)}\}$, where each $v^{(i)}\in \reals^{n}$.Then, the span of $S$, denoted by span($S$), is the set consisting of all the vectors that are linear combinations of $\{v^{(1)}, v^{(2)}, \cdots ,v^{(m)}\}$, that is, 
+$$\text{span}(S)=\left\{\sum_{i=1}^{m} a_{i}v^{(i)}\middle| a_{i}\in \reals ,\forall i\in [m]\right\}$$
 
-If $S=\{v^{(1)}, v^{(2)}, \cdots ,v^{(m)}\}$, where each $v^{(i)}\in \reals^{n}$
+This set is also called a \textbf{subspace} of $V$.
 
-Then span(S)$=\{\sum_{i=1}^{m} a_{i}v^{(i)}| a_{i}\in \reals ,\forall i\in [m]\}$
+\vspace{0.3cm}
+Example 1
 
-Example 1\\
+\begin{marginfigure}
+	\centering
+	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/subspace-eg1}}
+	\caption{Example 1}
+	\label{fig.2-3}
+\end{marginfigure}
+
+\begin{marginfigure}
+	\centering
+	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/subspace-eg2}}
+	\caption{Example 2}
+	\label{fig.2-4}
+\end{marginfigure}
+
 Let $S=\{v^{(1)}\}=\left\{ 
 \left[ 
 \begin{array}{c} 
 1 \\
 1
 \end{array}
-\right]\right\}$
-
-then
+\right]\right\}$, then
 \begin{align*}
-span(S)&=span({v^{(1)}})\\
+\text{span}(S)&=\text{span}({v^{(1)}})\\
 &=\left\{\left[ 
 	\begin{array}{c} 
 	x \\
 	y
 	\end{array}
-	\right]|x=y\right\}\\
+	\right]\middle|x=y\right\}\\
 &=\left\{a\left[ 
 	\begin{array}{c} 
 	1 \\
 	1
 	\end{array}
-	\right]|a\in\reals\right\}
+	\right]\middle|a\in\reals\right\}
 \end{align*}\\
-\begin{marginfigure}
-	\centering
-	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/subspace-eg1}}
-	\caption{}
-	\label{fig.2-3}
-\end{marginfigure}
-
 
 Example 2\\
-$S=\{v^{(1)}, v^{(2)}\}=\left\{\left[ 
+Let $S=\{v^{(1)}, v^{(2)}\}=\left\{\left[ 
 \begin{array}{c} 
 1\\
 1\\
@@ -182,53 +156,40 @@ $S=\{v^{(1)}, v^{(2)}\}=\left\{\left[
 0
 \end{array}
 \right]
-\right\}$
+\right\}$, then
 
 \begin{align*}
-span(S)&=\{a_{1}v^{(1)}, a_{2}v^{(2)}|(a_{1}, a_{2})\in \reals_{2}\}\\
+\text{span}(S)&=\{a_{1}v^{(1)}, a_{2}v^{(2)}|(a_{1}, a_{2})\in \reals^{2}\}\\
 &=\left\{\left[ 
 	\begin{array}{c} 
 	x\\
 	y\\
 	0
 	\end{array}
-	\right] |x\in\reals , y\in\reals\right\}\\
-&=\text{x-y plane}
+	\right] \middle|x\in\reals , y\in\reals\right\}\\
+&=\text{$x-y$ plane}
 \end{align*}\\
-\begin{marginfigure}
-	\centering
-	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/subspace-eg2}}
-	\caption{}
-	\label{fig.2-4}
-\end{marginfigure}
 
 
-In fact, the span of a set of vectors is a "subspace" is a subset of the XXX vector space($\reals^{n}$ or $\complex^{n}$). XXXX properties of a vector space
+Note:
 
-Note: $0\in\reals_{n}$ always included since we can set all coefficients $a_{i}=0$ for all $i$.
+(1) $0\in\reals^{n}$ always included since we can set all coefficients $a_{i}=0$ for all $i$.
 
-Subspace is a "flat" that goes through the origin.
+(2) Subspace is a "flat" that goes through the origin.
 
 \vspace{0.5cm}
 \noindent\textbf{Linear independent set}
 
-$S=\{v^{(1)},\cdots , v^{(n)}\}$ is a linear, independent set if no element of $S$ can be expressed as a linear combination of the others.
+A set $S=\{v^{(1)},\cdots , v^{(n)}\}$ is a linearly independent set if there is no element of $S$ can be expressed as a linear combination of the others.
 
 The set $S$ is linearly independent if the only $a_{i}$ that satisfies
+$$\sum_{i=1}^{m}a_{i}v^{(i)}=0\quad \text{is if} \quad a_{i}=0 \ \forall i\in [m]$$
 
-$\sum_{i=1}^{m}a_{i}v^{(i)}=0$ is if $a_{i}=0$ $\forall i\in [m]$
-
-If this were not true, letting $l\in[m]$ be s.t. $a_{l}\neq 0$ would have
-$$a_{l}v^{l}+\sum_{i\neq l} a_{i}v^{(i)}=0$$
-$$v^{(l)}=\sum_{i\neq l}(\frac{-a_{i}}{a_{l}})v^{(i)}$$
-
-Note that $a_{l}\neq 0$. So it is not linearly independent.
 
 \vspace{0.5cm}
-\noindent Importance of linearly independent
+\textbf{Importance of linearly independent}
 
-For any $u\in span(S)$ that is a unique choice of the $a_{i}$ in the expression
-$u=\sum_{i=1}^{m} a_{i}v^{(i)}$, i.e., only one way to express.
+For any $u\in \text{span}(S)$ , there is a unique linear combination to express $u$. That is, only one choice of $a_{i}$ in the expression.
 
 \begin{marginfigure}
 	\centering
@@ -243,27 +204,30 @@ $u=\sum_{i=1}^{m} a_{i}v^{(i)}$, i.e., only one way to express.
 	\label{fig.2-4}
 \end{marginfigure}
 
-$v^{(1)}= 
+
+\vspace{0.5cm}
+For example, any 2-d vector $u$ can be uniquely expressed by the following two vectors $v^{(1)}$ and $v^{(2)}$, which form the set $S$. 
+$$v^{(1)}= 
 \left[ 
 \begin{array}{c} 
 1 \\
 0
 \end{array}
-\right]$
+\right]
 ,
-$v^{(1)}= 
+v^{(2)}= 
 \left[ 
 \begin{array}{c} 
 1 \\
 1
 \end{array}
-\right]$
+\right]$$
 
-No redundancy is representation.
 
-observe: it did have redundancy in S. For example,
+Notice that the two vectors are co-linear so that there is no redundancy in the set $S$. Now, consider the case there is a redundancy in $S$, i.e., there is a vector in $S$ can be expressed by the others in $S$:
 
-$S=\left\{\left[ 
+
+$$S=\left\{\left[ 
 \begin{array}{c} 
 1\\
 0
@@ -281,45 +245,45 @@ $S=\left\{\left[
 1
 \end{array}
 \right]
-\right\}$
+\right\}$$
 
-can always shrink S by removing elements to get a linearly independent set. Such an irreducible or linearly independent set can serve as a basis for span(S).
+We can prove that we can always shrink $S$ by removing elements to get a linearly independent set(and also the same subspace before the deletion). Such an irreducible or linearly independent set can serve as a \textbf{basis} for span($S$).
 
-Any largest linearly independent subset of $S=\{v^{(1)},\cdots , v^{(m)}\}$,$B=\{v^{(1)},\cdots , v^{(k)}\}$, $k\leq m$ is a basis for span(S), and the dimension of span(S), dim(span(S))=k.
+Any largest linearly independent subset of $S=\{v^{(1)},\cdots , v^{(m)}\}$, $B=\{v^{(1)},\cdots , v^{(k)}\}$, $k\leq m$ is a basis for span($S$), and the dimension of span($S$) is denoted as  dim(span($S$))=$k$.
 
+\vspace{0.5cm}
+Example 1
 
-Example
+The following vectors form an linearly independent spanning set $S$, and also serve as a basis for the vector space spanned by the set $S$ (i.e., $\reals^{3}$ in this case)
 
-$v^{(1)}= 
+$$v^{(1)}= 
 \left[ 
 \begin{array}{c} 
 1 \\
 1 \\
 1
 \end{array}
-\right]$,
-$v^{(2)}= 
+\right],
+v^{(2)}= 
 \left[ 
 \begin{array}{c} 
 1 \\
 2 \\
 0
 \end{array}
-\right]$,
-$v^{(3)}= 
+\right],
+v^{(3)}= 
 \left[ 
 \begin{array}{c} 
 1 \\
 3 \\
 1
 \end{array}
-\right]$
+\right]$$
 
-an linearly independent spanning set form a basis for
 
-$span\left(\{v^{(1)},v^{(2)}, v^{(3)}\right\}=\reals^{3}$
-
-But, if swap $v^{(3)}= 
+However, if we redefine $v^{3}$, says
+$$v^{(3)}= 
 \left[ 
 \begin{array}{c} 
 3 \\
@@ -327,19 +291,18 @@ But, if swap $v^{(3)}=
 2
 \end{array}
 \right]
-=2v^{(1)}+v^{(2)}$
+=2v^{(1)}+v^{(2)}$$
 
-Then $\left(v^{(1)},v^{(2)}, v^{(3)}\right)$ is not a basis, and it need to be reduced to:
+Then $\left(v^{(1)},v^{(2)}, v^{(3)}\right)$ is not a basis(since it is linearly dependent now), and it need to be reduced to:
+$$\text{span}\left(\{v^{(1)},v^{(2)}\}\right)=\text{span}\left(\{v^{(1)},v^{(3)}\}\right)=\text{span}\left(\{v^{(2)},v^{(3)}\}\right)=\text{span}(S)$$
 
-$span\left(\{v^{(1)},v^{(2)}\}\right)=span\left(\{v^{(1)},v^{(2)}\}\right)=span\left(\{v^{(1)},v^{(2)}\}\right)=span(S)$
+We can prove that each a basis for span($S$) all have same coordinates.
 
-We can prove that each a basis for span(S) all have same coordinates.
+\vspace{0.3cm}
+Example 2
 
-Example
-
-Perhaps most familiar basis is the "standard" basis
-
-$v^{(1)}= 
+The most commonly used basis is the "standard" basis, that is, each vector of the basis has a unit length:
+$$v^{(1)}= 
 \left[ 
 \begin{array}{c} 
 1 \\
@@ -347,8 +310,8 @@ $v^{(1)}=
 0 \\
 \vdots
 \end{array}
-\right]$,
-$v^{(2)}= 
+\right],
+v^{(2)}= 
 \left[ 
 \begin{array}{c} 
 0 \\
@@ -356,8 +319,8 @@ $v^{(2)}=
 0 \\
 \vdots
 \end{array}
-\right]$, $\cdots$,
-$v^{(n)}= 
+\right], \cdots,
+v^{(n)}= 
 \left[ 
 \begin{array}{c} 
 0 \\
@@ -365,92 +328,68 @@ $v^{(n)}=
 \vdots \\
 1 
 \end{array}
-\right]$
+\right]$$
 
-
-often see "e" for standard basis, i.e., $e^{(i)}=v^{(i)}$.
-
-Note that our book uses $e_{i}$ for $e^{(i)}$.
+We often use $'e'$ for standard basis, i.e., $e^{(i)}=v^{(i)}$.
 
 \vspace{0.5cm}
-\noindent\textbf{Norms}: Another important property, idea of distance on length
+\noindent\textbf{Norms}: The idea of distance on length
 
-Familiar: Euclidean distance 
-
-But not only notion of distance. E.g. walking through downtown Toronto or NYC. Blocks you walk along the shortest park.
-
-figure here
-
-So, multiple sense of distance, a sense of distance for a vector is a "norm", some properties on norm must satisfy.
-
-A norm $\Vert\cdot\Vert$ is a function such that $\Vert\cdot\Vert : \gamma\mapsto\reals$
+A norm $\Vert\cdot\Vert$ is a function such that $\Vert\cdot\Vert : \nu\mapsto\reals$
 and satisfies
 
-(a)$\Vert v \Vert\geq 0$, $\forall v\in \gamma$, and $\Vert v \Vert=0$ iff $v=0$.
+(a) $\Vert v \Vert\geq 0$, $\forall v\in \nu$, and $\Vert v \Vert=0$ iff $v=0$.
 
-(b)$\Vert u+v \Vert\leq \Vert u \Vert+\Vert v \Vert$, $\forall u, v\in \gamma$.
+(b) $\Vert u+v \Vert\leq \Vert u \Vert+\Vert v \Vert$, $\forall u, v\in \nu$.
 
-(c)$\Vert au \Vert= \vert a\vert\Vert u \Vert$, $\forall a\in\reals, u\in\gamma$
+(c) $\Vert au \Vert= \vert a\vert\Vert u \Vert$, $\forall a\in\reals, u\in\nu$
 
-Note:$\gamma$ can be either $\reals$ or $\complex$, if $\gamma\in\complex$ we should have $a\in\complex$ in (c).
+Note that $\nu$ can be either $\reals$ or $\complex$, if $\nu\in\complex$ we should have $a\in\complex$ in (c).
 
-a family of norms but will come up after are:
+\vspace{0.5cm}
+Following is a family of norms that are frequently used:
 
 $L_{p}$ norm:
-
 $$\Vert x\Vert_{p}=(\sum_{k=1}^{n}\vert x_{k}\vert^{p})^{1/p}, 1\leq p\leq\infty$$
 
 $L_{2}$ norm: Euclidean length
-
 $$\Vert x\Vert_{2}=\sqrt{\sum_{k=1}^{n}\vert x_{k}\vert^{2}}$$
 
 $L_{1}$ norm:
-
 $$\Vert x\Vert_{1}=\sum_{k=1}^{n}\vert x_{k}\vert$$
 
 $L_{\infty}$ norm:
-
 $$\Vert x\Vert_{\infty}=\lim_{p\to\infty}\Vert x_{k}\Vert_{p}=\max_{k\in [n]} \vert x_{k}\vert$$
 
+\vspace{0.5cm}
+Length is a notion of "size". A natural notion of its "size" of a set is the number of non zero component, i.e., carnality of non-zero support
+$$\text{card}(x)=\sum_{k=1}^{n}\mathbb{1}_{x_{k}\neq 0}$$
 
-Length is a notion of "size"
+Sometimes it is called "$L_{0}$" norm $\Vert x\Vert_{0}$, since $\text{card}(x)=\lim_{p\to 0}(\sum_{k=1}^{n}\vert x_{k}\vert^{p})^{p}$, but it is not a norm (so this terminology is inaccurate). For instance, it doesn't satisfy property (c) of a norm:
+$$\text{card}(2x)=\text{card}(x)\neq 2\text{card}(x)$$
 
-A natural notion of its "size" of a set is the number of non zero XXX
+\textbf{Unit norm-ball}
 
-i.e., carnality of non-zero support
+To visualize a norm we often plot the unit norm-ball $\beta_{p}=\{x|\Vert x\Vert_{p}\leq 1\}$ in $\reals^{2}$. For example,
 
-$$card(x)=\sum_{k=1}^{n}\mathbb{1}_{x_{k}\neq 0}$$
+\vspace{0.3cm}
+$L_{2}$ norm ball
 
-Sometimes it is called "$L_{0}$" $norm \Vert x\Vert_{0}$ since
-
-$$card(x)=\lim_{p\to 0}(\sum_{k=1}^{n}\vert x_{k}\vert^{p})^{p}$$
-
-But not a norm (so this terminology is inaccurate). E.g., it doesn't satisfy property (c),
-
-$$card(2x)=card(x)\neq 2card(x)$$
-
-
-To visualize a norm we often plot it unit norm-ball
-
-$$\beta_{p}=\{x|\Vert x\Vert_{p}\leq 1\}$$
-
-$L_{2}$
-
-\begin{marginfigure}
+\begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p15-1}}
-	\caption{}
+%	\caption{$L_{1}$ norm ball}
 	\label{}
-\end{marginfigure}
+\end{figure}
 
-$L_{1}$ : $\{x|\vert x_{1}\vert\leq 1\}$
+$L_{1}$ norm ball : $\{x|\vert x_{1}\vert\leq 1\}$
 
-\begin{marginfigure}
+\begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p15-2}}
-	\caption{}
+	%\caption{$L_{2}$ norm ball}
 	\label{}
-\end{marginfigure}
+\end{figure}
 
 (a) First see inside the box, clearly $\vert x_{1}\vert\leq 1$ and $\vert x_{2}\vert\leq 1$
 
@@ -458,305 +397,266 @@ $L_{1}$ : $\{x|\vert x_{1}\vert\leq 1\}$
 
 (c) Rest by symmetry
 
+\newpage
+$L_{\infty}$ norm ball: $\{x|\max\{\vert x_{1}\vert, \vert x_{2}\vert\} \leq 1\}$
 
-$L_{\infty}$ : $\{x|\max\{\vert x_{1}\vert, \vert x_{2}\vert\} \leq 1\}$
-
-\begin{marginfigure}
+\begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p15-3}}
-	\caption{}
+%	\caption{$L_{\infty}$ norm ball}
 	\label{}
-\end{marginfigure}
+\end{figure}
 
-
-what about "$L_{0}$"? $\{x|card(x)\leq 1\}$
+What about "$L_{0}$"? 
 
 \begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p15-4}}
-	\caption{}
+%	\caption{}
 	\label{}
 \end{figure}
 
-Not much of a "ball"
+The set $\{x|\text{card}(x)\leq 1\}$ obviously is not much of a "ball".
 
-
-To visualize a bit more look at "level sets" of the norm balls.
-
-$\{x|\vert x\vert=c \}$, see for $c=\frac{1}{2}, 1, 2$
-
-$L_{1}$
+\vspace{0.5cm}
+To visualize a bit more, we look at the \textbf{"level sets"} of the norm balls. We define the level set as $\{x|\vert x\vert=c \}$, and let's see for $c=\frac{1}{2}, 1, 2$. See for the figures on the r.h.s.
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p16-1}}
-	\caption{}
+	\caption{$L_{1}$ level set}
 	\label{}
 \end{marginfigure}
-
-$L_{2}$
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p16-2}}
-	\caption{}
+	\caption{$L_{2}$ level set}
 	\label{}
 \end{marginfigure}
-
-$L_{\infty}$
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p16-3}}
-	\caption{}
+	\caption{$L_{\infty}$ level set}
 	\label{}
 \end{marginfigure}
 
-
+\vspace{0.3cm}
 Why might we be interested in different norms?
 
+Later in the course, we will see applications in optimal control that we want to meet a control objective while minimizing some resources(The objective will be to min a norm of the resources). %For instances,
 
-Ex: Later see applications in optimal control XXX want to meet a XXX objective (move a XXX from point a to XXX point b) while minimizing some resources $\rightarrow$ XXX will be XXX min a norm XXX XXX XXX 
+%$L_2$ $\rightarrow$ get min energy solution.
 
+%$L_1$ $\rightarrow$ get a sparse solution not many forms of jet, useful when "XXX up" overhead
 
-$L_2$ $\rightarrow$ get min energy solution
-
-$L_1$ $\rightarrow$ get a sparse solution not many forms of jet, useful when "XXX up" overhead
-
-$L_\infty$ all uses of resource will be equal in XXX "XXX -XXX " XXX in XXX XXX
+%$L_\infty$ $\rightarrow$ all uses of resource will be equal in magnitude "bang bang "control in vehicles.
 
 \vspace{0.5cm}
 \noindent\textbf{Inner Products}
 
-Final concept in geometry is angles which XXX to concept of inner product between elements of a vector space.
-
-The "standard" inner product in $\reals_{n}$ (aka dot/scalar product)
-
-$$x^{\trans}y=\sum_{k=1}^{n}x_{k}y_{k}$$
-
-More general denote an inner product as $\langle x,y\rangle$
-
-Definition: Any inner product on a (real) vector space $\Omega$ maps a pair of elements $x, y\in\Omega$ into the scalar, that is, $\langle \cdot,\cdot\rangle:\Omega\times\Omega\mapsto\reals$
-
-For any $x, y, z\in\Omega$ and $a\in\reals$, the following holds:
-
-$\langle x,y\rangle\geq 0$ and $\langle x,y\rangle=0$ iff $x=0\in\Omega$
-
-$\langle x+y,z\rangle=\langle x,z\rangle+\langle y,z\rangle$
-
-$\langle ax,y\rangle=a\langle x,y\rangle$
-
-$\langle x,y\rangle=\langle y,x\rangle$
+Any inner product(aka dot/scalar product) on a (real) vector space $\Omega$ maps a pair of elements $x, y\in\Omega$ into the scalar, that is, $\langle\cdot,\cdot\rangle:\Omega\times\Omega\mapsto\reals$. More intuitively the inner product of vectors $x$ and $y$ is given by 
+$$\langle x,y\rangle=x^{\trans}y=\sum_{k=1}^{n}x_{k}y_{k}$$
 
 
+For any $x, y, z\in\Omega$ and $a\in\reals$, the following must hold for a inner product:
+
+(1) $\langle x,y\rangle\geq 0$ and $\langle x,y\rangle=0$ iff $x=0\in\Omega$
+
+(2) $\langle x+y,z\rangle=\langle x,z\rangle+\langle y,z\rangle$
+
+(3) $\langle ax,y\rangle=a\langle x,y\rangle$
+
+(4) $\langle x,y\rangle=\langle y,x\rangle$
+
+\vspace{0.2cm}
 Note:
-The above change slightly in complex vector space, e.g., $\langle x,y\rangle=\overline{\langle y,x\rangle}$
 
-The concept we develop apply beyond list vectors in $\reals_{n}$ or $\complex_{n}$, e.g., space of polynomials or of XXX, but our focus will be $\reals_{n}$ and $\complex_{n}$.
+(a) The above change slightly in complex vector space, e.g., $\langle x,y\rangle=\overline{\langle y,x\rangle}$
 
+(b) The concept we develop apply beyond list vectors in $\reals^{n}$ or $\complex_{n}$, e.g., space of polynomials or of XXX, but our focus will be $\reals^{n}$ and $\complex_{n}$.
+
+
+\vspace{0.5cm}
 Let's connect to angle now.
 
-\begin{marginfigure}
+\begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p18}}
 	\caption{}
 	\label{}
-\end{marginfigure}
+\end{figure}
 
-Note: In above picture $x, y\in\reals_{n}$ but since $dim{span({x, y})}=2$ (assuming x and y are not co-linear). The familiar picture in $\reals_{2}$ shall holds.
+In above picture $x, y\in\reals^{n}$ but since $\text{dim}{\text{span}({x, y})}=2$ (assuming $x$ and $y$ are not co-linear). The familiar picture in $\reals^{2}$ shall holds.
 
-Since we know that $\vert\cos\theta\vert <1$ XXX give
-
+Since we know that $\vert\cos\theta\vert <1$, rearranging gives
 $$\vert\langle x,y\rangle\vert =\vert x^{\trans}y\vert \leq \Vert x\Vert_{2} \Vert y\Vert_{2}$$
 
-Cauchy-Schwartz relates inner product(angle) to norms(length)
+This is the so called Cauchy-Schwartz inequality, and it relates inner product(angle) to norms(length). Such inequality holds for inner product spaces, not just $\reals^{n}$($n$-dimensional Euclidean space). Further more, it could relate the inner product to the norms (not only $L_{2}$) via a generalization, says, "Holder's inequality":
+$$\vert x^{\trans}y\vert\leq \sum_{k=1}^{n}\vert x_{k}y_{k}\vert \leq \Vert x\Vert_{p}\Vert y\Vert_{q}$$
 
-Holds for the inner products, not just in $\reals_{n}$
+for any $p, q\geq 1$ such that $1/p+1/q=1$.
 
-But can also related $\vert\langle x,y\rangle\vert$ to the norms (not $L_{2}$) via a generalization, "Holder's inequality"
+(1) If $p=q=2$, we get the Cauchy-Schwartz inequality.
 
-$\vert x^{\trans}y\vert\leq \sum_{k=1}^{n}\vert x_{k}y_{k}\vert \leq \Vert x\Vert_{p}\Vert y\Vert_{q}$, for any $p, q\geq 1$ such that $1/p+1/q=1$
-
-If $p=q=2$, get c-s
-
-If $p=1$, $q=\infty$, get $\vert x^{\trans}y\vert\leq \Vert x\Vert_{1}\Vert y\Vert_{\infty}=(\sum_{k=1}^{n}\vert x_{k}\vert)(\max_{k\in [n]}x_{k})$
+(2) If $p=1$, $q=\infty$, we get $\vert x^{\trans}y\vert\leq \Vert x\Vert_{1}\Vert y\Vert_{\infty}=(\sum_{k=1}^{n}\vert x_{k}\vert)(\max_{k\in [n]}x_{k})$.
 
 
-
+\vspace{0.5cm}
 A second important connection of inner product and norm is that
-
 $$\Vert x\Vert_{2}=\sqrt{x^{\trans} x}=\langle x,x\rangle$$
 
-The $L_{2}$ norm is "induced" by the XXX inner product.
+The $L_{2}$ norm is "induced" by the inner product. In fact, any inner product induces a norm (by the properties of inner product) However, there are norms that are not induced by any inner product, e.g., $L_{1}$ and $L_{\infty}$. Inner product space has a more special structure than a "normed" vector space.
 
-In fact, any inner product induces a norm (by the properties of inner product)
-
-However, there are norms that are not induced by any inner product, e.g., $L_{1}$ and $L_{\infty}$.
-
-Inner product space more special structure than a "normed" vector space.
-
-\begin{marginfigure}
+\begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p19}}
 	\caption{}
 	\label{}
-\end{marginfigure}
+\end{figure}
 
 Note: There are also spaces with a sense of length (a "metric"). Those are not vector spaces (it can't add and scale elements). Those are "metric" spaces.
 
 \vspace{0.5cm}
 \noindent\textbf{Angles between vectors}
 
-Important XXX: since by Cauchy-Schwartz $\frac{\vert \langle x,y\rangle\vert}{\Vert x\Vert \Vert y\Vert}\leq 1$
-
-(a) If $\vert\cos\theta\vert = +1$, then $\theta 0^{\circ}$ or $180^{\circ}$. x and y are "co-linear", and $\vert\langle x,y\rangle\vert=\Vert x\Vert \Vert y\Vert$
+By Cauchy-Schwartz $\frac{\vert \langle x,y\rangle\vert}{\Vert x\Vert \Vert y\Vert}\leq 1$, hence we have the following cases for the angle $\theta$:
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p20-1}}
-	\caption{}
+	\caption{(a) $\cos\theta = +1$}
 	\label{}
 \end{marginfigure}
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p20-2}}
-	\caption{}
+	\caption{(a) $\cos\theta = -1$}
 	\label{}
 \end{marginfigure}
-
-(b) Perhaps more important if $\vert\cos\theta\vert = 0$, then $\theta 90^{\circ}$, and $\frac{\vert\langle x,y\rangle\vert}{\Vert x\Vert \Vert y\Vert}=0$, or equivalently, $\langle x,y\langle=0$ asumming $x\neq 0$ and $y\neq 0$
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p20-3}}
-	\caption{}
+	\caption{(b) $\cos\theta = 0$}
 	\label{}
 \end{marginfigure}
-
-$\theta$ is a "right" angle, and x, y are orthogonal vectors.
-
-(c) If $\vert \theta\vert <90^{circ}$ ,then $\cos\theta >0$. So $\langle x,y\rangle >0$ on "acute angle".
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p20-4}}
-	\caption{}
+	\caption{(c) $\cos\theta>0$}
 	\label{}
 \end{marginfigure}
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p20-5}}
-	\caption{}
+	\caption{(c) $\cos\theta<0$}
 	\label{}
 \end{marginfigure}
 
-wheres if $\vert \theta\vert >90^{circ}$, so $\langle x,y\rangle <0$ on "abluse angle".
+(a) If $\vert\cos\theta\vert = +1$, then $\theta=0^{\circ}$ or $180^{\circ}$. Vectors $x$ and $y$ are "co-linear", and $\vert\langle x,y\rangle\vert=\Vert x\Vert \Vert y\Vert$
+
+
+(b) If $\vert\cos\theta\vert = 0$, then $\theta = 90^{\circ}$, and $\frac{\vert\langle x,y\rangle\vert}{\Vert x\Vert \Vert y\Vert}=0$, or equivalently, $\langle x,y\rangle=0$ (asumming $x\neq 0$ and $y\neq 0$). In this case, $\theta$ is a "right" angle, and $x$, $y$ are orthogonal vectors.
+
+(c) If $\vert \theta\vert <90^{\circ}$ ,then $\cos\theta >0$, and $\langle x,y\rangle >0$, and $\theta$ is a "acute angle", wheres if $\vert \theta\vert >90^{circ}$, then $\cos\theta <0$ and $\langle x,y\rangle <0$, $\theta$ is a "obtuse angle".
+
+
 
 \vspace{0.5cm}
 \noindent\textbf{Orthogonality}
 
-A set of vectors $S=\{x^{(1)}, x^{(2)},\cdots, x^{(n)}\}$ is mutually orthogonal if $\langle x^{(i)},x^{(j)}\rangle =0$, $\forall i\neq j$
+A set of vectors $S=\{x^{(1)}, x^{(2)},\cdots, x^{(m)}\}$ is mutually orthogonal if $\langle x^{(i)},x^{(j)}\rangle =0$, $\forall i\neq j$
 					
-Such sets have nice property that the elements of S are linearly independent and so provide a basis for span(S) \& span(S)=m.
+Such sets have nice property that the elements of S are linearly independent and so provide a basis for span($S$) and hence dim(span($S$))=$m$.
 
-If, in addition, all elements have unit norm, i.e., $\Vert x^{i}\Vert_{2}=1$ for all $i\in[m]$ that the set forms an "orthogonal" basis.
+If, in addition, all elements have unit norm, i.e., $\Vert x^{(i)}\Vert_{2}=1$ for all $i\in[m]$ then the set forms an \textbf{orthogonal basis}.
 
-Note that $\Vert\cdot\Vert_{2}$ XXX measure length XXX if is induced by the inner product.
+Note that we use $\Vert\cdot\Vert_{2}$ to measure length because it is induced by the inner product.
 
-When (shortly) get to projection will see orthogonal basis are easy to XXX XXX
 
-\begin{marginfigure}
-	\centering
-	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p21-1}}
-	\caption{}
-	\label{}
-\end{marginfigure}
+%\begin{marginfigure}
+%	\centering
+%	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p21-1}}
+%	\caption{}
+%	\label{}
+%\end{marginfigure}
 
-\begin{marginfigure}
-	\centering
-	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p21-2}}
-	\caption{}
-	\label{}
-\end{marginfigure}
+%\begin{marginfigure}
+%	\centering
+%	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p21-2}}
+%	\caption{}
+%	\label{}
+%\end{marginfigure}
 
-Orthogonal complement: Given $S\in \gamma$, a subspace of $\gamma$, a vector $x\in\gamma$ is orthogonal to S if $x\perp s \forall s\in S$, i.e., $\perp$ to all vectors in S
+\vspace{0.3cm}
+\textbf{Orthogonal complement}: Given a subspace $S\in \nu$, a vector $x\in\nu$ is orthogonal to $S$ if $x\perp s \forall s\in S$, i.e., $\perp$ to all vectors in the subspace $S$. The orthogonal complement to $S$ is defined as a collection of such vectors $x$, namely
+$$ S^{\perp} =\{x\in\nu|x\perp s\}$$
 
-$$ S^{\perp} =\{x\in\gamma|x\perp s\}$$
+Some results of $S^{\perp}$:
 
-figure here
+(i) $S^{\perp}$ is a subspace: clearly it includes $0\in\gamma$ and is closed under linear combination(all linear combination $\perp S$).
 
-Some results:
+(ii) dim($\nu$)=dim($S$) + dim ($S^{\perp}$).
 
-(i) $S^{\perp}$ is a subspace: clearly include $0\in\gamma$ and is closed under linear combination(all linear combination $\perp S$)
+(iii) Any $x\in\nu$ can be written in a unique way as $x=x_{s}+x_{s^{\perp}}$ for any subspace $S$.
 
-(ii) dim($\gamma$)=dim(S) + dim ($S^{\perp}$)
+Note: If $S=\nu$ then $S^{\perp}={0}$.
 
-(iii) Any $x\in\gamma$ can be written in a unique way as $x=x_{s}+x_{s^{perp}}$ for any subspace S
-
-Note: If $S=\gamma$ then $S^{\perp}={0}$
 
 \vspace{0.5cm}
 \noindent\textbf{Projection}
 
-Basic problem: Given a point $x\in\gamma$, find the "closeest" point in the set S (recall that points $\equiv$ vectors)
+Motivation: Given a point $x\in\nu$, find the "closest" point in the set $S$ (recall that points $\equiv$ vectors), this point is called the projection of $x$ on the set $S$. Denote this point as $y$, formally we have
+$$y=\Pi_{s}(x)=\arg \min_{y\in S} \Vert y-x\Vert$$
 
-$$\Pi_{s}(x)=\arg \min \Vert y-x\Vert$$
+\vspace{0.3cm}
+Let's consider different cases for this optimization question:
 
-
-(1) First for S a subspace of an inner product space, $L_{2}$
+(1) $S$ is a subspace of an inner product space associate with $L_{2}$ norm
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p23-1}}
-	\caption{}
+	\caption{$S$ is a subspace of an inner product space}
 	\label{}
 \end{marginfigure}
 
-(2) Second for S, an "affine" set.
+(2) $S$ is an "affine" set(a shifted subspace)
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p23-2}}
-	\caption{}
+	\caption{$S$ is an "affine" set}
 	\label{}
 \end{marginfigure}
 
-Basically a shift of a subspace
+(3) Consider other norms, e.g., $L_{1}$, $L_{\infty}$ for which no inner product(projection in normed vectors space)
 
-Work XXX of geometry
+\vspace{0.3cm}
+\textbf{Projection onto 1-D subspace}
 
-(3) Third will realize can do even for other norms, $L_{1}$, $L_{\infty}$ for which XXX inner product(projection in normed vectors space)
+Let's consider the one dimension subspace given by
+$$S=span(\{v\})=\{\lambda v|\lambda \in \reals\}$$
 
-
-\noindent\textbf{Projection and 1-D subspace}
-
-\begin{marginfigure}
+The vector $x$ and subspace $S$ are somethings like:
+\begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p24}}
 	\caption{}
 	\label{}
-\end{marginfigure}
+\end{figure}
 
-$$S=span(\{v\})=\{\lambda v|\lambda \in \reals\}$$
+By orthogonal decomposition,  $x\in S\oplus S^{\perp}$, and therefore $\exists x_{s}\in S, e\in S^{\perp}$, such that $x=x_{s}+e$ (an unique expression).
 
-Figure here
-
-Be orthogonal decomposition  $x\in S\oplus S^{\perp}$
-
-So $\exists x_{s}\in S, e\in S^{\perp}$
-
-s.t. $x=x_{s}+e$, unique expression
-
-$(x-x_{s})=e \in S^{\perp}$
-
-Use this decomposition to solve optimization problem
-
+Use this decomposition to solve the optimization problem(find the closest point)
 $$\Pi_{s}(x)=\arg_{y\in S} \min \Vert y-x\Vert_{2}=\arg_{y\in S} \min \Vert y-x\Vert_{2}^{2}$$
 
-Look at the objective function
-
+The objective function can be written as
 \begin{align*}
 \Vert y-x\Vert_{2}^{2}&=\langle y-x,y-x\rangle\\
 &=\langle (y-x_{s})-e,(y-x_{s})-e\rangle\\
@@ -764,76 +664,48 @@ Look at the objective function
 &\geq \Vert e\Vert_{2}^{2}
 \end{align*}
 
-where minimum attained by setting $y=x_{s}$. Note that the minimum is unique by uniqueness of orthogonal decomposition and $\Vert y-x_{s}\Vert^{2}=0$ iff $y=x_{s}$.
+where the minimum is attained by setting $y=x_{s}$. Note that the minimum is unique by uniqueness of orthogonal decomposition and $\Vert y-x_{s}\Vert^{2}=0$ iff $y=x_{s}$.
 
-
-
-To summarize,
-
+To summarize, 
 $$x_{s}=\Pi_{s}(x)=\arg_{y\in S} \min \Vert y-x\Vert_{2}$$
 
 where $x_{s}$ is in $\perp$-decomposition.
 
-To solve for $x_{s}$: use condition that
+To solve for $x_{s}$ (the point we want), we use the condition that
+$$(x-x_{s}) \perp S=\{\lambda v|\lambda\in\reals\}$$
 
-$x-x_{s} \perp S=\{\lambda v|\lambda\in\reals\}$
+Since $x\in S$, $\exists a\in\reals$ such that $x_{s}=av$, and now we need to solve for $a$ by
+$$0=\langle x-av,v\rangle=\langle x,v\rangle-\langle av,v\rangle=\langle x,v\rangle-a\langle v,v\rangle$$
 
-But $x\in S$, so $\exists a\in\reals$ s.t. $x_{s}=av$, need to solve for $a$.
+Rearranging yields that $a=\frac{\langle x,v\rangle}{a\langle v,v\rangle}=\frac{\langle x,v\rangle}{\Vert v\Vert^{2}}$. Thus, $x_{s}=av=\frac{\langle x,v\rangle}{\Vert v\Vert^{2}}v$.
 
-$0=\langle x-av,v\rangle=\langle x,v\rangle-\langle av,v\rangle=\langle x,v\rangle-a\langle v,v\rangle$
 
-so $a=\frac{\langle x,v\rangle}{a\langle v,v\rangle}=\frac{\langle x,v\rangle}{\Vert v\Vert^{2}}$
+\vspace{0.5cm}
+\textbf{Projection onto a general subspace}
 
-Thus, $x_{s}=av=\frac{\langle x,v\rangle}{\Vert v\Vert^{2}}v$
+Observe that all previous steps for 1-D case still hold. Only used $S$ is 1-D when solving for $x^{(s)}$, so we have already done.
 
-Notes: Recall earlier left XXX derivative that concept $\cos\theta$ to inner product
-
-(1) $\cos\theta=\frac{x_{s}}{\Vert x\Vert}=\frac{1}{\Vert x\Vert}\frac{\vert\rangle x,v\rangle\vert}{\Vert v\Vert}\Vert v\Vert$
-
-$\cos\theta = \frac{\vert\langle x,v\rangle\vert}{\Vert v\Vert\Vert x\Vert}$
-
-(2) Nice way to remember
-
-$x_{s}=\langle x,\frac{x}{\Vert v\Vert}\rangle \frac{x}{\Vert v\Vert}$
-
-Now consider projection onto a subspace in general
-
-figure here
-
-Observe: all previous steps for 1-D case still hold. Only used S is 1-D when solving for $x^{(s)}$, so we have already done.
-
-Theorem: Let $\Omega$ be an inner product space. Let $x\in\Omega$ and let $S\in\Omega$ be a subspace. There exists a unique vector $x^{*}\in S$
-
-$x^{*} = \arg_{y\in S}\min \Vert x-y\Vert$
+\textbf{Theorem}: Let $x\in\Omega$ and $S\in\Omega$, where $x$ is a vector, $S$ is a subspace of $\Omega$ and $\Omega$ is an inner product space. There exists a unique vector $x^{*}\in S$ such that
+$$x^{*} = \arg_{y\in S}\min \Vert x-y\Vert$$
 
 A necessary and sufficient condition for $x^{*}$ is
 
-1. $x^{*} \in S$
+(1). $x^{*} \in S$
 
-2. $x-x^{*}\perp S$
+(2). $x-x^{*}\perp S$
 
+\vspace{0.3cm}
+Now let's consider how to Solve for $x^{*}$ in this general case.
 
-\noindent\textbf{Solving for $x^{*}$}(general case)
+Let $S=\text{span}\left(\{x^{(1)},x^{(2)},\cdots\,x^{(d)}\}\right)$. Notice that $x^{*}\in S$ can be written as $x^{*}=\sum_{i=1}^{d}a_{i}x^{(i)}$ for some $a_{i}$, and $(x-x^{*}) \perp S$, then if $(x-x^{*}) \perp x^{(k)}$ $\forall k\in [d]$, that will be $\perp$ to all linear combination of the spanning set and hence $\perp$ to $S$.
 
-Let $S=span\left(\{x^{(1)},x^{(2)},\cdots\,x^{(n)}\}\right)$
+Accordingly yields $d$ conditions, $\forall k\in [d]$, we have
+$$0=\langle x-x^{*},x^{(k)}\rangle=\langle x-\sum_{i=1}^{d}a_{i}x^{(i)},x^{(k)}\rangle=\langle x,x^{(k)}\rangle-\sum_{i=1}^{d}a_{i}\langle x^{(i)},x^{(k)}\rangle$$
 
-Since $x^{*}\in S$ can be written as 
+Rearranging yields
+$$\sum_{i=1}^{d}a_{i}\langle x^{(i)},x^{(k)}\rangle=\langle x,x^{(k)}\rangle ,\ \forall k\in [d]$$
 
-$x^{*}=\sum_{i=1}^{d}a_{i}x^{(i)}$ for some(as yet unknown) $a_{i}$
-
-since $(x-x^{*}) \perp S$
-
-If $(x-x^{*}) \perp x^{(k)}$ $\forall k\in [d]$ that will be $\perp$ to all linear combination and hence $\perp to S$
-
-Yields d conditions, $\forall k\in [d]$ we have
-
-$0=\langle x-x^{*},x^{(k)}\rangle=\langle x-\sum_{i=1}^{d}a_{i}x^{(i)},x^{(k)}\rangle=\langle x,x^{(k)}\rangle-\sum_{i=1}^{d}a_{i}\langle x^{(i)},x^{(k)}\rangle$
-
-Re-arranging yields
-
-$\sum_{i=1}^{d}a_{i}\langle x^{(i)},x^{(k)}\rangle=\langle x,x^{(k)}\rangle \forall k\in [d]$
-
-Or stacking into a matrix(d equations in d unknowns)
+Or stacking into a matrix($d$ equations in $d$ unknowns)
 $$\left[ 
 \begin{array}{cccc} 
 \langle x^{(1)},x^{(1)}\rangle & \langle x^{(1)},x^{(2)}\rangle &\cdots& \langle x^{(1)},x^{(d)}\rangle\\
@@ -856,64 +728,59 @@ d_{d}
 \end{array}
 \right]$$
 
+One case where easy to solve the equation is, when the $x^{(k)}$ are all mutually $\perp$ (so the matrix is diagonal), or furthermore, all these vectors have unit length and mutually orthogonal(so it is an identity matrix).
 
-One case where easy to solve the equations:
+\vspace{0.3cm}
+How do you orthogonalize and normalize a matrix?
 
-when the $x^{(k)}$ are all mutually $\perp$ matrix is diagonal.
+\textbf{Gran-Schmit Procedure:}
 
-If orthogonal and normalized matrix is identity matrix (even easier)
-
-How do you orthogonal and normalize a matrix? Gran-Schmit Procedure
+Let's consider an example: we have already have a basis ${x^{(1)}, x^{(2)}}$, and we want to find the orthogonal basis ${z^{(1)}, z^{(2)}}$.
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p28-1}}
-	\caption{}
+	\caption{Problem setting}
 	\label{}
 \end{marginfigure}
-
-Step 1: Normalize $x^{(1)}$
-
-$z^{(1)}=\frac{x^{(1)}}{\Vert x^{(1)}\Vert}$
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p28-2}}
-	\caption{}
+	\caption{Step 1}
 	\label{}
 \end{marginfigure}
-
-Step 2: Orthogonal $x^{(2)}$
-
-a.  Project $x^{(2)}$ and $z^{(1)}$
-
-$\frac{\langle x^{(2)},z^{(1)}\rangle}{\Vert z^{(1)}\Vert} z^{(1)}=\langle x^{(2)},x^{(1)}\rangle z^{(1)}=u$
-
-
-b. Normalize 
-
-$\frac{x^{(2)}-u}{\Vert x^{(2)}-u\Vert}$
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p28-3}}
-	\caption{}
+	\caption{Step 2}
 	\label{}
 \end{marginfigure}
 
-XXX to higher dimensions as needed
+Step 1: Normalize $x^{(1)}$
+$$z^{(1)}=\frac{x^{(1)}}{\Vert x^{(1)}\Vert}$$
 
+Step 2: Orthogonalize $x^{(2)}$
 
-Stacking up results to XXX yields "QR" decomposition
+\quad (a). Project $x^{(2)}$ onto $z^{(1)}$
+$$\frac{\langle x^{(2)},z^{(1)}\rangle}{\Vert z^{(1)}\Vert} z^{(1)}=\langle x^{(2)},x^{(1)}\rangle z^{(1)}=u$$
 
+\quad (b). Normalize to obtain $z^{(2)}$
+$$\frac{x^{(2)}-u}{\Vert x^{(2)}-u\Vert}$$
+
+The above procedure could be extended to higher dimensions as needed.
+
+\vspace{0.4cm}
+Stacking up results and yields the \textbf{QR decomposition}
 \begin{align*}
 	A&=\left[\begin{matrix}
 	\vdots&\vdots&\cdots&\vdots\\
-	x^{1}&x^{2}&\cdots&x^{m}\\
+	x^{(1)}&x^{(2)}&\cdots&x^{(m)}\\
 	\vdots&\vdots&\cdots&\vdots
 	\end{matrix}\right]=\left[\begin{matrix}
 	\vdots&\vdots&\cdots&\vdots\\
-	z^{1}&z^{2}&\cdots&z^{m}\\
+	z^{(1)}&z^{(2)}&\cdots&z^{(m)}\\
 	\vdots&\vdots&\cdots&\vdots
 	\end{matrix}\right]
 	\left[\begin{matrix}
@@ -925,235 +792,254 @@ Stacking up results to XXX yields "QR" decomposition
 	&=QR\\
 	&=\left[\begin{matrix}
 	\vdots&\vdots&\cdots\\
-	r_{11}z^{1}&r_{12}z^{1}+r_{22}z^{1}&\cdots \\
+	r_{11}z^{(1)}&r_{12}z^{(1)}+r_{22}z^{(1)}&\cdots \\
 	\vdots&\vdots&\cdots 
 	\end{matrix}\right]
 \end{align*}
 
-To date what have seen in linear algebra class
+Note that any non singular square matrix $A$ could be decomposed in this way.
 
-Next something(perhaps) new: project onto affine set
+\vspace{0.5cm}
+\textbf{Project onto affine set}
+
+Recall that all subspace must go through origin, and an "affine" set is a shift/translate of a subspace, and thus it seems that it can't be too difficult to project onto this kind of set. An affine set $\mathcal{A}$ is defined as
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p30-1}}
-	\caption{}
+	\caption{Subpace $S$}
 	\label{}
 \end{marginfigure}
-
-all subspace go through origin
-
-can't be too difficult to project onto XXX line(subspace) that doesn't include origin
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p30-2}}
-	\caption{}
+	\caption{Affine set $\mathcal{A}$ as a shifted subspace}
 	\label{}
 \end{marginfigure}
 
-Seems there must be some way to XXX our results XXX to this slightly modified geometry.
+$$\mathcal{A}=\{x\in\Omega|x=u+x^{(0)}, u\in U, x^{(0)}\in \mathcal{A}\}$$
 
-\vspace{0.5cm}
-Definition: an "affine" set is a shift/translate of a subspace
+Note that we can shift $S$ be any point in $\mathcal{A}$.
 
-$A=\{x\in\Omega|x=u+x^{c}, u\in U, x^{(c)}\in A\}$
+\vspace{0.3cm}
+The idea of finding projection onto affine set:
 
-figure here
+Step (0) Goal: to project $x\in \Omega$ onto $\mathcal{A}$.
 
-figure here
+Step (1) Translate both $x$ and $\mathcal{A}$ by $-x^{(0)}$, and note that the translation of $\mathcal{A}$ is $S$.
 
-Note: can shift S be any point in A(since any other point in A is XXX point + a vector in S)
+Step (2) Project(translate) $x-x^{(0)}$ onto $S$(as we did before), and shift result back by $+x^{(0)}$.
 
-Idea of projection onto affine set
-
-$\textcircled{0}$ To project $x\in \Omega$ onto A
-
-$\textcircled{1}$ First translate both x and A by $-x^{(0)}$
-
-translation of A is S
-
-$\textcircled{2}$ Project(translate) $x-x^{(0)}$ onto S(as before)
-
-shift result back by $+x^{(0)}$
-
-$\textcircled{3}$ Get point in A
+Step (3) Get the projection point in $\mathcal{A}$.
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p32-1}}
-	\caption{}
+	\caption{Step (0)}
 	\label{}
 \end{marginfigure}
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p32-2}}
-	\caption{}
+	\caption{Step (1)}
 	\label{}
 \end{marginfigure}
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p32-3}}
-	\caption{}
+	\caption{Step (2)}
 	\label{}
 \end{marginfigure}
 
 \begin{marginfigure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p32-4}}
-	\caption{}
+	\caption{Step (3)}
 	\label{}
 \end{marginfigure}
 
+\vspace{0.3cm}
+\textbf{Theorem: Projection onto affine set}
 
-Theorem: Projection onto affine set
-
-Let $\Omega$ be an inner product space
-
-Let $A\in \Omega$ be an affine set where $A=S+x^{(c)}$
-
-There is a unique $x^{*}\in A$ such that
-
-$x^{*} = \arg_{y\in A}\min \Vert y-x\Vert$
+Let $\mathcal{A}\in \Omega$ be an affine set, where $\Omega$ is an inner product space and $\mathcal{A}=S+x^{(c)}$. There is a unique $x^{*}\in \mathcal{A}$ such that 
+$$x^{*} = \arg_{y\in \mathcal{A}}\min \Vert y-x\Vert$$
 
 A necessary and sufficient(set of) conditions:
 
-1. $x^{*} \in A$
+(1). $x^{*} \in \mathcal{A}$
 
-2. $(x-x^{*})\perp S$
+(2). $(x-x^{*})\perp S$
 
-
-
-Before XXX note $(x-x^{*})\perp S$ not that
-
-If $(x-x^{*})\perp A$, then $(x-x^{*})\perp all vectors in A$
-
-But can see not case
-
-\begin{marginfigure}
-	\centering
-	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p33}}
-	\caption{}
-	\label{}
-\end{marginfigure}
-
-The book writes $(p-p^{(*)})\perp H$
-
-
-
-Proof: any $y\in A$ can be expressed as $y=z+x^{(0)}$ when $z\in S$
-
+\vspace{0.3cm}
+Proof: Any $y\in A$ can be expressed as $y=z+x^{(0)}$ when $z\in S$
 \begin{align*}
-\min_{y\in A} \Vert y-x\Vert&=\min_{(z+x^{(0)}\in) A} \Vert z+x^{(0)}-x\Vert\\
+\min_{y\in A} \Vert y-x\Vert&=\min_{(z+x^{(0)})\in A} \Vert z+x^{(0)}-x\Vert\\
 &=\min_{z\in S} \Vert z-(x-x^{(0)})\Vert
 \end{align*}
 
-Thus $z^{*}=\arg\min_{z\in S} \Vert z-(x-x^{(0)})\Vert$
-
-and translating back,
-
-$x^{(*)}=z^{(*)}+x^{(0)}$
+Thus $z^{*}=\arg\min_{z\in S} \Vert z-(x-x^{(0)})\Vert$, and translating back, we have
+$$x^{(*)}=z^{(*)}+x^{(0)}$$
 
 
-What are the conditions for optimality?
+What are the conditions for optimality? That is,
 
-$z^{(*)}-(x-x^{(0)})\perp S$ and $z^{*}$ by projection XXX
+$z^{(*)}-(x-x^{(0)})\perp S$ , where $z^{*}\in S$ is obtained by projection onto $S$.
 
-Thus, in terms of optimal $x^{*}$
+Thus, in terms of optimal $x^{*}$,
 
-$x^{(*)}=z^{(*)}+x^{(0)} \in A$
+(1) $x^{(*)}=z^{(*)}+x^{(0)} \in A$.
 
-$z^{(*)}+x^{(0)}-x \perp S \equiv x^{(*)}-x\perp S$
+(2) $(z^{(*)}+x^{(0)}-x) \perp S \Leftrightarrow (x^{(*)}-x)\perp S$.
 
 
-
+\vspace{0.3cm}
 Example: Projection onto a hyperplane
 
-example here 
+A \textbf{hyperplane} is an affine set $\mathcal{H}$ specified by the pair $(a, b) \in \mathbb{R}^n \times \mathbb{R}$. 
+\[
+\mathcal{H} = \{ z \in \mathbb{R}^n | a^{T} z = b \}
+\] 
+An equivalent definition is 
+\[
+\mathcal{H} = \{ z \in \mathbb{R}^n | z = u + z^{(0)}, u \in S, z^{(0)} \in \mathcal{H} \}
+\] 
+where $S$ is the subspace $S = \{ z \in \mathbb{R}^n | a^{T} z = 0 \}$. 
 
-Exercise: Prove equivalence of 2 definition
+Note: 
 
+(1) The "equivalent" definition is clearly that of an affine set.
+
+(2) $a \neq 0$ is termed as the "normal" direction.
+
+(3) If $b \neq 0$, then $\mathcal{H} = \mathcal{S}$ and so it is a subspace. 
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p35.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+A hyperplane is a special type of affine set. The dimension of the hyperplane is $n-1$ given that the subspace $S$ has a dimension of $n$. For example,
+
+(1) A (2-D) plane is a hyperplane in $\mathbb{R}^3$. 
+
+(2) A line is a hyperplane in $\mathbb{R}^3$. 
+
+(3) A line is not hyperplane in $\reals_{3}$.
+
+
+\vspace{0.3cm}
+Exercise: Prove equivalence of above 2 definition
+
+Let's Start with $\mathcal{H} = \{z \in \mathbb{R}^2 | a^{T} z = b \}$, and let $z^{0} \in \mathcal{H}$(any element at $\mathcal{H}$ will do).
+
+Then, since $a^{T} z^{0} = b$ and for any $z \in \mathcal{H}$, we have
+
+$$a^{T} z - b = 0\Leftrightarrow a^{T} - a^{T}z^{(0)} = 0\Leftrightarrow a^{T} (z - z^{(0)}) = 0$$
+
+Thus,
+$$\mathcal{H} = \{z | a^{T} (z - z^{(0)}) = 0 \}     \qquad (*)$$
+
+Now, since $(\text{span} \{ a \}) = \{ x | x= \lambda  a, \lambda \in \mathcal{R} \}$ is a subspace of dim $1$, the set $(\text{span} \{ a \})^{\perp} $ is a subspace of dim $n-1$. 
+
+Let $\mathcal{S}$ be this subspace.
+
+Observe that by (*), vectors in $\mathcal{H}$ when translate by $-z^{(0)}$ on $\mathcal{S}$. 
+
+Therefore $\mathcal{H}$ is $\mathcal{S}$ translated by $+z^{(0)}$ yields $z^{(0)}$. 
+
+Now, let's start with $\mathcal{H} = \{ z \in \mathbb{R}^n | z = u + z^{(0)}, u \in \mathcal{S}, z \in \mathcal{H} \}$. 
+
+Let $\{ u^{(1)}, \dots, u^{(n-1)} \}$ be a basis for $u$, and we choose $a \perp u^{(i)}$, $i \in [n-1]$ and let $b = a^{T} z^{0}$. Then for any $z \in \mathcal{H}$, we have $a^{T} z = 0 + a^{T} z^{(0)} = b$. 
+
+
+\vspace{0.3cm}
 Example: 2-D case
+Let normal direction be $a = (1, \frac{1}{2})$, offset $b = 2$.
+\begin{align*}
+\mathcal{H} &= \{z \in \mathbb{R}^2 | a^{T} z = b \} \\
+&= \{z \in \mathbb{R}^2 | z_1 + \frac{1}{2} z_2 - 2 = 0 \}
+\end{align*}
 
 
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p37.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
 
-Back to projection onto hyperplane
+$\mathcal{H} = \{ z \in \mathbb{R}^n | z = u + z^{(0)}, u \in \mathcal{S}, z^{(0)} = \begin{bmatrix} 2\\ 0\\ \end{bmatrix} \}$
 
-$H=\{z\in\reals_{n}|a^{\trans} z=b\}=\{z\in\reals_{n}|z=x_{s}+z^{(0)},x_{s}\in S, z^{(0)}\in H\}$
+when 
+\begin{align*}
+\mathcal{S} &= \{z \in \mathbb{R}^2 | a^{T} z = 0 \} \\
+&= \{z \in \mathbb{R}^2 | z_1 + \frac{1}{2} z_2 = 0 \}
+\end{align*}
 
-Recall $dim(S)=n-1$, so $dim(S^{\perp})=1$
+Note that recall any value at $z^{(0)} \in \mathcal{H}$ works so XXX
+$$\mathcal{H} = \{ z \in \mathbb{R}^n | z = u + z^{(0)}, u \in S, z^{(0)} = \begin{bmatrix} 0\\ 4\\ \end{bmatrix} \}$$
+or 
+$$\mathcal{H} = \{ z \in \mathbb{R}^n | z = u + z^{(0)}, u \in S, z^{(0)} = \begin{bmatrix} 1\\ 2\\ \end{bmatrix} \}\quad \text{, etc.} $$
 
-\begin{marginfigure}
+\vspace{0.3cm}
+Now let's back to the first example, projection onto hyperplane.
+$$\mathcal{H}=\{z\in\reals^{n}|a^{\trans} z=b\}=\{z\in\reals^{n}|z=x_{s}+z^{(0)},x_{s}\in S, z^{(0)}\in \mathcal{H}\}$$
+
+\begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p39}}
 	\caption{}
 	\label{}
-\end{marginfigure}
+\end{figure}
 
-want $p^{(*)}=\arg \min_{p\in H} \Vert p^{*}-p\Vert$
+Recall that $\text{dim}(S)=n-1$, so $\text{dim}(S^{\perp})=1$, and we want to find the point $p^{*}=\arg \min_{p\in H} \Vert p^{*}-p\Vert$.
 
-Observe $p-p^{9*} \perp S$ (optimal condition)
+Observe that $(p-p^{*}) \perp S$ (by optimal condition), So $(p-p^{*}) \in S^{\perp}=\{\lambda a|\lambda \in \reals \}$, and $\exists \lambda^{*}$ such that $p-p^{*}=\lambda^{*}a$.
 
-So $p-p^{*} \in S^{(\perp)}=\{\lambda a|\lambda \in \reals \}$
-
-Therefore, $\exists \lambda^{*}$ s.t.  $p-p^{*}=\lambda^{*}a$
-
-want to solve for $\lambda^{*}$ but have 2 unknowns $(\lambda^{*},p^{*})$
-
-will get rid of $p^{*}$ dependency by using definition of H
-
+Now, we want to solve for $\lambda^{*}$ but notice that there are 2 unknowns $(\lambda^{*},p^{*})$, and hence we get rid of $p^{*}$ dependency by using definition of $\mathcal{H}$.
 \begin{align*}
-p-p^{*}&=\lambda^{*}a\\
-a^{\trans} (p-p^{*})&=a^{\trans} (\lambda^{*}a)\\
-a^{\trans} p-a^{\trans} p^{*})&=\lambda^{*}a^{\trans} a\\
-a^{\trans} p-b&=\lambda^{*}a^{\trans} a\\
-x^{*}=\frac{a^{\trans} p-b}{a^{\trans} a}\\
-x^{*}=\frac{a^{\trans} p-b}{\Vert a\Vert^{2}}\\
+&\qquad p-p^{*}=\lambda^{*}a\\
+&\Leftrightarrow a^{\trans} (p-p^{*})=a^{\trans} (\lambda^{*}a)\\
+&\Leftrightarrow a^{\trans} p-a^{\trans} p^{*})=\lambda^{*}a^{\trans} a\\
+&\Leftrightarrow a^{\trans} p-b=\lambda^{*}a^{\trans} a\\
+&\Leftrightarrow \lambda^{*}=\frac{a^{\trans} p-b}{a^{\trans} a}\\
+&\Leftrightarrow \lambda^{*}=\frac{a^{\trans} p-b}{\Vert a\Vert^{2}}\\
 \end{align*}
 
-Thus, $p-p^{*}=\lambda^{*} a=(\frac{a^{\trans} p-b}{\Vert a\Vert^{2}})a$
-
-$p^{*}=p-(\frac{a^{\trans} p-b}{\Vert a\Vert^{2}})a$
+Thus, $p-p^{*}=\lambda^{*} a=(\frac{a^{\trans} p-b}{\Vert a\Vert^{2}})a$, or $p^{*}=p-(\frac{a^{\trans} p-b}{\Vert a\Vert^{2}})a$.
 
 and 
+$$\Vert p-p^{*}\Vert=\Vert \lambda^{*}a\Vert= \vert \lambda^{*}\vert \Vert a\Vert=\frac{\vert a^{\trans} p-b\vert}{\Vert a\Vert}$$.
 
-$\Vert p-p^{*}\Vert=\Vert \lambda^{*}a\Vert= \vert \lambda^{*}\vert \Vert a\Vert=\frac{\vert a^{\trans} p-b\vert}{\Vert a\Vert}$
-
-Recall terminology
-
-$\Vert p-p^{*}\Vert=\min_{y\in H} \Vert y-p\Vert$
-
-$p^{*}=\arg\min_{y\in H} p^{*}$
+Recall terminology $\Vert p-p^{*}\Vert=\min_{y\in \mathcal{H}} \Vert y-p\Vert$, we have
+$$p^{*}=\arg\min_{y\in \mathcal{H}} \Vert y-p\Vert$$
 
 
 \vspace{0.5cm}
 \noindent\textbf{Projection w.r.t other norms}
 
-So far looked at projection in inner product space.
+Recall that inner product spaces have a notion of angle, have term "orthogonality principle", and the $L_{2}$ norm is one such example. In contrast, some norms such as $L_{1}$ and$ L_{\infty}$ norms don't come with a sense of angle. However the problem still make senses if $p\neq 2$, e.g., $p=1$, $p=\infty$, but we cannot apply $\perp$ principle since there is no sense of angle.
 
-Recall inner product spaces have a notion of angle, have term "orthogonality principle", $L_{2}$ norm is one such example
-
-In contrast, XXX $L_{1}$ and$ L_{\infty}$ norms don't come with a sense of angle. However the problem
-
-
-
-still makes sens if $p\neq 2$, e.g., $p=1$, $p=\infty$, but cannot apply $\perp$ principle since no sense of angle
-
+\vspace{0.3cm}
 In following we will
 
-1. discuss projection in normed vector spaces particularly $L_{1}$ and $L_{\infty}$
+(1). Discuss projection in normed vector spaces, particularly $L_{1}$ and $L_{\infty}$.
 
-2. Illustrate how the solution differs as you change norm (change p)
+(2). Illustrate how the solution differs as you change the norm (change $p$).
 
-3. Give you a sense for character of different such for $p=1$ and $p=\infty$
+(3). Give you a sense for character of difference such for $p=1$ and $p=\infty$.
 
-4. Get a sense of why might pick $p\neq 2$
+(4). Get a sense of why might pick $p\neq 2$.
 
-
-Recall norm balls
+\newpage
+Recall norm balls we draw before. Let's project $0\in\reals^{2}$ onto a line (affine set/hyperplane).
 
 \begin{marginfigure}
 	\centering
@@ -1176,270 +1062,237 @@ Recall norm balls
 	\label{}
 \end{marginfigure}
 
-\begin{marginfigure}
+
+\begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p42-4}}
 	\caption{}
 	\label{}
-\end{marginfigure}
+\end{figure}
 
-Let's project $x=0\in\reals^{2}$ onto a line (affine set/hyperplane)
-
-figure here
-
-$$x^{*}=\arg\min_{x\in A} \Vert x-0\Vert_{p}=\arg\min_{x\in A} \Vert x\Vert_{p}$$
+$$x^{*}=\arg\min_{x\in \mathcal{A}} \Vert x-0\Vert_{p}=\arg\min_{x\in \mathcal{A}} \Vert x\Vert_{p}$$
 
 
-figure here
-
-Observe:
-
-$x_{2}^{*}$: Familiar with solution via inner product and $\perp$ theorem, closed form
-
-$x_{1}^{*}$: Solution is "sparse", generally will be cost for other constraints since norm-ball XXX + XXX axis+aligned
-
-$x_{\infty}^{*}$ at optimum, $x_{\infty, 1}^{*}=x_{\infty, 2}^{*}$, equal-magnitude coordinate
-
-Applications(later in course in XXX x will be control vector over time)
-
-$L_{2}$: energy control
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p43.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
 
-$L_{2}^{*}$: sparse solution:
+Observe that:
 
+$x_{2}^{*}$: Familiar with solution via inner product and $\perp$ theorem, and has a closed form solution.
 
-$L_{\infty}$:equal-effect: useful in "bang-bang" control, XXX XXX XXX XXX, e.g., in rockets
+$x_{1}^{*}$: Solution is "sparse", generally will be cost for other constraints since norm-ball oints + points axis aligned.
+
+$x_{\infty}^{*}$: At optimum, $x_{\infty, 1}^{*}=x_{\infty, 2}^{*}$, equal-magnitude coordinate.
 
 
 \vspace{0.5cm}
 \noindent\textbf{Functions}
 
-To date our focus has been on vectors
+Some terminologies will be used in this material:
 
-Now will discuss functions that map vectors inputs to real number. This is importance when come to optimization, e.g., in last example
+"Function":  $F:\reals^{n}\mapsto \reals$
 
-$x^{*}=\arg\min_{y\in H} \Vert x-y\Vert$
-
-$x\in\reals_{n}$ but the x is chosen to minimize the function $\Vert\cdot\Vert :\reals_{n}\mapsto\reals$
-
-Some terminology in this book:
-
-"Function":  $F:\reals_{n}\mapsto \reals$
-
-"Map":  $F:\reals_{n}\mapsto \reals^{m}$
-
-Note: above is like a XXX, XXX programming language
-$$F: x \mapsto y$$
-
-However, not all input values may be allowed, input may be a subset of $\Omega$ (cf, $\reals^{n}$), this is the "domain" of F
-
-dom F= $\{x\in\reals^{n}|\vert F(x)\vert\leq\infty\}$
+"Map":  $F:\reals^{n}\mapsto \reals^{m}$
 
 
-
-example here
-
-figure here
-
-figure here
-
-
-
-not the same functions since domains differ.
-
+However, not all input values may be allowed, input may be a subset of $\Omega$ (cf, $\reals^{n}$), this is the "domain" of $F$, that is
+$$\text{dom} F= \{x\in\reals^{n}|\vert F(x)\vert\leq\infty\}$$
 
 
 Aside: Terminology when discussion a pair of vector space $(\gamma,u)$ over a field $\mathbb{F}$
 
-F:$u\mapsto \gamma$, a "map", generally $dim(u)\neq dim(\gamma)$
+$F:u\mapsto \gamma$, a "map", generally $\text{dim}(u)\neq \text{dim}(\gamma)$.
 
-F:$u\mapsto u$ , an "   ", input and output vectors spaces have the same dimension
+$F:u\mapsto u$ , an "   ", input and output vectors spaces have the same dimension.
 
-F:$u\mapsto \mathbb{F}$ , a "function", map vector space into a scalar
+$F:u\mapsto \mathbb{F}$ , a "function", map vector space into a scalar.
 
-in this course, $u=\reals_{n}$ , $\gamma=\reals_{m}$, $\mathbb{F}=\reals$(or, occasionally $\complex$)
-
-
-
-Sets related to functions
-
-Various sets defined by a function tell us a lot(or sometimes everything) about a function $F:\reals_{n}\mapsto\reals$
-
-(1) The "graph" (a.k.a, "plot") of F is the set
-
-graph F$=\{(x,F(x))\in\reals_{n+1}:x\in\reals_{n}\}$
-
-(2) The "epigraph" of F is the set 
-
-epf F$=\{(x,t)\in\reals_{n+1}:x\in\reals_{n}, t\geq F(x) \}$
-
-figure here
-
-figure here
+In this course, $u=\reals^{n}$ , $\gamma=\reals^{m}$, $\mathbb{F}=\reals$ (or, occasionally $\complex$).
 
 
-also useful to consider points at(or below) a height
+\vspace{0.3cm}
+\textbf{Sets related to functions}
+
+Various sets defined by a function tell us a lot(or sometimes everything) about a function $F:\reals^{n}\mapsto\reals$
+
+(1) The "graph" (a.k.a, "plot") of $F$ is the set
+$$F=\{(x,F(x))\in\reals^{n+1}:x\in\reals^{n}\}$$
+
+(2) The "epigraph" of $F$ is the set 
+$$F=\{(x,t)\in\reals^{n+1}:x\in\reals^{n}, t\geq F(x) \}$$
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p48-1.jpg}
+	\caption{Graph 1} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p48-2.jpg}
+	\caption{Graph 2} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p48-3.jpg}
+	\caption{Epigraph 1} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p48-4.jpg}
+	\caption{Epigraph 2} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+
+Graph
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p47-1.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	\label{fig:graph} 
+\end{figure}
+
+Epigraph
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p47-2.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+
+
+It is also useful to consider points at(or below) a height
 
 (3) The "level" set
-
-$$c_{F}(t)=\{x\in\reals_{n}:F(x)=t\}$$
+$$c_{F}(t)=\{x\in\reals^{n}:F(x)=t\}$$
 
 (4) The "Sub-level" set
+$$L_{F}(t)=\{x\in\reals^{n}:F(x)\leq t\}$$
 
-$$L_{F}(t)=\{x\in\reals_{n}:F(x)\leq t\}$$
+Note: graph and epigraph are in $\reals^{n+1}$, level and sublevel set are in $\reals^{n}$
 
-Note: graph and epigraph are in $\reals_{n+1}$, level and sublevel are in $\reals_{n}$
-
-
-Let's sketch these sets for $L_{2}$ and $L_{1}$ norms in $\reals_{2}$
-
-Graph:
-
-figure here
-
-Epigraph:
-
-figure here
-
-Level sets:
-
-figure here
-
-Sub-level sets:
-
-figure here
-
-
-
-Linear and affine functions: important classes
-
-$F:\reals_{n}\mapsto\reals$ is linear iff
-
-(1)"Homogeneous": $F(ax)=aF(x)$,$ \forall x\in\reals_{n}$ and $a\in\reals$
-
-(2)"Additivity":  $F(x^{(1)}+x^{92})=F(x^{(1)})+F(x^{(2)})$
-
-Put together and recurse to get 
-
-
-$$F(\sum_{i\in [d]}^{}a_{i}x^{(i)})=\sum_{i\in [d]}^{}a_{i}F(x^{(i)})$$
-
-
-$F:\reals_{n}\mapsto\reals$ is affine iff
-
-$\overline{F}$ define pointwise as $\overline{F}=F(x)-F(0)$, $\forall x\in\reals_{n}$ is a linear function.
-
-
-Turns out(wasn't prove-see "Linear Algebra Done right")
-
-The $F:\reals_{n}\mapsto\reals$ is affine iff there is a unique pair $(a,b)\in\reals_{n}\times\reals$  s.t. 
-
-$F(x)=a^{\trans} x+b$,  $\forall x\in\reals_{n}$
-
-Since $F(0)=b$, this implies that any linear function can be expressed as $F(x)=a^{\trans} x=\langle a,x\rangle$ for some unique $a\in\reals_{n}$
-
-
-Sets and linear/affine functions
-
-The graph of $F:\reals_{n}\mapsto\reals$ is a 
-
-+ subspace of $\reals_{n+1}$ if F is linear
-
-+ hyperplane of $\reals_{n+1}$ if F is affine
-
-
-The epigraph of $F:\reals_{n}\mapsto\reals$ is a 
-
-+ half-space of $\reals_{n+1}$ if F is affine
-
-+ half-space the boarder at which includes $0\in\reals_{n+1}$ if F is linear
-
-figure here
-
-
-Similar statements hold for level sets and sub-level sets in $\reals_{n}$, e.g., level sets of a linear function $F:\reals_{2}\mapsto\reals$ are affine sets in $\reals_{2}$
-
-figure here
-
-
-Exercise: Use definition of graph and epigraph to prove:
-
-XXX round a best way to describe hyperplane and half-spaces, direct XXX next:
-
-proof here
-
-
-Proof: Graph F is a hyperplane when F is affine
-
-proof here
-
-
-
-
-Recalling definition of a hyperplane
-
-$$H=\{z\in\reals_{n}|a^{\trans} z=b,a\in\reals_{n}, b\in\reals \}$$
-
-Half-spaces are on one side or other of hyperplane
-
-$$H_{+}=\{z\in\reals_{n}|a^{\trans} z>b\}$$
-
-$$H_{-}=\{z\in\reals_{n}|a^{\trans} z\leq b\}$$
-
-Recall that a is $\perp$ to the subspace but defines H, euqivalently the boarder of $H_{+}$ or $H_{-}$
-
-figure here
-
-Why is $H_{+}$(rather than $H_{-}$) the side of $H$ XXX which the normal direction is painting
-
-figure here
-
-Note a and $(z-z^{(c)})$ label the vectors, is the displacements, not the end-points. The end-points are labeled as $z$, $z^{(c)}$, $z^{(c)}+a$
-
-Let's consider the inner product
-
-\begin{align*}
-\langle z-z^{c},(z^{c}+a)-a\rangle&=\langle z-z^{c},a\rangle\\
-&=z^{\trans} a -(z^{(c)})^{\trans} a\\
-&=z^{\trans}a-b
-\end{align*}
 
 \vspace{0.5cm}
-To date
+Let's sketch these sets for $L_{2}$ and $L_{1}$ norms in $\reals^{2}$ on the r.h.s.
 
-(1)Geometry
+\newpage
 
-(2)Functions
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p48-5.jpg}
+		\caption{Level set 1} 
+	%\label{fig:graph} 
+\end{marginfigure}
 
-In optimization you have some parametric vectors $x\in\reals_{n}$. You want to search all allowable x by moving around $\reals_{n}$(geometry!) to minimize some cost function $F:\reals_{n}\mapsto\reals$. Each parameter vector $x\in\reals_{n}$ will be associated with a cost $F(x)$.
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p48-6.jpg}
+	\caption{Level set 2} 
+	%\label{fig:graph} 
+\end{marginfigure}
 
-How might you solve such problem?
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p48-7.jpg}
+	\caption{Sub-level set 1} 
+	%\label{fig:graph} 
+\end{marginfigure}
 
-Classic example in 2-D: Finding your way off a mountain and XXX of a faster to a town.
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p48-8.jpg}
+	\caption{Sub-level set 2} 
+	%\label{fig:graph} 
+\end{marginfigure}
 
-Anyone know the classic method? Follow a stream downhill.
+\vspace{0.5cm}
+\textbf{Linear and affine functions}
 
-Why is that a good method?
+1. A function $F:\reals^{n}\mapsto\reals$ is linear iff
 
-Eventually, would get to ocean, towns built by streams
+(1) "Homogeneous": $F(ax)=aF(x)$,$ \forall x\in\reals^{n}$ and $a\in\reals$
 
-In mountains no towns upstream.
+(2) "Additivity":  $F(x^{(1)}+x^{(2)})=F(x^{(1)})+F(x^{(2)})$
 
-But equally important, don't walk in circles since water doesn't flow uphill
+Put together to get 
+$$F(\sum_{i\in [d]}^{}a_{i}x^{(i)})=\sum_{i\in [d]}^{}a_{i}F(x^{(i)})$$
+
+\vspace{0.3cm}
+2. A function $F:\reals^{n}\mapsto\reals$ is affine iff
+
+Let $\overline{F}$ define pointwise as $\overline{F}=F(x)-F(0)$, $\forall x\in\reals^{n}$ is a linear function. The $F:\reals^{n}\mapsto\reals$ is affine iff there is a unique pair $(a,b)\in\reals^{n}\times\reals$ such that 
+$$F(x)=a^{\trans} x+b,\  \forall x\in\reals^{n}$$
+
+Since $F(0)=b$, this implies that any linear function can be expressed as $F(x)=a^{\trans} x=\langle a,x\rangle$ for some unique $a\in\reals^{n}$.
+
+\vspace{0.5cm}
+\textbf{Sets and linear/affine functions}
+
+The graph of $F:\reals^{n}\mapsto\reals$ is a 
+
+\quad- subspace of $\reals^{n+1}$ if $F$ is linear.
+
+\quad- hyperplane of $\reals^{n+1}$ if $F$ is affine.
 
 
-To go downstream XXX easy to figure out when to get to stream - see which XXX water is flowing - Follow the negative gradient
+The epigraph of $F:\reals^{n}\mapsto\reals$ is a 
 
-In fact do some thing in $\reals_{n}$ not just $\reals_{2}$ "gradient descent".
+\quad- half-space of $\reals^{n+1}$ if $F$ is affine.
 
-So, gradient is importance, let's remind ourselves what it is.
+\quad- half-space the boarder at which includes $0\in\reals^{n+1}$ if $F$ is linear.
 
 
-Gradient
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p50-1.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
-The gradient $\nabla F$ of $F:\reals_{n}\mapsto\reals$ is the vector of partial derivatives
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p50-2.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
-$\nabla F= 
+Similar statements hold for level sets and sub-level sets in $\reals^{n}$, e.g., level sets of a linear function $F:\reals^{2}\mapsto\reals$ are affine sets in $\reals^{2}$
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p50-3.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+\vspace{0.3cm}
+Definition of a hyperplane:
+$$H=\{z\in\reals^{n}|a^{\trans} z=b,a\in\reals^{n}, b\in\reals \}$$
+
+Definition of Half-spaces: are on one side or other of a hyperplane
+$$H_{+}=\{z\in\reals^{n}|a^{\trans} z>b\}$$
+$$H_{-}=\{z\in\reals^{n}|a^{\trans} z\leq b\}$$
+
+
+
+\vspace{0.5cm}
+
+\textbf{Gradient}
+
+The gradient $\nabla F$ of $F:\reals^{n}\mapsto\reals$ is the vector of partial derivatives
+$$\nabla F= 
 \left[ 
 \begin{array}{c} 
 \frac{\partial F(x)}{\partial x_{1}} \\
@@ -1447,8 +1300,8 @@ $\nabla F=
 \vdots \\
 \frac{\partial F(x)}{\partial x_{n}}
 \end{array}
-\right]$,
-where $x= 
+\right],
+\ \text{where}\ x= 
 \left[ 
 \begin{array}{c} 
 x_{1} \\
@@ -1456,41 +1309,17 @@ x_{2} \\
 \vdots \\
 x_{n}
 \end{array}
-\right]$
+\right]$$
 
-Sometime consider compound function, need chain rule for gradients
-
-Say,
-
-$g:\reals^{n}\mapsto\reals_{m}$
-
-$F:\reals^{m}\mapsto\reals$
-
-Both F and g are differentiable and we want $\nabla\Phi (x)$, where $\Phi (x)=F(g(x))$.
-
-Before give formula, note that
-
-1. $\nabla\Phi (x) \in\reals_{n}$ XXX they are n "lengths" XXX XXX in x.
-
-2. Helps to consider an intermediate value z
-
-3. First consider the k element of $\nabla\Phi$, i.e., $[\nabla\Phi(x)]_{k}$
-\begin{align*}
-[\nabla\Phi(x)]_{k}&=\frac{\partial\Phi (x)}{\partial x_{k}}\\
-&=[\frac{\partial g_{1}(x)}{\partial x_{k}} \frac{\partial g_{2}(x)}{\partial x_{k}} \cdots \frac{\partial g_{m}(x)}{\partial x_{k}}] \nabla F(z)|_{z=g(x)}\\
-&=\sum_{i=1}^{m} \frac{\partial g_{i}(x)}{\partial x_{k}} \frac{\partial F(z)}{\partial z_{i}}|_{z=g(x)}
-\end{align*}
-
-Stacking up 
-
+Sometime  we need to consider compound function, and thus we need chain rule for gradients. Says, $g:\reals^{n}\mapsto\reals^{m}$ and $F:\reals^{m}\mapsto\reals$, both F and g are differentiable and we want $\nabla\Phi (x)$, where $\Phi (x)=F(g(x))$. In this case we have
 $$
 \nabla \phi (x)
 =
 \left[\begin{matrix}
 	\frac{\partial \phi (x)}{\partial x_{1}}\\
-	0\\
-	0\\
-	0\\
+	\vdots\\
+	\vdots\\
+	\vdots\\
 	\vdots\\
 	\frac{\partial \phi (x)}{\partial x_{n}}\\
 \end{matrix}\right]
@@ -1504,64 +1333,21 @@ $$
 \nabla F(g(x))
 $$
 
-Example: $\Phi(x)=F(g(x))$, where $g:\reals_{n}\mapsto\reals_{m}$ is affine. 
 
-In particular, $g(x)=\left[ 
-\begin{array}{c} 
-	g_{1}(x) \\
-	g_{2}(x) \\
-	\vdots \\
-	g_{m}(x)
-\end{array}
-\right]$
-
-and $g_{i}(x)=a_{i}^{\trans} x +b_{i}, i\in [m]$, $a_{i}\in\reals_{n}$, $b_{i}\in\reals$
-
-\begin{align*}
-\frac{\partial g_{i}(x)}{\partial x_{k}}=\frac{\partial}{\partial x_{k}}(a_{i}^{\trans} x+b)
-&=\frac{\partial}{\partial x_{k}}(\sum_{j=1}^{m}a_{ij}x_{j})\\
-&=a_{ik}
-\end{align*}
-
-Thus, $[\nabla\Phi(x)]_{k}=[a_{1k} a_{2k} \cdots a_{mk}]\nabla F(z)|_{z=g(x)}$
-
-Stacking up we have
-
-$$\nabla \phi (x)=
-\left[\begin{matrix}
-a_{11}&a_{21}&a_{31}&\cdots&a_{m1}\\
-a_{12}&a_{22}&a_{32}&\cdots&a_{m2}\\
-\vdots& & & & \\
-a_{1n}&\cdots&\cdots&\cdots&a_{mn}\\
-\end{matrix}\right]
-\left[
-\begin{matrix}
-\frac{\partial F(z)}{\partial z_{1}}&\\
-\vdots&\\
-\vdots&\\
-\frac{\partial F(z)}{\partial z_{n}}&
-\end{matrix}\right]
-$$
-
-
-
+\vspace{0.5cm}
 \textbf{Affine approximations}
 
 Consider the Taylor series for $F\colon \mathbb{R}^n \to \mathbb{R}$.
 
-$F(x) = F(x_0) + \nabla F(x_0)^{T} (x - x_0) + \varepsilon (x) $
+$$F(x) = F(x_0) + \nabla F(x_0)^{T} (x - x_0) + \varepsilon (x) $$
 
-$\lim_{x \to x_0} \frac{\varepsilon (x)}{\| x - x_0 \|_2} = 0$
 
-Example
+Example 1. $F(x) = 2 x_1^2 + x_2^2$
 
-$F(x) = 2 x_1^2 + x_2^2$ XXX along $x_1$ axis XXX along $x_2$
+$$F(x) \cong F(x^{(0)}) + \nabla F(x^{(0)})^{T} (x - x^{(0)})
+\left. \nabla F(x) \right|_{x} \qquad (*)$$
 
-$\nabla F(x) = \begin{bmatrix} 4x_1\\ 2x_2\\ \end{bmatrix}$
-
-$F(x) \cong F(x^{(0)}) + \nabla F(x^{(0)})^{T} (x - x^{(0)})$
-$\left. \nabla F(x) \right|_{x}$
-(*)
+$$\nabla F(x) = \begin{bmatrix} 4x_1\\ 2x_2\\ \end{bmatrix}$$
 
 \begin{displaymath}
 \nabla F \left( \begin{bmatrix} 0\\ 0\\ \end{bmatrix} \right)  =
@@ -1578,14 +1364,22 @@ $\left. \nabla F(x) \right|_{x}$
 \begin{bmatrix} 0\\ 2\\ \end{bmatrix}
 \end{displaymath}
 
-figure here
 
-$C_F(b) = {x \in \mathbb{R}^2 | F(x) = t}$
+\begin{figure}
+	\centering
+	\includegraphics[width=3in,height=3in]{figures/ch02/p59.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
+Sketch the "level set" in 2-D, 
 
-Sketch "level set" in 2-D
-
-figure here
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p60-1.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
 \begin{displaymath}
 \nabla F \left( \begin{bmatrix} 1\\ 0\\ \end{bmatrix} \right)  =
@@ -1597,27 +1391,32 @@ figure here
 \begin{bmatrix} 0\\ -2\\ \end{bmatrix}
 \end{displaymath}
 
-Let's visualize the set such that the increment in (*) is, 
-the First order, constant.
-I.e., which $x \in \mathbb{R}^2$ satisfy the relation
-
-${x | \nabla F(x_0)^{T} (x-x_0) = c}$
+Let's visualize the set such that the increment in $(*)$ is, the First order, constant. That is, which $x \in \mathbb{R}^2$ satisfy the relation
+$$\{x | \nabla F(x_0)^{T} (x-x_0) = c\}$$
 
 
-Consider case $c=0$
+(1) Consider case $c=0$
 
-There are points s.t., to approx (*), has some level as $F(x_0)$ when $c=0$
+There are points s.t., to approximate $(*)$, has some level as $F(x_0)$ when $c=0$, we have the set $\{x | \nabla F(x_0)^{T} (x-x_0) = 0\}$
 
-${x | \nabla F(x_0)^{T} (x-x_0) = 0}$
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p60-2.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
-figure here
 
+(2) Consider $c = \varepsilon > 0$, a small positive increment. Then, 
+$$\{x | \nabla F(x_0)^{T} (x-x_0) = \varepsilon\}$$
+is points that, to first order, have slightly higher cost (value, level). Then $F(x_0)$, the value at $x=x_0$.
 
-Consider $c = \varepsilon > 0$, a small positive XXX. Then, 
-${x | \nabla F(x_0)^{T} (x-x_0) = \varepsilon}$
-is points flat, to first order, have slightly higher cost (value, level). Then $F(x_0)$, XXX value at $x=x_0$.
-
-figure here
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p61.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
 In general the set
 \begin{align*}
@@ -1627,32 +1426,34 @@ In general the set
 \end{align*}
 which is a "hyperplane", a type of affine set. 
 
+\vspace{0.5cm}
+Observe that geometry of gradients connects to geometry of level sets. But you might think that is a bit funny. You know a Taylor sense approx is of the function $F$ not the level sets of $F$. You might also recall there is a tangent approximation involved somewhere, e.g. 
 
-Saw: - geometry of gradients connects to geometry of level sets. 
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p62.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
-But you might think that is a bit funny. You know a Taylor sense approx is of the function $F$ not the level sets of $F$. 
 
-You might also recall there is a tangent approximation involved somewhere, e.g. 
+To develop the approximation we need to consider the plot or "graph" at the function $F$
+$$\text{graph}\ F = \{(x, F(x) | x \in \mathbb{R}^n)\} \subseteq \mathbb{R}^{n+1}$$
 
-figure here
+e.g., in above example $F(x) = x^2+1$, $F \colon \mathbb{R} \to \mathbb{R}$, $s-n=1$ and plot (graph) is in $\mathbb{R}^2$.
 
-Taylor approx at $x = x_0$
-
-To develop the approximation need to consider the plot or "graph" at the function $F$
-
-$graph F = {(x, F(x) | x \in \mathbb{R}^n)} \subseteq \mathbb{R}^{n+1}$
-
-eg in above example $F(x) = x^2+1$, $F \colon \mathbb{R} \to \mathbb{R}$, $s-n=1$ and plot (graph) is in $\mathbb{R}^2$
-
-To find the tangent approximation, we will pick a point $t$ "above". The graph, is pick some pair $(x, t)$ s.t. $t \geq F(x)$
-
-aside $t \in epi F$ in the "epigraph" of $F$
+To find the tangent approximation, we will pick a point $t$ "above". The graph, is pick some pair $(x, t)$ s.t. $t \geq F(x)$.
 
 Use Taylor approximation above $x_0$ to approximate $F(x)$ 
 
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p63.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
-figure here
-
+\vspace{0.5cm}
 Recap:
 
 (1) Pick $(x, t)$ s.t. $t \geq F(x)$
@@ -1664,9 +1465,8 @@ $F(x) = F(x_0) + \nabla F(x_0)^{T} (x-x_0) + \varepsilon(x)$
 
 (4) By (1), $t \geq F(x) = F(x_0) + \nabla F(x_0)^{T} (x-x_0) + \varepsilon(x)$
 
-(5) By (2) will drop the $\varepsilon(x)$ XXX and assume inequality doesn't flip (because $x$ and $x_0$ are sufficiently close that $\varepsilon(x)$ is sufficient small)
-
-Yields $t \geq F(x_0) + \nabla F(x_0)^{T} (x-x_0)$  (*)
+(5) By (2) will drop the $\varepsilon(x)$ term and assume inequality doesn't flip (because $x$ and $x_0$ are sufficiently close that $\varepsilon(x)$ is sufficient small), and thus yields 
+$$t \geq F(x_0) + \nabla F(x_0)^{T} (x-x_0)\qquad  (*)$$
 Next, we re-arrange
 
 (6)
@@ -1677,26 +1477,31 @@ Next, we re-arrange
 
 
 Observe that:
-$(x-x_{0})\in \reals^{n}$ "so vectors are in $\reals_{n+1}$"
 
-$t-F(x_{0})\in\reals$ i.e., in example plot when $n=1$ in $\reals_{2}$.
+(a) $(x-x_{0})\in \reals^{n}$ so vectors are in $\reals^{n+1}$.
 
-figure here
+(b) $t-F(x_{0})\in\reals$ i.e., in example plot when $n=1$ in $\reals^{2}$.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p64.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
+\vspace{0.5cm}
 Now recall connection between angles and inner products.
-1. If inner product of 2 vectors is negative, then the angles is obtuse.
-2. Matches picture.
 
-What about vectors when this inner product=0?
+(1). If inner product of 2 vectors is negative, then the angles is obtuse.
 
+(2). Matches picture.
 
-
-$\{u\in\reals_{n+1}|<u, [\nabla F(x_{0}) , -1]^{trans}\}$
+What about vectors when this inner product = 0 ? That is
+$$\{u\in\reals^{n+1}|\langle u, [\nabla F(x_{0}) , -1]^{\trans}\rangle=0\}$$
 
 writing $u=[x-x_{0}, t-F(x_{0}]^{\trans}$ and no longer require $t\geq F(x)$.
 
-The condition become
+The condition becomes
 $$
 \left[
 \begin{array}{c} 
@@ -1714,18 +1519,17 @@ $$
 0
 $$
 
-So we recognize the set defines a hyperplane in $\reals_{n+1}$
-
-$H=\left\{\left[
+So we recognize the set defines a hyperplane in $\reals^{n+1}$
+$$\mathcal{H}=\left\{\left[
 \begin{array}{c} 
 	x \\
     t
 \end{array}
 \right]  
-\bigg|      
+\middle|      
 \left[
-\begin{array}{c} 
-x^{\trans}t
+\begin{array}{cc} 
+x^{\trans}&t
 \end{array}
 \right]  
 \left[
@@ -1736,8 +1540,8 @@ x^{\trans}t
 \right]  
 =
 \left[
-\begin{array}{c} 
-x_{0}^{\trans}F(x_{0})
+\begin{array}{cc} 
+x_{0}^{\trans}&F(x_{0})
 \end{array}
 \right]  
 \left[
@@ -1746,11 +1550,11 @@ x_{0}^{\trans}F(x_{0})
 	-1
 \end{array}
 \right]  
-\right\}$
+\right\}$$
 
 Finally, let's look at Taylor approximation one last time (1st order approximation)
 \begin{align*}
-F(x)&\approx + \nabla F(x_{0})^{\trans}(x-x_{0})\\
+F(x)&\approx F(x_{0})+ \nabla F(x_{0})^{\trans}(x-x_{0})\\
 &=F(x_{0})+\Vert\nabla F(x_{0})\Vert \Vert x-x_{0}\Vert \left< \frac{\nabla F(x_{0})}{\Vert\nabla F(x_{0})\Vert},\frac{x-x_{0}}{\Vert x-x_{0}\Vert}\right>
 \end{align*}
 
