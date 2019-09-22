@@ -36,7 +36,7 @@ Also, we often need to work with a set(or list) of vectors,
 where $\vecx{i} \in \reals^n$, $i \in \{1, 2, \ldots, m\}$, $i \in [m] = \{1,2,\cdots,m\}$ and
 $(\vecx{i})^\trans = [ \vecx[1]{i} \ \vecx[2]{i} \ \ldots \ \vecx[n]{i} ]$.  
 
-Note: The notations in this material are not 100\% consistent.
+Note: The textbook is not 100\% consistent in its use of this notation.
 
 \vspace{0.5cm}
 \noindent\textbf{Vector Space}
@@ -64,7 +64,7 @@ Linear combination: $\sum_{i=1}^{m} a_{i}v^{(i)}$
 
 \vspace{0.5cm}
 
-\textbf{Vector Space}: a set of vectors that is closed under addition and scaling, and satisfy following axioms:
+\textbf{Vector Space}: a set of vectors $v$ that is closed under addition and scaling, and satisfy following axioms:
 
 (1) Commutativity: $u+v=v+u$
 
@@ -72,9 +72,9 @@ Linear combination: $\sum_{i=1}^{m} a_{i}v^{(i)}$
 
 (3) Distributivity: $a(u+v)=au+av$,\ $(a+b)u=au+bu$
 
-(4) Identity element of addition: $\exists 0\in \gamma$ s.t. $u+0=u$
+(4) Identity element of addition: $\exists 0\in \cal{V}$ s.t. $u+0=u$
 
-(5) Inverse elements of addition: $\exists -u\in \gamma$ s.t. $u+(-u)=0$
+(5) Inverse elements of addition: $\exists -u\in \cal{V}$ s.t. $u+(-u)=0$
 
 (6) Identity element of scalar multiplication: $\exists a\in \reals\ \text{or}\ \complex$ s.t. $au=u$
 
@@ -333,18 +333,18 @@ v^{(n)}=
 We often use $'e'$ for standard basis, i.e., $e^{(i)}=v^{(i)}$.
 
 \vspace{0.5cm}
-\noindent\textbf{Norms}: The idea of distance on length
+\noindent\textbf{Norms}: The idea of distance on length on a vector space $\cal{V}$
 
-A norm $\Vert\cdot\Vert$ is a function such that $\Vert\cdot\Vert : \nu\mapsto\reals$
+A norm $\Vert\cdot\Vert$ is a function such that $\Vert\cdot\Vert : \cal{V}\mapsto\reals$
 and satisfies
 
 (a) $\Vert v \Vert\geq 0$, $\forall v\in \nu$, and $\Vert v \Vert=0$ iff $v=0$.
 
-(b) $\Vert u+v \Vert\leq \Vert u \Vert+\Vert v \Vert$, $\forall u, v\in \nu$.
+(b) $\Vert u+v \Vert\leq \Vert u \Vert+\Vert v \Vert$, $\forall u, v\in \cal{V}$.
 
-(c) $\Vert au \Vert= \vert a\vert\Vert u \Vert$, $\forall a\in\reals, u\in\nu$
+(c) $\Vert au \Vert= \vert a\vert\Vert u \Vert$, $\forall a\in\reals, u\in\cal{V}$
 
-Note that $\nu$ can be either $\reals$ or $\complex$, if $\nu\in\complex$ we should have $a\in\complex$ in (c).
+Note that $\nu$ can be either $\reals$ or $\complex$, if $\cal{V}\in\complex$ we should have $a\in\complex$ in (c).
 
 \vspace{0.5cm}
 Following is a family of norms that are frequently used:
@@ -407,7 +407,7 @@ $L_{\infty}$ norm ball: $\{x|\max\{\vert x_{1}\vert, \vert x_{2}\vert\} \leq 1\}
 	\label{}
 \end{figure}
 
-What about "$L_{0}$"? 
+What about card($x$)? 
 
 \begin{figure}
 	\centering
@@ -456,7 +456,7 @@ Later in the course, we will see applications in optimal control that we want to
 \vspace{0.5cm}
 \noindent\textbf{Inner Products}
 
-Any inner product(aka dot/scalar product) on a (real) vector space $\Omega$ maps a pair of elements $x, y\in\Omega$ into the scalar, that is, $\langle\cdot,\cdot\rangle:\Omega\times\Omega\mapsto\reals$. More intuitively the inner product of vectors $x$ and $y$ is given by 
+Any inner product(aka dot/scalar product) on a (real) vector space $\Omega$ maps a pair of elements $x, y\in\Omega$ into the scalar, that is, $\langle\cdot,\cdot\rangle:\Omega\times\Omega\mapsto\reals$. For vectors in $\reals^{n}$ the inner product of vectors $x$ and $y$ is given by 
 $$\langle x,y\rangle=x^{\trans}y=\sum_{k=1}^{n}x_{k}y_{k}$$
 
 
@@ -475,7 +475,7 @@ Note:
 
 (a) The above change slightly in complex vector space, e.g., $\langle x,y\rangle=\overline{\langle y,x\rangle}$
 
-(b) The concept we develop apply beyond list vectors in $\reals^{n}$ or $\complex_{n}$, e.g., space of polynomials or of XXX, but our focus will be $\reals^{n}$ and $\complex_{n}$.
+(b) The concept we develop apply beyond list vectors in $\reals^{n}$ or $\complex_{n}$, e.g., space of polynomials or of functions, but our focus will be $\reals^{n}$ and $\complex_{n}$.
 
 
 \vspace{0.5cm}
@@ -983,7 +983,7 @@ when
 &= \{z \in \mathbb{R}^2 | z_1 + \frac{1}{2} z_2 = 0 \}
 \end{align*}
 
-Note that recall any value at $z^{(0)} \in \mathcal{H}$ works so XXX
+Note that recall any value at $z^{(0)} \in \mathcal{H}$ works so alternatively, e.g.,
 $$\mathcal{H} = \{ z \in \mathbb{R}^n | z = u + z^{(0)}, u \in S, z^{(0)} = \begin{bmatrix} 0\\ 4\\ \end{bmatrix} \}$$
 or 
 $$\mathcal{H} = \{ z \in \mathbb{R}^n | z = u + z^{(0)}, u \in S, z^{(0)} = \begin{bmatrix} 1\\ 2\\ \end{bmatrix} \}\quad \text{, etc.} $$
@@ -999,7 +999,7 @@ $$\mathcal{H}=\{z\in\reals^{n}|a^{\trans} z=b\}=\{z\in\reals^{n}|z=x_{s}+z^{(0)}
 	\label{}
 \end{figure}
 
-Recall that $\text{dim}(S)=n-1$, so $\text{dim}(S^{\perp})=1$, and we want to find the point $p^{*}=\arg \min_{p\in H} \Vert p^{*}-p\Vert$.
+Recall that $\text{dim}(S)=n-1$, so $\text{dim}(S^{\perp})=1$, and we want to find the point $p^{*}=\arg \min_{p\in \mathcal{H}} \Vert p^{*}-p\Vert$.
 
 Observe that $(p-p^{*}) \perp S$ (by optimal condition), So $(p-p^{*}) \in S^{\perp}=\{\lambda a|\lambda \in \reals \}$, and $\exists \lambda^{*}$ such that $p-p^{*}=\lambda^{*}a$.
 
@@ -1085,7 +1085,7 @@ Observe that:
 
 $x_{2}^{*}$: Familiar with solution via inner product and $\perp$ theorem, and has a closed form solution.
 
-$x_{1}^{*}$: Solution is "sparse", generally will be cost for other constraints since norm-ball oints + points axis aligned.
+$x_{1}^{*}$: Solution is "sparse", generally will be the case for affine constraints since vertices of norm-ball are axis-aligned.
 
 $x_{\infty}^{*}$: At optimum, $x_{\infty, 1}^{*}=x_{\infty, 2}^{*}$, equal-magnitude coordinate.
 
@@ -1100,19 +1100,19 @@ Some terminologies will be used in this material:
 "Map":  $F:\reals^{n}\mapsto \reals^{m}$
 
 
-However, not all input values may be allowed, input may be a subset of $\Omega$ (cf, $\reals^{n}$), this is the "domain" of $F$, that is
-$$\text{dom} F= \{x\in\reals^{n}|\vert F(x)\vert\leq\infty\}$$
+However, not all input values may be allowed, input may be a subset of $\Omega$ (cf, $\reals^{n}$), this is the "domain" of $F$.% that is
+%$$\text{dom} F= \{x\in\reals^{n}|\vert F(x)\vert\leq\infty\}$$
 
+\vspace{0.5cm}
+Aside: Terminology when discussion a pair of vector space $(\cal{V},\cal{U})$ over a field $\mathbb{F}$
 
-Aside: Terminology when discussion a pair of vector space $(\gamma,u)$ over a field $\mathbb{F}$
+$F:\cal{U}\mapsto \cal{V}$, a "map", generally $\text{dim}(\cal{U})\neq \text{dim}(\cal{V})$.
 
-$F:u\mapsto \gamma$, a "map", generally $\text{dim}(u)\neq \text{dim}(\gamma)$.
+$F:\cal{U}\mapsto \cal{U}$ , an "operator", input and output vectors spaces have the same dimension.
 
-$F:u\mapsto u$ , an "   ", input and output vectors spaces have the same dimension.
+$F:\cal{U}\mapsto \mathbb{F}$ , a "functional", map vector space into a scalar.
 
-$F:u\mapsto \mathbb{F}$ , a "function", map vector space into a scalar.
-
-In this course, $u=\reals^{n}$ , $\gamma=\reals^{m}$, $\mathbb{F}=\reals$ (or, occasionally $\complex$).
+In this course, $\cal{U}$=$\reals^{n}$, $\cal{V}$=$\reals^{m}$, $\mathbb{F}$=$\reals$ (or, occasionally $\complex$).
 
 
 \vspace{0.3cm}
@@ -1220,7 +1220,7 @@ Let's sketch these sets for $L_{2}$ and $L_{1}$ norms in $\reals^{2}$ on the r.h
 \vspace{0.5cm}
 \textbf{Linear and affine functions}
 
-1. A function $F:\reals^{n}\mapsto\reals$ is linear iff
+1. A function $F:\reals^{n}\mapsto\reals$ is linear iff following two properties are satisfied
 
 (1) "Homogeneous": $F(ax)=aF(x)$,$ \forall x\in\reals^{n}$ and $a\in\reals$
 
@@ -1246,7 +1246,7 @@ The graph of $F:\reals^{n}\mapsto\reals$ is a
 
 \quad- hyperplane of $\reals^{n+1}$ if $F$ is affine.
 
-
+\vspace{0.2cm}
 The epigraph of $F:\reals^{n}\mapsto\reals$ is a 
 
 \quad- half-space of $\reals^{n+1}$ if $F$ is affine.
@@ -1256,7 +1256,7 @@ The epigraph of $F:\reals^{n}\mapsto\reals$ is a
 
 \begin{figure}
 	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p50-1.jpg}
+	\includegraphics[width=2in,height=2in]{figures/ch02/p50-1.jpg}
 	%\caption{This is an inserted JPG graphic} 
 	%\label{fig:graph} 
 \end{figure}
@@ -1267,6 +1267,7 @@ The epigraph of $F:\reals^{n}\mapsto\reals$ is a
 	%\caption{This is an inserted JPG graphic} 
 	%\label{fig:graph} 
 \end{figure}
+
 
 Similar statements hold for level sets and sub-level sets in $\reals^{n}$, e.g., level sets of a linear function $F:\reals^{2}\mapsto\reals$ are affine sets in $\reals^{2}$
 
@@ -1279,11 +1280,18 @@ Similar statements hold for level sets and sub-level sets in $\reals^{n}$, e.g.,
 
 \vspace{0.3cm}
 Definition of a hyperplane:
-$$H=\{z\in\reals^{n}|a^{\trans} z=b,a\in\reals^{n}, b\in\reals \}$$
+$$\mathcal{H}=\{z\in\reals^{n}|a^{\trans} z=b,a\in\reals^{n}, b\in\reals \}$$
 
-Definition of Half-spaces: are on one side or other of a hyperplane
-$$H_{+}=\{z\in\reals^{n}|a^{\trans} z>b\}$$
-$$H_{-}=\{z\in\reals^{n}|a^{\trans} z\leq b\}$$
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch02/p53.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	\label{fig:graph} 
+\end{marginfigure}
+
+Definition of Half-spaces: are on one side or other of a hyperplane(see the r.h.s for a graph of $\mathcal{H}_{+}$),
+$$\mathcal{H}_{+}=\{z\in\reals^{n}|a^{\trans} z>b\}$$
+$$\mathcal{H}_{-}=\{z\in\reals^{n}|a^{\trans} z\leq b\}$$
 
 
 
@@ -1311,7 +1319,7 @@ x_{n}
 \end{array}
 \right]$$
 
-Sometime  we need to consider compound function, and thus we need chain rule for gradients. Says, $g:\reals^{n}\mapsto\reals^{m}$ and $F:\reals^{m}\mapsto\reals$, both F and g are differentiable and we want $\nabla\Phi (x)$, where $\Phi (x)=F(g(x))$. In this case we have
+Sometime  we need to consider compound function, and thus we need chain rule for gradients. Says, $g:\reals^{n}\mapsto\reals^{m}$ and $F:\reals^{m}\mapsto\reals$, both $F$ and $g$ are differentiable and we want $\nabla\Phi (x)$, where $\Phi (x)=F(g(x))$. In this case we have
 $$
 \nabla \phi (x)
 =
@@ -1319,22 +1327,64 @@ $$
 	\frac{\partial \phi (x)}{\partial x_{1}}\\
 	\vdots\\
 	\vdots\\
-	\vdots\\
-	\vdots\\
 	\frac{\partial \phi (x)}{\partial x_{n}}\\
 \end{matrix}\right]
 =
 \left[\begin{matrix}
 	\frac{\partial g_{1}(x)}{\partial x_{1}}&\frac{\partial g_{2}(x)}{\partial x_{1}}&\cdots&\frac{\partial g_{m}(x)}{\partial x_{1}}\\
-	\frac{\partial g_{1}(x)}{\partial x_{1}}& & &\vdots\\
-	\vdots& & & \\
+	\frac{\partial g_{1}(x)}{\partial x_{2}}&\ddots & &\vdots\\
+	\vdots& &\ddots &\vdots \\
 	\frac{\partial g_{1}(x)}{\partial x_{n}}&\cdots&\cdots&\frac{\partial g_{m}(x)}{\partial x_{n}}
 \end{matrix}\right]
-\nabla F(g(x))
+\nabla F\left(g(x)\right)
 $$
 
+Example 
 
-\vspace{0.5cm}
+Let $g:\reals^{4}\mapsto\reals^{3}$ and $F:\reals^{3}\mapsto\reals$, both $F$ and $g$ are differentiable and we want to find $\nabla\Phi (x)$. To simplify, we let the function $g$ and $F$ takes the form,
+
+$g(x)=Ax+b$, where $A$ is an $3$ by $4$ matrix, $x$ is a $4$ dimensions vector,  and $b$ is $3$ dimensions vector, so function $g$ maps $\reals^{4}$ to $\reals^{3}$.
+ 
+
+$F(x)=Cx$, where $C$ is an $1$ by $3$ matrix and the input $x$ is a $3$ dimensions vector, so function $F$ maps $\reals^{3}$ to $\reals$.
+
+Hence, the gradient of $\Phi (x)$ is
+\begin{align*}
+\nabla \phi (x) &=
+\left[\begin{matrix}
+\frac{\partial \phi (x)}{\partial x_{1}}\\
+\frac{\partial \phi (x)}{\partial x_{2}}\\
+\frac{\partial \phi (x)}{\partial x_{13}}\\
+\frac{\partial \phi (x)}{\partial x_{4}}\\
+\end{matrix}\right]\\
+&=
+\left[\begin{matrix}
+\frac{\partial g_{1}(x)}{\partial x_{1}}&\frac{\partial g_{2}(x)}{\partial x_{1}}&\frac{\partial g_{3}(x)}{\partial x_{1}}\\
+\frac{\partial g_{1}(x)}{\partial x_{2}}&\frac{\partial g_{2}(x)}{\partial x_{2}}&\frac{\partial g_{3}(x)}{\partial x_{2}}\\
+\frac{\partial g_{1}(x)}{\partial x_{3}}&\frac{\partial g_{2}(x)}{\partial x_{3}}&\frac{\partial g_{3}(x)}{\partial x_{3}}\\
+\frac{\partial g_{1}(x)}{\partial x_{4}}&\frac{\partial g_{2}(x)}{\partial x_{4}}&\frac{\partial g_{3}(x)}{\partial x_{4}}
+\end{matrix}\right]
+\left[\begin{matrix}
+\frac{\partial \phi (x)}{\partial g_{1}}\\
+\frac{\partial \phi (x)}{\partial g_{2}}\\
+\frac{\partial \phi (x)}{\partial g_{3}}\\
+\end{matrix}\right]\\
+&=
+\left[\begin{matrix}
+a_{11}&a_{21}&a_{31}\\
+a_{12}&a_{22}&a_{32}\\
+a_{13}&a_{23}&a_{33}\\
+a_{14}&a_{24}&a_{34}\\
+\end{matrix}\right]
+\left[\begin{matrix}
+c_{11}\\
+c_{12}\\
+c_{13}\\
+\end{matrix}\right]\\
+&=
+A^{\trans}C^{\trans}\\
+\end{align*}
+
 \textbf{Affine approximations}
 
 Consider the Taylor series for $F\colon \mathbb{R}^n \to \mathbb{R}$.
@@ -1372,7 +1422,7 @@ $$\nabla F(x) = \begin{bmatrix} 4x_1\\ 2x_2\\ \end{bmatrix}$$
 	%\label{fig:graph} 
 \end{figure}
 
-Sketch the "level set" in 2-D, 
+Let's sketch the "level set" in 2-D, 
 
 \begin{figure}
 	\centering
@@ -1391,7 +1441,7 @@ Sketch the "level set" in 2-D,
 \begin{bmatrix} 0\\ -2\\ \end{bmatrix}
 \end{displaymath}
 
-Let's visualize the set such that the increment in $(*)$ is, the First order, constant. That is, which $x \in \mathbb{R}^2$ satisfy the relation
+Let's visualize the set such that the increment in $(*)$ is, to first order, constant. That is, which $x \in \mathbb{R}^2$ satisfy the relation
 $$\{x | \nabla F(x_0)^{T} (x-x_0) = c\}$$
 
 
@@ -1519,7 +1569,7 @@ $$
 0
 $$
 
-So we recognize the set defines a hyperplane in $\reals^{n+1}$
+So we recognize the set defines a hyperplane in $\reals^{n+1}$,
 $$\mathcal{H}=\left\{\left[
 \begin{array}{c} 
 	x \\
@@ -1551,11 +1601,13 @@ x_{0}^{\trans}&F(x_{0})
 \end{array}
 \right]  
 \right\}$$
+This is called a "supporting hyperplane" of the epigraph.
 
-Finally, let's look at Taylor approximation one last time (1st order approximation)
+Finally, let's look at Taylor approximation one last time (1st order approximation), and recall the geometric interpretation of each of the pieces:
 \begin{align*}
 F(x)&\approx F(x_{0})+ \nabla F(x_{0})^{\trans}(x-x_{0})\\
-&=F(x_{0})+\Vert\nabla F(x_{0})\Vert \Vert x-x_{0}\Vert \left< \frac{\nabla F(x_{0})}{\Vert\nabla F(x_{0})\Vert},\frac{x-x_{0}}{\Vert x-x_{0}\Vert}\right>
+&=F(x_{0})+\Vert\nabla F(x_{0})\Vert \Vert x-x_{0}\Vert \left< \frac{\nabla F(x_{0})}{\Vert\nabla F(x_{0})\Vert},\frac{x-x_{0}}{\Vert x-x_{0}\Vert}\right>\\
+&=\text{bias + steepness $\times$ distance $\times$ angle }
 \end{align*}
 
 

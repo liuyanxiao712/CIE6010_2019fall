@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.15)  21 SEP 2019 17:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.15)  22 SEP 2019 17:09
 entering extended mode
 **./main.tex
 (main.tex
@@ -1657,6 +1657,9 @@ LaTeX Warning: Label `' multiply defined.
 
 LaTeX Warning: Label `' multiply defined.
 
+
+LaTeX Warning: Label `fig:graph' multiply defined.
+
 )
 \openout1 = `main.aux'.
 
@@ -2294,104 +2297,116 @@ LaTeX Warning: Marginpar on page 31 moved.
 File: figures/ch02/p50-1.jpg Graphic file (type jpg)
 <use figures/ch02/p50-1.jpg>
 Package pdftex.def Info: figures/ch02/p50-1.jpg  used on input line 1259.
-(pdftex.def)             Requested size: 151.756pt x 98.1412pt.
+(pdftex.def)             Requested size: 144.53078pt x 93.46863pt.
 <figures/ch02/p50-2.jpg, id=272, 1687.05281pt x 1006.51031pt>
 File: figures/ch02/p50-2.jpg Graphic file (type jpg)
 <use figures/ch02/p50-2.jpg>
 Package pdftex.def Info: figures/ch02/p50-2.jpg  used on input line 1266.
 (pdftex.def)             Requested size: 151.75098pt x 90.53593pt.
-<figures/ch02/p50-3.jpg, id=273, 2042.38031pt x 1355.8153pt>
-File: figures/ch02/p50-3.jpg Graphic file (type jpg)
-<use figures/ch02/p50-3.jpg>
-Package pdftex.def Info: figures/ch02/p50-3.jpg  used on input line 1275.
-(pdftex.def)             Requested size: 151.73836pt x 100.7301pt.
 [31 <./figures/ch02/p48-5.jpg> <./figures/ch02/p48-6.jpg> <./figures/ch02/p48-7
 .jpg> <./figures/ch02/p48-8.jpg> <./figures/ch02/p50-1.jpg> <./figures/ch02/p50
--2.jpg>] [32 <./figures/ch02/p50-3.jpg>]
-<figures/ch02/p59.jpg, id=283, 2295.32532pt x 1717.16531pt>
+-2.jpg>]
+<figures/ch02/p50-3.jpg, id=278, 2042.38031pt x 1355.8153pt>
+File: figures/ch02/p50-3.jpg Graphic file (type jpg)
+<use figures/ch02/p50-3.jpg>
+Package pdftex.def Info: figures/ch02/p50-3.jpg  used on input line 1276.
+(pdftex.def)             Requested size: 151.73836pt x 100.7301pt.
+<figures/ch02/p53.jpg, id=279, 2518.1578pt x 1614.7828pt>
+File: figures/ch02/p53.jpg Graphic file (type jpg)
+<use figures/ch02/p53.jpg>
+Package pdftex.def Info: figures/ch02/p53.jpg  used on input line 1287.
+(pdftex.def)             Requested size: 151.73616pt x 97.30165pt.
+
+Overfull \hbox (7.73616pt too wide) in paragraph at lines 1286--1290
+ [] 
+ []
+
+[32 <./figures/ch02/p50-3.jpg> <./figures/ch02/p53.jpg>]
+<figures/ch02/p59.jpg, id=284, 2295.32532pt x 1717.16531pt>
 File: figures/ch02/p59.jpg Graphic file (type jpg)
 <use figures/ch02/p59.jpg>
-Package pdftex.def Info: figures/ch02/p59.jpg  used on input line 1370.
+Package pdftex.def Info: figures/ch02/p59.jpg  used on input line 1420.
 (pdftex.def)             Requested size: 216.79732pt x 162.18913pt.
-<figures/ch02/p60-1.jpg, id=284, 1843.63782pt x 1464.2203pt>
+<figures/ch02/p60-1.jpg, id=285, 1843.63782pt x 1464.2203pt>
 File: figures/ch02/p60-1.jpg Graphic file (type jpg)
 <use figures/ch02/p60-1.jpg>
-Package pdftex.def Info: figures/ch02/p60-1.jpg  used on input line 1379.
+Package pdftex.def Info: figures/ch02/p60-1.jpg  used on input line 1429.
 (pdftex.def)             Requested size: 151.74191pt x 120.51369pt.
- [33 <./figures/ch02/p59.jpg> <./figures/ch02/p60-1.jpg>]
-<figures/ch02/p60-2.jpg, id=289, 1614.7828pt x 1253.43282pt>
+ [33]
+<figures/ch02/p60-2.jpg, id=290, 1614.7828pt x 1253.43282pt>
 File: figures/ch02/p60-2.jpg Graphic file (type jpg)
 <use figures/ch02/p60-2.jpg>
-Package pdftex.def Info: figures/ch02/p60-2.jpg  used on input line 1404.
+Package pdftex.def Info: figures/ch02/p60-2.jpg  used on input line 1454.
 (pdftex.def)             Requested size: 151.75511pt x 117.79591pt.
-<figures/ch02/p61.jpg, id=290, 2415.77531pt x 1391.95032pt>
+<figures/ch02/p61.jpg, id=291, 2415.77531pt x 1391.95032pt>
 File: figures/ch02/p61.jpg Graphic file (type jpg)
 <use figures/ch02/p61.jpg>
-Package pdftex.def Info: figures/ch02/p61.jpg  used on input line 1416.
+Package pdftex.def Info: figures/ch02/p61.jpg  used on input line 1466.
 (pdftex.def)             Requested size: 151.75967pt x 87.4427pt.
-<figures/ch02/p62.jpg, id=291, 1951.29pt x 1078.0275pt>
+ [34 <./figures/ch02/p59.jpg> <./figures/ch02/p60-1.jpg>]
+<figures/ch02/p62.jpg, id=296, 1951.29pt x 1078.0275pt>
 File: figures/ch02/p62.jpg Graphic file (type jpg)
 <use figures/ch02/p62.jpg>
-Package pdftex.def Info: figures/ch02/p62.jpg  used on input line 1434.
+Package pdftex.def Info: figures/ch02/p62.jpg  used on input line 1484.
 (pdftex.def)             Requested size: 151.75934pt x 83.84235pt.
- [34 <./figures/ch02/p60-2.jpg> <./figures/ch02/p61.jpg>]
-<figures/ch02/p63.jpg, id=296, 1614.7828pt x 1379.90532pt>
+ [35 <./figures/ch02/p60-2.jpg> <./figures/ch02/p61.jpg> <./figures/ch02/p62.jp
+g>]
+<figures/ch02/p63.jpg, id=301, 1614.7828pt x 1379.90532pt>
 File: figures/ch02/p63.jpg Graphic file (type jpg)
 <use figures/ch02/p63.jpg>
-Package pdftex.def Info: figures/ch02/p63.jpg  used on input line 1451.
+Package pdftex.def Info: figures/ch02/p63.jpg  used on input line 1501.
 (pdftex.def)             Requested size: 151.75511pt x 129.68164pt.
-
-[35 <./figures/ch02/p62.jpg> <./figures/ch02/p63.jpg>]
-<figures/ch02/p64.jpg, id=301, 1789.43532pt x 1355.8153pt>
+<figures/ch02/p64.jpg, id=302, 1789.43532pt x 1355.8153pt>
 File: figures/ch02/p64.jpg Graphic file (type jpg)
 <use figures/ch02/p64.jpg>
-Package pdftex.def Info: figures/ch02/p64.jpg  used on input line 1487.
+Package pdftex.def Info: figures/ch02/p64.jpg  used on input line 1537.
 (pdftex.def)             Requested size: 151.75868pt x 114.98418pt.
-) [36 <./figures/ch02/p64.jpg>]
-Chapter 3.
-(ch03_matEig.tex [37
+ [36 <./figures/ch02/p63.jpg>])
+[37 <./figures/ch02/p64.jpg>] [38
 
-] [38] [39] [40] [41] [42]
+]
+Chapter 3.
+(ch03_matEig.tex [39] [40] [41] [42] [43] [44]
 Underfull \vbox (badness 1067) has occurred while \output is active []
 
- [43]
+ [45]
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
 (Font)              scaled to size 11.40997pt on input line 512.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 11.40997pt on input line 512.
 
-[44] [45]
+[46] [47]
 Overfull \hbox (36.27908pt too wide) detected at line 697
 \OML/zplm/m/it/10 x[] \OT1/zplm/m/n/10 = [] \OML/zplm/m/it/10 x[] \OT1/zplm/m/n
 /10 = [] \OML/zplm/m/it/10 x[] \OT1/zplm/m/n/10 = [] \OML/zplm/m/it/10  \OT1/z
 plm/m/n/10 = [] [] = [] [] = [] [] = []
  []
 
-[46]) [47] [48
+[48]) [49] [50
 
 ]
 Chapter 4.
-(ch04_symmMat.tex) [49] [50
+(ch04_symmMat.tex) [51] [52
 
 ]
 Chapter 5.
-(ch05_svd.tex) [51] [52
+(ch05_svd.tex) [53] [54
 
 ]
 Chapter 6.
-(ch06_linEqLS.tex) [53] [54
+(ch06_linEqLS.tex) [55] [56
 
 ]
 Chapter 7.
-(ch07_linQuadGeom.tex) [55] [56
+(ch07_linQuadGeom.tex) [57] [58
 
 ]
 Chapter 8.
-(ch08_convex.tex) [57] [58
+(ch08_convex.tex) [59] [60
 
 ]
 Chapter 9.
-(ch09_algs.tex) [59] [60
+(ch09_algs.tex) [61] [62
 
 ] (main.bbl
 
@@ -2399,7 +2414,7 @@ Package natbib Warning: Empty `thebibliography' environment on input line 8.
 
 )
 No file main.ind.
-[61
+[63
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 342.
@@ -2419,10 +2434,10 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 342.
  ) 
 Here is how much of TeX's memory you used:
- 59007 strings out of 492895
- 1358030 string characters out of 3133479
+ 59015 strings out of 492895
+ 1358166 string characters out of 3133479
  1754084 words of memory out of 3000000
- 61615 multiletter control sequences out of 15000+200000
+ 61620 multiletter control sequences out of 15000+200000
  669242 words of font info for 400 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,16n,96p,946b,1136s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2440,9 +2455,9 @@ s/type1/public/fpl/fplrij8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/he
 lvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.
 pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Progra
 m Files/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (61 pages, 7568913 bytes).
+Output written on main.pdf (63 pages, 8088799 bytes).
 PDF statistics:
- 493 PDF objects out of 1000 (max. 8388607)
- 91 named destinations out of 1000 (max. 500000)
- 82152 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 502 PDF objects out of 1000 (max. 8388607)
+ 93 named destinations out of 1000 (max. 500000)
+ 82157 words of extra memory for PDF output out of 89155 (max. 10000000)
 
