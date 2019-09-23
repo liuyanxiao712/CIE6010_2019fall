@@ -3,8 +3,6 @@
 %Lecture 9.11
 
 
-
-
 Matrices are rectangular arrays of numbers:
 
 $$
@@ -194,12 +192,12 @@ For the PageRank algorithm, more important webpages should be ranked higher:
 
 Let us assume each node's importance score is evenly spread across all the outgoing links, each node’s importance score can also be written as the sum of the importance scores received from all of the incoming neighbors: for node A, $\sum_{j \rightarrow A}\frac{\pi_j}{O_j}$
 
-\begin{figure}
-	\centering
-	\resizebox{7.5cm}{3cm}{\input{./figures/ch03/figure0}}
-	\caption{}
-	\label{}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\resizebox{7.5cm}{3cm}{\input{./figures/ch03/figure0}}
+%	\caption{}
+%	\label{}
+%\end{figure}
 
 
 Let the score of node 1 (and 2) be x, and that of node 3 (and 4) be y. Looking at node 1’s incoming links, we see that there is only one such link, coming from node 4 that points to three nodes. So $x = \frac{y}{3}$ and $2x + 2y = 1$, so set of importance scores turns out to be [0.125, 0.125, 0.375, 0.375].
@@ -409,12 +407,12 @@ P &= \{Ax \ x\in \mathcal{U}\}
 \end{align*}
 
 
-\begin{figure}
-	\centering
-	\resizebox{7.5cm}{3cm}{\input{./figures/ch03/figure1}}
-	\caption{}
-	\label{}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\resizebox{7.5cm}{3cm}{\input{./figures/ch03/figure1}}
+%	\caption{}
+%	\label{}
+%\end{figure}
 
 Assume $A$ is diagonalizable:
 
