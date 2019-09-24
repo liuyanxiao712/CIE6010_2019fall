@@ -1,0 +1,23 @@
+\contentsline {chapter}{\numberline {1}Introduction}{9}{chapter.1}
+\contentsline {chapter}{\numberline {2}Vectors and functions}{13}{chapter.2}
+\contentsline {chapter}{\numberline {3}Matrices and eigen decomposition}{35}{chapter.3}
+\contentsline {section}{\numberline {3.1}Matrices: array of numbers}{35}{section.3.1}
+\contentsline {subsection}{Matrices as linear \& affine maps}{36}{subsection*.4}
+\contentsline {subsection}{Approximations}{36}{subsection*.5}
+\contentsline {subsection}{Orthogonal Matrices}{36}{subsection*.6}
+\contentsline {section}{\numberline {3.2}PageRank}{37}{section.3.2}
+\contentsline {subsection}{Determinant}{40}{subsection*.7}
+\contentsline {chapter}{\numberline {4}Symmetric matrices and spectral decomposition}{41}{chapter.4}
+\contentsline {section}{\numberline {4.1}Symmetric Matrices}{41}{section.4.1}
+\contentsline {subsection}{Symmetric Matrices + Eigenvectors}{42}{subsection*.8}
+\contentsline {subsection}{Variational Characterization of engenvalues of $\lambda _i$ where $A\in S^n$}{43}{subsection*.9}
+\contentsline {subsection}{Positive (Semi)Definite matrices $\rightarrow $ "PD" or "PSD"}{43}{subsection*.10}
+\contentsline {subsection}{Ellipses}{44}{subsection*.11}
+\contentsline {subsection}{Square-root matrix}{46}{subsection*.12}
+\contentsline {chapter}{\numberline {5}Singlar value decomposition}{47}{chapter.5}
+\contentsline {chapter}{\numberline {6}Linear equations and least squares}{49}{chapter.6}
+\contentsline {chapter}{\numberline {7}Linear, quadratic, and geometric models}{51}{chapter.7}
+\contentsline {chapter}{\numberline {8}Convexity}{53}{chapter.8}
+\contentsline {chapter}{\numberline {9}First and second order methods}{55}{chapter.9}
+\contentsline {chapter}{Bibliography}{57}{chapter*.13}
+\contentsfinish 
