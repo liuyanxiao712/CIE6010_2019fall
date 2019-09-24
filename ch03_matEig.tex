@@ -120,7 +120,7 @@ For $x$ 'near' $x_0$, the variation $\delta_f(x) =f(x) - f(x_0)$ can be approxim
 \end{equation*}
 \subsection{Orthogonal Matrices}
 
-\subsubsection{Orthogonal}
+Orthogonal
 
 \begin{definition}
 	$U\in \Re^{n\times m}$ is \textbf{orthogonal} if $U = [U^{(1)} ... U^{(m)}]$
@@ -146,14 +146,14 @@ $x\rightarrow U \rightarrow y = Ux$
 
 $<Ux, Uw> = x^TU^TUw = x^Tw = <x, w>$
 
-\subsubsection{Domain}
+Domain
 
 $dom(A)$ = $\Re^n$, $A = [a^{(1)}...a^{(n)}]$
 
 $dom(A^T)$ = $\Re^m$, $A^T = [a^{(1)}...a^{(m)}]$
 
 
-\subsubsection{Range}
+Range
 
 Range of A is the set of vectors $y$ obtained as a linear combination of the $a_i$s are of the form $y= Ax$ for some vector $x\in \Re^n$.
 
@@ -165,7 +165,7 @@ R(A) = \{y\in \Re^m | y = Ax = \sum^n_{i=1}x_ia^{(i)}\}
 R(A^T) = \{w\in \Re^m | w = A^Tu = \sum^m_{i=1}u_ia^{(i)}\}
 \end{equation*}
 
-\subsubsection{Rank}
+Rank
 
 The dimension of $R(A)$ is called the rank of $A$:
 
@@ -173,13 +173,14 @@ The dimension of $R(A)$ is called the rank of $A$:
 rank(A) = dim\{R(A)\} = dim\{R(A^T)\} = rank(A^T)
 \end{equation*}
 
-\subsubsection{Nullspace} 
+Nullspace
 
 \begin{equation*}
 N(A) = \{x\in \Re^n | Ax = 0\}
 \end{equation*}
 
-\subsubsection{Fundamental Theorem}
+Fundamental Theorem
+
 $\Re^n = \Re(A^T) \bigoplus N(A)$: $\forall x\in \Re^n$ there is a unique $x = x_{R(A^T)} = x_{N(A)}$ 
 
 $N(A) \perp R(A^T)$, $N(A^T) \perp R(A)$
