@@ -1,5 +1,3 @@
-%% Placeholder for chapter on symmetric matrices and spectral decomposition
-
 \section{Symmetric Matrices}
 %Lecture Sep 18
 
@@ -14,7 +12,7 @@ Example: Quadratic Functions: $q: \Re^n \rightarrow \Re$
 
 \begin{align*}
 q(x) &= \sum^n_{i=1}\sum^n_{j=1}a_{ij}x_ix_j + \sum^n_{i=1}c_ix_i + d\\
-&= x^TAx + c^T + d\\
+&= x^TAx + c^Tx + d\\
 &= \frac{1}{2}x^T(A + A^T)x + c^Tx + d\\
 &= \frac{1}{2}
 \begin{bmatrix}%
@@ -34,8 +32,8 @@ x\\
 1) Let $F(x) = C^Tx = \sum^n_{i=1}c_ix_i$:
 
 \begin{align*}
-\frac{d}{dx_k}F(x) &+ \frac{d}{dx_k}(\sum^n_{i=1}c_ix_i) = c_k\\
-&= \nabla F(x) = 
+\frac{d}{dx_k}F(x) &= \frac{d}{dx_k}(\sum^n_{i=1}c_ix_i) = c_k\\
+\nabla F(x) &= 
 \begin{bmatrix}%
 \frac{\sigma F(x)}{\sigma x_1}\\
 ...\\
@@ -50,7 +48,7 @@ c_n
 
 2) Let
 \begin{align*}
-F(x) &= x^TAx = \sum_i\sum_ja_ijx_ix_j\\
+F(x) &= x^TAx = \sum_i\sum_ja_{ij}x_ix_j\\
 &= a_{11}x_1^2 + a_{12}x_1x_2 + ... + a_{21}x_2x_1 + ...\\
 \frac{d}{dx_k}F(x) &= \frac{d}{dx_k}(a_{kk}k_k^2 + \sum_{l\neq k}k_lx_k(a_{kk}+a_{kl}))\\
 &= (a_{kk} + a_{kk})x_k + \sum_{l\neq k}x_l(a_{lk} + a_{kl}) \\
@@ -60,12 +58,12 @@ F(x) &= x^TAx = \sum_i\sum_ja_ijx_ix_j\\
 
 \begin{align*}
 \nabla F(x) &= (A + A^T)x\\
-[\nabla^2F(x)]_{kj} &= \frac{d}{dx_j}(\frac{\sigma}{\sigma x_k}F(x))\\
+[\nabla^2F(x)]_{kj} &= \frac{d}{dx_j}(\frac{\partial}{\partial x_k}F(x))\\
 &= [A]_{kj} + [A]_{jk}\\
 \nabla^2F(x) &= (A + A^T)
 \end{align*}
 
-Because $q(x) = x^TAx + c^T + d$, take Taylor approximation of $q(x)$:
+Because $q(x) = x^TAx + c^Tx + d$, take Taylor approximation of $q(x)$:
 
 \begin{align*}
 \tilde{q}(x) &= q(0) + \nabla q(0)^Tx + \frac{1}{2}x^T\nabla^2q(0)x\\
@@ -83,7 +81,7 @@ Because $q(x) = x^TAx + c^T + d$, take Taylor approximation of $q(x)$:
 	
 	3) Eigenvectors of distinct eigenvalues are $\perp$.
 	
-	"Eigenspace": $\xi_{x_i} = N(A - \lambda_iI)\perp \xi_{\lambda_i} = N(A - \lambda_jI$
+	"Eigenspace"= $\xi_{x_i} = N(A - \lambda_iI)\perp \xi_{\lambda_i} = N(A - \lambda_jI)$
 \end{theorem}
 
 Implication: If we pick basis for each eigenspace $\lambda_i$ to be an orthogonal basis, because have "Fullset" of eigenvectors can always write:
@@ -120,25 +118,24 @@ Since all $\lambda_i \in \Re$ can order(largest-to-smallest):
 
 Ratio $\frac{x^TAx}{x^Tx}$ for $x\neq 0$ is a "Reyleigh quotient"
 
-Thm(4.3): $\lambda_{min}(A) \leq \frac{x^TAx}{||x||^2}\leq lam
-_{max}(A), \forall x = 0$
+Thm(4.3): $\lambda_{min}(A) \leq \frac{x^TAx}{||x||^2}\leq \lambda_{max}(A), \forall x = 0$
 
 
 \begin{proof}
 	\begin{align*}
 	x^TAx &= x^TU\Lambda U^Tx\\
-	&= \bar{x}\Lambda\bar{x}\\
+	&= \bar{x}^T\Lambda\bar{x}\\
 	&= \sum^n_{i=1}(\bar{x}_i)^2\lambda_i\\
 	&\leq \sum^n_{i=1}(\bar{x}_i)^2\lambda_{max}(A)\\
 	&= ||\bar{x}||^2\lambda_{max}(A)
 	\end{align*}
 	
 	\begin{equation*}
-	\lambda(A)||\bar{x}||^2 \leq x^TAx \leq ||\bar{x}||^2\lambda_{max}(A)
+	\lambda(A)_{min}||\bar{x}||^2 \leq x^TAx \leq ||\bar{x}||^2\lambda_{max}(A)
 	\end{equation*}
 	
 	\begin{equation*}
-	\lambda(A)||\bar{x}||^2 \leq x^TAx \leq ||\bar{x}||^2\lambda_{max}(A)
+	\lambda(A)_{min} \leq \frac{x^TAx}{||\bar{x}||^2} \leq \lambda_{max}(A)
 	\end{equation*}
 \end{proof}
 
@@ -146,7 +143,7 @@ _{max}(A), \forall x = 0$
 \subsection{Positive (Semi)Definite matrices $\rightarrow$ "PD" or "PSD"}
 
 \begin{definition}
-	A symmetrix matrix $A\in S^n$ is PD(alt PSD) if $x^TAx > 0$, $\forall x\in \Re^n$(alt $x^TAx\geq 0$)
+	A symmetric matrix $A\in S^n$ is PD(alt PSD) if $x^TAx > 0$, $\forall x\in \Re^n$(alt $x^TAx\geq 0$)
 \end{definition}
 
 PSD: $S^n_{+} = \{A\in S^n | A\succeq 0\}$
@@ -155,13 +152,13 @@ PD: $S^n_{++} = \{A\in S^n | A\succ 0\}$
 
 A symmetric matrix is PSD iff all its eigenvalues $\geq$ 0.
 
-A symmetric matrix is PD iff all its eigenvalues $>$ 0.
+A symmetric matrix is PD iff all its eigenvalues $>$ 0.\\
 
 
 (1) Assume $A\in S^n$ is PD $\rightarrow$ will show $\lambda_i > 0, \forall\,\,\, eigenvalues$.   
 
 \begin{equation*}
-x^TAx = x^TU\Lambda U^Tx = \bar{x}^T\Lambda\bar{x} - \sum^n_{i=1}\lambda_i(\bar{x}_i)^2 >0
+x^TAx = x^TU\Lambda U^Tx = \bar{x}^T\Lambda\bar{x} = \sum^n_{i=1}\lambda_i(\bar{x}_i)^2 >0
 \end{equation*}
 Since A is PD and $x\neq 0$
 
@@ -182,7 +179,7 @@ $$
 where only $j^m$ entry is 1.
 
 \begin{equation*}
-0 < U^{(i)^T} U\Lambda U^TU^{(1)} =e_j^T\Lambda e_j \Lambda e_j = \lambda_j
+0 < U^{(i)^T} U\Lambda U^TU^{(1)} =e_j^T\Lambda e_j = \lambda_j
 \end{equation*}
 
 
@@ -211,10 +208,10 @@ $\rightarrow$ PSD matrices are invertible only if PD
 Consider the set:
 
 \begin{equation*}
-\xi = \{x\in \Re^n | (x - x^{(a)})^T P(x - x^{(a)}) \leq 1 \}
+\xi = \{x\in \Re^n | (x - x^{(0)})^T P(x - x^{(0)}) \leq 1 \}
 \end{equation*}
 
-wher P is PD.
+where P is PD.
 
 Note argument is a quadratic function:
 
@@ -247,13 +244,13 @@ Look at set $\xi$: $\rightarrow$ centered at $x = x^{(0)}$:
 
 Example: Sample covariance \& PSD matrices: 
 
-Dataset $x^{(1)}, x^{(2)}, ..., x^{(m)}$ all $x^{(i)}\in \Re^n$
+Dataset $x^{(1)}, x^{(2)}, ..., x^{(m)}$ all $x^{(i)}\in \Re^n$\\
 
-Sample mean: $\mu = \frac{1}{m}]\sum^n_{i=1}x^{(i)}$
+Sample mean: $\mu = \frac{1}{m}\sum^n_{i=1}x^{(i)}$
 
 Sample covariance: $\sum = \frac{1}{m}\sum^m_{i=1}(x^{(i)}-\mu)(x^{(i)}-\mu)^T$
 
-xxx
+where $(x^{(i)}-\mu)(x^{(i)}-\mu)^T$ is the outer-product of centered data points.
 
 m=3:
 
@@ -358,3 +355,5 @@ A &= U\Lambda U^{-1} \\
 \end{bmatrix}\\
 &= U\Lambda^{\frac{1}{2}}U^TU\Lambda^{\frac{1}{2}}U^T
 \end{align*}
+
+where $A^{\frac{1}{2}} = U\Lambda^{\frac{1}{2}}U^T$ $\rightarrow$ "sq-root" matrix. 
