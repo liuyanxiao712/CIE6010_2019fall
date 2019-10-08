@@ -1,5 +1,315 @@
 %% Placeholder for chapter on linear equations and least squares
 
+\section{Least Squares}
+
+\begin{equation*}
+Ax = y \,\,\,\,\,(*)
+\end{equation*}
+where $A\in \Re^{m\times n}$ is coefficient data matrix (known), $y\in \Re^m$ are constraints(known) and $x\in \Re^n$ are parameters (to choose).
+
+There are three possibilities:
+
+\begin{itemize}
+	\item a) No $x\in \Re^n$ satisfies ($*$)
+	
+	\item b) Unique $x\in \Re^n$ satisfies ($*$)
+	
+	\item c) Many $x\in \Re^n$ satisfies ($*$)
+\end{itemize}
+
+(a) Existence:\\
+
+Since $Ax\in \mathcal{R}(A)$, a solution will exist if $y\in \mathcal{R}(A)$
+
+Test: 
+
+1) $rank([A y]) = rank[A]$: solution to ($*$) exists
+
+2) $rank([A y]) > rank[A]$: no solution to ($*$) exists\\
+
+(b)/(c) If a solution exists, is it unique?
+
+Assume a solution $\bar{x}$ exists s.t. $A\bar{x} = y$, any other solution $x$ myst also satisfy $Ax = y$. 
+
+So 
+\begin{align*}
+Ax - A\bar{x} &= A(x -\bar{x}) = 0\\
+x - \bar{x} &\in N(A)
+\end{align*}
+
+Any solution to ($*$) can be expressed as:
+\begin{equation*}
+x = \bar{x} + (x - \bar{x}) = \bar{x} + e
+\end{equation*}
+where $e\in N(A)$
+
+So if there are solutions to ($*$), will be some affine sets:
+
+\begin{equation*}
+\mathcal{A} = \{x|x = \bar{x} + N(A), A\bar{x} = y \}
+\end{equation*}
+solution is unique if elements of $N(A)$ are all 0. $\bar{x}$ is any particular solution for $A\bar{x} =y$
+
+The three cases typically bread down into a question about dimensions of $A\in \Re^{n\times n}$
+
+\begin{itemize}
+	\item 1) Overdetermined LS: more constraints than parameters $m>n$. Typically a solution does exist. 
+	
+	\item 2) Square: Equal \# constraints \& parameters, typically $\exists$  a unique solution.
+	
+	\item 3) Underdetermined LS: Fewer constraints than parameters, $m<n$, typically many solutions
+\end{itemize}
+
+1) Overdetermined: $m > n$
+
+Assume $A$ is full (column) rank, $rank(A) =n$. $A$ is tall, thin matrix. $dim(\mathcal{R}(A)) = n < m$. $y\in \Re^m$
+
+To find "closest" $Ax$ to $y$:
+
+\begin{align*}
+x^* &= arg \, min_{x\in \Re^n}||Ax - y||_2\\
+min_{x\in \Re^{n}}||Ax - y|| &= min_{\hat{y}\in \mathcal{R}(A)}||\hat{y} - y||_2 =\prod_{\mathcal{R}(A)}(y)\\
+\end{align*}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure1.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+
+
+From chapter2, 
+
+\begin{equation*}
+y^* = \sum^n_{i=1}x_i^*a^{(i)}
+\end{equation*}
+where 
+$$ A =   
+\left[
+\begin{matrix}
+a^{(i)} & ... & a^{(i)}
+\end{matrix}
+\right]
+$$
+
+Solve for $x^*$ via
+\begin{equation*}
+\sum^n_{i=1}x_1^*<a^{(k)}, a^{(i)}> = <a^{(k)}, y>, \forall k \in \{1,2,...,m \}
+\end{equation*}
+
+Stack up to get 
+
+\begin{equation*}
+A^TAx^* = A^Ty
+\end{equation*}
+
+There are 2 possibilities:
+
+a) $A^TA$ is invertible.
+
+b) $A^TA$ is not invertible.
+
+a) 
+\begin{align*}
+x^* &= (A^TA)^{-1}A^Ty\\
+\hat{y}^* &= A(A^TA)^{-1}A^Ty
+\end{align*}
+
+b) What happens if $A^TA$ is not invertible? 
+
+\begin{align*}
+\hat{y}^* &= A(A^TA)^{-1}A^Ty\\
+&= A(V
+\begin{bmatrix}
+\Sigma & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^T\mathcal{U}
+\begin{bmatrix}
+\Sigma \\
+\textbf{0}
+\end{bmatrix}
+V^T)^{-1}A^Ty\\
+&= A(V\Sigma^2V^T)^{-1}A^Ty\\
+&= AV(\Sigma^{-1})^2V^TA^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+\Sigma \\
+\textbf{0}
+\end{bmatrix}
+V^TV\Sigma^{-2}V^TV
+\begin{bmatrix}
+\Sigma & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+\Sigma \\
+\textbf{0}
+\end{bmatrix}
+\Sigma^{-1}\Sigma^{-1}
+\begin{bmatrix}
+\Sigma & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty
+\end{align*}
+
+Then we have:
+
+\begin{align*}
+y^{*} &= \mathcal{U}
+\begin{bmatrix}
+I_r\\
+\textbf{0}
+\end{bmatrix}
+\begin{bmatrix}
+I_r & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+I_r& \textbf{0}\\
+\textbf{0} & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+I_r& \textbf{0}\\
+\textbf{0} &  \textbf{0}
+\end{bmatrix}
+\begin{bmatrix}
+<\mathcal{U}^{(1)}, y>\\
+<\mathcal{U}^{(2)}, y>\\
+...\\
+<\mathcal{U}^{(m)}, y>
+\end{bmatrix}\\
+&= \sum^r_{i=1}<u^{(i)}, y>\mathcal{U}^{(i)}
+\end{align*}
+
+b) Uniquely determined:($m =n$)
+
+\begin{equation*}
+[A]x = y
+\end{equation*}
+
+\begin{equation*}
+x^* = A^{-1}y
+\end{equation*}
+
+\begin{itemize}
+	\item A full rank(columns\& rows)
+	
+	\item equal \# constraints \& parameters
+	
+	\item B/C A square \& full rank $A^{-1}$ exists
+\end{itemize}
+
+c) Underdetermined($m<n$)
+
+\begin{itemize}
+	\item A full row-rank
+	
+	\item rank(A) = m
+	 
+	\item A wide \& short matrix
+	
+	\item More parameters than constraints
+	
+	\item Hence many solutions
+\end{itemize}
+
+Idea: pick solution $x$ that satisfies($*$) and is shoetest
+
+\begin{equation*}
+x^* = arg \, min_{x\in \Re^n, Ax = y}||x||_2
+\end{equation*}
+
+\begin{equation*}
+min_{Ax = y, x\in \Re^n}||x|| = min_{x\in \Re^n, x\in \mathcal{A}}||x - 0|| = \prod_{\mathcal{A}}(0)
+\end{equation*}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure3.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+To solve for $x^*$, note (from before) error vector 
+
+\begin{align*}
+e &= x^* - 0 = x^* \perp N(A)\\
+x^* &\in N(A)^{\perp} = R(A)
+\end{align*}
+
+So we can write $x^* = A^T\alpha$ for some $\alpha \in \Re^m$. 
+For $x^*$ to be in $\mathcal{A}$ it must be satisfies that $Ax^* = y$
+
+Substituting in we get 
+
+\begin{equation*}
+y = Ax^* = AA^T\alpha
+\end{equation*}
+
+By assumption $A$ is full row rank so $AA^T$ is invertible.
+
+\begin{align*}
+\alpha^* &= (AA^T)y\\
+x^T &= A^T(AA^T)y
+\end{align*}
+
+\begin{align*}
+x^* &= A^T(AA^T)^{-1}y\\
+&= A^T\left[\mathcal{U}
+\begin{bmatrix}
+\Sigma & \mathbf{0}
+\end{bmatrix}
+V^TV
+\begin{bmatrix}
+\Sigma\\
+\mathbf{0}
+\end{bmatrix}
+\mathcal{U}^T\right]^{-1}y\\
+&= A^T(\mathcal{U}\Sigma^2\mathcal{U}^T)^{-1}y\\
+&= A^T\mathcal{U}\Sigma^{-2}\mathcal{U}^Ty\\
+&= V
+\begin{bmatrix}
+\Sigma\\
+\mathbf{0}
+\end{bmatrix}
+\mathcal{U}\mathcal{U}\Sigma^{-2}\mathcal{U}^Ty\\
+&=V
+\begin{bmatrix}
+\Sigma^{-1} \\
+\mathbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= V
+\begin{bmatrix}
+\Sigma^{-1}\\
+\mathbf{0}
+\end{bmatrix}
+\begin{bmatrix}
+<u^{(1)}, y>\\
+...\\
+<u^{(n)}, y>
+\end{bmatrix}\\
+&= \sum^r_{i=1}\frac{1}{\sigma_i}<u^{(i)}, y>V^{(i)}
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+Below are written by Zhipeng for note on 26th Sep. \\
 
 
 last time
