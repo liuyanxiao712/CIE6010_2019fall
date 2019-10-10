@@ -492,3 +492,413 @@ Above are written by Zhipeng for note on 26th Sep. \\
 
 Below are written by Yanxiao starts on 9th Oct. \\
 
+\subsection{Least Squares}
+\begin{equation*}
+x^* = arg\, min_{x\in \Re^n}||y-Ax||_2^2 \,\,\,\,\, (*)
+\end{equation*}
+
+\begin{itemize}
+	\item Standard LS variant in ($*$) weights all elements of error vector equally.(weighted LS)
+	
+	\item Standard LS measures error along standard coordinate system.(change coordinate system)
+	
+	\item Standard LS ignores that certain elements of $x$ may "cost" more than others.(regularization)
+\end{itemize}
+
+\subsection{"Tikhanov regularzation"}
+\begin{equation*}
+x^* =arg\,min_{x\in \Re^n}||w_1(y-Ax)||_2^2 + ||w_2(x - x^{(0)})||_2^2
+\end{equation*}\\
+
+We do a simple example:
+
+\begin{equation*}
+x^* = arg\,min_{x\in \Re^n}||y-Ax||_2^2 + \gamma||x||_2^2
+\end{equation*}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure4.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+Look at form of optional solution to 
+
+\begin{align*}
+x^* &= arg\,min_{x\in \Re^n}||y-Ax||_2^2 + \gamma||x||^2_2\\
+&= (A^TA + \gamma I)^{-1}A^Ty\\
+\hat{y}&= Ax^* = A(A^TA + \gamma I)^{-1}A^Ty\\
+\end{align*}
+apply SVD of A
+\begin{equation*}
+A = \mathcal{U}\tilde{\Sigma}V^T
+\end{equation*}
+
+First thing is to analyze $(A^TA + \gamma I)^{-1}$:
+\begin{align*}
+(A^TA + \gamma I)^{-1} &= V\tilde{\Sigma}^T\mathcal{U}^T\mathcal{U}\tilde{\Sigma}V^T + \gamma I)^{-1}\\
+&= (V
+\begin{bmatrix}
+\Sigma^T & 0\\
+0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}
+\Sigma & 0\\
+0 & 0\\
+\end{bmatrix}
+V^T + \gamma I)^{-1}\\
+&=(V
+\begin{bmatrix}
+\Sigma^2 & 0\\
+0  & 0
+\end{bmatrix}
+V^T + \gamma VV^T
+)^{-1}\\
+&= (V(
+\begin{bmatrix}
+\Sigma^2 & 0\\
+0 & 0
+\end{bmatrix}
++\gamma I)V^T)^{-1}\\
+&= V
+\left[
+\begin{array}{c|c}
+\Sigma^2+\gamma I_r&  \\ \hline 
+& I_{n-r}
+\end{array}
+\right]
+V^T\\
+&=
+V
+\left[
+\begin{array}{c|c}
+(\Sigma^2+\gamma I_r)^{-1}&  \\ \hline 
+& (I_{n-r})^{-1}
+\end{array}
+\right]
+V^T\\
+&=
+V
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& \begin{matrix}
+\frac{1}{\gamma} & &\\
+&...&\\
+&&\frac{1}{\gamma}
+\end{matrix}
+\end{array}
+\right]
+V^T
+\end{align*}
+
+%\begin{matrix}
+%	\frac{1}{\sigma_1^2+\gamma} & &\\
+%	&...&\\
+%	&&\frac{1}{\sigma_r^2+\gamma}
+%\end{matrix}
+
+
+%\left[
+%\begin{array}{c|c}
+%	\begin{matrix}
+%		\frac{1}{\sigma_1^2+\gamma} & &\\
+%		&...&\\
+%		&&\frac{1}{\sigma_r^2+\gamma}
+%	\end{matrix}&  \\ \hline 
+%	& \begin{matrix}
+%		\frac{1}{\gamma} & &\\
+%		&...&\\
+%		&&\frac{1}{\gamma}
+%	\end{matrix}
+%\end{array}
+%\right]
+
+
+
+\begin{align*}
+y^* &= Ax^* = A(A^TA + \gamma I)^{-1}A^Ty\\
+&= \mathcal{U}\tilde{\Sigma}V^T(V
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& \begin{matrix}
+\frac{1}{\gamma} & &\\
+&...&\\
+&&\frac{1}{\gamma}
+\end{matrix}
+\end{array}
+\right]
+V^T)V\tilde{\Sigma}\mathcal{U}^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+\Sigma & 0\\
+0 & 0
+\end{bmatrix}
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& \begin{matrix}
+\frac{1}{\gamma} & &\\
+&...&\\
+&&\frac{1}{\gamma}
+\end{matrix}
+\end{array}
+\right]
+\begin{bmatrix}
+\Sigma^T & 0\\
+0 & 0
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= \mathcal{U}
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& 0
+\end{array}
+\right]
+\mathcal{U}^Ty
+\\
+&= \mathcal{U}
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& 0
+\end{array}
+\right]
+\begin{bmatrix}
+<u^{(1)}, y>\\
+<u^{(2)}, y>\\
+...\\
+<u^{(m)}, y>
+\end{bmatrix}\\
+&=\mathcal{U}
+\begin{bmatrix}
+\frac{\sigma_1^2}{\sigma_1^2+\gamma}<u^{(1)}, y>\\
+...\\
+\frac{\sigma_r^2}{\sigma_r^2+\gamma}<u^{(r)}, y>\\
+0\\
+...\\
+0
+\end{bmatrix}\\
+&= \sum^r_{i=1}\frac{\sigma_i^2}{\sigma_i^2 + \gamma}<u^{(i)}, y>u^{(i)}
+\end{align*}\\
+
+By considering
+
+\begin{equation*}
+\sum^r_{i=1}\frac{\sigma_i^2}{\sigma_i^2 + \gamma}<u^{(i)}, y>u^{(i)}
+\end{equation*}
+
+We should note:
+
+\begin{itemize}
+	\item $\frac{\sigma_i^2}{\sigma_i^2 + \gamma}$: scaling is changed by regularization. If $\gamma = 0$, then  $\frac{\sigma_i^2}{\sigma_i^2 + \gamma} = 1$ and get back standard LS. If $\gamma > 0$, it's shrinkage. 
+	
+	\item $<u^{(i)}, y>$: projection of data vector $y$ along that $i^{th}$ direction. 
+	
+	\item $u^{(i)}$: component of approximation along $i^{th}$ direction or $i^{th}$ basis element. 
+\end{itemize}
+
+%\begin{equation*}
+%\begin{bmatrix}
+%\frac{\sigma_1^2}{\sigma_1^2+r} & & \\
+% & ... & \\
+%&&\frac{\sigma_r^2}{\sigma_r^2+r}
+%\end{bmatrix}
+%\end{equation*}
+
+
+
+\subsection{Linear Programs: An Optimization Problem}
+
+Also known as(a.k.a) (mathematical program") of the form
+
+\begin{align*}
+(arg)\,\,min_{x\in \Re^n}&c^Tx + d\,\,\,\text{("objective"function)}\\
+s.t.\,\,\, &Ax = b\\
+&Gx \leq h
+\end{align*}
+
+"Feasible" set(might not be good idea, but you can do this): $S = \{x|Ax = b, Gx \leq h \}$
+
+
+\begin{itemize}
+	\item $c\in \Re^n$, $d\in \Re$.
+	
+	\item $A\in \Re^{q\times n}$, $b\in \Re^q$, \begin{equation*}
+	A = 
+	\begin{bmatrix}
+	\alpha^{(1)^T}\\
+	...\\
+	\alpha^{(q)^T}
+	\end{bmatrix}
+	\end{equation*}
+	
+	$<\alpha^{(i)}, x> =b_i$, $i\in \left[q\right]$
+	
+	\item $G\in \Re^{m\times n}$, $h\in \Re^m$
+	
+	\item If
+	\begin{equation*}
+	G = 
+	\begin{bmatrix}
+	g^{(1)^T}\\
+	...\\
+	g^{(q)^T}
+	\end{bmatrix}
+	\end{equation*}
+	
+	Then $<G^{(i)}, x>\leq h_i$, $i\in \left[m\right]$
+	
+\end{itemize}
+
+
+
+
+
+\begin{align*}
+p^* = min \,\,\, &c^Tx + d\\
+s.t.\,\,\, &Ax = b\\
+&Gx\leq h
+\end{align*}
+
+"optimal" value of program:
+
+\begin{itemize}
+	\item Lowest cost shoice amongst all feasible $x$.
+	
+	\item Possible here is no minimal choice
+	
+	\item possible no feasible choice
+	
+	\item $p^*\in \Re$
+\end{itemize}
+
+
+\begin{align*}
+x^* = min \,\,\, &c^Tx + d\\
+s.t.\,\,\, &Ax = b\\
+&Gx\leq h
+\end{align*}
+
+$x^*$ "optimal" choice of optimization variable(or vector):
+
+\begin{itemize}
+	\item sometimes $x^*$ does not exist
+	
+	\item if exists, may or may not be unique
+	
+	\item $x^*\in \Re^n$
+\end{itemize}
+
+
+Let's consider an example:\\
+
+During the The Second World War, the US army is considering how to make their soldiers have enough nutrients...\\
+
+Different nutrients in different foods and daily requirement:\\
+
+
+\begin{tabular}{|c|c|c|c|}
+	\hline 
+	Nutrients&Meat&Potatoes&Daily Requirement\\
+	\hline  
+	Carbohydates&40&200&400\\
+	\hline  
+	Protein&100&20&200\\
+	\hline  
+	Fiber&5&40&40\\
+	\hline 
+\end{tabular}\\
+
+The price of meat and potatoes:\\
+
+
+
+\begin{tabular}{|c|c|}
+	\hline 
+	Resources&cost/kg\\
+	\hline  
+	Meat &\$ 1\\
+	\hline 
+	Potatoes &\$ 0.25\\
+	\hline 
+\end{tabular}
+
+$x_1$ denotes meat(kg) and $x_2$ denotes potatoes(kg).\\
+
+
+Objective:
+
+\begin{equation*}
+x_1 + \frac{1}{4}x_2 = 
+\begin{bmatrix}
+1 & \frac{1}{4}
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}
+\end{equation*}
+
+Constrains:
+\begin{align*}
+40x_1 + 200x_2 &\geq 400\\
+100x_1 + 20x_2 &\geq 200\\
+5x_1 + 40x_2 &\geq 40\\
+x_1 \geq 0\\
+x_2 \geq 0
+\end{align*}
+
+$Gx\leq h \rightarrow$ 
+
+\begin{equation*}
+\begin{bmatrix}
+-\frac{1}{5} & -1\\
+-\frac{1}{8} & -1\\
+-5 & -1\\
+-1 & 0\\
+0 & -1
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}\leq
+\begin{bmatrix}
+-2\\
+-1\\
+-10\\
+0\\
+0
+\end{bmatrix}
+\end{equation*}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure5.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
