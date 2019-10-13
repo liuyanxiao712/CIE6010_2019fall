@@ -2,20 +2,23 @@
 %% Placeholder for chapter on SVD
 \section{The Singular Value Decomposition(SVD)}
 
+Let's review our previous results before starting the SVD part.
+
 \subsection{Eigen-decomposition}
 
-For any $A\in \Re^{n\times n}$ that is diagonalizable, can express $A$ as 
+For any $A\in \reals^{n\times n}$ that is diagonalizable,  we can express $A$ as 
 \begin{equation*}
 A = U\Lambda U^{-1}
 \end{equation*}
 
-$U$: Matrix of linear independent eigenvectors $\in \mathbb{C}^n$
+$U$: $n$ by $n$ invertiable matrix of linear independent eigenvectors $\in \mathbb{C}^n$, that is, each column of $U$ is an eigenvector of $A$.
 
-$\Lambda$: Diagonal matrix of eigenvalues $\lambda_i\in \mathbb{C}$.
+$\Lambda$: a diagonal matrix whose diagonal entries are eigenvalues of $A$, and $\lambda_i\in \mathbb{C}$.
 
-\subsection{Spectral}
 
-For any $A\in S^n$ can express A as
+\subsection{Spectral decomposition}
+
+For any $n$ by $n$ symmetric matrix $A$, we can express $A$ as
 \begin{equation*}
 A = U\Lambda U^T
 \end{equation*}
@@ -24,18 +27,18 @@ $U$: Orthogonal matrix ($\perp$ \& normalized) $U^{(i)}\in \Re^n$;
 
 $\Lambda$: Diagonal matrix of $\lambda_i \in \Re$.
 
-\subsection{SVD}
 
-Any matrix $A\in \Re^{m\times n}$ can be expressed as 
+
+\subsection{Singular Value Decomposition(SVD)}
+
+For any matrix $A\in \reals^{m\times n}$, we can be expressed $A$ as 
 \begin{equation*}
 A =U\tilde{\Sigma} V^T
 \end{equation*}
 
+$U\in \reals^{m\times m}$: An orthogonal matrix, so $UU^T =U^TU = I_m$
 
-
-$U\in \Re^{m\times m}$: orthogonal so $UU^T =U^TU = I_m$
-
-$V\in \Re^{n\times n}$: orthogonal so $VV^T = V^TV =I_n$
+$V\in \reals^{n\times n}$: An orthogonal matrix, so $VV^T = V^TV =I_n$
 
 $$\tilde{\Sigma} = 
 \left[
@@ -43,28 +46,23 @@ $$\tilde{\Sigma} =
 \Sigma & \textbf{0}\\
 \textbf{0}&\textbf{0}
 \end{matrix}
-\right]\in \Re^{m\times n}
+\right]\in \reals^{m\times n}
 $$
 
-where $\Sigma = diag(\sigma_1,...,\sigma_r)\geq 0$
+where $\Sigma = diag(\sigma_1,...,\sigma_r)> 0$.
 
-Comments:
 
-SVD: 
-
+Comments on SVD: 
 \begin{itemize}
-	\item inherits $\perp$ matrices of spectral decomp and purely real $\lambda_i$
-	
-	\item Generalizes to non-square matrices
-	
-	\item Loose property of direction invariance of eigen-decomposition
-	
-	\item Consider $Ax = U\Sigma V^Tx$. 
+	\item Inherits $\perp$ matrices of spectral decomposition and all $\lambda_i$ are real.
+	\item Generalizes eigen-decomposition and spectral decomposition to a non-square matrices.
+	\item Lose the property of direction invariance of eigen-decomposition.
 \end{itemize}
 
+
+\vspace{0.5cm}
 \begin{example}
-	$y = Ax = U\tilde{\Sigma} V^Tx$
-	
+	Let's consider an example, $y = Ax = U\tilde{\Sigma} V^Tx$, and see how these matrices impose influences on a vector $x$(refer to the figures on the r.h.s)
 	$$U = 
 	\left[
 	\begin{matrix}
@@ -72,20 +70,26 @@ SVD:
 	\frac{1}{\sqrt{3}}&-\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}}\\
 	\frac{1}{\sqrt{3}}&0 & -\frac{2}{\sqrt{6}}
 	\end{matrix}
-	\right] \Sigma = 
+	\right]
+	 ,
+	\tilde{\Sigma} = 
 	\left[
 	\begin{matrix}
 	2&0\\
 	0&0\\
 	0&0
 	\end{matrix}
-	\right] V = 
+	\right] 
+	,
+	V = 
 	\left[
 	\begin{matrix}
 	-\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}\\
 	\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}
 	\end{matrix}
-	\right] A = 
+	\right] 
+	,
+	A = 
 	\left[
 	\begin{matrix}
 	-\frac{2}{\sqrt{6}}&\frac{2}{\sqrt{6}}\\
@@ -94,35 +98,34 @@ SVD:
 	\end{matrix}
 	\right]
 	$$
-	$$ a) x = 
+	
+$ 1) x = 
 	\left[
 	\begin{matrix}
 	1\\
 	0
 	\end{matrix}
 	\right]
-	$$
-	\begin{figure}
+$
+	\begin{marginfigure}
 		\centering
-		\includegraphics[width=2.1in,height=2.1in]{figures/ch05/figure1_a.jpg}
+		\includegraphics[width=1.8in,height=1.8in]{figures/ch05/figure1_a.jpg}
 		%\caption{This is an inserted JPG graphic} 
 		%\label{fig:graph} 
-	\end{figure}
-	$$ b) w = V^Tx = 
+	\end{marginfigure}
+
+
+$ 2) w = V^Tx = 
 	\left[
 	\begin{matrix}
 	-\frac{1}{\sqrt{2}}\\
 	\frac{1}{\sqrt{2}}
 	\end{matrix}
 	\right]
-	$$
-	\begin{figure}
-		\centering
-		\includegraphics[width=2.1in,height=2.1in]{figures/ch05/figure1_b.jpg}
-		%\caption{This is an inserted JPG graphic} 
-		%\label{fig:graph} 
-	\end{figure}
-	$$ c) z = \Sigma w = 
+$
+	
+
+$ 3) z = \Sigma w = 
 	\left[
 	\begin{matrix}
 	-\frac{1}{\sqrt{2}}\\
@@ -130,14 +133,23 @@ SVD:
 	0
 	\end{matrix}
 	\right]
-	$$
-	\begin{figure}
+$
+	
+	\begin{marginfigure}
 		\centering
-		\includegraphics[width=2.1in,height=2.1in]{figures/ch05/figure1_c.png}
+		\includegraphics[width=1.8in,height=1.8in]{figures/ch05/figure1_b.jpg}
 		%\caption{This is an inserted JPG graphic} 
 		%\label{fig:graph} 
-	\end{figure}
-	$$ d) y = Uz =  
+	\end{marginfigure}
+
+	\begin{marginfigure}
+		\centering
+		\includegraphics[width=1.8in,height=1.8in]{figures/ch05/figure1_c.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
+	\end{marginfigure}
+
+$ 4) y = Uz =  
 	\left[
 	\begin{matrix}
 	-\frac{2}{\sqrt{6}}\\
@@ -145,24 +157,29 @@ SVD:
 	-\frac{2}{\sqrt{6}}
 	\end{matrix}
 	\right]
-	$$
-	\begin{figure}
+$
+	\begin{marginfigure}
 		\centering
-		\includegraphics[width=2.1in,height=2.1in]{figures/ch05/figure1_d.jpg}
+		\includegraphics[width=1.8in,height=1.8in]{figures/ch05/figure1_d.jpg}
 		%\caption{This is an inserted JPG graphic} 
 		%\label{fig:graph} 
-	\end{figure}
+	\end{marginfigure}
 	
-	
+
 \end{example}
 
-
-SVD follows from eigen-decomp of $A^TA$ and $AA^T$ $\rightarrow$ both symmetric, so spectral theorem applies. 
-
-Write out $U\& V$ as: (r: rank($A$))
+This example and the figures show that the SVD of a matrix $A$ has lost the property of direction invariance, compared to the eigen-decomposition.
 
 
 
+\vspace{2cm}
+\subsection{Computing SVD}
+The idea of singular value decomposition(SVD) follows from eigen-decomp of $A^TA$ and $AA^T$, since both of these two matrices are symmetric, so the spectral theorem is applicable(i.e., $A^TA$ and $AA^T$ can be orthogonally diagonalize). 
+
+Let $A$ be an $m$ by $n$ matrix. First, we let $\lambda_i$ denote eigenvalues of the symmetric matrix $A A^T$ (or of matrix $A^T A$), and arrange these eigenvalues in a decreasing order, that is, $\lambda_1\geq \lambda_2\geq \cdots \geq \lambda_m$(there are $n$ eigenvalues if we consider $A^TA$). We define the singular value of a matrix $A$ as the square root of the eigenvalues and arrange them in a decreasing order as well, i.e., $\sigma_i=\sqrt{\lambda_i}$ and suppose we have $r$ singular values that are positive, so $\sigma_1\geq \sigma_2\geq \cdots \geq \sigma_r>0$.
+
+
+By spectral theorem, we write out $U$ and $V$ as (note that $\rank(A)=r$):
 $$ U =   
 \left[
 \begin{matrix}
@@ -175,7 +192,6 @@ U_r & U_{mr}
 \end{matrix}
 \right]
 $$
-
 
 $$ V =   
 \left[
@@ -190,11 +206,9 @@ V_r & V_{nr}
 \right]
 $$
 
-
-
-
+Thus,
 \begin{align*}
-AA^T &= U\tilde{\Sigma} V^TV\tilde{\Sigma}^TU^T
+AA^T &= U\tilde{\Sigma} V^TV\tilde{\Sigma}^TU^T\\
 &=
 \begin{bmatrix}
 \mathcal{U}_r & \mathcal{U}_{mr}
@@ -204,15 +218,15 @@ AA^T &= U\tilde{\Sigma} V^TV\tilde{\Sigma}^TU^T
 \textbf{0}&\textbf{0}
 \end{bmatrix}
 \begin{bmatrix}
-\Sigma^r & \textbf{0}\\
+\Sigma & \textbf{0}\\
 \textbf{0}&\textbf{0}
 \end{bmatrix}
 \begin{bmatrix}
 \mathcal{U}_r^T\\
 \mathcal{U}_{mr}^T
-\end{bmatrix}
-&=
-\begin{bmatrix}
+\end{bmatrix}\\
+&
+=\begin{bmatrix}
 \mathcal{U}_r & \mathcal{U}_{mr}
 \end{bmatrix}
 \begin{bmatrix}
@@ -222,38 +236,45 @@ AA^T &= U\tilde{\Sigma} V^TV\tilde{\Sigma}^TU^T
 \begin{bmatrix}
 \mathcal{U}_r^T\\
 \mathcal{U}_{mr}^T
-\end{bmatrix}
-&= \sum^r_{i=1}(\sigma_i)^2u^{(i)}(u&{(i)})^T\\
-&= \sum^m_{i=1}(\sigma_1)^2u^{(i)}u^{(i)^T}
+\end{bmatrix}\\
+&= \sum^r_{i=1}(\sigma_i)^2u^{(i)}u^{(i)^T}\\
+&= \sum^m_{i=1}(\sigma_i)^2u^{(i)}u^{(i)^T}
 \end{align*}
 
-
-
-$(AA^T)u^{(k)}$, $\rightarrow$ WTS $u^{(k)}$ is $k^{th}$ eigenvector of $AA^T$. 
-
-$(AA^T)u^{(k)} = \sum^m_{i=1}\sigma_i^2u^{(1)}(u^{(1)})^Tu^{(k)} = \sum^n_{i=1}\sigma_i^2\prod(i=k)u^{(1)} =\sigma^2_ku^{(k)}$
-
-$\lambda_k(AA^T) = \sigma^2_k$
-
-same logic applied to $A^TA$ shows $V^{(k)}$ is $k^{th}$ eigenvector of $(A^TA)$
-
-
-\subsection{Computing SVD}
-
-1) Singular values: Compute eigenvalues of $AA^T$ or $A^TA$ to find $\lambda_i(A^TA) =\sigma_i^2$ $\rightarrow$ $\sigma_i = \sqrt{\lambda_i(A^TA)}$
-
-$x^TA^TAx = w^Tw =||w||^2$
-
-2) Right-Singular vectors: eigenvectors of $A^TA$;
-
-3) Left-Singular vectors: eigenvectors of $AA^T$;
-
-4) Because $AA^T \& A^TA$ both symmetric, both have full set of eigenvectors.\\
-
-2. Consider arbitrary $x\in \Re^n$, 
-
+We may noticed that the vector $u^{(k)}$ is $k^{th}$ eigenvector of $AA^T$ by showing that
 \begin{align*}
-Ax &= U\tilde{\Sigma} V^Tx\\
+(AA^T)u^{(k)} 
+& = \sum^m_{i=1}\sigma_i^2u^{(i)}(u^{(i)})^Tu^{(k)}\\
+& = \sum^m_{i=1}\sigma_i^2 \mathbb{1}_{i=k} u^{(i)} \\
+& = \sigma^2_ku^{(k)}\\
+& = \lambda_k u^{(k)}
+\end{align*}
+where $\lambda_k$ is the k-th eigenvalue of $AA^T$, and the indicator function comes from the orthogonality of matrix $\mathcal{U}$.
+
+The same logic can be applied to $A^TA$ and shows that $v^{(k)}$ is $k^{th}$ eigenvector of $A^TA$.
+
+Accordingly, we have already to know how to obtain he SVD  of a matrix.
+
+
+We summarize the procedure that how we compute the SVD of a matrix $m$ by $n$ matrix $A$ as follows
+
+1) Singular values: Compute eigenvalues of $AA^T$ or $A^TA$, and to find the $r$ positive singular values $\sigma_i = \sqrt{\lambda_i(A^TA)}$, so we have the matrix $\tilde{\Sigma}$ with diagonal entries are these positive singular values and other entries are zero.
+
+%$x^TA^TAx = w^Tw =\Vert w\Vert^2$
+
+2) Right-Singular vectors $v^{(i)}$: Find the eigenvectors of $A^TA$, so we have an $n$ by $n$ orthogonal matrix $V$.
+
+3) Left-Singular vectors $u^{(i)}$: Find the eigenvectors of $AA^T$, so we have an $m$ by $m$ orthogonal matrix $\mathcal{U}$.
+
+4) Write down the expression $A = \mathcal{U} \tilde{\Sigma} V^T$.
+
+\vspace{0.5cm}
+
+\subsection{Bases for Fundamental Subspaces}
+Let's consider arbitrary $x\in \reals^n$, 
+\begin{align*}
+Ax 
+&= U\tilde{\Sigma} V^Tx\\
 &= 
 \begin{bmatrix}%
 U_r & U_{mr}
@@ -277,28 +298,126 @@ U_r & U_{mr}
 \begin{bmatrix}%
 V_r^T
 \end{bmatrix}x\\
-&= \Sigma^r_{i=1}\sigma_iu^{(i)}(V^{(1)})^Tx (***)
+&=
+U_r \Sigma V_r^T x\\
+&= \Sigma^r_{i=1}\sigma_iu^{(i)}(v^{(i)})^Tx
 \end{align*}
 \\
 
-Eq(*) looses all components of $x$ along $V^{(i)}$ directions when $r+1 \leq i \leq n$:
+The above equalities show us that we have lost all components of $x$ along $v^{(i)}$ directions when $r+1 \leq i \leq n$, i.e., columns of $V_{nr}$. We summarize the results as follows:
 
-$\rightarrow$ i.e. columns of $V_{nr}$
+(1) All direction in output are in span $\{u^{(1)} ,..., u^{(n)}\}$
 
-$\rightarrow$ columns of $V_{nr}$ provide basis for $N(A)$.\\
+(2) Columns of $V_{r}$ provide basis for $R(A^T)$
 
+(3) Columns of $V_{nr}$ provide basis for $N(A)$.
 
-All direction in output are in span $\{u^{(1)} ,..., u^{(n)}\}$
+(4) Columns of $U_r$ provide basis for $R(A)$.
 
-$\rightarrow$ columns of $U_r$ provide basis for $R(A)$.\\
-
-Columns of $U_{mr}$ provide basis for $N(A^T)$\\
-
-Columns of $V_{r}$ provide basis for $R(A^T)$
+(5) Columns of $U_{mr}$ provide basis for $N(A^T)$
 
 
-2) Consider arbitrary $x\in \Re^n$
 
+%2) Consider arbitrary $x\in \Re^n$
+
+%\begin{align*}
+%A &= \mathcal{U}\tilde{\Sigma}V^r\\
+%&= 
+%\begin{bmatrix}
+%\mathcal{U}_r & \mathcal{U}_{mr}
+%\end{bmatrix}
+%\begin{bmatrix}
+%\Sigma & \mathbf{0}\\
+%\mathbf{0} & \mathbf{0}
+%\end{bmatrix}
+%\begin{bmatrix}
+%V_r^T\\
+%V_{nr}^T
+%\end{bmatrix}\\
+%&= 
+%\begin{bmatrix}
+%\mathcal{U}_r & \mathcal{U}_{mr}
+%\end{bmatrix}
+%\begin{bmatrix}
+%\Sigma \\
+%\mathbf{0} & 
+%\end{bmatrix}
+%\begin{bmatrix}
+%V_r^T
+%\end{bmatrix}\\
+%&= \mathcal{U}_r\Sigma V_r^T\\
+%\end{align*}
+
+%$$\mathcal{U}_r^TAV_r &= \mathcal{U}_r^T(\mathcal{U}_r\Sigma V_r^T)V_r = \Sigma$$
+
+
+%\begin{align*}
+%A &= \mathcal{U}_r\Sigma V_r^T \\
+%&= \sum^r_{i=1}\mathcal{U}^{(i)}(V^{(i)})^T\sigma_i\\
+%&= \sigma_1\mathcal{U}^{(1)}V^{(1)^T}+ \sigma_2\mathcal{U}^{(2)}V^{(2)^T}
+%\end{align*}
+
+%\begin{equation*}
+%\sigma_1\mathcal{U}V^{(1)^T} = 
+%\begin{bmatrix}
+%\sigma_1V_1^{(1)}\mathcal{U}^{(1)} & \sigma_1V_2^{(1)}\mathcal{U}^{(1)} & ... & %\sigma_1V_n^{(1)}\mathcal{U}^{(1)}
+%\end{bmatrix}
+%\end{equation*}
+
+
+
+\subsection{Condition number}
+Most numerical computations involving an equation $Ax = b$ are as reliable as possible when the SVD of $A$ is used. The two
+orthogonal matrices $U$ and $V$ do not affect lengths of vectors or angles between vectors. Any possible instabilities in numerical calculations are identified in $\Sigma$. If the singular values of $A$ are extremely large or small, roundoff errors are almost inevitable, but an error analysis is aided by knowing the entries in $\Sigma$ and $V$.
+
+If $A$ is an invertible $n$ by $n$ matrix, then the ratio $\sigma_1/\sigma_n$ of the largest and smallest singular values gives the \textbf{condition number} of $A$ (Actually, a “condition number” of $A$ can be computed in several ways).
+
+Let's consider $Ax = b$ when $A$ is invertible. We solve for $x$ and obtain that $x = A^{-1}b$. What if $b = b_r + e$? how much does solution change (let's take $b$ as the true value and $e$ as the round-off error here) ?
+
+Now, our solution is $\hat{x} = A^{-1}b_r + A^{-1}e$.
+
+\begin{equation*}
+\frac{\frac{\Vert A^{-1}e\Vert}{\Vert A^{-1}b_r\Vert}}{\frac{\Vert e\Vert}{\Vert b\Vert}} = \frac{\Vert A^{-1}e\Vert_2}{\Vert e\Vert_2} \frac{\Vert b\Vert_2}{\Vert A^{-1}b\Vert_2}
+\end{equation*}
+
+\begin{align*}
+max_{e,b\neq 0} \, \frac{\Vert A^{-1}e\Vert}{\Vert e\Vert} \frac{\Vert b\Vert}{\Vert A^{-1}b\Vert} 
+&= \left[\max_{e\neq 0}\, \frac{\Vert A^{-1}e\Vert}{\Vert e\Vert}\right]\left[max_{b\neq 0}\, \frac{\Vert b\Vert}{\Vert A^{-1}b\Vert}\right]\\
+&= \frac{\sigma_{\max}(A^{-1})}{\sigma_{\min}(A^{-1})}\\
+&= \frac{\frac{1}{\sigma_n}}{\frac{1}{\sigma_1}}\\
+&= \frac{\sigma_1}{\sigma_n}\\
+&= \frac{\sigma_{\max}(A)}{\sigma_{\min}(A)}\\
+&= K(A)
+\end{align*}
+where $K(A)$ is defined as the condition number of matrix $A$.
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2in,height=2in]{figures/ch05/figure2.jpg}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+Note that, by the SVD of $A^{-1}$ we have
+\begin{align*}
+A^{-1} 
+&= (\mathcal{U}\Sigma V^T)^{-1} \\
+&= V\Sigma^{-1}\mathcal{U}^T\\
+&= V
+\begin{bmatrix}
+\frac{1}{\sigma_1} & &\\
+& \ddots & \\
+& & \frac{1}{\sigma_n}
+\end{bmatrix}
+\mathcal{U}^T
+\end{align*}
+
+and by the definition of Rayleigh Quotients we have 
+$$\sigma_{max}(A^{-1}) = \frac{1}{\sigma_n}$$
+$$\sigma_{min}(A^{-1}) = \frac{1}{\sigma_1}$$
+
+\subsection{Reduced SVD and Pseudo inverse}
+When matrix $\tilde{\Sigma}$ contains a zero row (or column) vector, we may have a simplified expression compared to the original SVD, namely, reduced SVD:
 \begin{align*}
 A &= \mathcal{U}\tilde{\Sigma}V^r\\
 &= 
@@ -313,71 +432,24 @@ A &= \mathcal{U}\tilde{\Sigma}V^r\\
 V_r^T\\
 V_{nr}^T
 \end{bmatrix}\\
-&= 
-\begin{bmatrix}
-\mathcal{U}_r & \mathcal{U}_{mr}
-\end{bmatrix}
-\begin{bmatrix}
-\Sigma \\
-\mathbf{0} & 
-\end{bmatrix}
-\begin{bmatrix}
-V_r^T
-\end{bmatrix}\\
 &= \mathcal{U}_r\Sigma V_r^T\\
-\mathcal{U}_r^TAV_r &= \mathcal{U}_r^T(\mathcal{U}_r\Sigma V_r^T)V_r = \Sigma = \mathcal{U}_r^TAV_r
 \end{align*}
+Noticed that the diagonal entries of matrix $\Sigma$ are non-zero, so we may have the pseudo inverse(i.e., Moore–Penrose inverse) of matrix $A$, which is given by
+$$A^{+} = V_r \Sigma^{-1} \mathcal{U}_r^T $$
 
 
-\begin{align}
-A &= \mathcal{U}_r\Sigma V_r^T \\
-&= \sum^r_{i=1}\mathcal{U}^{(i)}(V^{(i)})^T\sigma_i\\
-&= \sigma_1\mathcal{U}^{(1)}V^{(1)^T}+ \sigma_2\mathcal{U}^{(2)}V^{(2)^T}
-\end{align}
-
-\begin{equation*}
-\sigma_1\mathcal{U}V^{(1)^T} = 
-\begin{bmatrix}
-\sigma_1V_1^{(1)}\mathcal{U}^{(1)} & \sigma_1V_2^{(1)}\mathcal{U}^{(1)} & ... & \sigma_1V_n^{(1)}\mathcal{U}^{(1)}
-\end{bmatrix}
-\end{equation*}
-
-Condition \#
-
-Consider $Ax = b$ when $A$ is invertible, solve for $x$ as $x = A^{-1}b$. What if $b = b_r + e$? how much does solution change? 
-
-Solution is $\hat{x} = A^{-1}b_T + A^{-1}e$
-
-\begin{equation*}
-\frac{||\frac{A^{-1}e||}{||A^{-1}b_T||}}{\frac{||e||}{||b||}} = \frac{||A^{-1}e||_2}{||e||_2} \frac{||b||_2}{||A^{-1}b||_2}
-\end{equation*}
-
+\subsection{SVD and matrix norms}
+Recall the definition of matrix norms (Frobenius norm), it turns out that there is connection between Frobenius norm and the singular values:
 \begin{align*}
-max_{e,b\neq 0} \, \frac{||A^{-1}e||}{||e||} \frac{||b||}{||A^{-1}b||} &= \left[max_{e\neq 0}\, \frac{||A^{-1}e}{||e||}\right]\left[max_{b\neq 0}\, \frac{||b||}{||A^{-1}b||}\right]\\
-&= \frac{\sigma_{max}(A^{-1})}{\sigma_{min}(A^{-1}}\\
-&= \frac{\frac{1}{\sigma_n}}{\frac{1}{\sigma_1}}\\
-&= \frac{\sigma_1}{\sigma_n}\\
-&= \frac{\sigma_{max}(A)}{\sigma_{min}(A)}
-&= K(A)
+\Vert A\Vert_F^2 
+&=\sum_i \sum_j	a_{ij}^2\\
+&=\trace(A^TA)\\
+&=\trace(V\tilde{\Sigma}^T U^T U \tilde{\Sigma} V^T)\\
+&=\trace(V \tilde{\Sigma}^T \tilde{\Sigma} V^T)\\
+&=\trace(V V^T \tilde{\Sigma}^T \tilde{\Sigma})\\
+&=\trace(\tilde{\Sigma}^T \tilde{\Sigma})\\
+&=\trace(\tilde{\Sigma}^2)\\
+&=\sum_{i=1}^{r} \sigma_i^2
 \end{align*}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch05/figure2.jpg}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{figure}
-
-\begin{align}
-A^{-1} &= (\mathbb{U}\Sigma V^T)^{-1} \\
-&= V\Sigma^{-1}\mathcal{T}\\
-&= V
-\begin{bmatrix}
-\frac{1}{\sigma_1} & &\\
-& ... & \\
-& & \frac{1}{\sigma_n}
-\end{bmatrix}
-\mathcal{U}^T\\
-\sigma_{max}(A^{-1}) = \frac{1}{\sigma_n}\\
-\sigma_{min}(A^{-1}) = \frac{1}{\sigma_1}
-\end{align}
+That is, the Frobenius norm of $A$ equals to the sum of the square of positive singular values.
