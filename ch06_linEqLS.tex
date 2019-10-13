@@ -1,4 +1,173 @@
 %% Placeholder for chapter on linear equations and least squares
+%%%zhipeng add the following part
+%% Placeholder for chapter on linear equations and least squares
+
+
+
+last time
+
+solving linear system of equations Ax=y
+
+1. over determined
+
+$A^TAx=A^Ty$
+
+
+2. under determined m<n
+
+$X^* \in R(A^T)  $ 
+
+3. invertiable
+
+
+
+
+Today
+
+interpretation and variations 
+
+
+$min_x \Vert y-Ax\Vert_2$
+
+1 approximate solution to y=Ax
+
+$y^*=Ax^*$ best approx to solution in l2 space
+
+closes point in R(A) to y
+
+2. minimum perturbation of y to feasibility"
+
+$y+\Delta y= y^*$
+
+3. perturb both y and A to get feasibility
+
+total least square
+
+$\min_{\Delta y \Delta A} \Vert [\Delta A \Delta y] \Vert_F$, $\Delta A$ is m by n matrix and so $[\Delta A \Delta y]$ is m by n+1
+
+% $\min_{\Delta y \Delta A} \Vert [\Delta A \Delta y] \Vert_F =  \lambda \Vert [\Delta A] \Vert_F + \Vert [\Delta y] \Vert_F $
+
+
+$y+\Delta y\in R(A+\Delta A)$
+
+
+4. Linear regression
+
+$\Vert y-Ax\Vert ^2_2 = \sum_{i=1}^{m} ( y_i - <a^{(i)} , x>)^2$
+
+
+examples
+
+fit a line to $\{(0,6),(1,0),(2,0) \}={(a_i,y_i)}$
+
+approximation of form $x_1+ax$
+
+want $(y_i-x1+a_ix_i)^2 = r_i^2$
+
+$x^*=(A^TA)^{-1}A^Ty=[5 , -3]^T$
+
+
+$\hat{y}=x1^*+ax2^*=5-3a$            %so x1 and x2 are parameters
+
+
+variants of ls
+
+some residuals are more important than the others.
+
+$\min \sum_{i=1}^{n} w_i r_i=\Vert W (y-Ax)\Vert ^2_2=\Vert Wy-WAx)\Vert ^2_2=\Vert \bar{y}-\bar{A} \Vert ^2_2$
+
+can use a more general transform 
+
+$\Vert W (y-Ax)\Vert ^2_2 = (y-Ax)^TW^TW(y-Ax)=r^TW^TWr$
+
+$x^*=(A^TW^TWA)^{-1}A^TWW^Ty$
+
+
+
+
+weighted least square (ls) 
+
+when W is diagonal 
+
+figure here
+
+when W is PSD (rotation)
+
+figure here
+
+
+
+
+Regularization LS
+
+l2 regularized LS
+
+in ls $x*=\arg_x\in\reals_{n} \min \Vert Y-Ax\Vert ^2_2$
+
+and no preference for any specific x over any other, and often x is a vector of resources consumed.
+
+regularized ls
+
+$x*=\arg_x\in\reals_{n} \min \Vert Y-Ax\Vert ^2_2 + \gamma \Vert x\Vert ^2_2$, where $\gamma$ is a non negative scalar
+
+
+To solve regularized ls
+
+$u\in\reals_{n}, v\in\reals_{m}$
+
+
+Define
+
+%\bar{A}=
+
+$\Vert Y-Ax\Vert ^2_2 + \gamma \Vert x\Vert ^2_2=\Vert \bar{A}x-\bar{y}\Vert^2_2$
+
+$x^*=(\bar{A}^TA)^{-1}\bar{A}^T\bar{y}=(A^TA+\gamma I)^{-1}A^Ty$
+
+
+tiknon regularization
+
+content here
+
+
+Visualize regularized LS
+
+$\min \Vert Ax-y\Vert_2^2 +\gamma\Vert x\Vert^2_2$
+
+recall $x^*=[5 -3]^T$， and $\Vert Ax^*-y\Vert = 6$
+
+figure here
+
+
+Draw level set for some picture
+
+figure here
+
+figure here
+
+
+
+$c_1=\Vert Ax-y\Vert^2_2=\Vert A(x-x_s^*+x_s^*)-y\Vert^2_2=\Vert (Ax_s^*-y)-A(x-x_s^*)\Vert^2_2=\Vert (Ax_s^*-y)\Vert^2_2 - \Vert A(x-x_s^*)\Vert^2_2$
+
+The first term on r.h.s is a scalar 6, so we focus on the second term now.
+
+$\Vert A(x-x_s^*)\Vert^2_2= (x-x_s^*)^T A^TA (x-x_s^*)$ 
+
+Note that $A^TA$ is a PSD matrix.
+
+
+Understand geometry level set of $\Vert A(x-x_s)\Vert^2_2$ via eigenvector of PSD matrix $A^TA$
+
+
+$A^TA=$
+
+figure here
+
+%%%%zhipeng add the above apart
+
+
+
+
 
 \section{Least Squares}
 
