@@ -1,5 +1,315 @@
 %% Placeholder for chapter on linear equations and least squares
 
+\section{Least Squares}
+
+\begin{equation*}
+Ax = y \,\,\,\,\,(*)
+\end{equation*}
+where $A\in \Re^{m\times n}$ is coefficient data matrix (known), $y\in \Re^m$ are constraints(known) and $x\in \Re^n$ are parameters (to choose).
+
+There are three possibilities:
+
+\begin{itemize}
+	\item a) No $x\in \Re^n$ satisfies ($*$)
+	
+	\item b) Unique $x\in \Re^n$ satisfies ($*$)
+	
+	\item c) Many $x\in \Re^n$ satisfies ($*$)
+\end{itemize}
+
+(a) Existence:\\
+
+Since $Ax\in \mathcal{R}(A)$, a solution will exist if $y\in \mathcal{R}(A)$
+
+Test: 
+
+1) $rank([A y]) = rank[A]$: solution to ($*$) exists
+
+2) $rank([A y]) > rank[A]$: no solution to ($*$) exists\\
+
+(b)/(c) If a solution exists, is it unique?
+
+Assume a solution $\bar{x}$ exists s.t. $A\bar{x} = y$, any other solution $x$ myst also satisfy $Ax = y$. 
+
+So 
+\begin{align*}
+Ax - A\bar{x} &= A(x -\bar{x}) = 0\\
+x - \bar{x} &\in N(A)
+\end{align*}
+
+Any solution to ($*$) can be expressed as:
+\begin{equation*}
+x = \bar{x} + (x - \bar{x}) = \bar{x} + e
+\end{equation*}
+where $e\in N(A)$
+
+So if there are solutions to ($*$), will be some affine sets:
+
+\begin{equation*}
+\mathcal{A} = \{x|x = \bar{x} + N(A), A\bar{x} = y \}
+\end{equation*}
+solution is unique if elements of $N(A)$ are all 0. $\bar{x}$ is any particular solution for $A\bar{x} =y$
+
+The three cases typically bread down into a question about dimensions of $A\in \Re^{n\times n}$
+
+\begin{itemize}
+	\item 1) Overdetermined LS: more constraints than parameters $m>n$. Typically a solution does exist. 
+	
+	\item 2) Square: Equal \# constraints \& parameters, typically $\exists$  a unique solution.
+	
+	\item 3) Underdetermined LS: Fewer constraints than parameters, $m<n$, typically many solutions
+\end{itemize}
+
+1) Overdetermined: $m > n$
+
+Assume $A$ is full (column) rank, $rank(A) =n$. $A$ is tall, thin matrix. $dim(\mathcal{R}(A)) = n < m$. $y\in \Re^m$
+
+To find "closest" $Ax$ to $y$:
+
+\begin{align*}
+x^* &= arg \, min_{x\in \Re^n}||Ax - y||_2\\
+min_{x\in \Re^{n}}||Ax - y|| &= min_{\hat{y}\in \mathcal{R}(A)}||\hat{y} - y||_2 =\prod_{\mathcal{R}(A)}(y)\\
+\end{align*}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure1.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+
+
+From chapter2, 
+
+\begin{equation*}
+y^* = \sum^n_{i=1}x_i^*a^{(i)}
+\end{equation*}
+where 
+$$ A =   
+\left[
+\begin{matrix}
+a^{(i)} & ... & a^{(i)}
+\end{matrix}
+\right]
+$$
+
+Solve for $x^*$ via
+\begin{equation*}
+\sum^n_{i=1}x_1^*<a^{(k)}, a^{(i)}> = <a^{(k)}, y>, \forall k \in \{1,2,...,m \}
+\end{equation*}
+
+Stack up to get 
+
+\begin{equation*}
+A^TAx^* = A^Ty
+\end{equation*}
+
+There are 2 possibilities:
+
+a) $A^TA$ is invertible.
+
+b) $A^TA$ is not invertible.
+
+a) 
+\begin{align*}
+x^* &= (A^TA)^{-1}A^Ty\\
+\hat{y}^* &= A(A^TA)^{-1}A^Ty
+\end{align*}
+
+b) What happens if $A^TA$ is not invertible? 
+
+\begin{align*}
+\hat{y}^* &= A(A^TA)^{-1}A^Ty\\
+&= A(V
+\begin{bmatrix}
+\Sigma & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^T\mathcal{U}
+\begin{bmatrix}
+\Sigma \\
+\textbf{0}
+\end{bmatrix}
+V^T)^{-1}A^Ty\\
+&= A(V\Sigma^2V^T)^{-1}A^Ty\\
+&= AV(\Sigma^{-1})^2V^TA^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+\Sigma \\
+\textbf{0}
+\end{bmatrix}
+V^TV\Sigma^{-2}V^TV
+\begin{bmatrix}
+\Sigma & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+\Sigma \\
+\textbf{0}
+\end{bmatrix}
+\Sigma^{-1}\Sigma^{-1}
+\begin{bmatrix}
+\Sigma & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty
+\end{align*}
+
+Then we have:
+
+\begin{align*}
+y^{*} &= \mathcal{U}
+\begin{bmatrix}
+I_r\\
+\textbf{0}
+\end{bmatrix}
+\begin{bmatrix}
+I_r & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+I_r& \textbf{0}\\
+\textbf{0} & \textbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+I_r& \textbf{0}\\
+\textbf{0} &  \textbf{0}
+\end{bmatrix}
+\begin{bmatrix}
+<\mathcal{U}^{(1)}, y>\\
+<\mathcal{U}^{(2)}, y>\\
+...\\
+<\mathcal{U}^{(m)}, y>
+\end{bmatrix}\\
+&= \sum^r_{i=1}<u^{(i)}, y>\mathcal{U}^{(i)}
+\end{align*}
+
+b) Uniquely determined:($m =n$)
+
+\begin{equation*}
+[A]x = y
+\end{equation*}
+
+\begin{equation*}
+x^* = A^{-1}y
+\end{equation*}
+
+\begin{itemize}
+	\item A full rank(columns\& rows)
+	
+	\item equal \# constraints \& parameters
+	
+	\item B/C A square \& full rank $A^{-1}$ exists
+\end{itemize}
+
+c) Underdetermined($m<n$)
+
+\begin{itemize}
+	\item A full row-rank
+	
+	\item rank(A) = m
+	 
+	\item A wide \& short matrix
+	
+	\item More parameters than constraints
+	
+	\item Hence many solutions
+\end{itemize}
+
+Idea: pick solution $x$ that satisfies($*$) and is shoetest
+
+\begin{equation*}
+x^* = arg \, min_{x\in \Re^n, Ax = y}||x||_2
+\end{equation*}
+
+\begin{equation*}
+min_{Ax = y, x\in \Re^n}||x|| = min_{x\in \Re^n, x\in \mathcal{A}}||x - 0|| = \prod_{\mathcal{A}}(0)
+\end{equation*}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure3.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+To solve for $x^*$, note (from before) error vector 
+
+\begin{align*}
+e &= x^* - 0 = x^* \perp N(A)\\
+x^* &\in N(A)^{\perp} = R(A)
+\end{align*}
+
+So we can write $x^* = A^T\alpha$ for some $\alpha \in \Re^m$. 
+For $x^*$ to be in $\mathcal{A}$ it must be satisfies that $Ax^* = y$
+
+Substituting in we get 
+
+\begin{equation*}
+y = Ax^* = AA^T\alpha
+\end{equation*}
+
+By assumption $A$ is full row rank so $AA^T$ is invertible.
+
+\begin{align*}
+\alpha^* &= (AA^T)y\\
+x^T &= A^T(AA^T)y
+\end{align*}
+
+\begin{align*}
+x^* &= A^T(AA^T)^{-1}y\\
+&= A^T\left[\mathcal{U}
+\begin{bmatrix}
+\Sigma & \mathbf{0}
+\end{bmatrix}
+V^TV
+\begin{bmatrix}
+\Sigma\\
+\mathbf{0}
+\end{bmatrix}
+\mathcal{U}^T\right]^{-1}y\\
+&= A^T(\mathcal{U}\Sigma^2\mathcal{U}^T)^{-1}y\\
+&= A^T\mathcal{U}\Sigma^{-2}\mathcal{U}^Ty\\
+&= V
+\begin{bmatrix}
+\Sigma\\
+\mathbf{0}
+\end{bmatrix}
+\mathcal{U}\mathcal{U}\Sigma^{-2}\mathcal{U}^Ty\\
+&=V
+\begin{bmatrix}
+\Sigma^{-1} \\
+\mathbf{0}
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= V
+\begin{bmatrix}
+\Sigma^{-1}\\
+\mathbf{0}
+\end{bmatrix}
+\begin{bmatrix}
+<u^{(1)}, y>\\
+...\\
+<u^{(n)}, y>
+\end{bmatrix}\\
+&= \sum^r_{i=1}\frac{1}{\sigma_i}<u^{(i)}, y>V^{(i)}
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+Below are written by Zhipeng for note on 26th Sep. \\
 
 
 last time
@@ -178,5 +488,417 @@ figure here
 
 
 
+Above are written by Zhipeng for note on 26th Sep. \\
 
+Below are written by Yanxiao starts on 9th Oct. \\
+
+\subsection{Least Squares}
+\begin{equation*}
+x^* = arg\, min_{x\in \Re^n}||y-Ax||_2^2 \,\,\,\,\, (*)
+\end{equation*}
+
+\begin{itemize}
+	\item Standard LS variant in ($*$) weights all elements of error vector equally.(weighted LS)
+	
+	\item Standard LS measures error along standard coordinate system.(change coordinate system)
+	
+	\item Standard LS ignores that certain elements of $x$ may "cost" more than others.(regularization)
+\end{itemize}
+
+\subsection{"Tikhanov regularzation"}
+\begin{equation*}
+x^* =arg\,min_{x\in \Re^n}||w_1(y-Ax)||_2^2 + ||w_2(x - x^{(0)})||_2^2
+\end{equation*}\\
+
+We do a simple example:
+
+\begin{equation*}
+x^* = arg\,min_{x\in \Re^n}||y-Ax||_2^2 + \gamma||x||_2^2
+\end{equation*}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure4.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+Look at form of optional solution to 
+
+\begin{align*}
+x^* &= arg\,min_{x\in \Re^n}||y-Ax||_2^2 + \gamma||x||^2_2\\
+&= (A^TA + \gamma I)^{-1}A^Ty\\
+\hat{y}&= Ax^* = A(A^TA + \gamma I)^{-1}A^Ty\\
+\end{align*}
+apply SVD of A
+\begin{equation*}
+A = \mathcal{U}\tilde{\Sigma}V^T
+\end{equation*}
+
+First thing is to analyze $(A^TA + \gamma I)^{-1}$:
+\begin{align*}
+(A^TA + \gamma I)^{-1} &= V\tilde{\Sigma}^T\mathcal{U}^T\mathcal{U}\tilde{\Sigma}V^T + \gamma I)^{-1}\\
+&= (V
+\begin{bmatrix}
+\Sigma^T & 0\\
+0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}
+\Sigma & 0\\
+0 & 0\\
+\end{bmatrix}
+V^T + \gamma I)^{-1}\\
+&=(V
+\begin{bmatrix}
+\Sigma^2 & 0\\
+0  & 0
+\end{bmatrix}
+V^T + \gamma VV^T
+)^{-1}\\
+&= (V(
+\begin{bmatrix}
+\Sigma^2 & 0\\
+0 & 0
+\end{bmatrix}
++\gamma I)V^T)^{-1}\\
+&= V
+\left[
+\begin{array}{c|c}
+\Sigma^2+\gamma I_r&  \\ \hline 
+& I_{n-r}
+\end{array}
+\right]
+V^T\\
+&=
+V
+\left[
+\begin{array}{c|c}
+(\Sigma^2+\gamma I_r)^{-1}&  \\ \hline 
+& (I_{n-r})^{-1}
+\end{array}
+\right]
+V^T\\
+&=
+V
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& \begin{matrix}
+\frac{1}{\gamma} & &\\
+&...&\\
+&&\frac{1}{\gamma}
+\end{matrix}
+\end{array}
+\right]
+V^T
+\end{align*}
+
+%\begin{matrix}
+%	\frac{1}{\sigma_1^2+\gamma} & &\\
+%	&...&\\
+%	&&\frac{1}{\sigma_r^2+\gamma}
+%\end{matrix}
+
+
+%\left[
+%\begin{array}{c|c}
+%	\begin{matrix}
+%		\frac{1}{\sigma_1^2+\gamma} & &\\
+%		&...&\\
+%		&&\frac{1}{\sigma_r^2+\gamma}
+%	\end{matrix}&  \\ \hline 
+%	& \begin{matrix}
+%		\frac{1}{\gamma} & &\\
+%		&...&\\
+%		&&\frac{1}{\gamma}
+%	\end{matrix}
+%\end{array}
+%\right]
+
+
+
+\begin{align*}
+y^* &= Ax^* = A(A^TA + \gamma I)^{-1}A^Ty\\
+&= \mathcal{U}\tilde{\Sigma}V^T(V
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& \begin{matrix}
+\frac{1}{\gamma} & &\\
+&...&\\
+&&\frac{1}{\gamma}
+\end{matrix}
+\end{array}
+\right]
+V^T)V\tilde{\Sigma}\mathcal{U}^Ty\\
+&= \mathcal{U}
+\begin{bmatrix}
+\Sigma & 0\\
+0 & 0
+\end{bmatrix}
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& \begin{matrix}
+\frac{1}{\gamma} & &\\
+&...&\\
+&&\frac{1}{\gamma}
+\end{matrix}
+\end{array}
+\right]
+\begin{bmatrix}
+\Sigma^T & 0\\
+0 & 0
+\end{bmatrix}
+\mathcal{U}^Ty\\
+&= \mathcal{U}
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& 0
+\end{array}
+\right]
+\mathcal{U}^Ty
+\\
+&= \mathcal{U}
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+\frac{1}{\sigma_1^2+\gamma} & &\\
+&...&\\
+&&\frac{1}{\sigma_r^2+\gamma}
+\end{matrix}&  \\ \hline 
+& 0
+\end{array}
+\right]
+\begin{bmatrix}
+<u^{(1)}, y>\\
+<u^{(2)}, y>\\
+...\\
+<u^{(m)}, y>
+\end{bmatrix}\\
+&=\mathcal{U}
+\begin{bmatrix}
+\frac{\sigma_1^2}{\sigma_1^2+\gamma}<u^{(1)}, y>\\
+...\\
+\frac{\sigma_r^2}{\sigma_r^2+\gamma}<u^{(r)}, y>\\
+0\\
+...\\
+0
+\end{bmatrix}\\
+&= \sum^r_{i=1}\frac{\sigma_i^2}{\sigma_i^2 + \gamma}<u^{(i)}, y>u^{(i)}
+\end{align*}\\
+
+By considering
+
+\begin{equation*}
+\sum^r_{i=1}\frac{\sigma_i^2}{\sigma_i^2 + \gamma}<u^{(i)}, y>u^{(i)}
+\end{equation*}
+
+We should note:
+
+\begin{itemize}
+	\item $\frac{\sigma_i^2}{\sigma_i^2 + \gamma}$: scaling is changed by regularization. If $\gamma = 0$, then  $\frac{\sigma_i^2}{\sigma_i^2 + \gamma} = 1$ and get back standard LS. If $\gamma > 0$, it's shrinkage. 
+	
+	\item $<u^{(i)}, y>$: projection of data vector $y$ along that $i^{th}$ direction. 
+	
+	\item $u^{(i)}$: component of approximation along $i^{th}$ direction or $i^{th}$ basis element. 
+\end{itemize}
+
+%\begin{equation*}
+%\begin{bmatrix}
+%\frac{\sigma_1^2}{\sigma_1^2+r} & & \\
+% & ... & \\
+%&&\frac{\sigma_r^2}{\sigma_r^2+r}
+%\end{bmatrix}
+%\end{equation*}
+
+
+
+\subsection{Linear Programs: An Optimization Problem}
+
+Also known as(a.k.a) (mathematical program") of the form
+
+\begin{align*}
+(arg)\,\,min_{x\in \Re^n}&c^Tx + d\,\,\,\text{("objective"function)}\\
+s.t.\,\,\, &Ax = b\\
+&Gx \leq h
+\end{align*}
+
+"Feasible" set(might not be good idea, but you can do this): $S = \{x|Ax = b, Gx \leq h \}$
+
+
+\begin{itemize}
+	\item $c\in \Re^n$, $d\in \Re$.
+	
+	\item $A\in \Re^{q\times n}$, $b\in \Re^q$, \begin{equation*}
+	A = 
+	\begin{bmatrix}
+	\alpha^{(1)^T}\\
+	...\\
+	\alpha^{(q)^T}
+	\end{bmatrix}
+	\end{equation*}
+	
+	$<\alpha^{(i)}, x> =b_i$, $i\in \left[q\right]$
+	
+	\item $G\in \Re^{m\times n}$, $h\in \Re^m$
+	
+	\item If
+	\begin{equation*}
+	G = 
+	\begin{bmatrix}
+	g^{(1)^T}\\
+	...\\
+	g^{(q)^T}
+	\end{bmatrix}
+	\end{equation*}
+	
+	Then $<G^{(i)}, x>\leq h_i$, $i\in \left[m\right]$
+	
+\end{itemize}
+
+
+
+
+
+\begin{align*}
+p^* = min \,\,\, &c^Tx + d\\
+s.t.\,\,\, &Ax = b\\
+&Gx\leq h
+\end{align*}
+
+"optimal" value of program:
+
+\begin{itemize}
+	\item Lowest cost shoice amongst all feasible $x$.
+	
+	\item Possible here is no minimal choice
+	
+	\item possible no feasible choice
+	
+	\item $p^*\in \Re$
+\end{itemize}
+
+
+\begin{align*}
+x^* = min \,\,\, &c^Tx + d\\
+s.t.\,\,\, &Ax = b\\
+&Gx\leq h
+\end{align*}
+
+$x^*$ "optimal" choice of optimization variable(or vector):
+
+\begin{itemize}
+	\item sometimes $x^*$ does not exist
+	
+	\item if exists, may or may not be unique
+	
+	\item $x^*\in \Re^n$
+\end{itemize}
+
+
+Let's consider an example:\\
+
+During the The Second World War, the US army is considering how to make their soldiers have enough nutrients...\\
+
+Different nutrients in different foods and daily requirement:\\
+
+
+\begin{tabular}{|c|c|c|c|}
+	\hline 
+	Nutrients&Meat&Potatoes&Daily Requirement\\
+	\hline  
+	Carbohydates&40&200&400\\
+	\hline  
+	Protein&100&20&200\\
+	\hline  
+	Fiber&5&40&40\\
+	\hline 
+\end{tabular}\\
+
+The price of meat and potatoes:\\
+
+
+
+\begin{tabular}{|c|c|}
+	\hline 
+	Resources&cost/kg\\
+	\hline  
+	Meat &\$ 1\\
+	\hline 
+	Potatoes &\$ 0.25\\
+	\hline 
+\end{tabular}
+
+$x_1$ denotes meat(kg) and $x_2$ denotes potatoes(kg).\\
+
+
+Objective:
+
+\begin{equation*}
+x_1 + \frac{1}{4}x_2 = 
+\begin{bmatrix}
+1 & \frac{1}{4}
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}
+\end{equation*}
+
+Constrains:
+\begin{align*}
+40x_1 + 200x_2 &\geq 400\\
+100x_1 + 20x_2 &\geq 200\\
+5x_1 + 40x_2 &\geq 40\\
+x_1 \geq 0\\
+x_2 \geq 0
+\end{align*}
+
+$Gx\leq h \rightarrow$ 
+
+\begin{equation*}
+\begin{bmatrix}
+-\frac{1}{5} & -1\\
+-\frac{1}{8} & -1\\
+-5 & -1\\
+-1 & 0\\
+0 & -1
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}\leq
+\begin{bmatrix}
+-2\\
+-1\\
+-10\\
+0\\
+0
+\end{bmatrix}
+\end{equation*}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure5.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
 
