@@ -11,7 +11,7 @@ For any $A\in \reals^{n\times n}$ that is diagonalizable,  we can express $A$ as
 A = U\Lambda U^{-1}
 \end{equation*}
 
-$U$: $n$ by $n$ invertible matrix of linear independent eigenvectors $\in \mathbb{C}^n$, that is, each column of $U$ is an eigenvector of $A$.
+$U$: $n$ by $n$ invertiable matrix of linear independent eigenvectors $\in \mathbb{C}^n$, that is, each column of $U$ is an eigenvector of $A$.
 
 $\Lambda$: a diagonal matrix whose diagonal entries are eigenvalues of $A$, and $\lambda_i\in \mathbb{C}$.
 

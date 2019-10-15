@@ -84,7 +84,7 @@ Combine (1) and (2), and because $q(x) = x^TAx + c^Tx + d$, we take Taylor appro
 \qquad $\xi_{\lambda_i} = N(A - \lambda_iI)\perp \xi_{\lambda_i} = N(A - \lambda_jI)$, where $\xi_{\lambda_i}$ denotes the eigenspace w.r.t eigenvalue $\lambda_i$ (also, it is the null space of matrix $(A - \lambda_iI)$).
 \end{theorem}
 
-Implication: We can pick the basis for each eigenspace to be an orthogonal basis(e.g, pick the eigenvectors of this symmetric matrix), because we have "full set" of eigenvectors($n$ linearly independent vectors) and we can always write:
+Implication: We can pick the basis for each eigenspace to be an orthogonal basis(e.g, pick the eigenvectors of this symmetric matrix), because we have "Fullset" of eigenvectors($n$ linearly independent vectors) and we can always write:
 
 "Spectral Decomposition":
 

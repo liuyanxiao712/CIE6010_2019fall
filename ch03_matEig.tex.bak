@@ -57,9 +57,9 @@ Note: the origin is a all-zero matrix.
 
 \textbf{Length of Matrix: Norm}
 
-We introduce the Frobenius norm here but note that there are also other matrix norms(e.g., spectrum norm, nuclear norm)
+We introduce the Forbenius norm here but note that there are also other matrix norms(e.g., spectrum norm, nuclear norm)
 
-Frobenius Norm: 
+Forbenius Norm: 
 
 $$\Vert A\Vert _F = \sqrt{<A, A>} = \sqrt{\text{trace}(A^TA)} = \sqrt{\sum^m_{i=1}\sum^m_{j=1}[A]^2_{ij}}$$
 
@@ -319,7 +319,7 @@ Let's define following terminology:
 
 Matrix $H$: its $(i,j)$th entry is $\frac{1}{O_i}$ if there is a hyperlink from webpage $i$ to webpage $j$, and $0$ otherwise.
 
-$\pi$: $N \times$1 column vector denoting the importance scores of the $N$ web pages.
+$\pi$: $N \times$1 column vector denoting the importance scores of the $N$ webpages.
 
 Multiply $\pi^T$ on the right by matrix $H$, this is spreading the importance score from the last iteration evenly among the outgoing links, and re-calculating the importance score of each webpage in this iteration by summing up the importance scores from the incoming links. That is
 $$\pi^T[k] = \pi^T[k - 1]H$$
@@ -418,7 +418,7 @@ $$lim_{k\rightarrow \infty}\frac{A^kx^{(0)}}{\Vert A^kx^{(0)}\Vert} =u^{(1)}$$
 
 In conclusion, the limiting distribution(the importance score) for each page, is specified by an eigenvector(with the largest eigenvalue).
 
-[Further reading] In the terminology of stochastic process, the matrix $H$ is called the column stochastic matrix (i.e., each column sum up to one and no entries is negative), and important score for each page we want to compute $\pi^*$ is the stationary distribution (also equal to the limiting distribution when it is an irreducible Markov chain). The $\pi^*(i)$ is interpreted as, the proportion of time you stay in the state $i$ in a long run. 
+[Further reading] In the terminology of stochastic process, the matrix $H$ is called the column stochastic matrix (i.e., each column sum up to one and no entries is negative), and important score for each page we want to compute $\pi^*$ is the stationary distribution (also equal to the limiting distribution when it is an irreducible markov chain). The $\pi^*(i)$ is interpreted as, the proportion of time you stay in the state $i$ in a long run. 
 
 
 %What is an Internet Structure s.t. $dim[N(A-I)] = 2$?
@@ -436,7 +436,7 @@ A(\alpha_1u^{(1)} + \alpha_2u^{(2)}) = \alpha_1\lambda_1u^{(1)} + \alpha_2\lambd
 
 where $\alpha_1u^{(1)} + \alpha_2u^{(2)}$ is this linear combination and $\alpha_1\lambda_1u^{(1)} + \alpha_2\lambda_2u^{(2)}$ are the maps to a different of same eigenvalues.
 
-1) The "algebraic" multiplicity of an eigenvalue $\lambda$ of a square matrix $A$ is \# of eigenvalues $\lambda_i, \lambda_2,...,\lambda_m$ equal to $\lambda$, and we write it as AM($\lambda$).
+1) The "algebraic" multiplicity of an eignevalue $\lambda$ of a square matrix $A$ is \# of eigenvalues $\lambda_i, \lambda_2,...,\lambda_m$ equal to $\lambda$, and we write it as AM($\lambda$).
 
 2) The geometric multiplicity of an eigenvalue $\lambda$ of a square matrix $A$ is the dimension of $N(A - \lambda I)$, and we write it as GM($\lambda$).
 
