@@ -82,7 +82,7 @@ Linear combination: $\sum_{i=1}^{m} a_{i}v^{(i)}$
 In this course our focus is on $\reals^{n}$, i.e., finite-length vectors with real elements. It is also useful to note that the geometric ideas could apply to lots of other spaces, such as
 
 \textcircled{1} Finite-length complex vector\\
-we need this especially for discussion of eigenvalues and eigenvectors. But it is also important example in quantum computing.\\
+we need this esp for discussion of eigenvalues and eigenvectors. But it is also important example in quantum computing.\\
 \textcircled{2} $\infty$-length complex sequences\\
 \textcircled{3} Complex functions defined on real line\\
 \textcircled{4} Polynomials of degree at most n-1\\
@@ -493,7 +493,7 @@ In above picture $x, y\in\reals^{n}$ but since $\text{dim}{\text{span}({x, y})}=
 Since we know that $\vert\cos\theta\vert <1$, rearranging gives
 $$\vert\langle x,y\rangle\vert =\vert x^{\trans}y\vert \leq \Vert x\Vert_{2} \Vert y\Vert_{2}$$
 
-This is the so called Cauchy-Schwartz inequality, and it relates inner product(angle) to norms(length). Such inequality holds for inner product spaces, not just $\reals^{n}$($n$-dimensional Euclidean space). Further more, it could relate the inner product to the norms (not only $L_{2}$) via a generalization, says, ``H\"older's inequality'':
+This is the so called Cauchy-Schwartz inequality, and it relates inner product(angle) to norms(length). Such inequality holds for inner product spaces, not just $\reals^{n}$($n$-dimensional Euclidean space). Further more, it could relate the inner product to the norms (not only $L_{2}$) via a generalization, says, "Holder's inequality":
 $$\vert x^{\trans}y\vert\leq \sum_{k=1}^{n}\vert x_{k}y_{k}\vert \leq \Vert x\Vert_{p}\Vert y\Vert_{q}$$
 
 for any $p, q\geq 1$ such that $1/p+1/q=1$.
@@ -561,9 +561,9 @@ By Cauchy-Schwartz $\frac{\vert \langle x,y\rangle\vert}{\Vert x\Vert \Vert y\Ve
 (a) If $\vert\cos\theta\vert = +1$, then $\theta=0^{\circ}$ or $180^{\circ}$. Vectors $x$ and $y$ are "co-linear", and $\vert\langle x,y\rangle\vert=\Vert x\Vert \Vert y\Vert$
 
 
-(b) If $\vert\cos\theta\vert = 0$, then $\theta = 90^{\circ}$, and $\frac{\vert\langle x,y\rangle\vert}{\Vert x\Vert \Vert y\Vert}=0$, or equivalently, $\langle x,y\rangle=0$ (assuming $x\neq 0$ and $y\neq 0$). In this case, $\theta$ is a "right" angle, and $x$, $y$ are orthogonal vectors.
+(b) If $\vert\cos\theta\vert = 0$, then $\theta = 90^{\circ}$, and $\frac{\vert\langle x,y\rangle\vert}{\Vert x\Vert \Vert y\Vert}=0$, or equivalently, $\langle x,y\rangle=0$ (asumming $x\neq 0$ and $y\neq 0$). In this case, $\theta$ is a "right" angle, and $x$, $y$ are orthogonal vectors.
 
-(c) If $\vert \theta\vert <90^{\circ}$ ,then $\cos\theta >0$, and $\langle x,y\rangle >0$, and $\theta$ is a "acute angle", whereas if $\vert \theta\vert >90^{circ}$, then $\cos\theta <0$ and $\langle x,y\rangle <0$, $\theta$ is a "obtuse angle".
+(c) If $\vert \theta\vert <90^{\circ}$ ,then $\cos\theta >0$, and $\langle x,y\rangle >0$, and $\theta$ is a "acute angle", wheres if $\vert \theta\vert >90^{circ}$, then $\cos\theta <0$ and $\langle x,y\rangle <0$, $\theta$ is a "obtuse angle".
 
 
 
@@ -643,7 +643,7 @@ Let's consider different cases for this optimization question:
 Let's consider the one dimension subspace given by
 $$S=span(\{v\})=\{\lambda v|\lambda \in \reals\}$$
 
-The vector $x$ and subspace $S$ are something like:
+The vector $x$ and subspace $S$ are somethings like:
 \begin{figure}
 	\centering
 	\resizebox{7.5cm}{3cm}{\input{./figures/ch02/p24}}
@@ -733,7 +733,7 @@ One case where easy to solve the equation is, when the $x^{(k)}$ are all mutuall
 \vspace{0.3cm}
 How do you orthogonalize and normalize a matrix?
 
-\textbf{Gram-Schmidt Procedure:}
+\textbf{Gran-Schmit Procedure:}
 
 Let's consider an example: we have already have a basis ${x^{(1)}, x^{(2)}}$, and we want to find the orthogonal basis ${z^{(1)}, z^{(2)}}$.
 
