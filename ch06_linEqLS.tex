@@ -4,173 +4,9 @@
 
 
 
-last time
-
-solving linear system of equations Ax=y
-
-1. over determined
-
-$A^TAx=A^Ty$
-
-
-2. under determined m<n
-
-$X^* \in R(A^T)  $ 
-
-3. invertiable
-
-
-
-
-Today
-
-interpretation and variations 
-
-
-$min_x \Vert y-Ax\Vert_2$
-
-1 approximate solution to y=Ax
-
-$y^*=Ax^*$ best approx to solution in l2 space
-
-closes point in R(A) to y
-
-2. minimum perturbation of y to feasibility"
-
-$y+\Delta y= y^*$
-
-3. perturb both y and A to get feasibility
-
-total least square
-
-$\min_{\Delta y \Delta A} \Vert [\Delta A \Delta y] \Vert_F$, $\Delta A$ is m by n matrix and so $[\Delta A \Delta y]$ is m by n+1
-
-% $\min_{\Delta y \Delta A} \Vert [\Delta A \Delta y] \Vert_F =  \lambda \Vert [\Delta A] \Vert_F + \Vert [\Delta y] \Vert_F $
-
-
-$y+\Delta y\in R(A+\Delta A)$
-
-
-4. Linear regression
-
-$\Vert y-Ax\Vert ^2_2 = \sum_{i=1}^{m} ( y_i - <a^{(i)} , x>)^2$
-
-
-examples
-
-fit a line to $\{(0,6),(1,0),(2,0) \}={(a_i,y_i)}$
-
-approximation of form $x_1+ax$
-
-want $(y_i-x1+a_ix_i)^2 = r_i^2$
-
-$x^*=(A^TA)^{-1}A^Ty=[5 , -3]^T$
-
-
-$\hat{y}=x1^*+ax2^*=5-3a$            %so x1 and x2 are parameters
-
-
-variants of ls
-
-some residuals are more important than the others.
-
-$\min \sum_{i=1}^{n} w_i r_i=\Vert W (y-Ax)\Vert ^2_2=\Vert Wy-WAx)\Vert ^2_2=\Vert \bar{y}-\bar{A} \Vert ^2_2$
-
-can use a more general transform 
-
-$\Vert W (y-Ax)\Vert ^2_2 = (y-Ax)^TW^TW(y-Ax)=r^TW^TWr$
-
-$x^*=(A^TW^TWA)^{-1}A^TWW^Ty$
-
-
-
-
-weighted least square (ls) 
-
-when W is diagonal 
-
-figure here
-
-when W is PSD (rotation)
-
-figure here
-
-
-
-
-Regularization LS
-
-l2 regularized LS
-
-in ls $x*=\arg_x\in\reals_{n} \min \Vert Y-Ax\Vert ^2_2$
-
-and no preference for any specific x over any other, and often x is a vector of resources consumed.
-
-regularized ls
-
-$x*=\arg_x\in\reals_{n} \min \Vert Y-Ax\Vert ^2_2 + \gamma \Vert x\Vert ^2_2$, where $\gamma$ is a non negative scalar
-
-
-To solve regularized ls
-
-$u\in\reals_{n}, v\in\reals_{m}$
-
-
-Define
-
-%\bar{A}=
-
-$\Vert Y-Ax\Vert ^2_2 + \gamma \Vert x\Vert ^2_2=\Vert \bar{A}x-\bar{y}\Vert^2_2$
-
-$x^*=(\bar{A}^TA)^{-1}\bar{A}^T\bar{y}=(A^TA+\gamma I)^{-1}A^Ty$
-
-
-tiknon regularization
-
-content here
-
-
-Visualize regularized LS
-
-$\min \Vert Ax-y\Vert_2^2 +\gamma\Vert x\Vert^2_2$
-
-recall $x^*=[5 -3]^T$, and $\Vert Ax^*-y\Vert = 6$
-
-figure here
-
-
-Draw level set for some picture
-
-figure here
-
-figure here
-
-
-
-$c_1=\Vert Ax-y\Vert^2_2=\Vert A(x-x_s^*+x_s^*)-y\Vert^2_2=\Vert (Ax_s^*-y)-A(x-x_s^*)\Vert^2_2=\Vert (Ax_s^*-y)\Vert^2_2 - \Vert A(x-x_s^*)\Vert^2_2$
-
-The first term on r.h.s is a scalar 6, so we focus on the second term now.
-
-$\Vert A(x-x_s^*)\Vert^2_2= (x-x_s^*)^T A^TA (x-x_s^*)$ 
-
-Note that $A^TA$ is a PSD matrix.
-
-
-Understand geometry level set of $\Vert A(x-x_s)\Vert^2_2$ via eigenvector of PSD matrix $A^TA$
-
-
-$A^TA=$
-
-figure here
-
-%%%%zhipeng add the above apart
-
-
-
-
 
 \section{Least Squares}
-
+ 
 \begin{equation*}
 Ax = y \,\,\,\,\,(*)
 \end{equation*}
@@ -219,10 +55,10 @@ So if there are solutions to ($*$), will be some affine sets:
 \end{equation*}
 solution is unique if elements of $N(A)$ are all 0. $\bar{x}$ is any particular solution for $A\bar{x} =y$
 
-The three cases typically bread down into a question about dimensions of $A\in \Re^{n\times n}$
+The three cases typically bread down into a question about dimensions of $A\in \Re^{m\times n}$
 
 \begin{itemize}
-	\item 1) Overdetermined LS: more constraints than parameters $m>n$. Typically a solution does exist. 
+	\item 1) Overdetermined LS: more constraints than parameters $m>n$. Typically a solution does not exist. 
 	
 	\item 2) Square: Equal \# constraints \& parameters, typically $\exists$  a unique solution.
 	
@@ -231,7 +67,7 @@ The three cases typically bread down into a question about dimensions of $A\in \
 
 1) Overdetermined: $m > n$
 
-Assume $A$ is full (column) rank, $rank(A) =n$. $A$ is tall, thin matrix. $dim(\mathcal{R}(A)) = n < m$. $y\in \Re^m$
+Assume $A$ is full (column) rank, $rank(A) =n$. $A$ is tall, thin matrix. $dim(\mathcal{R}(A)) = n < m$. $y\in \Re^m$.\\
 
 To find "closest" $Ax$ to $y$:
 
@@ -410,7 +246,7 @@ To solve for $x^*$, note (from before) error vector
 
 \begin{align*}
 e &= x^* - 0 = x^* \perp N(A)\\
-x^* &\in N(A)^{\perp} = R(A)
+x^* &\in N(A)^{\perp} = R(A^T)
 \end{align*}
 
 So we can write $x^* = A^T\alpha$ for some $\alpha \in \Re^m$. 
@@ -448,7 +284,7 @@ V^TV
 \Sigma\\
 \mathbf{0}
 \end{bmatrix}
-\mathcal{U}\mathcal{U}\Sigma^{-2}\mathcal{U}^Ty\\
+\mathcal{U}^T\mathcal{U}\Sigma^{-2}\mathcal{U}^Ty\\
 &=V
 \begin{bmatrix}
 \Sigma^{-1} \\
@@ -467,12 +303,6 @@ V^TV
 \end{bmatrix}\\
 &= \sum^r_{i=1}\frac{1}{\sigma_i}<u^{(i)}, y>V^{(i)}
 \end{align*}
-
-
-
-
-
-
 
 
 
@@ -674,7 +504,7 @@ x^* = arg\, min_{x\in \Re^n}||y-Ax||_2^2 \,\,\,\,\, (*)
 	\item Standard LS ignores that certain elements of $x$ may "cost" more than others.(regularization)
 \end{itemize}
 
-\subsection{"Tikhanov regularzation"}
+\subsection{"Tikhanov regularization"}
 \begin{equation*}
 x^* =arg\,min_{x\in \Re^n}||w_1(y-Ax)||_2^2 + ||w_2(x - x^{(0)})||_2^2
 \end{equation*}\\
@@ -705,8 +535,9 @@ A = \mathcal{U}\tilde{\Sigma}V^T
 \end{equation*}
 
 First thing is to analyze $(A^TA + \gamma I)^{-1}$:
+
 \begin{align*}
-(A^TA + \gamma I)^{-1} &= V\tilde{\Sigma}^T\mathcal{U}^T\mathcal{U}\tilde{\Sigma}V^T + \gamma I)^{-1}\\
+(A^TA + \gamma I)^{-1} &= (V\tilde{\Sigma}^T\mathcal{U}^T\mathcal{U}\tilde{\Sigma}V^T + \gamma I)^{-1}\\
 &= (V
 \begin{bmatrix}
 \Sigma^T & 0\\
@@ -753,12 +584,12 @@ V
 \begin{array}{c|c}
 \begin{matrix}
 \frac{1}{\sigma_1^2+\gamma} & &\\
-&...&\\
+&\ddots&\\
 &&\frac{1}{\sigma_r^2+\gamma}
 \end{matrix}&  \\ \hline 
 & \begin{matrix}
 \frac{1}{\gamma} & &\\
-&...&\\
+&\ddots&\\
 &&\frac{1}{\gamma}
 \end{matrix}
 \end{array}
@@ -792,22 +623,22 @@ V^T
 
 \begin{align*}
 y^* &= Ax^* = A(A^TA + \gamma I)^{-1}A^Ty\\
-&= \mathcal{U}\tilde{\Sigma}V^T(V
+&= \mathcal{U}\tilde{\Sigma}V^T\left(V
 \left[
 \begin{array}{c|c}
 \begin{matrix}
 \frac{1}{\sigma_1^2+\gamma} & &\\
-&...&\\
+&\ddots&\\
 &&\frac{1}{\sigma_r^2+\gamma}
 \end{matrix}&  \\ \hline 
 & \begin{matrix}
 \frac{1}{\gamma} & &\\
-&...&\\
+&\ddots&\\
 &&\frac{1}{\gamma}
 \end{matrix}
 \end{array}
 \right]
-V^T)V\tilde{\Sigma}\mathcal{U}^Ty\\
+V^T\right)V\tilde{\Sigma}\mathcal{U}^Ty\\
 &= \mathcal{U}
 \begin{bmatrix}
 \Sigma & 0\\
@@ -817,12 +648,12 @@ V^T)V\tilde{\Sigma}\mathcal{U}^Ty\\
 \begin{array}{c|c}
 \begin{matrix}
 \frac{1}{\sigma_1^2+\gamma} & &\\
-&...&\\
+&\ddots&\\
 &&\frac{1}{\sigma_r^2+\gamma}
 \end{matrix}&  \\ \hline 
 & \begin{matrix}
 \frac{1}{\gamma} & &\\
-&...&\\
+&\ddots&\\
 &&\frac{1}{\gamma}
 \end{matrix}
 \end{array}
@@ -836,9 +667,9 @@ V^T)V\tilde{\Sigma}\mathcal{U}^Ty\\
 \left[
 \begin{array}{c|c}
 \begin{matrix}
-\frac{1}{\sigma_1^2+\gamma} & &\\
-&...&\\
-&&\frac{1}{\sigma_r^2+\gamma}
+\frac{sigma_1^2}{\sigma_1^2+\gamma} & &\\
+&\ddots&\\
+&&\frac{sigma_r^2}{\sigma_r^2+\gamma}
 \end{matrix}&  \\ \hline 
 & 0
 \end{array}
@@ -849,9 +680,9 @@ V^T)V\tilde{\Sigma}\mathcal{U}^Ty\\
 \left[
 \begin{array}{c|c}
 \begin{matrix}
-\frac{1}{\sigma_1^2+\gamma} & &\\
-&...&\\
-&&\frac{1}{\sigma_r^2+\gamma}
+\frac{sigma_1^2}{\sigma_1^2+\gamma} & &\\
+&\ddots&\\
+&&\frac{sigma_r^2}{\sigma_r^2+\gamma}
 \end{matrix}&  \\ \hline 
 & 0
 \end{array}
@@ -859,16 +690,16 @@ V^T)V\tilde{\Sigma}\mathcal{U}^Ty\\
 \begin{bmatrix}
 <u^{(1)}, y>\\
 <u^{(2)}, y>\\
-...\\
+\vdots\\
 <u^{(m)}, y>
 \end{bmatrix}\\
 &=\mathcal{U}
 \begin{bmatrix}
 \frac{\sigma_1^2}{\sigma_1^2+\gamma}<u^{(1)}, y>\\
-...\\
+\vdots\\
 \frac{\sigma_r^2}{\sigma_r^2+\gamma}<u^{(r)}, y>\\
 0\\
-...\\
+\vdots\\
 0
 \end{bmatrix}\\
 &= \sum^r_{i=1}\frac{\sigma_i^2}{\sigma_i^2 + \gamma}<u^{(i)}, y>u^{(i)}
@@ -890,184 +721,5 @@ We should note:
 	\item $u^{(i)}$: component of approximation along $i^{th}$ direction or $i^{th}$ basis element. 
 \end{itemize}
 
-%\begin{equation*}
-%\begin{bmatrix}
-%\frac{\sigma_1^2}{\sigma_1^2+r} & & \\
-% & ... & \\
-%&&\frac{\sigma_r^2}{\sigma_r^2+r}
-%\end{bmatrix}
-%\end{equation*}
 
-
-
-\subsection{Linear Programs: An Optimization Problem}
-
-Also known as(a.k.a) (mathematical program") of the form
-
-\begin{align*}
-(arg)\,\,min_{x\in \Re^n}&c^Tx + d\,\,\,\text{("objective"function)}\\
-s.t.\,\,\, &Ax = b\\
-&Gx \leq h
-\end{align*}
-
-"Feasible" set(might not be good idea, but you can do this): $S = \{x|Ax = b, Gx \leq h \}$
-
-
-\begin{itemize}
-	\item $c\in \Re^n$, $d\in \Re$.
-	
-	\item $A\in \Re^{q\times n}$, $b\in \Re^q$, \begin{equation*}
-	A = 
-	\begin{bmatrix}
-	\alpha^{(1)^T}\\
-	...\\
-	\alpha^{(q)^T}
-	\end{bmatrix}
-	\end{equation*}
-	
-	$<\alpha^{(i)}, x> =b_i$, $i\in \left[q\right]$
-	
-	\item $G\in \Re^{m\times n}$, $h\in \Re^m$
-	
-	\item If
-	\begin{equation*}
-	G = 
-	\begin{bmatrix}
-	g^{(1)^T}\\
-	...\\
-	g^{(q)^T}
-	\end{bmatrix}
-	\end{equation*}
-	
-	Then $<G^{(i)}, x>\leq h_i$, $i\in \left[m\right]$
-	
-\end{itemize}
-
-
-
-
-
-\begin{align*}
-p^* = min \,\,\, &c^Tx + d\\
-s.t.\,\,\, &Ax = b\\
-&Gx\leq h
-\end{align*}
-
-"optimal" value of program:
-
-\begin{itemize}
-	\item Lowest cost shoice amongst all feasible $x$.
-	
-	\item Possible here is no minimal choice
-	
-	\item possible no feasible choice
-	
-	\item $p^*\in \Re$
-\end{itemize}
-
-
-\begin{align*}
-x^* = min \,\,\, &c^Tx + d\\
-s.t.\,\,\, &Ax = b\\
-&Gx\leq h
-\end{align*}
-
-$x^*$ "optimal" choice of optimization variable(or vector):
-
-\begin{itemize}
-	\item sometimes $x^*$ does not exist
-	
-	\item if exists, may or may not be unique
-	
-	\item $x^*\in \Re^n$
-\end{itemize}
-
-
-Let's consider an example:\\
-
-During the The Second World War, the US army is considering how to make their soldiers have enough nutrients...\\
-
-Different nutrients in different foods and daily requirement:\\
-
-
-\begin{tabular}{|c|c|c|c|}
-	\hline 
-	Nutrients&Meat&Potatoes&Daily Requirement\\
-	\hline  
-	Carbohydates&40&200&400\\
-	\hline  
-	Protein&100&20&200\\
-	\hline  
-	Fiber&5&40&40\\
-	\hline 
-\end{tabular}\\
-
-The price of meat and potatoes:\\
-
-
-
-\begin{tabular}{|c|c|}
-	\hline 
-	Resources&cost/kg\\
-	\hline  
-	Meat &\$ 1\\
-	\hline 
-	Potatoes &\$ 0.25\\
-	\hline 
-\end{tabular}
-
-$x_1$ denotes meat(kg) and $x_2$ denotes potatoes(kg).\\
-
-
-Objective:
-
-\begin{equation*}
-x_1 + \frac{1}{4}x_2 = 
-\begin{bmatrix}
-1 & \frac{1}{4}
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\
-x_2
-\end{bmatrix}
-\end{equation*}
-
-Constrains:
-\begin{align*}
-40x_1 + 200x_2 &\geq 400\\
-100x_1 + 20x_2 &\geq 200\\
-5x_1 + 40x_2 &\geq 40\\
-x_1 \geq 0\\
-x_2 \geq 0
-\end{align*}
-
-$Gx\leq h \rightarrow$ 
-
-\begin{equation*}
-\begin{bmatrix}
--\frac{1}{5} & -1\\
--\frac{1}{8} & -1\\
--5 & -1\\
--1 & 0\\
-0 & -1
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\
-x_2
-\end{bmatrix}\leq
-\begin{bmatrix}
--2\\
--1\\
--10\\
-0\\
-0
-\end{bmatrix}
-\end{equation*}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure5.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{figure}
 
