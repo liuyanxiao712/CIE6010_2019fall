@@ -304,7 +304,7 @@ V^TV
 
 %$X^* \in R(A^T)  $ 
 
-%3. invertible
+%3. invertiable
 
 
 
@@ -474,7 +474,7 @@ $$x^*=(\bar{A}^T A)^{-1} \bar{A}^T \bar{y}=(A^T A+\gamma I)^{-1} A^T y$$
 
 
 \vspace{0.5cm}
-'Tikhanov' regularization (also known as ridge regression)
+'Tikhonov' regularization (also known as ridge regression)
 $$\min_x \Vert W_1 (Ax - y)\Vert^2_2 - \Vert W_2 (x - x^{(0)})\Vert^2_2 = \min_x \Vert \bar{A}x-\bar{y}\Vert^2_2 $$
 where $\bar{A} = 
 \begin{bmatrix}
