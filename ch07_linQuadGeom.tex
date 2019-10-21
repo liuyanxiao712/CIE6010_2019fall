@@ -854,3 +854,268 @@ s.t. \,\,\, &Ax = b\\
 %Above are notes for Oct14
 
 
+\section{10.16}
+
+%Below are notes for Oct16
+
+\begin{align*}
+p^* = min_{x\in \Re^n}\,\,\,\,\, &\frac{1}{2}x^THx + c^Tx + d\\
+ s.t.\,\,\,\,\, &Ax = b\\
+ &Gx\leq h
+\end{align*}
+
+
+FIGUREa
+
+\subsection{Least squares}
+\begin{align*}
+||Ax - y||_2^2 &= (Ax - y)^T(Ax - y)\\
+&= x^TA^TAx - 2y^TAx + y^Ty\\
+&= \frac{1}{2}x^T(2A^TA)x - 2y^TAx + ||y||_2^2
+\end{align*}
+
+Note: Cannot always manipulate objective of a QP into form of objective of a LS problem.\\
+
+\subsection{Equality constrained QPs}
+
+\begin{align*}
+p^* = min_{x\in \Re^n}\,\,\,\,\, &\frac{1}{2}x^THx + c^Tx + d\\
+s.t.\,\,\,\,\, &Ax = b
+\end{align*}
+
+
+FIGUREb
+
+\begin{equation*}
+\mathcal{A} =\{x | x = \bar{x} + \xi,\,\,\, \text{where } \xi \in N(A) \}
+\end{equation*}
+
+Let N be a basis for $N(A)$, can express $\xi \in N(A)$ as $\xi = Nz$ where $z\in \Re^k$, $k =dim(N(A)) \leq n$
+
+
+Substitute this expression for any feasible $x$ into objective $F_0(\cdot)$
+
+
+\begin{align*}
+F_0(x) &= F_0(\bar{x} + \xi) = F_)(\bar{x} + Nz)\\
+&= \frac{1}{2}(\bar{x} + Nz)^TH(\bar{x}+Nz) + c^T(\bar{x} + Nz) + d\\
+&= \frac{1}{2}z^T[N^THN]z + [c^TN + \bar{x}^THN]z + [\frac{1}{2}\bar{x}^TH\bar{x} + c^Tx + d] \\
+\end{align*}
+
+\begin{equation*}
+p^* = min_{z\in \Re^k}\,\,\,\,\, \frac{1}{2}z^T\tilde{H}z + \tilde{c^T}z + \tilde{d}
+\end{equation*}
+
+$\rightarrow$ lower-dimensional optimization problem $k =dim(N(A)) \leq n $
+
+$\rightarrow$ still a QP, but an unconstrained QP.
+
+
+
+\begin{example}{Markowitz Partfolio optimization}
+	"Mean/variance" analysis
+	
+	\begin{itemize}
+		\item Minimize amount of variance in returns for a fixed level of (expected) returns
+		
+		\item Harry Markowitz(1990 Nobel Prize)
+	\end{itemize}
+	
+	\textbf{Model}: There are n stock, single investment period\\
+	
+	\textbf{Task}:
+	
+	\begin{itemize}
+		\item Design an investment strategy $p\in \Re^n$
+		
+		\item $p_i = $ amount/proportion of wealth invested in stock $i$
+		
+		\item $\sum^n_{i=1}p_i = 1$, "all-in" invest all your money
+		
+		\item $p_i \geq 0$, "long" positions(no "short time")
+		
+		\item Wealth normalized to 1
+	\end{itemize} 
+	
+	\textbf{Returns}:
+	
+	\begin{itemize}
+		\item $x\in \Re^n$
+		
+		\item $x_i$ = return on $i^th$ stock in period if must 1RMB in stock: get $x_i$RMB back.
+	\end{itemize} 
+	
+	
+	\textbf{Probabilistic model on returns}:
+	
+	\begin{itemize}
+		\item Expected returns: $\bar{x_i} = \mathbb{E}[x_i]$(known)
+		
+		\item Your return (random) is $\sum^n_{i=1}p_ix_i = p^Tx$
+		
+		\item Your expected value $\mathbb{E}[\sum^n_{i=1}p_ix_i] = \sum^n_{i=1}p_i\mathbb{E}[x_i] = \sum^n_{i=1}p_i\bar{x_i} = p^T\bar{x}$
+		
+		\item variance in returns:
+		
+		\begin{align*}
+		var(p^Tx) &=\mathbb{E}[(p^Tx - p^T\bar{x})^2]\\
+		&= \mathbb{E}[(p^T(x - x^T))^2]\\
+		&= \mathbb{E}[p^T(x - \bar{x})(x - \bar{x})^Tp]\\
+		&= p^T\mathbb{E}[(x - \bar{x})(x - \bar{x})^T]p\\
+		&= p^T\Sigma p
+		\end{align*}
+	\end{itemize}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	Given mean returns $\bar{x}$ and covariance matrix of returns $\Sigma \in \Re^{n\times n}$. Design $p$ to minimize "risk" subject to same minimal returns.:
+	
+	\begin{align*}
+	min_{p\in \Re^n}\,\,\,\,\, &p^T\Sigma p\\
+	s.t. \,\,\,\,\,&p^T\bar{x}\geq r_{min}\\
+	&\textbf{1}^Tp = 1\\
+	&p\geq 0
+	\end{align*}
+\end{example}
+
+
+
+
+\begin{align*}
+p^* = min_{x\in \Re^n}\,\,\,\,\, &\frac{1}{2}x^THx + x^Tx + d\\
+s.t.\,\,\,\,\, &Ax = b\\
+&Gx\leq h
+\end{align*}
+
+Discuss geometry of objective
+
+Discuss geometry of feasible set
+
+1) w.l.o.g assume $H\in S^n$, 
+
+\begin{align*}
+x^THx &=\frac{1}{2}[x^THx + x^TH^Tx]\\
+ &= \frac{1}{2}x^T(H+H^T)x
+\end{align*}
+
+Hence always consider $H$ symmetric.\\
+
+
+
+\subsection{Symmetric matrices}
+
+1) Eigenvalues: purely real eigenvalues (can sort)
+
+2) Eigenvectors: can always be chosen $\perp$ and can always diagonalize
+
+\begin{equation*}
+H = \mathcal{U}\Lambda \mathbb{U}^T  = \sum^n_{i=1}\lambda_iu^{(i)}u^{(i)^T}
+\end{equation*}
+
+For 3 cases:
+
+\begin{equation*}
+F_0(x) = \frac{1}{2}x^THx + c^Tx + d
+\end{equation*}
+
+\begin{itemize}
+	\item A) $H\in S^n$ but not PSD
+	
+	\begin{equation*}
+	H = 
+	\begin{bmatrix}
+	1&0\\
+	0&-2
+	\end{bmatrix}
+	\end{equation*}
+	
+	\item B) $H\in S^n_+$ but not PD
+	\begin{equation*}
+	H = 
+	\begin{bmatrix}
+	1&0\\
+	0&0
+	\end{bmatrix}
+	\end{equation*}
+	
+	\item C) $H\in S^n_{++}$
+	\begin{equation*}
+	H = \begin{bmatrix}
+	1&0\\
+	0&2
+	\end{bmatrix}
+	\end{equation*}
+\end{itemize}
+
+
+
+\begin{itemize}
+	\item Plot 1: $F_0(x) =\frac{1}{2}x^THx$
+	
+	\item Plot 2: $F_0(x) =\frac{1}{2}x^THx + [0.5\,\,\, 0.5]x$
+	
+	\item Plot 3: $F_0(x) =\frac{1}{2}x^THx + [0.5\,\,\, 0]x$
+\end{itemize}
+
+
+
+
+MATLAB Graphs may be included later.\\
+
+Case A: 
+
+$H\in S^n$ but $H\notin S^n_+$. (Symmetric not PSD)
+
+There must be an eigenvalue/vector pair $(\lambda, u)$ s.t. $\lambda < 0$.
+
+Set $x_{\alpha} = \alpha u$ for some $\alpha \in \Re$
+
+\begin{align*}
+F_0(\alpha u) &= \frac{1}{2}(\alpha u)^TH(\alpha u) + c^T(\alpha u) + d\\
+&= \frac{{\alpha}^2}{2} u^T[\sum^n_{i=1}\lambda_i u^{(i)} u^{(i)^T}]u + \alpha c^Tu + d\\
+&= \frac{{\alpha}^2}{2}\lambda + \alpha <c,u> + d\\
+&= -\frac{{\alpha}^2}{2}|\lambda| + \alpha<c,u> + d\\
+&= F(\alpha u)
+\end{align*}
+
+
+Case B: 
+
+$H\in S_+^n$ but $H\notin S^n_{++}$ (PSD not PD)
+
+$\rightarrow$ at least 1 zero eigenvalue.\\
+
+$c \notin R(H)$
+
+$\rightarrow$ There is a complement of $c$ in $R(H)^{\perp} = N(H^T) = N(H)$ and can move in that direction without changing $2^{nd}$ order term while driving $1^{st} $ order term to $\infty$.
+
+$\rightarrow$ Let $c_{||} = \prod_{R(H)}(c)$, $c_{\perp} = \prod_{N(H)}(c)$
+
+$\rightarrow$ $c = c_{||} + c_{\perp}$ orthogonal decomposition lemma(unique decomposition)
+
+$\rightarrow$ Let $x_{\alpha} =-\alpha c_{\perp}$ where $\alpha \in \Re^+$
+
+\begin{align*}
+F_0(x_{\alpha}) &=\frac{{\alpha}^2}{2}c_{\perp}^THc_{\perp} + c^T(-\alpha c_{\perp}) + d\\
+&= 0 - \alpha(c_{||} + c_{\perp})^Tc_{\perp} + d\\
+&= -\alpha(c_{||}^Tc_{\perp} + c_{\perp}^Tc_{\perp}) + d\\
+&= -\alpha||c_{\perp}||^2_2 + d
+\end{align*}
+
+\begin{itemize}
+	\item Case A: $H\notin S^n_+$, $p^* = -\infty$
+	
+	\item Case B: $H\in S^n_+$ but not $S^n_{++}$, $c\in R(H)$
+	
+	\item Case C: $H\in S^n_{++}$
+\end{itemize}
+
+%Above are notes for Oct16
