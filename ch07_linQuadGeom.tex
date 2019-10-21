@@ -170,3 +170,430 @@ x_2
 	%\caption{This is an inserted JPG graphic} 
 	%\label{fig:graph} 
 \end{figure}
+
+%Below are notes for Oct 12
+We have started talking about Linear Programming problems:
+
+\begin{align*}
+(arg)min_{x\in \Re^n} \,\,\, c^Tx + d\\
+s.t. \,\,\, Ax& = b\\
+Gx &\leq h\\
+A&\in \Re^{q\times n}, b\in \Re^{q}\\
+G&\in \Re^{m\times n}, h\in \Re^{m}
+\end{align*}
+
+Objective of LP, have or don't have constraints
+
+\begin{align*}
+p^* &= min \,\,\, c^Tx+d\\
+x^* &= arg\,\, min_{x\in \Re^n} \,\,\, c^Tx+d
+\end{align*}
+
+Probability 1: $c = 0 \in \Re^n$
+
+\begin{align*}
+p^* &= min_{x\in \Re^n} \,\,\, d=d\\
+x^* &= arg\,\, min_{x\in \Re^n} \,\,\, d = \Re^n
+\end{align*}
+
+Probability 2: $c \neq 0 \in \Re^n$
+
+\begin{align*}
+p^* &= -\infty\,\,\, \text{by convention if no minimum}\\
+x(\alpha) &= -\alpha c \,\,\, \alpha \geq 0\\
+c^Tx + d &= c^T(-\alpha c) + d = \alpha - \alpha c^Tc = \alpha - \alpha||c||^2_2\\
+x^* &\text{doesn't exist}
+\end{align*}
+
+So for unconstrained LP:
+
+\begin{equation*}
+%\label{eq6}
+p^*=\left\{
+\begin{aligned}
+d &  & \text{if } c=0 \\
+-\infty &  & \text{otherwise}
+\end{aligned}
+\right.
+\end{equation*}
+
+\begin{equation*}
+%\label{eq6}
+x^*=\left\{
+\begin{aligned}
+\Re^n & &\text{if } c=0 \\
+\text{doesn't exist} &  & \text{otherwise}
+\end{aligned}
+\right.
+\end{equation*}
+
+Think about geometry of cost function:
+
+\begin{equation*}
+F_0(x)(\text{"objective function"}) =c^Tx + d(affine function)
+\end{equation*}
+
+\begin{align*}
+c_{F_0}(t) &= x\in \Re^n | F_0(x) = c^Tx + d = t \}(\text{hyper-plane})\\
+&= \{x\in \Re^n | C^Tx = (t-d) \}(\text{offset when t=d}, C_{F_0}(t) \text{is a subspace})
+\end{align*}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_1.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+To find the relationship between $t_1$ and $t_2$:
+
+\begin{align*}
+t_2 &= c^T(x^{(0)}+\aleph c) + d\\
+t_1 &= c^Tx^{(0)} + d\\
+t_2 - t_1 &= [c^Tx^{(0)} + d + \alpha ||c||^2] - c^Tx^{(0)} = \alpha \Vert c \Vert^2
+\end{align*}
+
+One approach:
+
+%\begin{align*}
+%t_2 &= c^T(x^{(0)} + \alpha c) + d\\
+%t_1 &= c^Tx^{(0)} + d\\
+%t_2 - t_1 &= \[c^Tx^{(0)} + d + \alpha||c||^2 \] - c^Tx^{(0)} + d\\
+%&= \alpha ||c||^2\\
+%\end{align*}
+
+\begin{equation*}
+\nabla F_0(x) =
+	\begin{bmatrix}
+	\frac{\sigma}{\sigma x_1}(c^Tx+d)\\
+	\vdots\\
+	\frac{\sigma}{\sigma x_n}(c^Tx+d)
+	\end{bmatrix} = 
+	\begin{bmatrix}
+	c_1\\
+	c_2\\
+	\vdots\\
+	c_n
+	\end{bmatrix} = c
+\end{equation*}
+
+\begin{align*}
+Ax &= b\\
+Gx &\leq h
+\end{align*}
+
+Then it comes to:
+
+\begin{equation*}
+A = 
+\begin{bmatrix}
+\alpha^{(1)}\\
+\alpha^{(2)}\\
+\vdots\\
+\alpha^{(q)}
+\end{bmatrix}
+\end{equation*}
+
+
+\begin{equation*}
+\{x|Ax = b \} =  \cap^q_{i=1}\{x|<\alpha^{(i)}, x> = b_i \}
+\end{equation*}
+
+
+
+The "feasible" set:
+
+\begin{equation*}
+S = \left(\cap^q_{i=1}\{x\in \Re^n | <\alpha^{(i)}, x> = b_i \}\right) \cap \left(\cap^m_{i=1}\{x\in \Re^n | <g^{(i)}, x> \leq h_i \}\right)
+\end{equation*}
+
+(Intersect half-spaces with hyper-planes)
+
+\begin{itemize}
+	\item "polyhedron" / "polytape"
+	
+	\item Ax = b $\rightarrow$ $Ax \leq b$, $Ax \geq b$
+\end{itemize}
+
+\begin{example}
+	\begin{align*}A &= 
+	\begin{bmatrix}
+	1 & 1
+	\end{bmatrix}
+	b = 
+	\begin{bmatrix}
+	2
+	\end{bmatrix}\\
+	G &= 
+	\begin{bmatrix}
+	-1 & 0\\
+	0 & -1
+	\end{bmatrix}
+	h = 
+	\begin{bmatrix}
+	0\\
+	0
+	\end{bmatrix}\\
+	Ax &= b \rightarrow x_1 + x_2 = 2\\
+	Gx &\leq h \rightarrow x_1 \geq 0, x_2\geq 0
+	\end{align*}
+	
+	
+	\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_2.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+	\end{figure}
+\end{example}
+
+
+
+
+
+
+
+
+\begin{example}
+	Equality constraints force you into lower effective dimension:
+	
+	\begin{align*}
+	A =
+	\begin{bmatrix}
+	1&1&1
+	\end{bmatrix}
+	\end{align*}
+	\begin{equation*}
+	B= 
+	\begin{bmatrix}
+	1\\
+	\end{bmatrix}
+	\end{equation*}
+	
+	\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_3.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+	\end{figure}
+\end{example}
+
+\begin{example}
+	\begin{equation*}
+	\begin{bmatrix}
+	1&1\\
+	1&1
+	\end{bmatrix}
+	\begin{bmatrix}
+	x_1\\
+	x_2
+	\end{bmatrix}=
+	\begin{bmatrix}
+	1\\
+	2
+	\end{bmatrix}
+	\end{equation*}
+	
+	\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_4.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+	\end{figure}
+	
+	Can also happen with inequalities constraints:
+		\begin{align*}
+	\begin{bmatrix}
+	-1&0\\
+	1&0
+	\end{bmatrix}
+	\begin{bmatrix}
+	x_1\\
+	x_2
+	\end{bmatrix}&\leq
+	\begin{bmatrix}
+	0\\
+	-1
+	\end{bmatrix}\\
+	S &= \emptyset
+	\end{align*}
+
+\end{example}
+
+
+
+\begin{example}
+	\begin{align*}
+	\begin{bmatrix}
+	-1 & 0\\
+	0 & -1\\
+	\frac{1}{2} & -1\\
+	1 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+	x_1\\
+	x_2
+	\end{bmatrix}
+	 &\leq 
+	 \begin{bmatrix}
+	 0\\
+	 0\\
+	 1\\
+	 3
+	 \end{bmatrix}\\
+	 \frac{1}{2}x_1 - x_2&\leq 1\\
+	 x_2 &\geq -1 + \frac{1}{2}x_1
+	\end{align*}
+	
+	\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_5.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+	\end{figure}
+\end{example}
+
+
+
+
+
+LP: Linear objective \& constraints
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_6.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+\begin{equation*}
+S = \{x\in \Re^3 | 
+\begin{bmatrix}
+1 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2\\
+x_3
+\end{bmatrix}
+ = 1, x_1 \geq 0, x_2\geq 0,x_3\geq 0
+ \}
+\end{equation*}
+
+\begin{align*}
+x^* = arg\,\,\, &min 
+\begin{bmatrix}
+1&1&1
+\end{bmatrix}x\\
+&s.t. \,\,\, x\in S\\
+x^* = arg\,\,\, &min 
+\begin{bmatrix}
+1&0&0
+\end{bmatrix}x = x_1\\
+\end{align*}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_7.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+So there are various possibilities here for $p^* \& x^* $:
+
+\begin{itemize}
+	\item 1) $x^*$ is unique, $p^*$ finite
+	
+	\item 2) $x^*$ is not unique, $p^*$ finite. 
+	
+	\item 3) There is no $x^*$:
+	
+		a) $S = \emptyset$(Feasible set is empty), constraint $p^* = \infty$
+	
+		b) $S$ is unbounded \& no minimum, constraint $p^* = -\infty$
+\end{itemize}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_8.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+
+
+
+
+"active" constraints are those inequality constraints satisfied with equality. 
+
+Cost decreases if:
+
+\begin{align*}
+c^T(x^{(0)} + \bigtriangleup) + d &< c^Tx^{(0)} + d\\
+c^T\bigtriangleup &< 0\\
+<c, \bigtriangleup> &< 0
+\end{align*}
+
+
+In example constraints 1\&2 are active at optimum.\\
+
+Observation: 
+
+\begin{itemize}
+	\item If you are at a vertex(doesn't have to be optimum). 
+	
+	\item Any "move" that keeps you feasible must be into feasible set $\rightarrow$ opposite vector that define active constraints.
+	
+	\begin{equation*}
+	v - \alpha g^{(1)} - \beta g^{(2)}, \,\,\, \alpha, \beta \geq 0
+	\end{equation*}
+	
+	\item Are these any choices of $\alpha, \beta$ that decrease the cost?
+	
+	\begin{align*}
+	c^T(v - \alpha g^{(1)} - \beta g^{(2)}) + d &\leq c^Tx + d\\
+	-\alpha <c, g^{(1)}> - \beta<c, g^{(2)}> &\leq 0
+	\end{align*}
+\end{itemize}
+
+If:
+
+1) $<c, g^{(1)}> < 0$
+
+2) $<c, g^{(2)}> < 0$
+
+no more into feasible set will decrease the cost.\\ 
+
+Condition for optimality:\\
+
+A feasible vertex $v$: $v\in\{x|Gx \leq h \}$ is an optimal solution to LP with cost $F_0(x) = c^Tx + d$ if $c^Tg^{(i)} < 0$, $\forall i\in$ active set.\\
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_9.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{figure}
+
+
+Simplex algorithm:
+
+\begin{itemize}
+	\item 1) Start ar feasible vertex;
+	
+	\item 2) Identify direct of cost decrease along an edge;
+	
+	\item 3) Move on that direction until any further more would violate a previously inactive constraints.
+	
+	\item 4) Stop + add that new constraint(s) to active set.
+	
+	\item 5) Repeat
+\end{itemize}
+
+
+
+%Above are notes for Oct 12
+
+
+
