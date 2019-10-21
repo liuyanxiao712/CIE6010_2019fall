@@ -595,5 +595,262 @@ Simplex algorithm:
 
 %Above are notes for Oct 12
 
+%Below are notes for Oct14
+
+
+
+\begin{equation*}
+\{x|Gx\leq h \}
+\end{equation*}
+
+
+FIGURE1
+
+
+If $x =v^{(a)}$, constraints, constraints 1\&2 active, 3 is inactive.
+
+\begin{align*}
+<g^{(1)}, v^{(a)}> &= h_1\\
+<g^{(2)}, v^{(a)}> &= h_2\\
+<g^{(3)}, v^{(a)}> &< h_3
+\end{align*}
+
+At $x = v^{(b)}$, constraints 2\&3 active, 1 is inactive.\\
+
+1) Define a vertex $v$:
+
+\begin{itemize}
+	\item a) $v\in S$ is a vertex if cannot express $v = \lambda u +(1-\lambda)w$, $u, w\in S$, $\lambda \in [0,1]$
+	
+	\item b) There exists a cost vector $c\in \Re^n$ s.t. $v$ is unique solution to an LP with cost vector $c$.
+	
+	\item c) Algebraic characterization of vertices in terms of $A, b, G, h$. $S = \{x|Ax \leq b, Gx\leq h \}$
+\end{itemize}
+
+
+
+2) Define / Find directions along edges of polyhedron that keep you in the feasible set.
+
+3) How far can you go in direction that decrease cost until "leave" feasible set?
+
+\begin{align*}
+min \,\,\, &c^Tx+d\\
+s.t. \,\,\, &Ax = b\\
+&Gx\leq h
+\end{align*}
+
+$x\in \Re^n, c\in \Re^n, d\in \Re, A\in \Re^{q\times n}, b\in \Re^q, G\in \Re^{m\times n}, h\in \Re^m$.
+
+Inequalities:
+
+\begin{align*}
+min \,\,\, &c^Tx+d\\
+s.t. \,\,\, &Gx\leq h\\
+\end{align*}
+
+"Standard Form":
+
+\begin{align*}
+min \,\,\, &c^Tx+d\\
+s.t. \,\,\, &Ax = b\\
+&x\geq 0
+\end{align*}
+
+To get to inequality:
+
+\begin{equation*}
+Ax = b \Leftrightarrow Ax\geq b, Ax\leq b
+\end{equation*}
+
+\begin{align*}
+min\,\,\, &c^Tx +d\\
+s.t. &\begin{bmatrix}
+G\\
+A\\
+-A
+\end{bmatrix} x\leq
+\begin{bmatrix}
+h\\
+b\\
+-b
+\end{bmatrix}
+\end{align*}
+
+Standard Form:
+
+\begin{align*}
+min \,\,\, &c^Tx+d\\
+s.t. \,\,\, &Gx\leq h\\
+&Ax = b
+\end{align*}
+
+is equivalent to:
+
+\begin{align*}
+min \,\,\, &c^Tx+d\\
+s.t. \,\,\, &Gx + s = h\\
+&Ax = b\\
+&s\geq 0
+\end{align*}
+
+is also equivalent to:
+
+\begin{align*}
+min \,\,\, &c^T(x^{+} - x^{-})+d\\
+s.t. \,\,\, &G(x^{+} - x^{-}) + s = h\\
+&A(x^{+} - x^{-}) = b\\
+&s\geq 0\\
+&x^{+}\geq 0\\
+&x^{-}\geq 0
+\end{align*}
+
+can come to:
+
+\begin{align*}
+min_{x^{+},x^{-},s} &\begin{bmatrix}
+c^T - c^T & 0
+\end{bmatrix}
+\begin{bmatrix}
+x^{+}\\
+x^{-}\\
+s
+\end{bmatrix}+d\\
+&\begin{bmatrix}
+A-A & 0
+\end{bmatrix}
+\begin{bmatrix}
+x^{+}\\
+x^{-}\\
+s
+\end{bmatrix}=b\\
+&\begin{bmatrix}
+G-G & I
+\end{bmatrix}
+\begin{bmatrix}
+x^{+}\\
+x^{-}\\
+s
+\end{bmatrix}=h\\
+&x^{+}\geq 0, x^{-}\geq 0, s\geq 0
+\end{align*}
+
+
+
+
+\begin{example}
+	\begin{align*}
+	&min \Vert Ax - b\Vert_{\infty}\\
+	&s.t. Gx \leq h\\
+	&\Vert u\Vert_{\infty} = max_{i\in [n]}|u_i|
+	\end{align*}
+	Introduce helper variable $t$:
+	
+	FIGURE2
+	
+	
+	\begin{align*}
+	min_{x,t} &t\\
+	s.t. &Ax - b\leq t\textbf{1}\\
+	&Ax - b\leq (-t)\textbf{1}\\
+	&Gx \leq h
+	\end{align*}
+\end{example}
+
+
+\begin{example}
+	FIGURE3
+	
+	\begin{align*}
+	min_x &||Ax - b||_1, \,\,\,\,\, A\in \Re^{q\times n}\\
+	s.t. &Gx\leq h
+	\end{align*}
+	
+	\begin{equation*}
+	||u||_1 = \sum^q_{i=1} |u_i|
+	\end{equation*}
+	
+	Helper vector $t\in \Re^q$.
+	
+	\begin{align*}
+	min_{x,t} &\sum^q_{i=1}t_i\\
+	s.t. \,\,\,\,\,&Gx \leq h\\
+	&Ax -b \leq t\\
+	&Ax -b \geq -t
+	\end{align*}
+\end{example}
+
+\begin{example}
+	\begin{align*}
+	min \,\,\, max_{i\in [q]} &(c^{(i)^T}x + d_i)\\
+	s.t. &Gx\leq h
+	\end{align*}
+	
+	\begin{align*}
+	min_{x, t\in \Re} &t\\
+	s.t. &(c^{(i)^T}x + d_i)\leq t,\,\,\,\,\, \forall i\in [q]\\
+	&Gx\leq h
+	\end{align*}
+	
+	FIGURE4
+\end{example}
+
+
+
+\begin{example}
+	Finding the largest $l_2$ ball that fits in a polyhedron $p = \{x| Gx\leq h \}$
+	
+	FIGURE5
+\end{example}
+
+A sphere is fully parameterized by :
+\begin{itemize}
+	\item Its center $x_c$
+	
+	\item Its radius $r$
+\end{itemize}
+
+A sphere fits in $p$ if:$x_c + u \in p$, $\forall u \,\,\, s.t. ||u||_2\leq r$
+
+
+\begin{itemize}
+	\item $x_c+u \in p$ means that $g^{(i)^T}(x_c + u) \leq h_i,\,\,\, \forall i\in [q]$ \& all $u$ $s.t. ||u||_2\leq r$.
+	
+	\item Looking at constraints $i$ by itself: $g^{({i})^T}x_c + g^{({i})^T}u \leq h_i$. 
+	
+	As for $g^{({i})^T}u$, for $||u||_2>r$, what direction should $u$ point in to make left hand side as large as possible?
+	
+	Set $u=\frac{g^{(1)}}{||g^{(1)}||}r$ 
+\end{itemize}
+
+Upshot: if following is satisfied:
+
+\begin{equation*}
+g^{(1)^T}[x_c + \frac{g^{(1)}}{||g^{(1)}||_2}r] \leq h_i
+\end{equation*}
+
+Then constraint $i$ is satidfied for all $u$ that are of length $r$.
+
+FIGURE6
+
+\begin{align*}
+max_{x, r} &r\,\,\,(or\,\,\,min -r)\\
+s.t. &g^{(1)^T}x_c + ||g^{(1)}||_r\leq h_i\,\,\,\,\, i\in [q]
+\end{align*}
+
+$\rightarrow(x_c, r)\in \Re^{n+1}$
+
+$\rightarrow$ Transformed some quadratic-like problem into an LP.\\
+
+
+Quadratic program(QP)
+
+\begin{align*}
+p^* = min_{x\in \Re^n} &\frac{1}{2}x^THx + c^Tx + d\\
+s.t. \,\,\, &Ax = b\\
+&Gx \leq h
+\end{align*}
+
+
+%Above are notes for Oct14
 
 
