@@ -1166,3 +1166,384 @@ F_0(x_{\alpha}) &=\frac{{\alpha}^2}{2}c_{\perp}^THc_{\perp} + c^T(-\alpha c_{\pe
 \end{itemize}
 
 %Above are notes for Oct16
+
+
+
+%Nelow are notes for Oct21
+
+
+\section{Geometry of Objective}
+
+\begin{equation*}
+p^* = min_{x\in \Re^n}\frac{1}{2}x^THx + c^Tx + d
+\end{equation*}
+
+If either (A) $H \notin S^n_+$ then
+
+or (B) - (i): $H\in S^n_+$ but $H\in S^n_{++}$ and $C\notin R(H)$
+
+It comes to $p^* = -\infty$\\
+
+(B) - (ii) $H\in S^n_{+}$, $H\notin S^n_{++}$ and $C\in R(H)$, $H\in S^n_{++}$:
+
+It comes to $p^* > -\infty$
+
+\begin{align*}
+H &= \sum^n_{i=1}\lambda_iU^{(1)}U^{(1)^T} \\
+&= \sum^r_{i=1}U^{(1)}U^{(1)^T}\\
+&= U_r\Sigma Y_r^T\\
+H^{\frac{1}{2}} &= U_r\Sigma^{\frac{1}{2}}U_r^T\\
+H^{+} &= U_r\Sigma^{-1}U_r^T\\
+(H^{\frac{1}{2}})^+ &= U_r\Sigma^{-\frac{1}{2}}U_r^T
+\end{align*}
+
+where 
+\begin{align*}\Sigma = 
+\begin{bmatrix}
+\sqrt{\lambda_1} &  & 0 \\
+&\ddots&\\
+0&&\sqrt{\lambda_r}
+\end{bmatrix}\\\Sigma^{-\frac{1}{2}} =
+\begin{bmatrix}
+\frac{1}{\sqrt{\lambda_1}} &  & 0 \\
+&\ddots&\\
+0&&\frac{1}{\sqrt{\lambda_r}}
+\end{bmatrix}
+\end{align*}
+
+\begin{equation*}
+C\in R(H) = R(H^{\frac{1}{2}}) = R(H^+) = R[(H^{\frac{1}{2}})^+]
+\end{equation*}
+
+as $C\in R(H)$: $\exists \bar{y}\in \Re^n$ s.t. $c = H\hat{y}$. But since $R(H) = R(H^{\frac{1}{2}})$, $\exists y \in \Re^n$
+
+\begin{equation*}
+C = H^{\frac{1}{2}}y = H^{\frac{1}{2}}(y+\xi)
+\end{equation*}
+
+where $\xi \in N(H^{\frac{1}{2}})$, so:
+
+\begin{equation*}
+C = (U_r\Sigma^{\frac{1}{2}}U_r^T)y = \sum^r_{i=1}U^{(i)}\sqrt{\lambda_i}(U^{(i)^T}y)
+\end{equation*}
+
+We can pick a min-norm choice for $y$: $y = argmin\Vert \bar{y}\Vert_2$ and $\bar{y}\in\Re^n$, $C = H^{\frac{1}{2}}\bar{y}$. So $y = (H^{\frac{1}{2}})^+C$
+
+Summary: $C = H^{\frac{1}{2}}y$, $y = (H^{\frac{1}{2}})^+C$
+
+\begin{align*}
+\frac{1}{2}x^THx + c^Tx + d &= \frac{1}{2}x^TH^{\frac{1}{2}}H^{\frac{1}{2}}x+y^TH^{\frac{1}{2}}x + d\\
+&= \frac{1}{2}\tilde{x}^T\tilde{x} + y^T\tilde{x} + d\\
+&= \frac{1}{2}(\tilde{x}^Tx+2y^T\tilde{x}+y^Ty) - \frac{1}{2}y^Ty + d &(*)\\
+&= \frac{1}{2}\Vert\tilde{x}+y\Vert^2_2 - \frac{1}{2}\Vert y \Vert^2_2 + d
+\end{align*}
+
+Set $\tilde{x} = -y$ to minimize $(*)$.
+
+Question: Can you always pick $x$ s.t. $\tilde{x} = -y$?
+
+\begin{equation*}
+y = (H^{\frac{1}{2}})^+C\in R((H^{\frac{1}{2}})^+) = R(H) = R(H^{\frac{1}{2}})
+\end{equation*}
+Since $x\in \Re^n$ is unconstrained, can always set it s.t. $\tilde{x} = -y$ 
+
+With choice of $x$ s.t. $\tilde{x} = -y$ where $\tilde{x} = H^{\frac{1}{2}}x$:
+
+\begin{align*}
+F_0(x) \geq p^* &= d - \frac{1}{2}\Vert y \Vert_2^2\\
+&= d - \frac{1}{2}y^Ty\\
+&= d - \frac{1}{2}C^T(H^{\frac{1}{2}})^+(H^{\frac{1}{2}})^+C\\
+&= d - \frac{1}{2}C^T
+\begin{bmatrix}
+U_r
+\end{bmatrix}
+\begin{bmatrix}
+\Sigma^{-\frac{1}{2}}]
+\end{bmatrix}
+\begin{bmatrix}
+U_r^T
+\end{bmatrix}
+\begin{bmatrix}
+U_r
+\end{bmatrix}
+\begin{bmatrix}
+\Sigma^{-\frac{1}{2}}]
+\end{bmatrix}
+\begin{bmatrix}
+U_r^T
+\end{bmatrix}
+\begin{bmatrix}
+C
+\end{bmatrix}\\
+&= d - \frac{1}{2}C^T(U_r\Sigma^{-1}U^T_r)C\\
+&= d - \frac{1}{2}C^TH^+C
+\end{align*}
+What is the minimizing choice of $x\in \Re^n$?
+
+Since $y\in R(H) = R(H^{\frac{1}{2}})$, $x\in \Re^n$, there are many solutions. Pick min-norm one to nail things down. 
+
+Min-norm solution to $\tilde{x} = H^{\frac{1}{2}}x$ are pseudo inverse:
+
+\begin{align*}
+x &= (H^{\frac{1}{2}})^+\tilde{x}\\
+&= -(H^{\frac{1}{2}})^+y\\
+&= -(H^{\frac{1}{2}})^+(H^{\frac{1}{2}})^+C \Leftrightarrow -H^+C
+\end{align*}\\
+
+Case C: $H\in S^n_{++}$
+
+Since $H\in S^n_{++}$, it is also in $S^n_{+}$. 
+
+If $H\in S^n_{++}$ $\Leftrightarrow R(H) = \Re^n$ means $C \in R(H)$.
+
+In this situation $H^+ = H^{-1}$:
+\begin{align*}
+x &= -H^{-1}C\\
+p^* &= d - C^TH^{-1}C
+\end{align*}
+Summary: If $p^* = min_{x\in \Re^n}\frac{1}{2}x^THx + c^Tx + d$:
+
+\begin{equation}
+p^* = \left\{
+\begin{array}{lr}
+d - c^TH^+c &(H\geq 0 \& C\in R(H))  \\
+-\infty & \text{else}
+\end{array}
+\right.
+\end{equation}
+\begin{equation}
+x^* = argmin = \left\{
+\begin{array}{lr}
+-H^+c &(H\geq 0 \& C\in R(H)) \\
+\text{not exist} & \text{else}
+\end{array}
+\right.
+\end{equation}
+
+
+Solving QPs via "active set" methods.
+
+\begin{equation}
+min_{x\in \Re^2}(x_1 - 1)^2 + (x_2 - 2.5)^2 s.t. 
+\begin{bmatrix}
+-1&2\\
+1&2\\
+1&-2\\
+-1&0\\
+0&-1
+\end{bmatrix}\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}\begin{bmatrix}
+2\\
+6\\
+2\\
+0\\
+0
+\end{bmatrix}
+\end{equation}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_1.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\begin{itemize}
+	\item at optimum some subset of inequality constraints satisfied with equality "active" set
+	
+	\item Best "loose"
+	
+	\item If you know the active set or optimum, just solve an "equality"-constrained QP"
+\end{itemize}
+By illustrative example:
+
+1) Initialize at $x^{(0)} = \begin{bmatrix}
+2\\
+0
+\end{bmatrix}$, starting with initial "working set" of equality constraint:
+
+\begin{eqnarray}
+w_0 = \{x|x_2 = 0 \}
+\end{eqnarray}
+
+
+2) \begin{equation*}
+min_{x\in \Re^2} \frac{1}{2}x^T\begin{bmatrix}
+2&0\\
+0&2
+\end{bmatrix}x + \begin{bmatrix}
+-2 & -5
+\end{bmatrix} + (1 + 2.5^2)
+\end{equation*}
+
+s.t. $\begin{bmatrix}
+	0  & 1
+\end{bmatrix}x = 0$
+
+Recall from last time, we need a basis for $N(\begin{bmatrix}
+0\\
+1
+\end{bmatrix}) = \{x|x = \alpha\begin{bmatrix}
+0\\
+1
+\end{bmatrix} \}$
+
+Say $\begin{bmatrix}
+1\\
+0
+\end{bmatrix} = N\Leftarrow$
+
+\begin{align*}
+\tilde{H} &= N^THN = 2\\
+\tilde{C} &= (c^TN + \bar{x}HN)\\
+&= -2\tilde{d}\\
+&= (d+c^Tx + \frac{1}{2}x^THx)
+\end{align*}
+
+We convert the problem to :
+
+\begin{align*}
+z^* &= argmin\,\,\, z^T\tilde{H}z + \tilde{c}^Tz + \tilde{d}\\
+&= argmin\,\,\, \frac{1}{2}2z^2 + (-2z) = \tilde{d}
+\end{align*}
+ $2z - 2 = 0$, $z = 1$
+
+So the optimum is:
+
+\begin{equation*}
+\bar{x}+ z^*N = \begin{bmatrix}
+0\\
+0
+\end{bmatrix} + 1
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix} = 
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}
+\end{equation*}
+
+Quadratically constrained Quadratic Program:
+
+\begin{align*}
+argmin_{x\in \Re^n} &\frac{1}{2}x^THx + c^T + d\\
+s.t. &\frac{1}{2}x^TH_ix + c^T_i + d_i \leq 0  & i\in [m]\\
+&\frac{1}{2}\tilde{H}_ix + \tilde{c}_i^Tx + \tilde{d}_i = 0 & i\in [q]
+\end{align*}
+
+\begin{itemize}
+	\item If $H_i = 0, \forall i\in [n]$, $\tilde{H}_i = 0, \forall i\in [q]$, $\rightarrow QP$
+	
+	\item Typically $h-0\geq 0, H_i\geq 0$, $i\in [m], \tilde{H}_i = o, \forall i\in [q]$. "convex optimization program", set $\tilde{H}_i = 0$
+\end{itemize}
+Consider a single equality constraint $q = 1$, consider a scalar problem $x\in \Re$:
+
+\begin{equation*}
+\tilde{H}_1 = 1 \,\,\, \tilde{c}_i = 0 \,\,\, \tilde{d}_i = -\frac{1}{2}
+\end{equation*}
+
+Constraint becomes:
+
+\begin{equation*}
+\frac{1}{2}x_1^2 + 0 - \frac{1}{2} = 0\rightarrow x_1^2 = 1
+\end{equation*}
+
+Three types of inequality:
+
+Type 1:
+
+\begin{equation*}
+H=\begin{bmatrix}
+2 &\\
+&\frac{1}{2}
+\end{bmatrix}\,\,\,c^T = \begin{bmatrix}
+0 & 0
+\end{bmatrix}\,\,\,
+d = -1
+\end{equation*}
+
+\begin{align*}
+\frac{1}{2}x^THx + c^Tx + d \leq 0\Rightarrow &\frac{1}{2}x^T\begin{bmatrix}
+2&\\
+&\frac{1}{2}
+\end{bmatrix}x\leq 1\\
+&x^T\begin{bmatrix}
+2&\\
+&\frac{1}{2}
+\end{bmatrix}x \leq 2
+\end{align*}
+
+\begin{align*}
+2x_1^2 + \frac{1}{2}x_2^2 &\leq 2\\
+x_1 + \frac{1}{4}x_2^2 &\leq 1\\
+\frac{x_1^2}{1} + \frac{x_2^2}{4} &\leq 1
+\end{align*}
+Type 2:
+
+\begin{equation*}
+H=0\,\,\,c = \begin{bmatrix}
+-1 & 1
+\end{bmatrix}\,\,\,
+d = -1
+\end{equation*}
+\begin{equation*}
+\begin{bmatrix}
+-1 & 1
+\end{bmatrix}x\leq 1\Rightarrow
+\begin{bmatrix}
+-1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}\leq 1\Rightarrow x_2\leq 1 + x_1
+\end{equation*}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_2.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+Type 3:
+\begin{equation*}
+H=\begin{bmatrix}
+0 &0\\
+0&2
+\end{bmatrix}\,\,\,c^T = \begin{bmatrix}
+-1 & 0
+\end{bmatrix}\,\,\,
+d = -1 \Rightarrow x^2_2 - x_1 - 1\leq 0
+\end{equation*}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_3.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+Intersection:
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_4.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+
+
+
+%Above are notes for Oct21
+
+
+%Below are notes for Oct21
+
+
+%Above are notes for Oct23
+
