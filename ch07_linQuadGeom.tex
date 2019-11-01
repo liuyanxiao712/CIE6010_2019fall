@@ -1,60 +1,121 @@
 %% Placeholder for chapter on linear, quadratic, and geometric models
 
 \section{Linear Programs: An Optimization Problem}
-
-Also known as(a.k.a) (mathematical program") of the form
-
+\subsection{Terminology and concepts regarding LP problem}
+Consider following problem, i.e., Liner programming with equality and inequity constraints:
 \begin{align*}
-(arg)\,\,min_{x\in \Re^n}&c^Tx + d\,\,\,\text{("objective"function)}\\
-s.t.\,\,\, &Ax = b\\
-&Gx \leq h
+	\min_{x\in \reals^n}& c^Tx + d\\
+	s.t. \quad &Ax = b\\
+	&Gx \leq h
 \end{align*}
 
-"Feasible" set(might not be good idea, but you can do this): $S = \{x|Ax = b, Gx \leq h \}$
+where $x\in \reals^n, c\in \reals^n, d\in \Re, A\in \reals^{q\times n}, b\in \reals^q, G\in \reals^{m\times n}, h\in \reals^m$.
 
+Note that, the function $p(x)=c^Tx + d$ is called the objective function and $x$ is called the decision variable. The goal of this problem is to find $x^*$ such that the optimal value $p^*$ of the objective function is achieved.
 
-\begin{itemize}
-	\item $c\in \Re^n$, $d\in \Re$.
-	
-	\item $A\in \Re^{q\times n}$, $b\in \Re^q$, \begin{equation*}
-	A = 
-	\begin{bmatrix}
-	\alpha^{(1)^T}\\
-	...\\
-	\alpha^{(q)^T}
-	\end{bmatrix}
-	\end{equation*}
-	
-	$<\alpha^{(i)}, x> =b_i$, $i\in \left[q\right]$
-	
-	\item $G\in \Re^{m\times n}$, $h\in \Re^m$
-	
-	\item If
-	\begin{equation*}
-	G = 
-	\begin{bmatrix}
-	g^{(1)^T}\\
-	...\\
-	g^{(q)^T}
-	\end{bmatrix}
-	\end{equation*}
-	
-	Then $<G^{(i)}, x>\leq h_i$, $i\in \left[m\right]$
-	
-\end{itemize}
+This formulation is the general form, and let's write it in matrix form(list of vectors), that is,
 
+$$
+A = 
+\begin{bmatrix}
+\alpha^{(1)^T}\\
+...\\
+\alpha^{(q)^T}
+\end{bmatrix}
+\qquad	
+G = 
+\begin{bmatrix}
+g^{(1)^T}\\
+...\\
+g^{(q)^T}
+\end{bmatrix}
+$$
 
+$$<\alpha^{(i)}, x> =b_i,\ i\in \left[q\right]$$
+$$<G^{(i)}, x>\leq h_i,\ i\in \left[m\right]$$
 
+Note that, there are also two other forms which are commonly used.
 
-
+1. Inequality form (only contains inequity constraints)
 \begin{align*}
-p^* = min \,\,\, &c^Tx + d\\
-s.t.\,\,\, &Ax = b\\
-&Gx\leq h
+	min \,\,\, &c^Tx+d\\
+	s.t. \,\,\, &Gx\leq h\\
+\end{align*}
+Given the general form, to get the inequality form, we simply break the equality
+\begin{equation*}
+	Ax = b \Leftrightarrow Ax\geq b, Ax\leq b
+\end{equation*}
+So we can get inequality form as follows:
+\begin{align*}
+	\min c^Tx&+d\\
+	\qquad s.t. \quad Gx &\leq h\\
+	Ax &\leq b\\
+	-Ax &\leq -b
 \end{align*}
 
-"optimal" value of program:
+2. Standard form (only contains equality and all variables are non negative)
+\begin{align*}
+	\min \quad&c^Tx+d\\
+	s.t. \quad&Ax = b\\
+	&x\geq 0
+\end{align*}
 
+Given the general form, we can also convert it into a standard form in 2 steps.
+
+Step 1: Introducing the slack variables $s$
+
+Given the general form,
+\begin{align*}
+	\min \quad&c^Tx+d\\
+	s.t. \quad&Gx\leq h\\
+	&Ax = b
+\end{align*}
+We add the slack variables $s$ so that the formulation become:
+\begin{align*}
+	\min \quad&c^Tx+d\\
+	s.t. \quad&Gx + s = h\\
+	&Ax = b\\
+	&s\geq 0
+\end{align*}
+Note that the slack variables $s$ must be non negative here.
+
+
+Step 2: We break the decision variable $x$ by $x= x^+ - x^-$
+\begin{align*}
+	\min \quad &c^T(x^{+} - x^{-})+d\\
+	s.t. \quad&G(x^{+} - x^{-}) + s = h\\
+	&A(x^{+} - x^{-}) = b\\
+	&s\geq 0\\
+	&x^{+}\geq 0\\
+	&x^{-}\geq 0
+\end{align*}
+
+
+Concepts that are frequently used in LP (and also optimization theory):
+
+(1) Feasible set(or feasible region): The set of points $S$ that are satisfying all the constraints, i.e.,
+$$S = \{x\in\reals^{n}|Ax = b, Gx \leq h \}$$
+
+(2) Feasible solution: The points in the feasible set $S$.
+
+(3) Polyhedron: intersection of finite number of half-spaces, i.e.,
+$$\{x\in\reals^{n}|Gx\leq h\}$$
+
+(4) Polytope: bounded intersection of finitely many half-spaces.
+
+
+
+
+
+\vspace{0.5cm}
+Let $p^*$ be the optimal value of the given objective function under the constraints, i.e.,
+\begin{align*}
+	p^* = min \,\,\, &c^Tx + d\\
+	s.t.\,\,\, &Ax = b\\
+	&Gx\leq h
+\end{align*}
+
+Remarks on "optimal" value $p^*$ of program:
 \begin{itemize}
 	\item Lowest cost shoice amongst all feasible $x$.
 	
@@ -65,103 +126,106 @@ s.t.\,\,\, &Ax = b\\
 	\item $p^*\in \Re$
 \end{itemize}
 
-
+\vspace{0.5cm}
+Let $x^*$ be the optimal choice of the decision variable $x$, i.e.,
 \begin{align*}
-x^* = min \,\,\, &c^Tx + d\\
-s.t.\,\,\, &Ax = b\\
-&Gx\leq h
+	x^* = \arg \min \,\,\, &c^Tx + d\\
+	s.t.\,\,\, &Ax = b\\
+	&Gx\leq h
 \end{align*}
 
-$x^*$ "optimal" choice of optimization variable(or vector):
-
+Remarks on "optimal" solution $x^*$ of program:
 \begin{itemize}
-	\item sometimes $x^*$ does not exist
+	\item Sometimes $x^*$ does not exist
 	
-	\item if exists, may or may not be unique
+	\item If exists, may not be unique
 	
-	\item $x^*\in \Re^n$
+	\item $x^*\in \reals^n$
 \end{itemize}
 
 
+
+
+\vspace{0.5cm}
 Let's consider an example:\\
 
 During the The Second World War, the US army is considering how to make their soldiers have enough nutrients...\\
 
-Different nutrients in different foods and daily requirement:\\
+Different nutrients in different foods and daily requirement:
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+		\hline 
+		Nutrients&Meat&Potatoes&Daily Requirement\\
+		\hline  
+		Carbohydates&40&200&400\\
+		\hline  
+		Protein&100&20&200\\
+		\hline  
+		Fiber&5&40&40\\
+		\hline 
+	\end{tabular}
+\end{center}
 
 
-\begin{tabular}{|c|c|c|c|}
-	\hline 
-	Nutrients&Meat&Potatoes&Daily Requirement\\
-	\hline  
-	Carbohydates&40&200&400\\
-	\hline  
-	Protein&100&20&200\\
-	\hline  
-	Fiber&5&40&40\\
-	\hline 
-\end{tabular}\\
+\vspace{0.3cm}
+The price of meat and potatoes:
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline 
+		Resources&cost/kg\\
+		\hline  
+		Meat &\$ 1\\
+		\hline 
+		Potatoes &\$ 0.25\\
+		\hline 
+	\end{tabular}
+\end{center}
 
-The price of meat and potatoes:\\
+Let $x_1$ denotes meat(kg) and $x_2$ denotes potatoes(kg), and we formulate this LPP as follows:
 
-
-
-\begin{tabular}{|c|c|}
-	\hline 
-	Resources&cost/kg\\
-	\hline  
-	Meat &\$ 1\\
-	\hline 
-	Potatoes &\$ 0.25\\
-	\hline 
-\end{tabular}
-
-$x_1$ denotes meat(kg) and $x_2$ denotes potatoes(kg).\\
-
-
-Objective:
-
+Objective function:
 \begin{equation*}
-x_1 + \frac{1}{4}x_2 = 
-\begin{bmatrix}
-1 & \frac{1}{4}
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\
-x_2
-\end{bmatrix}
+	\min_{x_1, x_2} x_1 + \frac{1}{4}x_2 = 
+	\min_{x_1, x_2}
+	\begin{bmatrix}
+		1 & \frac{1}{4}
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1\\
+		x_2
+	\end{bmatrix}
 \end{equation*}
 
 Constrains:
 \begin{align*}
-40x_1 + 200x_2 &\geq 400\\
-100x_1 + 20x_2 &\geq 200\\
-5x_1 + 40x_2 &\geq 40\\
-x_1 \geq 0\\
-x_2 \geq 0
+	40x_1 + 200x_2 &\geq 400\\
+	100x_1 + 20x_2 &\geq 200\\
+	5x_1 + 40x_2 &\geq 40\\
+	x_1 \geq 0\\
+	x_2 \geq 0
 \end{align*}
 
-$Gx\leq h \rightarrow$ 
 
+Rewrite it as $Gx\leq h$, that is,
 \begin{equation*}
-\begin{bmatrix}
--\frac{1}{5} & -1\\
--\frac{1}{8} & -1\\
--5 & -1\\
--1 & 0\\
-0 & -1
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\
-x_2
-\end{bmatrix}\leq
-\begin{bmatrix}
--2\\
--1\\
--10\\
-0\\
-0
-\end{bmatrix}
+	\begin{bmatrix}
+		-\frac{1}{5} & -1\\
+		-\frac{1}{8} & -1\\
+		-5 & -1\\
+		-1 & 0\\
+		0 & -1
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1\\
+		x_2
+	\end{bmatrix}\leq
+	\begin{bmatrix}
+		-2\\
+		-1\\
+		-10\\
+		0\\
+		0
+	\end{bmatrix}
 \end{equation*}
 
 \begin{figure}
@@ -171,43 +235,33 @@ x_2
 	%\label{fig:graph} 
 \end{figure}
 
-%Below are notes for Oct 12
-We have started talking about Linear Programming problems:
 
+
+\subsection{LP without contraints}
+
+Consider the LPP does not have constraints, so we have
 \begin{align*}
-(arg)min_{x\in \Re^n} \,\,\, c^Tx + d\\
-s.t. \,\,\, Ax& = b\\
-Gx &\leq h\\
-A&\in \Re^{q\times n}, b\in \Re^{q}\\
-G&\in \Re^{m\times n}, h\in \Re^{m}
+	p^* &= \min c^Tx+d\\
+	x^* &= \arg \min_{x\in \reals^n} \,\,\, c^Tx+d
 \end{align*}
 
-Objective of LP, have or don't have constraints
-
+\vspace{0.5cm}
+Situation 1: $c = 0 \in \reals^n$
 \begin{align*}
-p^* &= min \,\,\, c^Tx+d\\
-x^* &= arg\,\, min_{x\in \Re^n} \,\,\, c^Tx+d
+	p^* &= \min_{x\in \reals^n} \,\,\, d=d\\
+	x^* &= \arg \min_{x\in \reals^n} \,\,\, d = \reals^n
 \end{align*}
 
-Probability 1: $c = 0 \in \Re^n$
-
+Situation 2: $c \neq 0 \in \reals^n$
 \begin{align*}
-p^* &= min_{x\in \Re^n} \,\,\, d=d\\
-x^* &= arg\,\, min_{x\in \Re^n} \,\,\, d = \Re^n
+	p^* &= -\infty\,\,\, \text{by convention if no minimum}\\
+	x(\alpha) &= -\alpha c \,\,\, \alpha \geq 0\\
+	c^Tx + d &= c^T(-\alpha c) + d = \alpha - \alpha c^Tc = \alpha - \alpha||c||^2_2\\
+	x^* &\text{doesn't exist}
 \end{align*}
 
-Probability 2: $c \neq 0 \in \Re^n$
-
-\begin{align*}
-p^* &= -\infty\,\,\, \text{by convention if no minimum}\\
-x(\alpha) &= -\alpha c \,\,\, \alpha \geq 0\\
-c^Tx + d &= c^T(-\alpha c) + d = \alpha - \alpha c^Tc = \alpha - \alpha||c||^2_2\\
-x^* &\text{doesn't exist}
-\end{align*}
-
-So for unconstrained LP:
-
-\begin{equation*}
+Thus, for unconstrained LP we conclude that
+$$
 %\label{eq6}
 p^*=\left\{
 \begin{aligned}
@@ -215,28 +269,29 @@ d &  & \text{if } c=0 \\
 -\infty &  & \text{otherwise}
 \end{aligned}
 \right.
-\end{equation*}
-
-\begin{equation*}
 %\label{eq6}
+\qquad
 x^*=\left\{
 \begin{aligned}
-\Re^n & &\text{if } c=0 \\
+\reals^n & &\text{if } c=0 \\
 \text{doesn't exist} &  & \text{otherwise}
 \end{aligned}
 \right.
-\end{equation*}
+$$
 
-Think about geometry of cost function:
+Let's think about the geometry of cost function:
+$$
+F_0(x) =c^Tx + d
+$$
+where $F_0(x)$ is the objective function and it turns out that it is also an affine function.
 
-\begin{equation*}
-F_0(x)(\text{"objective function"}) =c^Tx + d(affine function)
-\end{equation*}
-
+Recall that the level set for $F_0(x)$, 
 \begin{align*}
-c_{F_0}(t) &= x\in \Re^n | F_0(x) = c^Tx + d = t \}(\text{hyper-plane})\\
-&= \{x\in \Re^n | C^Tx = (t-d) \}(\text{offset when t=d}, C_{F_0}(t) \text{is a subspace})
+	c_{F_0}(t) &=\{ x\in \reals^n | F_0(x) = c^Tx + d = t \}\\
+	&= \{x\in \reals^n | C^Tx = (t-d) \}
 \end{align*}
+
+Obviously, the level set for $F_0(x)$ defines a hyperplane, and when $t=d$ it defines a subspace(go through the origin). Let's consider two level sets, for $t_1$ and $t_2$,
 
 \begin{figure}
 	\centering
@@ -245,105 +300,96 @@ c_{F_0}(t) &= x\in \Re^n | F_0(x) = c^Tx + d = t \}(\text{hyper-plane})\\
 	%\label{fig:graph} 
 \end{figure}
 
-To find the relationship between $t_1$ and $t_2$:
+Note that $c$ is the normal vector to $x$. Let's find the relationship between $t_1$ and $t_2$:
 
+Approach (1)
 \begin{align*}
-t_2 &= c^T(x^{(0)}+\aleph c) + d\\
-t_1 &= c^Tx^{(0)} + d\\
-t_2 - t_1 &= [c^Tx^{(0)} + d + \alpha ||c||^2] - c^Tx^{(0)} = \alpha \Vert c \Vert^2
+	t_2 &= c^T(x^{(0)}+\alpha c) + d\\
+	t_1 &= c^Tx^{(0)} + d\\
+	t_2 - t_1 &= [c^Tx^{(0)} + d + \alpha ||c||^2] - c^Tx^{(0)} = \alpha \Vert c \Vert^2
 \end{align*}
+So apparently $t_2>t_1$.
 
-One approach:
-
-%\begin{align*}
-%t_2 &= c^T(x^{(0)} + \alpha c) + d\\
-%t_1 &= c^Tx^{(0)} + d\\
-%t_2 - t_1 &= \[c^Tx^{(0)} + d + \alpha||c||^2 \] - c^Tx^{(0)} + d\\
-%&= \alpha ||c||^2\\
-%\end{align*}
-
+Approach (2)
 \begin{equation*}
-\nabla F_0(x) =
+	\nabla F_0(x) =
 	\begin{bmatrix}
-	\frac{\sigma}{\sigma x_1}(c^Tx+d)\\
-	\vdots\\
-	\frac{\sigma}{\sigma x_n}(c^Tx+d)
+		\frac{\sigma}{\sigma x_1}(c^Tx+d)\\
+		\vdots\\
+		\frac{\sigma}{\sigma x_n}(c^Tx+d)
 	\end{bmatrix} = 
 	\begin{bmatrix}
-	c_1\\
-	c_2\\
-	\vdots\\
-	c_n
+		c_1\\
+		c_2\\
+		\vdots\\
+		c_n
 	\end{bmatrix} = c
 \end{equation*}
 
+The gradient points out that the direction of $c$ is the direction of increase in $F_0(x)$. In fact, we could show that the direction of the gradient evaluated at a certain point, is the direction that the value of function increases more rapidly(remind yourself what you have learned in Calculus).
+
+Hence, to minimize the objective function, we go in opposite direction of the gradient, that is, we should go as far as possible along the direction of $-c$ (unless $c=0$).
+
+
+\vspace{0.5cm}
+Now, let's turn back to LP with following constraints as we specified before:
 \begin{align*}
-Ax &= b\\
-Gx &\leq h
+	Ax &= b\\
+	Gx &\leq h
 \end{align*}
 
-Then it comes to:
+Interesting results and interpenetration for these two kind of constraints:
 
-\begin{equation*}
-A = 
-\begin{bmatrix}
-\alpha^{(1)}\\
-\alpha^{(2)}\\
-\vdots\\
-\alpha^{(q)}
-\end{bmatrix}
-\end{equation*}
+(1) $Ax=b$ (Equality contraints): force $x^*$ into an affine set
+$$\{x\in \reals^n|Ax = b \} =  \cap^q_{i=1}\{x\in \reals^n|<\alpha^{(i)}, x> = b_i \}$$
 
+(2) $Gx\leq h$ (Inequality contraints): force $x^*$ to be in an intersection of half-spaces
+$$\{x\in \reals^n|Gx \leq h \} =  \cap^q_{i=1}\{x\in \reals^n| <g^{(i)}, x> \leq h_i \}$$
 
-\begin{equation*}
-\{x|Ax = b \} =  \cap^q_{i=1}\{x|<\alpha^{(i)}, x> = b_i \}
-\end{equation*}
+(3) The feasible set: intersection of half-spaces and hyperplanes
+$$
+S = \left(\cap^q_{i=1}\{x\in \reals^n | <\alpha^{(i)}, x> = b_i \}\right) \cap \left(\cap^m_{i=1}\{x\in \reals^n | <g^{(i)}, x> \leq h_i \}\right)
+$$
 
 
-
-The "feasible" set:
-
-\begin{equation*}
-S = \left(\cap^q_{i=1}\{x\in \Re^n | <\alpha^{(i)}, x> = b_i \}\right) \cap \left(\cap^m_{i=1}\{x\in \Re^n | <g^{(i)}, x> \leq h_i \}\right)
-\end{equation*}
-
-(Intersect half-spaces with hyper-planes)
-
+A few remarks:
 \begin{itemize}
-	\item "polyhedron" / "polytape"
+	\item Concepts of polyhedron and polytape.
 	
 	\item Ax = b $\rightarrow$ $Ax \leq b$, $Ax \geq b$
 \end{itemize}
 
+
+
 \begin{example}
 	\begin{align*}A &= 
-	\begin{bmatrix}
-	1 & 1
-	\end{bmatrix}
-	b = 
-	\begin{bmatrix}
-	2
-	\end{bmatrix}\\
-	G &= 
-	\begin{bmatrix}
-	-1 & 0\\
-	0 & -1
-	\end{bmatrix}
-	h = 
-	\begin{bmatrix}
-	0\\
-	0
-	\end{bmatrix}\\
-	Ax &= b \rightarrow x_1 + x_2 = 2\\
-	Gx &\leq h \rightarrow x_1 \geq 0, x_2\geq 0
+		\begin{bmatrix}
+			1 & 1
+		\end{bmatrix}
+		b = 
+		\begin{bmatrix}
+			2
+		\end{bmatrix}\\
+		G &= 
+		\begin{bmatrix}
+			-1 & 0\\
+			0 & -1
+		\end{bmatrix}
+		h = 
+		\begin{bmatrix}
+			0\\
+			0
+		\end{bmatrix}\\
+		Ax &= b \rightarrow x_1 + x_2 = 2\\
+		Gx &\leq h \rightarrow x_1 \geq 0, x_2\geq 0
 	\end{align*}
 	
 	
 	\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_2.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_2.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
 	\end{figure}
 \end{example}
 
@@ -355,217 +401,212 @@ S = \left(\cap^q_{i=1}\{x\in \Re^n | <\alpha^{(i)}, x> = b_i \}\right) \cap \lef
 
 
 \begin{example}
-	Equality constraints force you into lower effective dimension:
+	Generally, equality constraints move you from a higher dimensional geometry in $\reals^n$ to a slice, which is a lower dimensional geometry. See the following example of losing 1 dimension per linearly independent constraint:
+	
 	
 	\begin{align*}
-	A =
-	\begin{bmatrix}
-	1&1&1
-	\end{bmatrix}
+		A =
+		\begin{bmatrix}
+			1&1&1
+		\end{bmatrix}
 	\end{align*}
 	\begin{equation*}
-	B= 
-	\begin{bmatrix}
-	1\\
-	\end{bmatrix}
+		B= 
+		\begin{bmatrix}
+			1\\
+		\end{bmatrix}
 	\end{equation*}
 	
 	\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_3.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_3.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
 	\end{figure}
 \end{example}
 
 \begin{example}
+	In some cases, there may be no intersection between hyperplane:
+	
 	\begin{equation*}
-	\begin{bmatrix}
-	1&1\\
-	1&1
-	\end{bmatrix}
-	\begin{bmatrix}
-	x_1\\
-	x_2
-	\end{bmatrix}=
-	\begin{bmatrix}
-	1\\
-	2
-	\end{bmatrix}
+		\begin{bmatrix}
+			1&1\\
+			1&1
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_1\\
+			x_2
+		\end{bmatrix}=
+		\begin{bmatrix}
+			1\\
+			2
+		\end{bmatrix}
 	\end{equation*}
 	
 	\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_4.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_4.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
 	\end{figure}
+	So the  feasible set is empty, $S = \emptyset$.
 	
-	Can also happen with inequalities constraints:
-		\begin{align*}
-	\begin{bmatrix}
-	-1&0\\
-	1&0
-	\end{bmatrix}
-	\begin{bmatrix}
-	x_1\\
-	x_2
-	\end{bmatrix}&\leq
-	\begin{bmatrix}
-	0\\
-	-1
-	\end{bmatrix}\\
-	S &= \emptyset
+	\vspace{0.3cm}
+	This situation may also happen with inequalities constraints:
+	\begin{align*}
+		\begin{bmatrix}
+			-1&0\\
+			1&0
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_1\\
+			x_2
+		\end{bmatrix}&\leq
+		\begin{bmatrix}
+			0\\
+			-1
+		\end{bmatrix}\\
+		S &= \emptyset
 	\end{align*}
-
+	
 \end{example}
 
 
 
 \begin{example}
+	Generally, to facilitate sketch will often just sketch inequity constraints:
+	
 	\begin{align*}
-	\begin{bmatrix}
-	-1 & 0\\
-	0 & -1\\
-	\frac{1}{2} & -1\\
-	1 & 1
-	\end{bmatrix}
-	\begin{bmatrix}
-	x_1\\
-	x_2
-	\end{bmatrix}
-	 &\leq 
-	 \begin{bmatrix}
-	 0\\
-	 0\\
-	 1\\
-	 3
-	 \end{bmatrix}\\
-	 \frac{1}{2}x_1 - x_2&\leq 1\\
-	 x_2 &\geq -1 + \frac{1}{2}x_1
+		\begin{bmatrix}
+			-1 & 0\\
+			0 & -1\\
+			\frac{1}{2} & -1\\
+			1 & 1
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_1\\
+			x_2
+		\end{bmatrix}
+		&\leq 
+		\begin{bmatrix}
+			0\\
+			0\\
+			1\\
+			3
+		\end{bmatrix}\\
 	\end{align*}
 	
+	So we have
+	$$x_1 \geq 0$$
+	$$x_2 \geq 0$$
+	$$x_2 \geq -1 + \frac{1}{2}x_1$$
+	$$x_2 \leq 3 - x_1$$
+	
+	Sketch the feasible set:
+	
 	\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_5.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_5.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
 	\end{figure}
+\end{example}
+
+The rows of matrix $G$ are the normal directions of the hyperplanes that define the half-spaces, and the normal directions point outward from the feasible set.
+
+
+\begin{example}
+	Let's combine all these things together, liner objective function, linear equality constraints and linear inequity constraints.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_6.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
+	\end{figure}
+	
+	What's optimum? Looks like $x^*=v^{(3)}$.
+	
+	
+	\vspace{0.5cm}
+	We may also have a facet with the feasible set 
+	$$S = \{x\in \reals^3 | x_1 +x_2+x_3 = 1, x_1 \geq 0, x_2\geq 0,x_3\geq 0\}$$
+	
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_7.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
+	\end{figure}
+	
+	So there are various possibilities here for $p^*$ and  $x^* $:
+	
+	\begin{itemize}
+		\item 1) $x^*$ is unique, $p^*$ finite
+		
+		\item 2) $x^*$ is not unique, $p^*$ finite. 
+		
+		\item 3) There is no $x^*$:
+		
+		\quad a) $S = \emptyset$ (Feasible set is empty), constraint $p^* = \infty$. So we say that this LP problem is infeasible.
+		
+		\quad b) $S$ is unbounded \& no minimum, constraint $p^* = -\infty$
+	\end{itemize}
+	
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_8.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
+	\end{figure}
+	
+	Active constraints: An optimal solution that lies at the intersection point of two constraints causes both of those constraints to be considered active
+	
+	Inactive constraints: If any of the constraint lines do not pass through the optimal point, those constraints are called inactive.
+	
+	In this example(see picture above) constraints g(1) and g(2) are active at optimum.
+	
+	Note that, we could improve(decrease) the cost if:
+	$$c^T(x^{(0)} + \bigtriangleup) + d < c^Tx^{(0)} + d$$
+	That is, $\langle c, \bigtriangleup\rangle < 0$, the angle between displacement vector $\bigtriangleup$ and normal vector $c$ is an obtuse angle(see the picture above).
 \end{example}
 
 
 
 
 
-LP: Linear objective \& constraints
-
-\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_6.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{figure}
-
-\begin{equation*}
-S = \{x\in \Re^3 | 
-\begin{bmatrix}
-1 & 1 & 1
-\end{bmatrix}
-\begin{bmatrix}
-x_1\\
-x_2\\
-x_3
-\end{bmatrix}
- = 1, x_1 \geq 0, x_2\geq 0,x_3\geq 0
- \}
-\end{equation*}
-
-\begin{align*}
-x^* = arg\,\,\, &min 
-\begin{bmatrix}
-1&1&1
-\end{bmatrix}x\\
-&s.t. \,\,\, x\in S\\
-x^* = arg\,\,\, &min 
-\begin{bmatrix}
-1&0&0
-\end{bmatrix}x = x_1\\
-\end{align*}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_7.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{figure}
-
-So there are various possibilities here for $p^* \& x^* $:
-
-\begin{itemize}
-	\item 1) $x^*$ is unique, $p^*$ finite
-	
-	\item 2) $x^*$ is not unique, $p^*$ finite. 
-	
-	\item 3) There is no $x^*$:
-	
-		a) $S = \emptyset$(Feasible set is empty), constraint $p^* = \infty$
-	
-		b) $S$ is unbounded \& no minimum, constraint $p^* = -\infty$
-\end{itemize}
-
-
-\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1012_8.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{figure}
-
-
-
-
-
-"active" constraints are those inequality constraints satisfied with equality. 
-
-Cost decreases if:
-
-\begin{align*}
-c^T(x^{(0)} + \bigtriangleup) + d &< c^Tx^{(0)} + d\\
-c^T\bigtriangleup &< 0\\
-<c, \bigtriangleup> &< 0
-\end{align*}
-
-
-In example constraints 1\&2 are active at optimum.\\
-
-Observation: 
-
+\vspace{0.5cm}
+Some observations:
 \begin{itemize}
 	\item If you are at a vertex(doesn't have to be optimum). 
 	
-	\item Any "move" that keeps you feasible must be into feasible set $\rightarrow$ opposite vector that define active constraints.
+	\item Any "move" that keeps you feasible must also let you move into the feasible set 
+	
+	$\rightarrow$ opposite vector that define active constraints.
 	
 	\begin{equation*}
-	v - \alpha g^{(1)} - \beta g^{(2)}, \,\,\, \alpha, \beta \geq 0
+		v - \alpha g^{(1)} - \beta g^{(2)}, \,\,\, \alpha, \beta \geq 0
 	\end{equation*}
 	
 	\item Are these any choices of $\alpha, \beta$ that decrease the cost?
-	
 	\begin{align*}
-	c^T(v - \alpha g^{(1)} - \beta g^{(2)}) + d &\leq c^Tx + d\\
-	-\alpha <c, g^{(1)}> - \beta<c, g^{(2)}> &\leq 0
+		c^T(v - \alpha g^{(1)} - \beta g^{(2)}) + d &\leq c^Tx + d\\
+		-\alpha \langle c, g^{(1)}\rangle  - \beta \langle c, g^{(2)}\rangle &\leq 0
 	\end{align*}
 \end{itemize}
 
 If:
 
-1) $<c, g^{(1)}> < 0$
+1) $\langle c, g^{(1)}\rangle < 0$
 
-2) $<c, g^{(2)}> < 0$
+2) $\langle c, g^{(2)}\rangle < 0$
 
 no more into feasible set will decrease the cost.\\ 
 
-Condition for optimality:\\
+\vspace{0.5cm}
+Condition for optimality:
 
 A feasible vertex $v$: $v\in\{x|Gx \leq h \}$ is an optimal solution to LP with cost $F_0(x) = c^Tx + d$ if $c^Tg^{(i)} < 0$, $\forall i\in$ active set.\\
 
@@ -577,12 +618,12 @@ A feasible vertex $v$: $v\in\{x|Gx \leq h \}$ is an optimal solution to LP with 
 \end{figure}
 
 
+\subsection{Simplext Algorithm}
 Simplex algorithm:
-
 \begin{itemize}
-	\item 1) Start ar feasible vertex;
+	\item 1) Start from a feasible vertex;
 	
-	\item 2) Identify direct of cost decrease along an edge;
+	\item 2) Identify direction of cost decrease along an edge;
 	
 	\item 3) Move on that direction until any further more would violate a previously inactive constraints.
 	
@@ -593,288 +634,229 @@ Simplex algorithm:
 
 
 
-%Above are notes for Oct 12
 
-%Below are notes for Oct14
-
-
-
-\begin{equation*}
-\{x|Gx\leq h \}
-\end{equation*}
+%\begin{equation*}
+%\{x|Gx\leq h \}
+%\end{equation*}
 
 
-\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_1.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_1.png}
+%\caption{This is an inserted JPG graphic} 
+%\label{fig:graph} 
+%\end{figure}
 
 
-If $x =v^{(a)}$, constraints, constraints 1\&2 active, 3 is inactive.
+%If $x =v^{(a)}$, constraints, constraints 1\&2 active, 3 is inactive.
 
-\begin{align*}
-<g^{(1)}, v^{(a)}> &= h_1\\
-<g^{(2)}, v^{(a)}> &= h_2\\
-<g^{(3)}, v^{(a)}> &< h_3
-\end{align*}
+%\begin{align*}
+%<g^{(1)}, v^{(a)}> &= h_1\\
+%<g^{(2)}, v^{(a)}> &= h_2\\
+%<g^{(3)}, v^{(a)}> &< h_3
+%\end{align*}
 
-At $x = v^{(b)}$, constraints 2\&3 active, 1 is inactive.\\
+%At $x = v^{(b)}$, constraints 2\&3 active, 1 is inactive.\\
 
-1) Define a vertex $v$:
+%1) Define a vertex $v$:
 
-\begin{itemize}
-	\item a) $v\in S$ is a vertex if cannot express $v = \lambda u +(1-\lambda)w$, $u, w\in S$, $\lambda \in [0,1]$
-	
-	\item b) There exists a cost vector $c\in \Re^n$ s.t. $v$ is unique solution to an LP with cost vector $c$.
-	
-	\item c) Algebraic characterization of vertices in terms of $A, b, G, h$. $S = \{x|Ax \leq b, Gx\leq h \}$
-\end{itemize}
+%\begin{itemize}
+%	\item a) $v\in S$ is a vertex if cannot express $v = \lambda u +(1-\lambda)w$, $u, w\in S$, $\lambda \in [0,1]$
+
+%	\item b) There exists a cost vector $c\in \reals^n$ s.t. $v$ is unique solution to an LP with cost vector $c$.
+
+%	\item c) Algebraic characterization of vertices in terms of $A, b, G, h$. $S = \{x|Ax \leq b, Gx\leq h \}$
+%\end{itemize}
 
 
 
-2) Define / Find directions along edges of polyhedron that keep you in the feasible set.
+%2) Define / Find directions along edges of polyhedron that keep you in the feasible set.
 
-3) How far can you go in direction that decrease cost until "leave" feasible set?
-
-\begin{align*}
-min \,\,\, &c^Tx+d\\
-s.t. \,\,\, &Ax = b\\
-&Gx\leq h
-\end{align*}
-
-$x\in \Re^n, c\in \Re^n, d\in \Re, A\in \Re^{q\times n}, b\in \Re^q, G\in \Re^{m\times n}, h\in \Re^m$.
-
-Inequalities:
-
-\begin{align*}
-min \,\,\, &c^Tx+d\\
-s.t. \,\,\, &Gx\leq h\\
-\end{align*}
-
-"Standard Form":
-
-\begin{align*}
-min \,\,\, &c^Tx+d\\
-s.t. \,\,\, &Ax = b\\
-&x\geq 0
-\end{align*}
-
-To get to inequality:
-
-\begin{equation*}
-Ax = b \Leftrightarrow Ax\geq b, Ax\leq b
-\end{equation*}
-
-\begin{align*}
-min\,\,\, &c^Tx +d\\
-s.t. &\begin{bmatrix}
-G\\
-A\\
--A
-\end{bmatrix} x\leq
-\begin{bmatrix}
-h\\
-b\\
--b
-\end{bmatrix}
-\end{align*}
-
-Standard Form:
-
-\begin{align*}
-min \,\,\, &c^Tx+d\\
-s.t. \,\,\, &Gx\leq h\\
-&Ax = b
-\end{align*}
-
-is equivalent to:
-
-\begin{align*}
-min \,\,\, &c^Tx+d\\
-s.t. \,\,\, &Gx + s = h\\
-&Ax = b\\
-&s\geq 0
-\end{align*}
-
-is also equivalent to:
-
-\begin{align*}
-min \,\,\, &c^T(x^{+} - x^{-})+d\\
-s.t. \,\,\, &G(x^{+} - x^{-}) + s = h\\
-&A(x^{+} - x^{-}) = b\\
-&s\geq 0\\
-&x^{+}\geq 0\\
-&x^{-}\geq 0
-\end{align*}
-
-can come to:
-
-\begin{align*}
-min_{x^{+},x^{-},s} &\begin{bmatrix}
-c^T - c^T & 0
-\end{bmatrix}
-\begin{bmatrix}
-x^{+}\\
-x^{-}\\
-s
-\end{bmatrix}+d\\
-&\begin{bmatrix}
-A-A & 0
-\end{bmatrix}
-\begin{bmatrix}
-x^{+}\\
-x^{-}\\
-s
-\end{bmatrix}=b\\
-&\begin{bmatrix}
-G-G & I
-\end{bmatrix}
-\begin{bmatrix}
-x^{+}\\
-x^{-}\\
-s
-\end{bmatrix}=h\\
-&x^{+}\geq 0, x^{-}\geq 0, s\geq 0
-\end{align*}
-
-
+%3) How far can you go in direction that decrease cost until "leave" feasible set?
 
 
 \begin{example}
+	Consider the problem:
 	\begin{align*}
-	&min \Vert Ax - b\Vert_{\infty}\\
-	&s.t. Gx \leq h\\
-	&\Vert u\Vert_{\infty} = max_{i\in [n]}|u_i|
+		&min \Vert Ax - b\Vert_{\infty}\\
+		&s.t. Gx \leq h
 	\end{align*}
-	Introduce helper variable $t$:
 	
+	Recall that $\Vert u\Vert_{\infty} = max_{i\in [n]}|u_i|$,
 	\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_2.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_2.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
 	\end{figure}
 	
-	
+	Introduce a helper(auxiliary) variable $t\in \reals$ which corresponding to the value of the norm, so the we convert the original problem into following problem:	
 	\begin{align*}
-	min_{x,t} &t\\
-	s.t. &Ax - b\leq t\textbf{1}\\
-	&Ax - b\leq (-t)\textbf{1}\\
-	&Gx \leq h
+		min &\qquad t\\
+		s.t. &Ax - b\leq t\textbf{1}\\
+		&Ax - b\geq (-t)\textbf{1}\\
+		&Gx \leq h
 	\end{align*}
 \end{example}
 
 
 \begin{example}
+	Consider the problem:
+	\begin{align*}
+		min_x &||Ax - b||_1, \,\,\,\,\, A\in \reals^{q\times n}\\
+		s.t. &Gx\leq h
+	\end{align*}
 	\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_3.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_3.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
 	\end{figure}
 	
-	\begin{align*}
-	min_x &||Ax - b||_1, \,\,\,\,\, A\in \Re^{q\times n}\\
-	s.t. &Gx\leq h
-	\end{align*}
-	
+	Recall the definition of $L_1$ norm:
 	\begin{equation*}
-	||u||_1 = \sum^q_{i=1} |u_i|
+		||u||_1 = \sum^q_{i=1} |u_i|
 	\end{equation*}
 	
-	Helper vector $t\in \Re^q$.
+	%	\begin{figure}
+	%		\centering
+	%		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_4.png}
+	%		%\caption{This is an inserted JPG graphic} 
+	%		%\label{fig:graph} 
+	%	\end{figure}
 	
+	Let's introduce the helper vector $t\in \reals^q$,
 	\begin{align*}
-	min_{x,t} &\sum^q_{i=1}t_i\\
-	s.t. \,\,\,\,\,&Gx \leq h\\
-	&Ax -b \leq t\\
-	&Ax -b \geq -t
+		min_{x,t} &\sum^q_{i=1}t_i\\
+		s.t. \,\,\,\,\,&Gx \leq h\\
+		&Ax -b \leq t\\
+		&Ax -b \geq -t
 	\end{align*}
 	
-	\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_4.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-	\end{figure}
-\end{example}
-
-\begin{example}
-	\begin{align*}
-	min \,\,\, max_{i\in [q]} &(c^{(i)^T}x + d_i)\\
-	s.t. &Gx\leq h
-	\end{align*}
-	
-	\begin{align*}
-	min_{x, t\in \Re} &t\\
-	s.t. &(c^{(i)^T}x + d_i)\leq t,\,\,\,\,\, \forall i\in [q]\\
-	&Gx\leq h
-	\end{align*}
-	
-	\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_5.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-	\end{figure}
 \end{example}
 
 
 
 \begin{example}
-	Finding the largest $l_2$ ball that fits in a polyhedron $p = \{x| Gx\leq h \}$
+	Consider following problem:
+	\begin{align*}
+		min \,\,\, max_{i\in [q]} &(c^{(i)^T}x + d_i)\\
+		s.t. &Gx\leq h
+	\end{align*}
+	This case is similar to the $L_\infty$ norm case due to the inner max function, but it is one-sided(no lower bound). So we could convert the original one to the following:
+	\begin{align*}
+		min  &\qquad t\\
+		s.t. &(c^{(i)^T}x + d_i)\leq t,\,\,\,\,\, \forall i\in [q]\\
+		&Gx\leq h
+	\end{align*}
+	\begin{marginfigure}
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_5.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
+	\end{marginfigure}
+\end{example}
+
+Remark:
+
+In above three examples, the decision variables in initial formulation are $x\in \reals^n$, but in reformulation they become:
+
+Example 7.6: $(x, t) \in \reals^n \times \reals$
+
+Example 7.7: $(x, t) \in \reals^n \times \reals^n$
+
+Example 7.8: $(x, t) \in \reals^n \times \reals$
+
+
+
+\begin{example}
+	Finding the largest $L_2$ ball that fits in a polytope.
+	
+	Let $p = \{x\in \reals^n| Gx\leq h \}$,
 	
 	\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_6.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
+		\centering
+		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_6.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
 	\end{figure}
 \end{example}
 
-A sphere is fully parameterized by :
+It turns out that, this problem can be formulated as an LP problem. \
+
+Note that:
 \begin{itemize}
-	\item Its center $x_c$
+	\item A sphere is fully parameterized by its center $x_c$ and its radius $r$
 	
-	\item Its radius $r$
+	\item A sphere $(x_c, r)$ fits in $p$ if: $x_c + u \in p$, $\forall u \,\,\, s.t. ||u||_2\leq r$
 \end{itemize}
 
-A sphere fits in $p$ if:$x_c + u \in p$, $\forall u \,\,\, s.t. ||u||_2\leq r$
+\vspace{0.3cm}
+Now, let's formulate as an LP. To accomplish this, observe that 
+
+$x_c+u \in p$ means that $g^{(i)^T}(x_c + u) \leq h_i,\,\,\, \forall i\in [q]$, $\forall u$ s.t. $||u||_2\leq r$.
+
+\vspace{0.2cm}
+Examine the constraint $g^{({i})^T}x_c + g^{({i})^T}u \leq h_i$ at a time:
+
+As for $g^{({i})^T}u$, what's the direction of $u$ in order to make this term large as possible? It turns out, $u$ must be aligned with $g^{(i)}$, the same direction with $g^{(i)}$.
+
+Furthermore, what's the value of $u$ that is aligned with $g^{(i)}$ and satisfies  $\vert u\vert_2=r?$ It should be:
+$$u^*=\frac{g^{(1)}}{||g^{(1)}||}r$$
 
 
-\begin{itemize}
-	\item $x_c+u \in p$ means that $g^{(i)^T}(x_c + u) \leq h_i,\,\,\, \forall i\in [q]$ \& all $u$ $s.t. ||u||_2\leq r$.
-	
-	\item Looking at constraints $i$ by itself: $g^{({i})^T}x_c + g^{({i})^T}u \leq h_i$. 
-	
-	As for $g^{({i})^T}u$, for $||u||_2>r$, what direction should $u$ point in to make left hand side as large as possible?
-	
-	Set $u=\frac{g^{(1)}}{||g^{(1)}||}r$ 
-\end{itemize}
+So, if the following is satisfied:
+$$g^{(i)^T}[x_c + u^*] \leq h_i$$\
+Then constraint $i$ will be satisfied for all $u$ such that $\vert u\vert \leq r$.
 
-Upshot: if following is satisfied:
+Substituting in $u^*$, the constraints become:
+$$g^{(i)^T} x_c + \Vert g^{(i)}\Vert_2 r\leq h_i$$
+Note that the constraint is linear in $x_c$ and $r$.
 
-\begin{equation*}
-g^{(1)^T}[x_c + \frac{g^{(1)}}{||g^{(1)}||_2}r] \leq h_i
-\end{equation*}
-
-Then constraint $i$ is satidfied for all $u$ that are of length $r$.
-
-
-
+The problem of finding the largest sphere becomes the following:
 \begin{align*}
-max_{x, r} &r\,\,\,(or\,\,\,min -r)\\
-s.t. &g^{(1)^T}x_c + ||g^{(1)}||_r\leq h_i\,\,\,\,\, i\in [q]
+	\max \quad & r\\
+	s.t.\quad &g^{(i)^T}x_c + r ||g^{(i)}||_2\leq h_i \qquad \forall i\in [q]
 \end{align*}
 
-$\rightarrow(x_c, r)\in \Re^{n+1}$
 
-$\rightarrow$ Transformed some quadratic-like problem into an LP.\\
+Remarks:
+
+(1) Optimal value $(x_c, r)\in \reals^{n+1}$.
+
+(2) $x_c$ is a variable that does not enter the objective.
+
+(3) Possibly no solution if $p$ is an empty set.
+
+(4) Constraints and objective are linear in optimal variable so it is an LP problem.
+
+(5)Transformed some quadratic-like problem (quadratic as a sphere is involved) into an LP, because we were able to identify which direction of $u$ the worst case for each constraint.
 
 
-Quadratic program(QP)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\section{Quadratic program(QP)}
 
 \begin{align*}
 p^* = min_{x\in \Re^n} &\frac{1}{2}x^THx + c^Tx + d\\
