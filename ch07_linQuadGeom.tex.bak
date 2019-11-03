@@ -117,7 +117,7 @@ Let $p^*$ be the optimal value of the given objective function under the constra
 
 Remarks on "optimal" value $p^*$ of program:
 \begin{itemize}
-	\item Lowest cost choice amongst all feasible $x$.
+	\item Lowest cost shoice amongst all feasible $x$.
 	
 	\item Possible here is no minimal choice
 	
@@ -157,7 +157,7 @@ Different nutrients in different foods and daily requirement:
 		\hline 
 		Nutrients&Meat&Potatoes&Daily Requirement\\
 		\hline  
-		Carbohydrates&40&200&400\\
+		Carbohydates&40&200&400\\
 		\hline  
 		Protein&100&20&200\\
 		\hline  
@@ -181,7 +181,7 @@ The price of meat and potatoes:
 	\end{tabular}
 \end{center}
 
-Let $x_1$ denotes meat(kg) and $x_2$ denotes potatoes(kg), and we formulate this LP as follows:
+Let $x_1$ denotes meat(kg) and $x_2$ denotes potatoes(kg), and we formulate this LPP as follows:
 
 Objective function:
 \begin{equation*}
@@ -237,9 +237,9 @@ Rewrite it as $Gx\leq h$, that is,
 
 
 
-\subsection{LP without constraints}
+\subsection{LP without contraints}
 
-Consider the LP does not have constraints, so we have
+Consider the LPP does not have constraints, so we have
 \begin{align*}
 	p^* &= \min c^Tx+d\\
 	x^* &= \arg \min_{x\in \reals^n} \,\,\, c^Tx+d
@@ -338,12 +338,12 @@ Now, let's turn back to LP with following constraints as we specified before:
 	Gx &\leq h
 \end{align*}
 
-Interesting results and interpretation for these two kind of constraints:
+Interesting results and interpenetration for these two kind of constraints:
 
-(1) $Ax=b$ (Equality constraints): force $x^*$ into an affine set
+(1) $Ax=b$ (Equality contraints): force $x^*$ into an affine set
 $$\{x\in \reals^n|Ax = b \} =  \cap^q_{i=1}\{x\in \reals^n|<\alpha^{(i)}, x> = b_i \}$$
 
-(2) $Gx\leq h$ (Inequality constraints): force $x^*$ to be in an intersection of half-spaces
+(2) $Gx\leq h$ (Inequality contraints): force $x^*$ to be in an intersection of half-spaces
 $$\{x\in \reals^n|Gx \leq h \} =  \cap^q_{i=1}\{x\in \reals^n| <g^{(i)}, x> \leq h_i \}$$
 
 (3) The feasible set: intersection of half-spaces and hyperplanes
@@ -354,7 +354,7 @@ $$
 
 A few remarks:
 \begin{itemize}
-	\item Concepts of polyhedron and polytope.
+	\item Concepts of polyhedron and polytape.
 	
 	\item Ax = b $\rightarrow$ $Ax \leq b$, $Ax \geq b$
 \end{itemize}
@@ -618,7 +618,7 @@ A feasible vertex $v$: $v\in\{x|Gx \leq h \}$ is an optimal solution to LP with 
 \end{figure}
 
 
-\subsection{Simplex Algorithm}
+\subsection{Simplext Algorithm}
 Simplex algorithm:
 \begin{itemize}
 	\item 1) Start from a feasible vertex;
@@ -941,7 +941,7 @@ $\rightarrow$ still a QP, but an unconstrained QP.
 
 
 
-\begin{example}{Markowitz Portfolio optimization}
+\begin{example}{Markowitz Partfolio optimization}
 	"Mean/variance" analysis
 	
 	\begin{itemize}
@@ -1151,7 +1151,7 @@ F_0(x_{\alpha}) &=\frac{{\alpha}^2}{2}c_{\perp}^THc_{\perp} + c^T(-\alpha c_{\pe
 
 
 
-%Below are notes for Oct21
+%Nelow are notes for Oct21
 
 
 \section{Geometry of Objective}
