@@ -895,4 +895,299 @@ Note:
 
 %Below are notes for Nov 6
 
+$F(x) = \lambda_{max}(x)$ where $domF = S^n$ is convex. 
+
+(a) 
+
+\begin{align*}
+\lambda_{max}(x) &= max_{v:\Vert v\Vert = 1}v^TXv\\
+v^TXv &= v^TQ\Lambda Q^Tv = \tilde{v}^T\Lambda \tilde{v}\\
+&= \sum^n_{i=1}(\tilde{v}_i)^2\lambda_i \leq \lambda_{max}(X)
+\end{align*}
+
+(b)
+\begin{equation*}
+v^T(\alpha x_1 + \beta x_2)v = \alpha v^Tx_1v + \beta v^Tx_2v
+\end{equation*}
+
+
+$v^TXv$ is linear in $X$.
+
+So $F(x)$ is $max$ of a bunch of functions linear in $X$ $\Leftarrow$ convex.
+
+\begin{enumerate}
+	\item $F(x) = \sigma_1(x)$ convex on $domF =\Re^{n\times m}$.
+	
+	\item $F(x) = (detX)^{\frac{1}{n}}$ , concave on $domf = S^n_{++}$
+\end{enumerate}
+
+
+\subsection{"First-order" condition}
+
+\begin{theorem}
+	A differentiable function $f$ ($domf$ is open and gradients exist everywhere in domain) is convex if and only if $\forall x,y\in domf$:
+	\begin{equation*}
+	F(y)\geq F(x) + \triangledown F(x)^T(y-x) \,\,\,\,\,  (*)
+	\end{equation*}
+	and if strictly convex if $(*)$ is a strict inequality for all $x\neq y$.
+	
+	\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1106_1.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+	\end{marginfigure}
+	
+	$\rightarrow$ First-order Taylor approximation is everywhere an under-estimator of $f$.
+	
+	$\rightarrow$ There is a tangent plane that is a supporting hyperplane of $epiF$.
+\end{theorem}
+
+First, assume $f$ convex $\Rightarrow$ show $(*)$ holds. Pick $(x,y)$ by define convex function. 
+
+\begin{align*}
+F((1-\lambda)x+\lambda y) &\leq (1-\lambda)F(x) + \lambda F(y)\\
+\frac{F(x+\lambda(y-x)) - F(x)}{\lambda} &\leq F(y) - F(x)
+\end{align*}
+
+
+Let $\lambda \rightarrow 0$ and observe $lim_{\lambda\rightarrow 0} \frac{F(x+\lambda(y-x)) - F(x)}{\lambda} = \triangledown F(x)^T(y-x)$.
+
+\begin{equation*}
+\triangledown F(x)^T(y-x)\leq F(y) - F(x)
+\end{equation*}
+
+(You can also do above procedure in 1-dimension, try it by yourself)
+
+Secondly, assume $(*)$ holds $\rightarrow$ show convex.
+
+Take any $(x,y)\in domf$, then $\forall \lambda\in[0,1]$, $z= \lambda x + (1-\lambda)y \in domf$ since $domf$ convex.
+
+Using $(*)$ 2 times get:
+
+\begin{align*}
+F(x) &\geq F(z) + \triangledown F(x)^T(x-z)\\
+F(y) &\geq F(z) + \triangledown F(x)^T(y-z)
+\end{align*} 
+Compute
+
+\begin{align*}
+\lambda F(x)+(1-\lambda)F(y) &\geq F(z) + \triangledown F(z)^T[\lambda (x-z)+(1-\lambda)(y-z)]\\
+&= F(z) + \triangledown F(z)^T[\lambda x - \lambda z + y - z - \lambda y +\lambda z]\\
+&= F(z) + \triangledown F(z)^T[\lambda x + (1-\lambda)y - z]\\
+&= F(z)\\
+&= F(\lambda x + (1-\lambda )y)
+\end{align*}
+
+Connect $1^{st}-$order condition with $epif$
+
+Recall $(x,t)\in epif$ if $t\geq F(x)$
+
+$1^{st}-$order condition: $\forall x,y \in domf$, $F(y)\geq F(x) + \triangledown F(x)^T(y-x)$
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1106_2.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+Consider and $(y,t)\in epif$:
+
+\begin{align*}
+t &\geq F(y) \geq F(x) + \triangledown F(x)^T(y-x)\\
+0 &\geq F(x) - t + \triangledown F(x)^T(y-x)\\
+&= \begin{bmatrix}
+\triangledown F(x)^T & -1
+\end{bmatrix}\begin{bmatrix}
+y-x\\
+t -F(x)
+\end{bmatrix}\\
+&= \begin{bmatrix}
+\triangledown F(x)^T  & -1
+\end{bmatrix}\begin{bmatrix}
+y\\
+t
+\end{bmatrix} + (-\triangledown F(x)^Tx + F(x))
+\end{align*}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1106_3.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\subsection{"Second-order" condition}
+
+\begin{theorem}
+	If $f$ is everywhere twice differentiable, then $f$ is convex if and only if its Hessian $\triangledown^2F(x)\geq 0$(PSD) for all $x\in domf$
+\end{theorem}
+
+Similarly, we show our two-parts proof:\\
+
+Firstly, assume $f$ convex $\Rightarrow$ show $\triangledown^2F(x)\geq 0$.
+
+Let $x_o \in domf$(any point), $v\in \Re^n$(a direction), then $z = x_0 + \lambda v$ is in $domf$ if $\lambda > 0$ sufficiently small. 
+
+By Taylor approximation, 
+\begin{equation*}
+F(z) = F(x_0) + \triangledown F(x_))^T(\lambda v) + \frac{1}{2}(\lambda_v)^T\triangledown^2F(x_0)\lambda v + O(\lambda^3)
+\end{equation*}
+
+Re-arrange:
+
+\begin{equation*}
+\frac{1}{2}\lambda^2v^T\triangledown^2F(x_0)v+O(\lambda^3) =       F(z) - F(x_0) - \triangledown F(x_0)^T(\lambda v)
+\end{equation*}
+
+The right-hand side is $\geq 0$ by first-order-convexity result.\\ 
+
+
+
+
+
+Continuing, divide through by $\lambda^2$ to get:
+\begin{equation*}
+\frac{1}{2}v^T\triangledown^2F(x_0)v + \frac{O(\lambda^3)}{\lambda^2} \geq 0
+\end{equation*}
+
+In above equation, $O(\lambda^3)$ means this is $\leq M\lambda^3$ "Big-O", so $\frac{O(\lambda^3)}{\lambda^2} \leq M\lambda$.
+
+Letting $\lambda\rightarrow 0$ get $\frac{1}{2}v^T\triangledown^2F(x_0)v\geq 0$, $\Rightarrow \triangledown^2F(x_0)$ is PSD. 
+
+For all $x_0 \in domf$, since $v\in \Re^n$ can be chosen arbitrarily. \\
+
+Secondly, Assume $\triangledown^2F(x_0)\geq 0, \forall x_0\in domf$ $\Rightarrow$ convex.
+
+Apply Taylor approximation with remainder $\forall x,y\in domf$, 
+
+\begin{equation*}
+F(y) =F(x) + \triangledown F(x)^T(y-x) + \frac{1}{2}(y-x)^T\triangledown^2F(z)(y-x)
+\end{equation*}
+
+where Hessian evaluated at some $z$ between $x\& y$("mean value")
+
+Since $\triangledown^2F(x_0)\geq 0$,
+
+\begin{equation*}
+F(y) \geq F(x) + \triangledown F(x)^T (y-x)
+\end{equation*}
+
+$\rightarrow$ back to $1^{st}-$order-condition, true for $\forall x,y$. So $f$ must be convex. 
+
+
+Here we can give some examples:
+
+\begin{enumerate}
+	\item $F(x) = x^2$, $domf = \Re$, $F''(x) = 2 > 0$, $\forall x\in \Re$(strictly convex)
+	
+	\item $F(x) = x^3$, $domf = \Re$, $F'(x) = 3x^2$, $F''(x) = 6x$, but if set $demf = \Re_+$ then $f$ is convex.
+	
+	\item $F(x) = x^{\alpha}$, $domf = \Re_+$, $F''(x) = \alpha(\alpha - 1)x^{\alpha - 2}$ where $\alpha(\alpha - 1) > 0$ if $\alpha > 1$ or $\alpha < 0$ and $\alpha(\alpha - 1) < 0$ if $0<\alpha < 1$. $x^{\alpha - 2}\geq 0$ since $domf = \Re_+$
+	
+	\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1106_4.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+	\end{marginfigure}
+	
+	\item $F(x) = log_ex$, $domf = \Re_{++}$, $F'(x) = \frac{1}{x}$, $F''(x) = -\frac{1}{x^2}<0$, concave.
+	
+	\item $F(x) = xlog_e(x)$, $domf = \Re_{++}$, $\frac{\alpha^2}{\alpha x^2}F(x) = \frac{\alpha}{\alpha x}[log_e(x) + \frac{x}{x}] = \frac{1}{x} > 0$, convex
+	
+	\item $F(x) = e^{\alpha x}$, $domf = \Re$, $F''(x) = \alpha^2 e^{\alpha x}$
+	
+	\item $F(x) = \frac{1}{2}x^THx + c^Tx + d$, 
+	
+	\begin{align*}
+	\triangledown F(x) &= \frac{1}{2}(H+H^T)x + c \\
+	&= \tilde{H}x + c\\
+	\triangledown^2F(x) &= \tilde{H}
+	\end{align*}
+	If $\tilde{H}\geq 0$, then convex.
+	
+	If $\tilde{H}\leq 0$, then concave.
+	
+	If neither PSD or negative semi-definite, then neither. 
+\end{enumerate}
+
+\begin{example}
+	\begin{align*}
+	F(x,y) &= x^2 + y^2 + 3xy \\
+	&= \begin{bmatrix}
+	x&y
+	\end{bmatrix}\begin{bmatrix}
+	1&\frac{3}{2}\\
+	\frac{3}{2} & 1
+	\end{bmatrix}\begin{bmatrix}
+	x\\
+	y
+	\end{bmatrix}\\
+	&=\frac{1}{2}\begin{bmatrix}
+	x&y
+	\end{bmatrix}\begin{bmatrix}
+	2&3\\
+	3 & 2
+	\end{bmatrix}\begin{bmatrix}
+	x\\
+	y
+	\end{bmatrix}\\
+	det(\begin{bmatrix}
+	2&3\\
+	3&2
+	\end{bmatrix} - \lambda I) &= det\begin{bmatrix}
+	2-\lambda & 3\\
+	3 & 2-\lambda
+	\end{bmatrix}\\
+	&= (2-\lambda)^2 - 9\\
+	&= (\lambda - 5)(\lambda + 1)
+	\end{align*}
+	Try $-45^{\circ}$ line, will see slice is not convex.
+	
+	\begin{equation*}
+	F(x,-x) = x^2 + (-x)^2 + 3x(-x) = 2x^2 - 3x^2 = -x^2
+	\end{equation*}
+	
+\end{example}
+
+\begin{example}
+	Geometric mean $\sqrt{x_1x_2} = F(x_1x_2)$, $domf = \Re_+ \times \Re_+$.
+	
+	\begin{equation*}
+	\triangledown^2F(x) = -\frac{\sqrt{x_1x_2}}{y}\begin{bmatrix}
+	\frac{1}{x^2_1} & -\frac{1}{x_1x_2}\\
+	-\frac{1}{x_1x_2} & \frac{1}{x^2_2}
+	\end{bmatrix}
+	\end{equation*}
+	
+	1) Calculate eigenvalues
+	
+	2) Use definition
+	
+	\begin{align*}
+	v^T\triangledown^2F(x)v &= -\frac{\sqrt{x_1x_2}}{2}[\frac{v_1^2}{x_1^2} - \frac{2v_1v_2}{x_1x_2} + \frac{v_2^2}{x^2_2}]\\
+	&= -\frac{\sqrt{x_1x_2}}{2}(\frac{v_1}{x_1} -\frac{v_2}{x_2}) \leq 0
+	\end{align*}
+	
+	Concave in $(x_1, x_2)$, $F(x) = (\prod^n_{i=1}x_i)^{\frac{1}{n}}$ is concave in $x\in \Re^n$
+\end{example}
+
+Consequence of convexity conditions for differentiable $f$
+
+By $1^{st}-$order, if $f$ convex, then:
+
+\begin{equation*}
+F(y)\geq F(x) + \triangledown F(x)^T(y-x), \forall x,y\in domf
+\end{equation*}
+
+
+what if $\triangledown F(x^*) = 0 \in \Re^n$ for some $x^*\in domf$:
+\begin{equation*}
+F(y)\geq F(x^*) + \triangledown F(x^*)^T(y-x^*)
+\end{equation*}
+
+So if you can find an $x^*\in domf$ s.t. $\triangledown F(x^*) = 0$ then that is a global minimum.
+
 %Above are notes for Nov 6
