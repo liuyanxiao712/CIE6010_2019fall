@@ -650,5 +650,249 @@ g(x) = max\{F_1(x), F_2(x) \}
 %Above are notes for Oct30
 
 %Below are notes for Nov 4
+\subsection{Cones and generalized inequalities}
+
+\begin{align*}
+F(x) &=\sum\alpha_iF_i(x)\\
+g(x) &= F(Ax + b)\\
+g(x) &= max\{F_1(x), F_2(x) \}
+\end{align*}
+
+Example 1:
+\begin{align*}
+F(x) &= \sum^{\infty}_{i=1}log(b_i - a_i^Tx)^{-1}\\
+&=\sum^n_{i=1}-log(b_i - a_i^Tx)
+\end{align*}
+where $\lambda \in \Re^n$, $a_i\in \Re^n$, $b_i\in \Re$
+
+1) Note: $-log(\cdot)$ is a convex function, $dom\, -log(\cdot) = R_{++}$, $domF = \{x|b_i - a_i^Tx >0, \forall i\in [m] \} =\{x|b_i - a_i^Tx \in \Re_{++}, \forall i\in [m]$. Inverse image of $\Re_{++}$ under an affine transformation, and therefore a convex set. 
+
+2) Sum of convex functions each a convex function of an affine transformation of $x$, $\Leftrightarrow$ Therefore a convex function.\\
+
+\begin{example}
+	
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1104_1.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\begin{equation*}
+F(x) = sup_{y\in \mathcal{C}}\Vert y-x\Vert
+\end{equation*}
+
+note $\mathcal{C}$ not necessarily a convex set. 
+
+\begin{enumerate}
+	\item $y-x\rightarrow$ affine and therefore convex function of $x$.
+	
+	\item $\Vert\cdot\Vert\rightarrow$ norm function, so a convex function of its argument. 
+	
+	\item F(x) = $sup_{y\in \mathcal{C}}\Vert y-x\Vert$, $y\in \mathcal{C}$ is the basic max of a bunch of convex functions, each indexed by a $y\in \mathcal{C}$
+\end{enumerate}
+\end{example}
+
+\begin{example}
+	
+
+
+\begin{equation*}
+F(x) =inf_{y\in \mathcal{C}}\Vert y-x\Vert
+\end{equation*}
+
+$\rightarrow$ generally NOT convex in $x$.
+
+$\rightarrow$ If $\mathcal{C}$ is a convex set, then this is convex in $x$. 
+\end{example}
+
+\subsection{Projection} If $h(x, y)$ is convex in $(x,y)$, then $F(x) = inf_yh(x,y)$ is convex in $x$.
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1104_2.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+Idea: Shine light along $y$-axis, get shadow on $x-z$ plane that shadow is epif \& is a convex set. 
+
+\begin{proof}
+	Since $h(x,y)$ is convex in $\begin{bmatrix}
+	x\\
+	y
+	\end{bmatrix}\in domh$,
+	\begin{equation*}
+	epih = \{(x,y,t)|t\geq h(x,y), \begin{bmatrix}
+	x\\
+	y
+	\end{bmatrix}\in domh \}
+	\end{equation*}
+	$\rightarrow$ That's the black bowl in above graph. 
+	
+	Now consider:
+	\begin{equation*}
+	F(x) = inf_{y:\begin{bmatrix}
+		x\\
+		y
+		\end{bmatrix}\in domh}h(x,y)
+	\end{equation*}
+	
+	\begin{align*}
+	domF &= \{x|\exists y s.t. (x,y)\in domh \}\\
+	&= \{\begin{bmatrix}
+	1&0
+	\end{bmatrix}\begin{bmatrix}
+	x\\
+	y
+	\end{bmatrix} \vert \begin{bmatrix}
+	x\\
+	y
+	\end{bmatrix}\in domh \}
+	\end{align*}
+	
+	Above: affine map of all points in a convex set and therefore domf is a convex set.
+\end{proof}
+
+\begin{align*}
+epiF &= \{(x,t)|t\geq inf_{y:\begin{bmatrix}
+	x\\
+	y
+	\end{bmatrix}}\in domh, x\in domf \}\\
+&= \{\begin{bmatrix}
+\cdots
+\end{bmatrix}\begin{bmatrix}
+x\\
+y\\
+t
+\end{bmatrix}\vert t\geq h(x,y), \begin{bmatrix}
+x\\
+y
+\end{bmatrix}\in domh \}
+\end{align*}
+
+So this set is a convex set. But this set if $epiF$ so $F$ must be a convex function. 
+
+\begin{example}
+	
+
+
+\begin{equation*}
+F(x) = inf_{y\in\mathcal{C}}\Vert x-y\Vert
+\end{equation*}
+is a convex function if $\mathcal{C}$ is a convex set. 
+
+\begin{enumerate}
+	\item $x-y$ is affine in $x$
+	
+	\item $\Vert\cdot\Vert$ is a convex function for all norms.
+	
+	\item Apply projection theorem where $domh = \{\begin{bmatrix}
+	x\\
+	y
+	\end{bmatrix}\vert x\in \Re^n, y\in \mathcal{C} \}$ is a convex set and $x$ is unconstrained. 
+\end{enumerate}
+\end{example}
+\subsection{Characterizing Convexity by Restricting to a Line}
+
+Theorem: $F: \Re^n \rightarrow \Re$ is convex iff $g:\Re \rightarrow \Re$ is convex (in $t$) where $g(t) =F(x_0 + tv)$. For all choices of $x_0\in domf$, $v\in \Re^n$, $t\in \Re$ s.t. $x_0+tv\in domF$
+
+\begin{itemize}
+	\item $g(t)$ is function restricted to a line/slice
+	
+	\item If all possible slices convex then so is $F$.
+\end{itemize}
+
+Note: need $x_0+tv\in domF$, also note $domF$ is a convex set. 
+
+\begin{equation*}
+g(t) = g_{x_0, v}(t) = F(x_0+tv)
+\end{equation*}
+
+\begin{equation*}
+dom(g_{x_0, v}) = \{t|x_0+tv \in domF \}
+\end{equation*}
+
+Therefore $dom(g_{x_0, v})$ is convex set for all $x_0, v$.\\
+
+First, If $F$ is convex $\rightarrow$ $g$ convex. 
+\begin{align*}
+\forall t_1, t_2\in domg, \lambda\in [0,1]\\
+g(\lambda t_1 +(1-\lambda)t_2) &= F(x_0+[\lambda t_1+(1-\lambda)t_2]v)\\
+&= F(\lambda[x_0 +t, v]+(1-\lambda)[x_0+t_2v])\\
+&\leq \lambda F(x_0+t_1 v)+(1-\lambda)F(x_0+t_2v)\\
+&=\lambda g(t_1) + (1-\lambda)g(t_2)
+\end{align*}
+
+Second, $g$ convex in $t$, $\forall(x_0, v)\Rightarrow$ $F$ is convex. Pick arbitrary $x,y\in domF$, let $x_0 =x$, $v=(y-x)$, consider $g_{x_0, v}(t)$ for $t\in[0,1]$:
+
+\begin{align*}
+g_{x_0, v}(t) &= F(x_0+tv)\\
+&= F(x+t(y-x))\\
+&= F((1-t)x+ty)
+\end{align*}
+Since $g_{x_0, v}$ is convex in $t$ $\Rightarrow$ $F$ is convex in $t$. ($t$ plays role of $\lambda$)
+
+\begin{example}
+	
+
+
+\begin{equation*}
+F(x) =logdet(x^{-1})
+\end{equation*}
+
+\begin{itemize}
+	\item $domF = S^n_{++}$ $\leftarrow$ PD matrices
+	
+	\item $S^n_{++} \subset S^n \leftarrow$ vector space of $n\times n$ symmetric matrices. 
+\end{itemize}
+To show this is a convex function, will show it is convex for all "lines".
+
+line in $S^n$: $x_0 + tH$ where $x_0$ is synnetric PD matrix, $t\in \Re$ and $H$ is symmetric matrix in $S^n$. So $x_0 + tH$ is a family of symmetric matrices.
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1104_3.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+\end{example}
+
+note: $x_0\in S^n_{++}$, so $x_0^{-1}$exists, so $x_0^{\frac{1}{2}}$exists. $det(AB) = det(A)\cdot det(B)$
+
+\begin{align*}
+g(x) &= logdet(x_0+tH)^{-1}\\
+&= logdet[(x_0^{\frac{1}{2}}x_0^{\frac{1}{2}}+tx_0^{\frac{1}{2}}x_0^{-\frac{1}{2}}+Hx_0^{-\frac{1}{2}}x_0^{\frac{1}{2}})^{-1}]\\
+&= logdet[x_0^{-\frac{1}{2}}(I+tx_0^{-\frac{1}{2}}Hx_0^{-\frac{1}{2}})^{-1}x_0^{-\frac{1}{2}}]\\
+&= logdetx_0^{-1} + logdet[(I+tx_0^{-\frac{1}{2}}Hx_0^{-\frac{1}{2}})^{-1}]\\
+&= logdetx_0^{-1}+log(det(I+tM)^{-1})\\
+&= logdetx_0^{-1}+log[\prod^n_{i=1}(1+t\lambda_i)^{-1}]\\
+&= logdetx_0^{-1} - \sum_{i=1}^nlog(1+t\lambda_i)
+\end{align*}
+
+Recall $det$ is product of eigenvalues. 
+
+\begin{equation*}
+(I+tM)v = v+t\lambda v = (1+t\lambda)v
+\end{equation*}
+eigenvalues of $(I+tM)$ are $1+t\lambda_i$.\\
+
+Note:
+
+\begin{enumerate}
+	\item $1+t\lambda_i$ is affine in $t$
+	
+	\item $-log(\cdot)$ convex
+	
+	\item sum of convex functions $\Rightarrow$ $g(t)$ is convex in $t$.
+\end{enumerate}
+
 
 %Above are notes for Nov 4
+
+
+
+
+%Below are notes for Nov 6
+
+%Above are notes for Nov 6
