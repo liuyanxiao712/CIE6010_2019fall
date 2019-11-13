@@ -475,7 +475,7 @@ Properties of Convex Sets:
 \end{enumerate}
 
 \subsection{Convex Functions}
-Let $F$ have a convex domain, then $F:\Re^n\rightarrow \Re$ a convex function if $\forall x,y \in dom(F)$:
+Let $F$ have aconvex domain, then $F:\Re^n\rightarrow \Re$ a convex function if $\forall x,y \in dom(F)$:
 
 \begin{equation*}
 F(\lambda x + (1-\lambda)y) \leq \lambda F(x) + (1-\lambda)F(y), \forall \lambda \in [0,1]
@@ -507,7 +507,7 @@ And $F(\lambda u + (1-\lambda)v)$ can be written as $F(v + \lambda(u-v))$:
 F(\lambda u + (1-\lambda)v) \leq \lambda F(v) + \lambda(F(u)-F(v))
 \end{equation*}
 
-line segment connecting $(u,F(u))$ to $(v, F(v))$ always above bottom of bowl.
+line segment connecting $(u,F(u))$ to $(v, F(v))$ always above buttom of bawl.
 
 
 Sometimes define an "extended value" function
@@ -848,7 +848,7 @@ F(x) =logdet(x^{-1})
 \end{itemize}
 To show this is a convex function, will show it is convex for all "lines".
 
-line in $S^n$: $x_0 + tH$ where $x_0$ is symmetric PD matrix, $t\in \Re$ and $H$ is symmetric matrix in $S^n$. So $x_0 + tH$ is a family of symmetric matrices.
+line in $S^n$: $x_0 + tH$ where $x_0$ is synnetric PD matrix, $t\in \Re$ and $H$ is symmetric matrix in $S^n$. So $x_0 + tH$ is a family of symmetric matrices.
 
 \begin{marginfigure}
 	\centering

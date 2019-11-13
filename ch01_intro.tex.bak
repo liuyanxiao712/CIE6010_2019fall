@@ -64,7 +64,7 @@ vectors described above might be denoted $\calX = \{ \vecx{1}, \vecx{2},
 in the above example $|\calX| = m$.  For some special sets we make an
 exception.  In particular to denote real numbers, complex numbers, and
 integers we respectively write $\reals$, $\complex$, and $\integers$.
-Occasionally we have need to refer to the sets of non-negative and
+Occassionally we have need to refer to the sets of non-negative and
 positive real numbers, respectively denoted $\reals_+$ and
 $\reals_{++}$.
 

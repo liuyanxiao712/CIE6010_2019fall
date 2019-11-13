@@ -311,8 +311,8 @@ for distinct courses are in parallel development. \vspace{0.2in} \\
 \noindent \= Version 1.02: \ \= Initial distribution of chapters 3 and 4.\\
 \noindent \= Version 1.03: \ \= Initial distribution of chapter 5.\\
 \noindent \= Version 1.04: \ \= Initial distribution of chapter 6.\\
-\noindent \= Version 1.05: \ \= Initial distribution of chapter 7, including linear programs.\\
-\noindent \= Version 1.06: \ \= Distribution of remainder of chapter 7, including quadratic programs \\ \hspace{6em} and quadratically-constrained quadratic programs.\\
+\noindent \= Version 1.05: \ \= Initial distribution of chapter 7, including linear programs..\\
+\noindent \= Version 1.06: \ \= Distribution of rest of chapter 7, including qudratic programs and quadratically-constrained quadratic programs.\\
 \noindent \= Version 1.07: \ \= Initial distribution of rough notes for chapter 8; to be revised.\\
 
 \end{tabbing}
@@ -341,7 +341,7 @@ for distinct courses are in parallel development. \vspace{0.2in} \\
 \input{ch04_symmMat.tex}
 
 
-\chapter{Singular value decomposition}
+\chapter{Singlar value decomposition}
 \label{ch.SVD}
 \input{ch05_svd.tex}
 
@@ -349,11 +349,11 @@ for distinct courses are in parallel development. \vspace{0.2in} \\
 \label{ch.linEqLS}
 \input{ch06_linEqLS.tex}
 
-\chapter{Linear programs, quadratic programs, and quadratically-constrained quadratic programs}
+\chapter{Linear programs, quadratic programs, and quadratically-constrainted quadratic programs}
 \label{ch.linQuadGeom}
 \input{ch07_linQuadGeom.tex}
 
-\chapter{Convex sets and functions}
+\chapter{Convexity}
 \label{ch.convex}
 \input{ch08_convex.tex}
 
