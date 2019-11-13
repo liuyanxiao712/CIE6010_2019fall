@@ -9,7 +9,7 @@ Consider following problem, i.e., Liner programming with equality and inequity c
 	&Gx \leq h
 \end{align*}
 
-where $x\in \reals^n, c\in \reals^n, d\in \Re, A\in \reals^{q\times n}, b\in \reals^q, G\in \reals^{m\times n}, h\in \reals^m$.
+where $x\in \reals^n, c\in \reals^n, d\in \reals, A\in \reals^{q\times n}, b\in \reals^q, G\in \reals^{m\times n}, h\in \reals^m$.
 
 Note that, the function $p(x)=c^Tx + d$ is called the objective function and $x$ is called the decision variable. The goal of this problem is to find $x^*$ such that the optimal value $p^*$ of the objective function is achieved.
 
@@ -123,7 +123,7 @@ Remarks on "optimal" value $p^*$ of program:
 	
 	\item possible no feasible choice
 	
-	\item $p^*\in \Re$
+	\item $p^*\in \reals$
 \end{itemize}
 
 \vspace{0.5cm}
@@ -837,53 +837,18 @@ Remarks:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \newpage
 
 \section{Quadratic program(QP)}
 
+A quadratic programming problem is formulated in a general way as follows
 \begin{align*}
-p^* = min_{x\in \Re^n} &\frac{1}{2}x^THx + c^Tx + d\\
-s.t. \,\,\, &Ax = b\\
-&Gx \leq h
-\end{align*}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_7.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{figure}
-%Above are notes for Oct14
-
-
-\section{10.16}
-
-%Below are notes for Oct16
-
-\begin{align*}
-p^* = min_{x\in \Re^n}\,\,\,\,\, &\frac{1}{2}x^THx + c^Tx + d\\
+p^* = min_{x\in \reals^n}\,\,\,\,\, &\frac{1}{2}x^THx + c^Tx + d\\
  s.t.\,\,\,\,\, &Ax = b\\
  &Gx\leq h
 \end{align*}
 
-
+The feasible set(feasible region) is illustrated as follows
 \begin{figure}
 	\centering
 	\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_a.png}
@@ -891,19 +856,23 @@ p^* = min_{x\in \Re^n}\,\,\,\,\, &\frac{1}{2}x^THx + c^Tx + d\\
 	%\label{fig:graph} 
 \end{figure}
 
-\subsection{Least squares}
+\subsection{Connection between LS problem and QP problem}
+Recall the lest square problem we have studied, it turns out that we can convert the least square problem into a QP problem.
 \begin{align*}
 ||Ax - y||_2^2 &= (Ax - y)^T(Ax - y)\\
 &= x^TA^TAx - 2y^TAx + y^Ty\\
 &= \frac{1}{2}x^T(2A^TA)x - 2y^TAx + ||y||_2^2
 \end{align*}
 
-Note: Cannot always manipulate objective of a QP into form of objective of a LS problem.\\
+However, for the converse case, we can not always manipulate the objective of a QP into a  LS problem.
 
-\subsection{Equality constrained QPs}
 
+\subsection{Equality constrained QPs: Substitute back to the objective}
+A basic idea of solving such kind of problem is to substitute the equality constraints back to the objective function so that hopefully we can eliminate some variables(dimensions), and obtain an unconstrained QP problem.
+
+Consider a formulation of such kind of problem,
 \begin{align*}
-p^* = min_{x\in \Re^n}\,\,\,\,\, &\frac{1}{2}x^THx + c^Tx + d\\
+p^* = min_{x\in \reals^n}\,\,\,\,\, &\frac{1}{2}x^THx + c^Tx + d\\
 s.t.\,\,\,\,\, &Ax = b
 \end{align*}
 
@@ -915,77 +884,64 @@ s.t.\,\,\,\,\, &Ax = b
 	%\label{fig:graph} 
 \end{figure}
 
-\begin{equation*}
-\mathcal{A} =\{x | x = \bar{x} + \xi,\,\,\, \text{where } \xi \in N(A) \}
-\end{equation*}
+The feasible set could be expressed as follows
+$$\mathcal{A} =\{x | x = \bar{x} + \xi,\,\,\, \text{where } \xi \in N(A) \}$$
+where $\bar{x}$ is a particular solution to the equation $Ax=b$.
 
-Let N be a basis for $N(A)$, can express $\xi \in N(A)$ as $\xi = Nz$ where $z\in \Re^k$, $k =dim(N(A)) \leq n$
+Let $N$ be a basis for $N(A)$, so that we can express $\xi \in N(A)$ as $\xi = Nz$, where $z\in \reals^k$, $k =\text{dim}(N(A)) \leq n$.
 
-
-Substitute this expression for any feasible $x$ into objective $F_0(\cdot)$
-
-
+Substitute this expression for any feasible $x$ into the objective $F_0(\cdot)$
 \begin{align*}
-F_0(x) &= F_0(\bar{x} + \xi) = F_)(\bar{x} + Nz)\\
+F_0(x) 
+&= F_0(\bar{x} + \xi)\\
+&= F(\bar{x} + Nz)\\
 &= \frac{1}{2}(\bar{x} + Nz)^TH(\bar{x}+Nz) + c^T(\bar{x} + Nz) + d\\
 &= \frac{1}{2}z^T[N^THN]z + [c^TN + \bar{x}^THN]z + [\frac{1}{2}\bar{x}^TH\bar{x} + c^Tx + d] \\
+&= \frac{1}{2}z^T\tilde{H}z + \tilde{c^T}z + \tilde{d}\\
 \end{align*}
-
+where we newly define $\tilde{H}$, $\tilde{c^T}$, and $\tilde{d}$ in the last equality. So now we have obtain an unconstrained QP problem which is formulated as
 \begin{equation*}
-p^* = min_{z\in \Re^k}\,\,\,\,\, \frac{1}{2}z^T\tilde{H}z + \tilde{c^T}z + \tilde{d}
+p^* = min_{z\in \reals^k}\,\,\,\,\, \frac{1}{2}z^T\tilde{H}z + \tilde{c^T}z + \tilde{d}
 \end{equation*}
 
-$\rightarrow$ lower-dimensional optimization problem $k =dim(N(A)) \leq n $
+Hence, to summarize,
 
-$\rightarrow$ still a QP, but an unconstrained QP.
+(1)We have got a newly lower-dimensional optimization problem since $k =\text{dim}(N(A)) \leq n $.
+
+(2)The new problem is still a QP, but is an unconstrained QP.
 
 
 
-\begin{example}{Markowitz Portfolio optimization}
-	"Mean/variance" analysis
+\begin{example}{Markowitz Portfolio optimization/Mean/variance" analysis}  Harry Markowitz(1990 Nobel Prize)
 	
+	
+	\textbf{Problem formulation}: 
 	\begin{itemize}
-		\item Minimize amount of variance in returns for a fixed level of (expected) returns
+		\item Objective: For a fixed level of (expected) returns, we want to minimize the variance of returns.
 		
-		\item Harry Markowitz(1990 Nobel Prize)
-	\end{itemize}
-	
-	\textbf{Model}: There are n stock, single investment period\\
-	
-	\textbf{Task}:
-	
-	\begin{itemize}
-		\item Design an investment strategy $p\in \Re^n$
+		\item There are $n$ stocks, and we only consider a single investment period\\
 		
-		\item $p_i = $ amount/proportion of wealth invested in stock $i$
+		\item Design an optimal investment strategy $p\in \reals^n$, where the component $p_i = $ is the weight of your total wealth invested in the stock $i$.
 		
-		\item $\sum^n_{i=1}p_i = 1$, "all-in" invest all your money
+		\item We require $\sum^n_{i=1}p_i = 1$, that is, you must invest all your money.
 		
-		\item $p_i \geq 0$, "long" positions(no "short time")
+		\item We also require $p_i \geq 0$, that is, you are only allowed to take long positions, and short selling is not allowed.
 		
-		\item Wealth normalized to 1
+		\item Your total wealth is normalized to $1$. So $p_i$ is not only weight but also the amount of money you invest on stock $i$ now.
 	\end{itemize} 
 	
-	\textbf{Returns}:
+	\textbf{Return and Variance}:
 	
 	\begin{itemize}
-		\item $x\in \Re^n$
-		
-		\item $x_i$ = return on $i^th$ stock in period if must 1RMB in stock: get $x_i$RMB back.
-	\end{itemize} 
-	
-	
-	\textbf{Probabilistic model on returns}:
-	
-	\begin{itemize}
-		\item Expected returns: $\bar{x_i} = \mathbb{E}[x_i]$(known)
+		\item Let $x\in \reals^n$ be a random vector denotes the return of $n$ stocks, so component $x_i$ is the return on the $i$-th stock in one period. That is, if we invest 1 RMB in a stock at the beginning, we will get $x_i$ RMB back at the end of this period.
+
+		\item Expected returns: $\bar{x_i} = \mathbb{E}[x_i]$. In general, it is a known estimator based on historical data.
 		
 		\item Your return (random) is $\sum^n_{i=1}p_ix_i = p^Tx$
 		
-		\item Your expected value $\mathbb{E}[\sum^n_{i=1}p_ix_i] = \sum^n_{i=1}p_i\mathbb{E}[x_i] = \sum^n_{i=1}p_i\bar{x_i} = p^T\bar{x}$
+		\item Your expected return $\mathbb{E}[\sum^n_{i=1}p_ix_i] = \sum^n_{i=1}p_i\mathbb{E}[x_i] = \sum^n_{i=1}p_i\bar{x_i} = p^T\bar{x}$
 		
-		\item variance in returns:
-		
+		\item variance in your return:
 		\begin{align*}
 		var(p^Tx) &=\mathbb{E}[(p^Tx - p^T\bar{x})^2]\\
 		&= \mathbb{E}[(p^T(x - x^T))^2]\\
@@ -996,19 +952,11 @@ $\rightarrow$ still a QP, but an unconstrained QP.
 	\end{itemize}
 	
 	
+	With above terminoglogy and model formulation, given a mean return $\bar{x}$ and the covariance matrix of returns $\Sigma \in \reals^{n\times n}$, we want to find an optimal strategy/policy $p$ to minimize the risk(represent by variance) subject to same minimal returns.: 
 	
-	
-	
-	
-	
-	
-	
-
-	
-	Given mean returns $\bar{x}$ and covariance matrix of returns $\Sigma \in \Re^{n\times n}$. Design $p$ to minimize "risk" subject to same minimal returns.:
-	
+	The problem is formulated as:
 	\begin{align*}
-	min_{p\in \Re^n}\,\,\,\,\, &p^T\Sigma p\\
+	min_{p\in \reals^n}\,\,\,\,\, &p^T\Sigma p\\
 	s.t. \,\,\,\,\,&p^T\bar{x}\geq r_{min}\\
 	&\textbf{1}^Tp = 1\\
 	&p\geq 0
@@ -1017,44 +965,56 @@ $\rightarrow$ still a QP, but an unconstrained QP.
 
 
 
-
+\subsection{Geometry of QP}
+Consider the general form of QP
 \begin{align*}
-p^* = min_{x\in \Re^n}\,\,\,\,\, &\frac{1}{2}x^THx + x^Tx + d\\
+p^* = min_{x\in \reals^n}\,\,\,\,\, &\frac{1}{2}x^THx + x^Tx + d\\
 s.t.\,\,\,\,\, &Ax = b\\
 &Gx\leq h
 \end{align*}
+Follow the same as LP, we would like to discuss the geometry of QP.
 
-Discuss geometry of objective
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.5in,height=3in]{figures/ch07/figure1112_01.png}
+	\caption{Plot 1} 
+	%\label{fig:graph} 
+\end{marginfigure}
 
-Discuss geometry of feasible set
 
-1) w.l.o.g assume $H\in S^n$, 
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.5in,height=3in]{figures/ch07/figure1112_02.png}
+	\caption{Plot 2} 
+	%\label{fig:graph} 
+\end{marginfigure}
 
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=2.5in,height=3in]{figures/ch07/figure1112_03.png}
+	\caption{Plot 3} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+(1) Geometry of feasible set: The same as LP.
+
+(2) Geometry of objective: Without loss of generality(w.l.o.g), we can assume that $H\in S^n$, i.e., $H$ is symmetric, since
 \begin{align*}
-x^THx &=\frac{1}{2}[x^THx + x^TH^Tx]\\
- &= \frac{1}{2}x^T(H+H^T)x
+x^THx 
+&=\frac{1}{2}[x^THx + x^TH^Tx]\\
+&= \frac{1}{2}x^T(H+H^T)x
 \end{align*}
+clearly $H$ is symmetric.\\
 
-Hence always consider $H$ symmetric.\\
+Recal that for symmetric matrices, we have
 
+a) Eigenvalues: purely real eigenvalues (so we can arrange them in an order).
 
+b) Eigenvectors: can be chosen to be $\perp$ and can always diagonalize $H$, i.e., we can write
+$$H = \mathcal{U}\Lambda \mathbb{U}^T  = \sum^n_{i=1}\lambda_iu^{(i)}u^{(i)^T}$$
 
-\subsection{Symmetric matrices}
-
-1) Eigenvalues: purely real eigenvalues (can sort)
-
-2) Eigenvectors: can always be chosen $\perp$ and can always diagonalize
-
-\begin{equation*}
-H = \mathcal{U}\Lambda \mathbb{U}^T  = \sum^n_{i=1}\lambda_iu^{(i)}u^{(i)^T}
-\end{equation*}
-
-For 3 cases:
-
-\begin{equation*}
-F_0(x) = \frac{1}{2}x^THx + c^Tx + d
-\end{equation*}
-
+Consider following 3 different cases for the matrix $H$:
 \begin{itemize}
 	\item A) $H\in S^n$ but not PSD
 	
@@ -1084,153 +1044,139 @@ F_0(x) = \frac{1}{2}x^THx + c^Tx + d
 	\end{equation*}
 \end{itemize}
 
+%Now, let's look at visualization for cases A to C.
+
+%If we only consider the quadratic term,
+%$$F_0(x) =\frac{1}{2}x^THx$$
+%Clearly, we have following results
+
+Consider the 3 cases for $H$ given above and the following different objective functions, we plot these figures on r.h.s. for illustration.
+
+Plot 1: $F_0(x) =\frac{1}{2}x^THx$
+
+Plot 2: $F_0(x) =\frac{1}{2}x^THx + [0.5\,\,\, 0.5]x$
+
+Plot 3: $F_0(x) =\frac{1}{2}x^THx + [0.5\,\,\, 0]x$
 
 
-\begin{itemize}
-	\item Plot 1: $F_0(x) =\frac{1}{2}x^THx$
-	
-	\item Plot 2: $F_0(x) =\frac{1}{2}x^THx + [0.5\,\,\, 0.5]x$
-	
-	\item Plot 3: $F_0(x) =\frac{1}{2}x^THx + [0.5\,\,\, 0]x$
-\end{itemize}
+\vspace{0.5cm}
+\textbf{Let's consider 3 different cases for a general QP problem.}
 
+\textbf{Case A: } $H\in S^n$ but $H\notin S^n_+$ (Symmetric not PSD).
 
+For such $H$, there must be an eigenvalue/vector pair $(\lambda, u)$ s.t. $\lambda < 0$.
 
-
-MATLAB Graphs may be included later.\\
-
-Case A: 
-
-$H\in S^n$ but $H\notin S^n_+$. (Symmetric not PSD)
-
-There must be an eigenvalue/vector pair $(\lambda, u)$ s.t. $\lambda < 0$.
-
-Set $x_{\alpha} = \alpha u$ for some $\alpha \in \Re$
+Set $x_{\alpha} = \alpha u$ for some $\alpha \in \reals$, we have
 
 \begin{align*}
 F_0(\alpha u) &= \frac{1}{2}(\alpha u)^TH(\alpha u) + c^T(\alpha u) + d\\
 &= \frac{{\alpha}^2}{2} u^T[\sum^n_{i=1}\lambda_i u^{(i)} u^{(i)^T}]u + \alpha c^Tu + d\\
-&= \frac{{\alpha}^2}{2}\lambda + \alpha <c,u> + d\\
-&= -\frac{{\alpha}^2}{2}|\lambda| + \alpha<c,u> + d\\
-&= F(\alpha u)
+&= \frac{{\alpha}^2}{2}\lambda + \alpha <c,u> + d
 \end{align*}
 
+Since $\lambda<0$, let $\alpha \to \infty$ leads to an unbounded objective function, i.e., $p^* = -\infty$.
 
-Case B: 
 
-$H\in S_+^n$ but $H\notin S^n_{++}$ (PSD not PD)
 
-$\rightarrow$ at least 1 zero eigenvalue.\\
+\vspace{0.3cm}
+\textbf{Case B: } $H\in S_+^n$ but $H\notin S^n_{++}$ ($H$ is PSD but not PD)
 
-$c \notin R(H)$
+$\rightarrow$ $H$ has at least 1 zero eigenvalue.\\
 
-$\rightarrow$ There is a complement of $c$ in $R(H)^{\perp} = N(H^T) = N(H)$ and can move in that direction without changing $2^{nd}$ order term while driving $1^{st} $ order term to $\infty$.
+\vspace{0.3cm}
+\textbf{Case B (i)} $H\in S_+^n$ but $H\notin S^n_{++}$ and $c \notin R(H)$.
 
-$\rightarrow$ Let $c_{||} = \prod_{R(H)}(c)$, $c_{\perp} = \prod_{N(H)}(c)$
+There is a complement of $c$ in $R(H)^{\perp} = N(H^T) = N(H)$, and thus we can move in that direction without affecting $2^{nd}$ order term while driving $1^{st} $ order term to $-\infty$.
 
-$\rightarrow$ $c = c_{||} + c_{\perp}$ orthogonal decomposition lemma(unique decomposition)
+Let $c_{||} = \prod_{R(H)}(c)$,  and $c_{\perp} = \prod_{N(H)}(c)$, where the first one is the component in $R(A)$ and second one is the component in $N(H)$.
 
-$\rightarrow$ Let $x_{\alpha} =-\alpha c_{\perp}$ where $\alpha \in \Re^+$
+Notice that $R(H)^{\perp}= N(H^T) = N(H)$, since $H$ is symmetric. By orthogonal decomposition lemma, there is an unique decomposition
+$$c = c_{\Vert} + c_{\perp}$$
 
+Now, let $x_{\alpha} =-\alpha c_{\perp}$, where $\alpha \in \reals_+$.
 \begin{align*}
-F_0(x_{\alpha}) &=\frac{{\alpha}^2}{2}c_{\perp}^THc_{\perp} + c^T(-\alpha c_{\perp}) + d\\
-&= 0 - \alpha(c_{||} + c_{\perp})^Tc_{\perp} + d\\
-&= -\alpha(c_{||}^Tc_{\perp} + c_{\perp}^Tc_{\perp}) + d\\
-&= -\alpha||c_{\perp}||^2_2 + d
+F_0(x_{\alpha}) 
+&=\frac{{\alpha}^2}{2}c_{\perp}^THc_{\perp} + c^T(-\alpha c_{\perp}) + d\\
+&= 0 - \alpha(c_{\Vert} + c_{\perp})^Tc_{\perp} + d\\
+&= -\alpha(c_{\Vert}^Tc_{\perp} + c_{\perp}^Tc_{\perp}) + d\\
+&= -\alpha \Vert c_{\perp}\Vert^2_2 + d
 \end{align*}
 
-\begin{itemize}
-	\item Case A: $H\notin S^n_+$, $p^* = -\infty$
-	
-	\item Case B: $H\in S^n_+$ but not $S^n_{++}$, $c\in R(H)$
-	
-	\item Case C: $H\in S^n_{++}$
-\end{itemize}
-
-%Above are notes for Oct16
+Hence the function is unbouded below since we could take $\alpha \to\infty$. Therefore,
+$$p^*=-\infty$$
 
 
 
-%Below are notes for Oct21
+\vspace{0.3cm}
+\textbf{Case B (ii)}  $H\in S_+^n$ but $H\notin S^n_{++}$ and $c \in R(H)$.
 
-
-\section{Geometry of Objective}
-
-\begin{equation*}
-p^* = min_{x\in \Re^n}\frac{1}{2}x^THx + c^Tx + d
-\end{equation*}
-
-If either (A) $H \notin S^n_+$ then
-
-or (B) - (i): $H\in S^n_+$ but $H\in S^n_{++}$ and $C\notin R(H)$
-
-It comes to $p^* = -\infty$\\
-
-(B) - (ii) $H\in S^n_{+}$, $H\notin S^n_{++}$ and $C\in R(H)$, $H\in S^n_{++}$:
-
-It comes to $p^* > -\infty$
-
+First, remind us of some results from previous chapter,
 \begin{align*}
-H &= \sum^n_{i=1}\lambda_iU^{(1)}U^{(1)^T} \\
-&= \sum^r_{i=1}U^{(1)}U^{(1)^T}\\
-&= U_r\Sigma Y_r^T\\
+H 
+&= \sum^n_{i=1}\lambda_i U^{(i)}U^{(i)^T} \\
+&= \sum^r_{i=1}\lambda_i U^{(i)}U^{(i)^T}\\
+&= U_r\Sigma Y_r^T
+\end{align*}
+and,
+\begin{align*}
 H^{\frac{1}{2}} &= U_r\Sigma^{\frac{1}{2}}U_r^T\\
 H^{+} &= U_r\Sigma^{-1}U_r^T\\
 (H^{\frac{1}{2}})^+ &= U_r\Sigma^{-\frac{1}{2}}U_r^T
 \end{align*}
 
 where 
-\begin{align*}\Sigma = 
+$$\Sigma = 
 \begin{bmatrix}
 \sqrt{\lambda_1} &  & 0 \\
 &\ddots&\\
 0&&\sqrt{\lambda_r}
-\end{bmatrix}\\\Sigma^{-\frac{1}{2}} =
+\end{bmatrix}
+,\
+\Sigma^{-\frac{1}{2}} =
 \begin{bmatrix}
 \frac{1}{\sqrt{\lambda_1}} &  & 0 \\
 &\ddots&\\
 0&&\frac{1}{\sqrt{\lambda_r}}
 \end{bmatrix}
-\end{align*}
+$$
 
-\begin{equation*}
-C\in R(H) = R(H^{\frac{1}{2}}) = R(H^+) = R[(H^{\frac{1}{2}})^+]
-\end{equation*}
+Observe that
+$$C\in R(H) = R(H^{\frac{1}{2}}) = R(H^+) = R\left((H^{\frac{1}{2}})^+\right)$$
 
-as $C\in R(H)$: $\exists \bar{y}\in \Re^n$ s.t. $c = H\hat{y}$. But since $R(H) = R(H^{\frac{1}{2}})$, $\exists y \in \Re^n$
+Since $C\in R(H)$ and $R(H) = R(H^{\frac{1}{2}})$, there exists $y \in \reals^n$ such that
+$$C = H^{\frac{1}{2}}y = H^{\frac{1}{2}}(y+\xi)$$
 
-\begin{equation*}
-C = H^{\frac{1}{2}}y = H^{\frac{1}{2}}(y+\xi)
-\end{equation*}
+where $\xi \in N(H^{\frac{1}{2}})$. Note that choice of $y$ is not unique and the second equality due to $\rank(H)= r<n$. 
 
-where $\xi \in N(H^{\frac{1}{2}})$, so:
-
+Explicitly, we have 
 \begin{equation*}
 C = (U_r\Sigma^{\frac{1}{2}}U_r^T)y = \sum^r_{i=1}U^{(i)}\sqrt{\lambda_i}(U^{(i)^T}y)
 \end{equation*}
 
-We can pick a min-norm choice for $y$: $y = argmin\Vert \bar{y}\Vert_2$ and $\bar{y}\in\Re^n$, $C = H^{\frac{1}{2}}\bar{y}$. So $y = (H^{\frac{1}{2}})^+C$
+Now, the question is, which $y$ we should pick? Let's pick the $y$ with min-norm, that is, 
+\begin{align*}
+y &=\arg\min_{\bar{y}\in\reals^n}\Vert \bar{y}\Vert_2\\
+s.t\  C &= H^{\frac{1}{2}}\bar{y}
+\end{align*}
 
-Summary: $C = H^{\frac{1}{2}}y$, $y = (H^{\frac{1}{2}})^+C$
+It turns out that, this is an under determined and rank-deficient LS problem. So the solution to this question is given by
+$$y = (H^{\frac{1}{2}})^+C = U_r \Sigma^{-\frac{1}{2}} U_r^T C$$
 
+
+So, when $C = H^{\frac{1}{2}}y$, we can pick $y = (H^{\frac{1}{2}})^+C$. Let's look back at the objective to understanding such choice.
 \begin{align*}
 \frac{1}{2}x^THx + c^Tx + d &= \frac{1}{2}x^TH^{\frac{1}{2}}H^{\frac{1}{2}}x+y^TH^{\frac{1}{2}}x + d\\
 &= \frac{1}{2}\tilde{x}^T\tilde{x} + y^T\tilde{x} + d\\
-&= \frac{1}{2}(\tilde{x}^Tx+2y^T\tilde{x}+y^Ty) - \frac{1}{2}y^Ty + d &(*)\\
-&= \frac{1}{2}\Vert\tilde{x}+y\Vert^2_2 - \frac{1}{2}\Vert y \Vert^2_2 + d
+&= \frac{1}{2}(\tilde{x}^Tx+2y^T\tilde{x}+y^Ty) - \frac{1}{2}y^Ty + d \\
+&= \frac{1}{2}\Vert\tilde{x}+y\Vert^2_2 - \frac{1}{2}\Vert y \Vert^2_2 + d &(*)
 \end{align*}
+In the second equality we let $\tilde{x} = H^{\frac{1}{2}} x$.
 
-Set $\tilde{x} = -y$ to minimize $(*)$.
+Apparently, we would like to set $\tilde{x} = -y$ to minimize $(*)$, and the question is, is this always possible? The answer is yes.
 
-Question: Can you always pick $x$ s.t. $\tilde{x} = -y$?
+Since $y = (H^{\frac{1}{2}})^+C\in R((H^{\frac{1}{2}})^+) = R(H) = R(H^{\frac{1}{2}})$, and $\tilde{x}=H^{\frac{1}{}} x$ so $\tilde{x} \in R\left(H^{\frac{1}{2}}\right) = R(H)$. Since $x\in \reals^n$ is unconstrained, so we can choose $x$ to make $\tilde{x}$ equal to any element of $R(H)$, namely $y$. 
 
-\begin{equation*}
-y = (H^{\frac{1}{2}})^+C\in R((H^{\frac{1}{2}})^+) = R(H) = R(H^{\frac{1}{2}})
-\end{equation*}
-Since $x\in \Re^n$ is unconstrained, can always set it s.t. $\tilde{x} = -y$ 
-
-With choice of $x$ s.t. $\tilde{x} = -y$ where $\tilde{x} = H^{\frac{1}{2}}x$:
-
+Thus, to minimize $(*)$ we set $\tilde{x} = -y$ where $\tilde{x} = H^{\frac{1}{2}}x$, and yields
 \begin{align*}
 F_0(x) \geq p^* &= d - \frac{1}{2}\Vert y \Vert_2^2\\
 &= d - \frac{1}{2}y^Ty\\
@@ -1260,70 +1206,88 @@ C
 &= d - \frac{1}{2}C^T(U_r\Sigma^{-1}U^T_r)C\\
 &= d - \frac{1}{2}C^TH^+C
 \end{align*}
-What is the minimizing choice of $x\in \Re^n$?
 
-Since $y\in R(H) = R(H^{\frac{1}{2}})$, $x\in \Re^n$, there are many solutions. Pick min-norm one to nail things down. 
+What is the minimizing choice of $x\in \reals^n$?
 
-Min-norm solution to $\tilde{x} = H^{\frac{1}{2}}x$ are pseudo inverse:
+Since $y\in R(H) = R(H^{\frac{1}{2}})$ and $x\in \reals^n$ is free, we can satisfy equality and thus there are many solutions. 
 
+We would like to pick min-norm solution for $x$, which is given by
 \begin{align*}
-x &= (H^{\frac{1}{2}})^+\tilde{x}\\
+x^* 
+&= (H^{\frac{1}{2}})^+\tilde{x}\\
 &= -(H^{\frac{1}{2}})^+y\\
-&= -(H^{\frac{1}{2}})^+(H^{\frac{1}{2}})^+C \Leftrightarrow -H^+C
+&= -(H^{\frac{1}{2}})^+(H^{\frac{1}{2}})^+C\\
+&= -H^+C
 \end{align*}\\
 
-Case C: $H\in S^n_{++}$
+\vspace{0.3cm}
+\textbf{Case C}: $H\in S^n_{++}$ ($H$ is PD)
 
-Since $H\in S^n_{++}$, it is also in $S^n_{+}$. 
+This is indeed a special case of case B(ii), and that's because
 
-If $H\in S^n_{++}$ $\Leftrightarrow R(H) = \Re^n$ means $C \in R(H)$.
+(1)$H\in S^n_{++}$, then it is also in $S^n_{+}$, and so all eigenvalues are non negative.
 
-In this situation $H^+ = H^{-1}$:
+(2)$H\in S^n_{++}$, then $\rank(H) = n$ and thus $R(H)=\reals^n$, and certainly $C \in R(H)$.
+
+From previous solution, we have
 \begin{align*}
-x &= -H^{-1}C\\
-p^* &= d - C^TH^{-1}C
+x 
+&= -H^{+}C\\
+&= -U_r \Sigma^{-1} U_r^T C\\
+&= -U_r \Sigma^{-1} U_n^T C\\
+&= - H^{-1} C
 \end{align*}
-Summary: If $p^* = min_{x\in \Re^n}\frac{1}{2}x^THx + c^Tx + d$:
+So in this case $H^+ = H^{-1}$. The optimal value is given by
+$$p^* = d - \frac{1}{2}C^TH^{-1}C$$
 
+
+\textbf{Summary }
+
+Consider the QP problem $p^* = min_{x\in \reals^n}\frac{1}{2}x^THx + c^Tx + d$,
 \begin{equation}
 p^* = \left\{
 \begin{array}{lr}
-d - c^TH^+c &(H\geq 0 \& C\in R(H))  \\
--\infty & \text{else}
+d - \frac{1}{2}c^TH^+c &\text{$H$ is PD, or, $H$ is PSD but not PD and $c \in R(H)$}\\
+-\infty &\text{$H$ is not PSD, or, $H$ is PSD but not PD and $c\notin R(H)$}
 \end{array}
-\right.
+\right.\nonumber
 \end{equation}
+
 \begin{equation}
-x^* = argmin = \left\{
+x^* = \left\{
 \begin{array}{lr}
--H^+c &(H\geq 0 \& C\in R(H)) \\
-\text{not exist} & \text{else}
+-H^+c &\text{$H$ is PD, or, $H$ is PSD but not PD and $c \in R(H)$}\\
+\text{not exist} &\text{$H$ is not PSD, or, $H$ is PSD but not PD and $c\notin R(H)$}
 \end{array}
-\right.
+\right.\nonumber
 \end{equation}
 
+\vspace{0.5cm}
+\subsection{Solving QPs via "active set" methods}
 
-Solving QPs via "active set" methods.
-
-\begin{equation}
-min_{x\in \Re^2}(x_1 - 1)^2 + (x_2 - 2.5)^2 s.t. 
+\begin{align*}
+\min_{x\in \reals^2} \quad & (x_1 - 1)^2 + (x_2 - 2.5)^2 \\
+s.t. \quad&
 \begin{bmatrix}
 -1&2\\
 1&2\\
 1&-2\\
 -1&0\\
 0&-1
-\end{bmatrix}\begin{bmatrix}
+\end{bmatrix}
+\begin{bmatrix}
 x_1\\
 x_2
-\end{bmatrix}\begin{bmatrix}
+\end{bmatrix}
+\leq
+\begin{bmatrix}
 2\\
 6\\
 2\\
 0\\
 0
 \end{bmatrix}
-\end{equation}
+\end{align*}
 
 \begin{marginfigure}
 	\centering
@@ -1341,64 +1305,76 @@ x_2
 \end{itemize}
 By illustrative example:
 
-1) Initialize at $x^{(0)} = \begin{bmatrix}
+Step 1
+
+Initialize at point $x^{(0)} = \begin{bmatrix}
 2\\
 0
-\end{bmatrix}$, starting with initial "working set" of equality constraint:
-
-\begin{eqnarray}
-w_0 = \{x|x_2 = 0 \}
-\end{eqnarray}
+\end{bmatrix}$, starting with initial "working set" of equality constraint(the fifth equality constraint):
+$$w_0 = \{x|x_2 = 0 \}$$
 
 
-2) \begin{equation*}
-min_{x\in \Re^2} \frac{1}{2}x^T\begin{bmatrix}
+Step 2
+ \begin{align*}
+\min_{x\in \reals^2} \quad
+&
+\frac{1}{2}x^T
+\begin{bmatrix}
 2&0\\
 0&2
-\end{bmatrix}x + \begin{bmatrix}
+\end{bmatrix}
+x + 
+\begin{bmatrix}
 -2 & -5
-\end{bmatrix} + (1 + 2.5^2)
-\end{equation*}
+\end{bmatrix} 
++ (1 + 2.5^2)\\
+s.t.\quad &
+\begin{bmatrix}
+0 & 1
+\end{bmatrix}
+x = 0
+\end{align*}
 
-s.t. $\begin{bmatrix}
-	0  & 1
-\end{bmatrix}x = 0$
 
-Recall from last time, we need a basis for $N(\begin{bmatrix}
+Recall the linearly constrained QP problem, we need a basis for 
+$N(\begin{bmatrix} 
 0\\
 1
-\end{bmatrix}) = \{x|x = \alpha\begin{bmatrix}
-0\\
-1
-\end{bmatrix} \}$
-
-Say $\begin{bmatrix}
+\end{bmatrix}) 
+= \{x|x = \alpha
+\begin{bmatrix}
 1\\
 0
-\end{bmatrix} = N\Leftarrow$
+\end{bmatrix} \}$
+in this case. Let
+$N=
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}$,
 
+$$\tilde{H} = N^THN = 2$$
+$$\tilde{C}^T = (c^TN + \bar{x}^T HN)= -2$$
+$$\tilde{d}= (d+c^Tx + \frac{1}{2}\bar{x}^TH\bar{x})=0$$
+
+
+So we have converted the problem to :
 \begin{align*}
-\tilde{H} &= N^THN = 2\\
-\tilde{C} &= (c^TN + \bar{x}HN)\\
-&= -2\tilde{d}\\
-&= (d+c^Tx + \frac{1}{2}x^THx)
+z^* 
+&= \arg\min_{z\in\reals} \frac{1}{2} z^T\tilde{H}z + \tilde{c}^Tz + \tilde{d}\\
+&= \arg\min_{z\in\reals} \frac{1}{2}2z^2 + (-2z)+ 0\\
+&= \arg\min_{z\in\reals} z^2 - 2z
 \end{align*}
-
-We convert the problem to :
-
-\begin{align*}
-z^* &= argmin\,\,\, z^T\tilde{H}z + \tilde{c}^Tz + \tilde{d}\\
-&= argmin\,\,\, \frac{1}{2}2z^2 + (-2z) = \tilde{d}
-\end{align*}
- $2z - 2 = 0$, $z = 1$
+Take the first derivative and set it to zero, we get $z^* = 1$.
 
 So the optimum is:
-
 \begin{equation*}
-\bar{x}+ z^*N = \begin{bmatrix}
+x^{(1)}= \bar{x}+ z^*N = 
+\begin{bmatrix}
 0\\
 0
-\end{bmatrix} + 1
+\end{bmatrix}
+ + 1
 \begin{bmatrix}
 1\\
 0
@@ -1409,116 +1385,275 @@ So the optimum is:
 \end{bmatrix}
 \end{equation*}
 
-Quadratically constrained Quadratic Program:
+
+Step 3
+
+Note:
+
+(1) At this point we recognize that the equality constraint $\{x|x_2=0\}$ is no longer "binding" becausewe just optimizaed alogng that set.
+
+(2) We could drop the fifth constraint from "working set" left with $w_2 =\emptyset$
+
+(3) We are facing with an unconstrainted optimization problem. Clearly we would like to move to $x^{(1)} +\Delta = 
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}
++
+\begin{bmatrix}
+0\\
+2.5
+\end{bmatrix}
+$.
+
+(4) But there may be a "blocking" constraint in way. In this example, this is the first constraint $\{x|-x_1 +2x_2\leq 2 \}$
+
+(5) Instead, we solve for the a step size $\gamma$ to make the constraint light, i.e., $g^{(i)T}(x^{(1)}+\gamma \Delta) = h_1$. 
+
+So we have,
+$$[-1\ 2] 
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}
++
+\gamma
+\begin{bmatrix}
+0\\
+2.5
+\end{bmatrix}
+=
+2
+\Leftrightarrow
+\gamma= \frac{3}{5}
+$$
+
+$$
+x^{(2)} = x^{(1)} +\frac{3}{5} \Delta =
+\begin{bmatrix}
+1\\
+1.5
+\end{bmatrix}
+$$
+
+
+Step 4
+
+This time, $w_3 = \{x|
+\begin{bmatrix}
+-1& 2
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}
+=2
+\}$.
+
+$$N(
+\begin{bmatrix}
+-1& 2
+\end{bmatrix})
+=
+\{x|x=\alpha
+\begin{bmatrix}
+2\\
+1
+\end{bmatrix}\},
+\quad
+\bar{x}\in 
+\{x|
+\begin{bmatrix}
+-1& 2
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}
+=2
+\}
+$$
+
+We pick $N=
+\begin{bmatrix}
+2\\
+1
+\end{bmatrix}
+,\quad
+\bar{x}=
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix}
+$.
+
+$$\tilde{H} = N^THN = 10$$
+$$\tilde{C}^T = (c^TN + \bar{x}^T HN)= -7$$
+$$\tilde{d}= (d+c^Tx + \frac{1}{2}\bar{x}^TH\bar{x})=-4$$
 
 \begin{align*}
-argmin_{x\in \Re^n} &\frac{1}{2}x^THx + c^T + d\\
-s.t. &\frac{1}{2}x^TH_ix + c^T_i + d_i \leq 0  & i\in [m]\\
-&\frac{1}{2}\tilde{H}_ix + \tilde{c}_i^Tx + \tilde{d}_i = 0 & i\in [q]
+z^* 
+&= \arg\min_{z\in\reals} \frac{1}{2} z^T\tilde{H}z + \tilde{c}^Tz + \tilde{d}\\
+&= \arg\min_{z\in\reals} \frac{1}{2}10 z^2 + (-7z) - 4\\
+&= \arg\min_{z\in\reals} 5z^2 - 7z -4
 \end{align*}
+Take the first derivative and set it to zero, we get $z^* = \frac{7}{10}$.
+
+\begin{equation*}
+x^{(3)}= \bar{x}+ z^*N = 
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix}
++ 
+\frac{7}{10}
+\begin{bmatrix}
+2\\
+1
+\end{bmatrix} = 
+\begin{bmatrix}
+1.4\\
+1.7
+\end{bmatrix}
+\end{equation*}
+
+Note $x^{(3)}$ is the global optimum so we end this algorithm here.
+
+
+
+\vspace{0.5cm}
+\subsection{Quadratically Constrained Quadratic Program (QCQP)}
+Let's formulate such kind of problem first
+\begin{align*}
+\min_{x\in \reals^n} \quad &\frac{1}{2}x^TH_0 x + c_0^T x + d_0\\
+s.t.\quad &\frac{1}{2}x^TH_ix + c^T_i x + d_i \leq 0  & i\in [m]\\
+&\frac{1}{2} x^T \tilde{H}_ix + \tilde{c}_i^Tx + \tilde{d}_i = 0 & i\in [q]
+\end{align*}
+
+\textbf{Note:}
 
 \begin{itemize}
-	\item If $H_i = 0, \forall i\in [n]$, $\tilde{H}_i = 0, \forall i\in [q]$, $\rightarrow QP$
+	\item If $H_i = 0, \forall i\in [n]$, $\tilde{H}_i = 0, \forall i\in [q]$, then we have a $QP$.
 	
-	\item Typically $h-0\geq 0, H_i\geq 0$, $i\in [m], \tilde{H}_i = o, \forall i\in [q]$. "convex optimization program", set $\tilde{H}_i = 0$
+	\item Typically $H_0\geq 0$, $H_i\geq 0$, $i\in [m]$, and $\tilde{H}_i = 0$, $\forall i\in [q]$, in which case the problem is a convex optimization problem, and thus it is easy to solve as we will discuss in next chapter.
+	
 \end{itemize}
-Consider a single equality constraint $q = 1$, consider a scalar problem $x\in \Re$:
+
+To see that why $\tilde{H}_i \neq 0$ makes things difficult, let's consider a single  equality constraint $q = 1$, and a scalar problem $x\in \reals$:
+$$\tilde{H}_1 = 1 \,\,\, \tilde{c}_i = 0 \,\,\, \tilde{d}_i = -\frac{1}{2}$$
+So the equality constraint becomes:
+$$\frac{1}{2}x_1^2 + 0 - \frac{1}{2} = 0 \Leftrightarrow x_1^2 = 1 \Leftrightarrow x_1\in\{-1, 1\} $$
+Notice that the feasible set is not a continuum of possibilities, i.e., it is a distinct set so the problem is "Combinatorial".
+
+
+
+
+
+\begin{example}
+Let's consider the QCQP with only three inequality constraints ($m=3$).
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_2.png}
+	\caption{Feasible set of constraint 1} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+Constraint 1:
 
 \begin{equation*}
-\tilde{H}_1 = 1 \,\,\, \tilde{c}_i = 0 \,\,\, \tilde{d}_i = -\frac{1}{2}
-\end{equation*}
-
-Constraint becomes:
-
-\begin{equation*}
-\frac{1}{2}x_1^2 + 0 - \frac{1}{2} = 0\rightarrow x_1^2 = 1
-\end{equation*}
-
-Three types of inequality:
-
-Type 1:
-
-\begin{equation*}
-H=\begin{bmatrix}
-2 &\\
-&\frac{1}{2}
-\end{bmatrix}\,\,\,c^T = \begin{bmatrix}
+H_1=\begin{bmatrix}
+2 & 0 \\
+0 &\frac{1}{2}
+\end{bmatrix}
+\qquad 
+c_1^T = \begin{bmatrix}
 0 & 0
-\end{bmatrix}\,\,\,
-d = -1
+\end{bmatrix}
+\qquad 
+d_1 = -1
 \end{equation*}
 
+So this constraint can be written as
 \begin{align*}
-\frac{1}{2}x^THx + c^Tx + d \leq 0\Rightarrow &\frac{1}{2}x^T\begin{bmatrix}
-2&\\
-&\frac{1}{2}
-\end{bmatrix}x\leq 1\\
-&x^T\begin{bmatrix}
-2&\\
-&\frac{1}{2}
-\end{bmatrix}x \leq 2
+\frac{1}{2}x^TH_1x + c_1^Tx + d_1 \leq 0 &\Leftrightarrow 2x_1^2 + \frac{1}{2}x_2^2 \leq 2\\
+&\Leftrightarrow\frac{x_1^2}{1} + \frac{x_2^2}{4}\leq 1
 \end{align*}
 
-\begin{align*}
-2x_1^2 + \frac{1}{2}x_2^2 &\leq 2\\
-x_1 + \frac{1}{4}x_2^2 &\leq 1\\
-\frac{x_1^2}{1} + \frac{x_2^2}{4} &\leq 1
-\end{align*}
-Type 2:
+It is obviously the feasible set of this constraint corresponds to an ellipse, and by computing the eigenvalues(lengths of major and minor axis) and eigenvectors(directions of major and minor axis) of $H_1$, we are able to draw such feasible set as on the r.h.s.
 
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_3.png}
+	\caption{Feasible set of constraint 2} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+Constraint 2:
 \begin{equation*}
-H=0\,\,\,c = \begin{bmatrix}
+H_2=
+\begin{bmatrix}
+0 & 0\\
+0 & 0
+\end{bmatrix}
+\qquad
+c_2^T = 
+\begin{bmatrix}
 -1 & 1
-\end{bmatrix}\,\,\,
-d = -1
+\end{bmatrix}
+\qquad
+d_2 = -1
 \end{equation*}
+
+So this constraint can be written as
 \begin{equation*}
 \begin{bmatrix}
 -1 & 1
-\end{bmatrix}x\leq 1\Rightarrow
+\end{bmatrix}x\leq 1\Leftrightarrow
 \begin{bmatrix}
 -1 & 1
 \end{bmatrix}
 \begin{bmatrix}
 x_1\\
 x_2
-\end{bmatrix}\leq 1\Rightarrow x_2\leq 1 + x_1
+\end{bmatrix}\leq 1\Leftrightarrow x_2\leq 1 + x_1
 \end{equation*}
 
-\begin{marginfigure}
-	\centering
-	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_2.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{marginfigure}
+The corresponding feasible set of this constraint is illustrated on r.h.s.
 
-Type 3:
-\begin{equation*}
-H=\begin{bmatrix}
-0 &0\\
-0&2
-\end{bmatrix}\,\,\,c^T = \begin{bmatrix}
--1 & 0
-\end{bmatrix}\,\,\,
-d = -1 \Rightarrow x^2_2 - x_1 - 1\leq 0
-\end{equation*}
-
-\begin{marginfigure}
-	\centering
-	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_3.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{marginfigure}
-
-Intersection:
 \begin{marginfigure}
 	\centering
 	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_4.png}
-	%\caption{This is an inserted JPG graphic} 
+	\caption{Feasible set of constraint 3} 
 	%\label{fig:graph} 
 \end{marginfigure}
 
+Constraint 3:
+\begin{equation*}
+H_3=
+\begin{bmatrix}
+0 & 0\\
+0 & 2
+\end{bmatrix}
+\qquad
+c_3^T = 
+\begin{bmatrix}
+-1 & 0
+\end{bmatrix}
+\qquad
+d_3 = -1 
+\end{equation*}
+
+So this constraint can be written as
+$$x^2_2 - x_1 - 1\leq 0$$
+The corresponding feasible set of this constraint is illustrated on r.h.s.
 
 
+Put all these 3 constraints together(i.e., find the intersection of above 3 feasible sets), so we can obtain the desired feasible set for this QCQP problem
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch07/figure1021_5.png}
+	\caption{Feasible set for this QCQP} 
+	%\label{fig:graph} 
+\end{marginfigure}
+\end{example}
 
-%Above are notes for Oct21
