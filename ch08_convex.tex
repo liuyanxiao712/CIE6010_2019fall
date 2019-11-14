@@ -1191,3 +1191,315 @@ F(y)\geq F(x^*) + \triangledown F(x^*)^T(y-x^*)
 So if you can find an $x^*\in domf$ s.t. $\triangledown F(x^*) = 0$ then that is a global minimum.
 
 %Above are notes for Nov 6
+
+
+
+%Below are notes for Nov 11
+
+\subsection{Local VS Gloal Minima}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1111_1.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\begin{definition}
+	$x^*$ is a local minimum of $F$ if $\exists \epsilon >0 s.t. \forall x$ where $|x - x^*| < \epsilon$, $F(x) \geq F(x^*)$
+\end{definition}
+
+\begin{theorem}
+	Suppose $F$ is twice differentiable(not necessarily convex) that:
+	
+	(1) If $x^*$ is a local optimum that $\triangledown F(x^*) = 0$ and $\triangledown^2F(x^*)\geq 0$.
+	
+	(2) If $\triangledown F(x^*) = 0$ and $\triangledown^2F(x^*)> 0$, then $x^*$ is a local minimum. 
+\end{theorem}
+
+
+Consider:
+
+\begin{align*}
+&F(x) = x^3 \quad \text{at} \quad x = 0\\
+&F'(x) = 3x^2 \quad \text{at} \quad F'(0) = 0\\
+&F''(x) = 6x \quad \text{at} \quad F''(0) = 0
+\end{align*}
+
+(1) 
+\begin{proof}
+	Let $x^*$ be a local optimum, consider any $v$:
+	\begin{equation*}
+	lim_{t\rightarrow 0^+}\frac{F(x^* + tv) - F(x^*)}{t} = \triangledown F(x^*)^Tv\geq 0
+	\end{equation*}
+	It's greater than 0 since $x^*$ is local minimum.
+	
+	This implies that $\triangledown F(x^*) = 0$ because $v$ is arbitrary. 
+	
+	Example: If $\triangledown F(x^*) \neq 0$, hen take $V = -\triangledown F(x^*)$ \& would get a negative one unless $\triangledown F(x^*) = 0$
+	
+\end{proof}
+
+\begin{align*}
+lim_{t\rightarrow 0^+}\frac{F(x^* + tv) - F(x^*)}{t^2} &= lim_{t\rightarrow 0^+} \frac{F(x^*) + \triangledown F(x^*)^T(tv) + \frac{1}{2}(tv)^T\triangledown F(x^*)(tv) + o(t^2) - F(x^*)}{t^2}\\
+&= lim_{t\rightarrow 0^+} \frac{1}{2}v^T\triangledown^2F(x^*)v+\frac{\sigma(t^2)}{t^2}\\
+&= \frac{1}{2}v^T\triangledown^2F(x^*)v \\
+&\geq 0
+\end{align*}
+
+Since $v$ is arbitrary by definition of PSD, $\triangledown^2 F(x^*) \geq 0$
+
+For twice differentiable functions, what we are told here is: $x^*$ is a local optimum $\Rightarrow$ $\triangledown F(x^*) = 0 \& \triangledown^2F(x^*)\geq 0$.\\
+
+If in addition, $F$ is convex:
+
+$\Rightarrow$ $\triangledown^2F(x^*)\geq0, \forall x\in domF$
+
+$\Rightarrow$ $\triangledown F(x^*) = 0$, $\Rightarrow$ $x^*$ is global optimum.
+
+Put together to say: If $F$ convex then local optimum $\Rightarrow$ global optimum.\\
+
+(2)
+\begin{proof}
+	If $\triangledown F(x^*) = 0$ \& $\triangledown^2 F(x^*) > 0$, $\Rightarrow$ $x^*$ is local optimum.\\
+	
+	Again use Taylor: 
+	
+	\begin{align*}
+	F(x) &= F(x^* + tv) \\
+	&= F(x^*) + \triangledown F(x^*)^T(tv) + \frac{1}{2}(tv)^T\triangledown^2F(x^*)(tv) + o(\Vert v \Vert^2)\\
+	&= F(x^*) + \frac{1}{2}t^2v^T\triangledown^2F(x^*)v + o(\Vert v \Vert^2)\\
+	\end{align*}
+	
+	$\Rightarrow$ If $t$ is sufficiently small, the quadratic term dominates the $o(\Vert tv \Vert^2)$ term.
+	
+	$\Rightarrow$ Any parr in neighborhood sufficiently small (meaning $t$ sufficiently small) has evaluation larger than $F(x^*)$.
+	
+	$\Rightarrow$ $x^*$ is local optimum. 
+\end{proof}
+
+
+Remarks: 
+
+\begin{enumerate}
+	\item It is possible no local or global optima exist.
+	
+	\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1111_2.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+	\end{marginfigure}
+	
+	This graph is on $inf\,\, F(x) = 0$ but no $x\in domF = \Re$ achieves $F(x) = 0$.
+	
+	\item This is story for unconstrained optimization
+	
+	\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1111_3.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+	\end{marginfigure}
+	
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\subsection{Composition of Functions}
+
+Let $F(x) = h(g(x))$ where $g: \Re^n \rightarrow \Re$ and $h: \Re\rightarrow \Re$. Then $F: \Re^n\rightarrow \Re$ is convex if:
+
+
+
+\begin{enumerate}
+	\item $g$ convex, $h$ is convex and non-decreasing.
+	
+	\item $g$ concave, $h$ is convex and non-increasing.
+\end{enumerate}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1111_4.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1111_5.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+Prove: For differentiable functions, can also prove for non-differentiable. 
+
+(i)
+
+\begin{itemize}
+	\item $F'(x) = h'(g(x))g'(x)$.
+	
+	\item $F''(x) = h''(g(x))g'(x)g'(x) + h'(g(x))g''(x) \geq 0$ 
+\end{itemize}
+
+
+
+Note: Doing derivative for $n=1$ without loss of generality because we showed a convex function must be convex along all lines. 
+
+
+
+(ii) 
+\begin{equation*}
+F''(x) = h''(g(x))(g'(x))^2 + h'(g(x))g''(x) \geq 0
+\end{equation*}
+
+Can extend to multiple dimensions.
+\begin{align*}
+&g:\Re^n\rightarrow \Re^k, h:\Re^k\rightarrow \Re\\
+F(x) &= h(g(x))\\
+&= h(g_1(x) g_2(x)...g_k(x)) \text{is convex}
+\end{align*}
+
+$\cdot$ $g$ is convex and $h$ is convex and non-decreasing in each of its arguments. 
+
+\begin{example}
+	$F(x) = exp(g(x)) = h(g(x))$ where $g(x)$ is convex. 
+	
+	$\rightarrow$ $h(\cdot) = exp(\cdot)$ is convex and is non-decreasing.
+	
+	Therefore $F(x)$ is convex. 
+\end{example}
+
+\begin{example}
+	$F(x) = \frac{1}{g(x)}$ is convex if $g(x)$ is concave and positive, $\forall x$. 
+	
+	$F(x) = g(h(x))$ where $h(x) = \frac{1}{x}$ and $domh = \Re_{++}$. $\rightarrow$ $h$ is convex.
+	
+	$\rightarrow$ $g(\cdot)$ is concave 
+	
+	$\rightarrow$ $h$ is convex.
+	
+	$\rightarrow$ $h(x) = \frac{1}{x}$ is non-increasing on $\Re_{++}$.
+	
+	$\Rightarrow$ $F$ is a convex function. 
+\end{example}
+
+\begin{example}
+	$F(x) = -\sum^k_{i=1}log(-F_i(x))$ is convex on $\{x\vert F_i(x)<0\forall i\in \{1...k \}  \}$ if the $F_i$ are all convex.
+	
+	\begin{enumerate}
+		\item $domf = \cap^k_{i=1}\{x\vert F_i(x) <0 \}$
+		
+		$\Rightarrow$ Intersection of sublevel sets of convex functions therefore a convex set.
+		
+		$\Rightarrow$ For each $F_i(x)<0\Rightarrow -F_i(x) >0$
+		
+		$F(x) = \sum^k_{i=1} -log(-F_i(x))$ is the positive sum of convex functions, so convex eventually.
+	\end{enumerate}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+\subsection{Intro to convex optimization problems}
+General form: $F_i(x), h_i(x): \Re^n\rightarrow \Re$.
+
+\begin{align*}
+\min_{x\in \Re^n} \quad &F_0(x) \quad(\text{"objective function"})\\
+s.t. \quad &F_i(x) \leq 0, i = 1...m \quad\text{inequality constraints}\\
+&h_i(x) =0,i =1...p \quad \text{equality constraints}
+\end{align*}
+
+
+\begin{equation*}
+\mathcal{C} = \{x\vert F_i(x) \leq 0,i=1...m,h_i(x) = 0,i = 1...p \}
+\end{equation*}
+is the "feasible set"
+
+Optimal value: $p^* = inf_{x\in \mathcal{C}}F_0(x)$
+
+Optimal points: $\{x\in \mathcal{C}\vert F_0(x) = p^* \}$.\\
+
+Convex optimization problem: 
+
+\begin{align*}
+\min_x \quad &F_0(x) \\
+s.t. &F_i(x)\leq 0 \quad i = 1,...,m\\
+&a^T_i + b_i = 0\quad i =i,...,p\\
+\end{align*}
+
+$a^T_i + b_i = 0$ ia often written as:
+\begin{equation*}
+\begin{bmatrix}
+a_1^T\\
+a_2^T\\
+...\\
+a_p^T
+\end{bmatrix}x = 
+\begin{bmatrix}
+b_1\\
+...\\
+b_P
+\end{bmatrix}
+\end{equation*}
+
+\begin{enumerate}
+	\item All $F_i$, $i\in \{0,1,...n \}$ are convex functions.
+	
+	\item All equality constraints are affine.
+\end{enumerate}
+
+
+%\begin{example}
+%	\begin{align*}
+%	&\min\quad{x_1+x_2}\\
+%	s.t. &-x_1\leq 0\\
+%	&-x_2\leq 0\\
+%	&1-x_1x_2 \leq 0\\
+%	\end{align*}
+%	
+%	GRAPH7
+%\end{example}
+
+Remarks:
+
+\begin{enumerate}
+	\item Think about feasible set,
+	\begin{equation*}
+	\mathcal{C} = (\cap^m_{i=1}\{x\vert F_i(x) \leq 0 \})\cap(\cap^p_{i=1}\{x\vert a_i^Tx - b_i = 0 \})
+	\end{equation*}
+	
+	For the left-hand part, each is a sublevel set of a convex function therefore convex.
+	
+	For the right-hand part, each is an affine set and therefore convex.
+	
+	$\Rightarrow$ Intersect $p+m$ convex sets therefore $\mathcal{C}$ is a convex set.
+	
+	\item Note: $h_i(x)$ are affine(and not more general convex) to keep the set $\{x\vert h_i(x) = 0 \}$ a convex set. 
+	
+	Let $h_i(x) = x^2 - 1$: 
+	\begin{equation*}
+	\{x\vert x^2 - 1 = 0 \} = \{x\vert x^2 = 1 \} = \{\pm 1 \}
+	\end{equation*}
+	\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1111_6.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+	\end{marginfigure}
+\end{enumerate}
+
+%Above are notes for Nov 11
