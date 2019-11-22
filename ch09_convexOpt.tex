@@ -290,5 +290,217 @@ where $-(A_0+A_1x_1+,,,+A_nx_n)\in S^n$, $A_i\in S^n$, $\leq$ means they're PSD 
 
 %Below are notes for Nov 18
 
+\subsection{Second-Order Cone Program (SOCPs)}
+
+\begin{align*}
+\min \quad&F^Tx\\
+s.t. \quad& \Vert A_ix+b_i\Vert_2 \leq c_i^Tx + d_i\quad i = 1,...,m\\
+&Fx \leq g
+\end{align*}
+$A_i\in \Re^{n_i\times n}$, $x\in \Re^n$, $b_i\in \Re^{n_i}$, $F\in \Re^{p\times n}$, $g\in \Re^p$
+
+Norm cone:
+\begin{equation*}
+\mathcal{C} = \{(x,t)\in \Re^{n+ 1} \vert \Vert x\Vert \leq t \} \subseteq \Re^{n+1}
+\end{equation*}
+
+
+\begin{marginfigure}
+\centering
+\includegraphics[width=1.8in,height=1.8in]{figures/ch09/figure1118_1.png}
+%\caption{This is an inserted JPG graphic} 
+%\label{fig:graph} 
+\end{marginfigure}
+
+\begin{itemize}
+	\item First fix $t = t_0$, $\mathcal{C}_{t_0} = \{(x,t_0)\vert \Vert x\Vert \leq t_0 \}$, "fill-in" slice
+	
+	\item Next fix $x = x_0$, $\mathcal{C}_{x_0} = \{(x_0,t)\vert \Vert x_0\Vert \leq t \}$
+	
+	$\rightarrow$  Fix point in $x\in \Re^n$ to $x = x_0$ and "Fill up".
+\end{itemize}
+
+
+\begin{proof}
+	1) Cone; 2) Convex cone
+	
+	\begin{enumerate}
+		\item Pick any $(x_0, t_0)\in \mathcal{C}$, show that $(\theta x_0, \theta t_0)\in \mathcal{C} \quad\forall \theta \in \Re_+$:
+		
+		\begin{equation*}
+		\Vert \theta x_0\Vert = \vert \theta \vert \Vert x_0\Vert = \theta \Vert x_0\Vert \leq \theta t_0
+		\end{equation*}
+		
+		$\mathcal{C}$ is a cone
+		
+		\item Pick $(x_0, t_0)\in \mathcal{C}$ and $(y_0, s_0)\in \mathcal{C}$, show that:
+		
+		\begin{equation*}
+		(\theta x_0 + (1-\theta)y_0, \theta t_0 + (1-\theta)s_0)\in \mathcal{C}, \forall 0\leq \theta \leq 1
+		\end{equation*}
+		
+		\begin{align*}
+		\Vert \theta x_0 + (1-\theta)y_0\Vert &\leq \Vert \theta x_0\Vert + \Vert (1-\theta)y_0\Vert\\
+		&= \vert \theta \vert \Vert x_0\Vert + \vert (1-\theta) \vert \Vert y_0\Vert\\
+		&= \theta \Vert x_0\Vert +  (1-\theta)\Vert y_0\Vert\\
+		&\leq \theta t_0 + (1-\theta)s_0
+		\end{align*}
+		
+		In summary, $\mathcal{C} = \{(x,t)\vert \Vert x\Vert_2 \leq t \}$ is a convex cone.
+		
+		Consider following affine map:
+		\begin{equation*}
+		F_i(x) = \begin{bmatrix}
+		A_ix+b_i\\
+		c_i^Tx+d_i
+		\end{bmatrix}\in \Re^{n+ 1}
+		\end{equation*}
+		For ith constraint want $\Vert A_ix+b_i\Vert \leq c^T_ix+d_i$.
+		
+		\begin{equation*}
+		\{x\vert F_i(x)\in \mathcal{C}_{n+ 1} = F_i^{-1}(\mathcal{C}_{n+ 1}) \}
+		\end{equation*}
+	\end{enumerate}
+\end{proof}
+
+Remarks:
+
+\begin{enumerate}
+	\item If all $A_i = 0$, then get an LP;
+	
+	\item If $c_i = 0$, then get a QP;
+	
+	\item Second-order because use $l_2$ norm for cone.
+\end{enumerate}
+
+\subsection{Robust Linear Programs}
+
+\begin{align*}
+\min \quad&c^Tx\\
+s.t. \quad&a_i^Tx\leq b_i\quad i = 1,...,m
+\end{align*}
+$\Rightarrow$ Robust to uncertainty in $a_i$, two versions: (1) worst-case; (2)statistical.\\
+
+(1) Worst Case:
+
+Know $a_i\in \xi_i = \{a\vert a = \bar{a_i} + P_iu, \Vert u \Vert\leq 1 \} $. 
+
+Then we can change:
+\begin{align*}
+\min\quad &c^Tx\\
+s.t. \quad&a_i^Tx\leq b_i\quad a_i \in \xi_i \quad i = 1,...,m\\
+&a_i\in\xi_i
+\end{align*}
+
+to:
+
+\begin{align*}
+\min \quad&c^Tx\\
+s.t. \quad&(\bar{a_i} + P_iu)^Tx\leq b_i\quad i = 1,...,m\\
+&\Vert u_i\Vert \leq 1
+\end{align*}
+
+\begin{align*}
+\min\quad &c^Tx\\
+s.t \quad&sup_{\Vert u_i\Vert \leq 1}(\bar{a_i} + P_iu)^Tx\leq b_i\quad i = 1,...,m
+\end{align*}
+
+\begin{align*}
+(\bar{a_i} + P_iu)^Tx &= \bar{a_i}^Tx + u^TP_i^Tx \\
+&\leq \bar{a_i}^Tx + (\frac{P_i^Tx}{\Vert P_i^Tx\Vert})^TP_i^Tx\\
+&= \bar{a_i}^Tx + \frac{x^TP_iP_i^Tx}{\Vert P_i^Tx\Vert_2}\\
+&= \bar{a_i}^Tx + \Vert P_i^Tx\Vert_2
+\end{align*}\\
+
+(2) Statistical approach
+
+Model $a_i$ as random vectors $a_i \sim N(\bar{a_i}^T, \Sigma_i)$
+\begin{align*}
+E[a_i^Tx - b_i] &= \bar{a_i}^Tx - b_i = \mu_i\\
+E[((a_i^Tx - b_i) - (a_i^Tx - b_i))^2] &= E[((a_i - \bar{a_i})^Tx)^2]\\
+&= E[x^T(a_i - \bar{a_i})(a_i - \bar{a_i})^Tx] \\
+&= x^TE[(a_i - \bar{a_i})(a_i - \bar{a_i})^T]x\\
+&= x^T\Sigma_i x \\
+&= \sigma^2\\
+&= x^T \Sigma_i^{\frac{1}{2}}\Sigma_i^{\frac{1}{2}} x\\
+&= \Vert \Sigma_i^{\frac{1}{2}} x\Vert^2_2
+\end{align*}
+
+\begin{align*}
+Pr[a_i^T \leq b_i] &= Pr[a^T_i x\leq b_i]\\
+&= \Phi(\frac{b_i - \bar{a_i}^Tx}{\sigma_i})\\
+&= \Phi(\frac{b_i - \bar{a_i}^Tx}{\Vert \Sigma_i^{\frac{1}{2}} x\Vert_2})
+\end{align*}
+
+\begin{marginfigure}
+\centering
+\includegraphics[width=1.8in,height=1.8in]{figures/ch09/figure1118_2.png}
+%\caption{This is an inserted JPG graphic} 
+%\label{fig:graph} 
+\end{marginfigure}
+
+Say we want:
+
+\begin{align*}
+Pr[a_i^Tx\leq b_i]&\geq n\\
+\Phi(\frac{b_i - \bar{a_i}^Tx}{\sigma_i})&\geq n\\
+\frac{b_i - \bar{a_i}^Tx}{\sigma_i}&\geq \Phi^{-1}(m)
+\end{align*}
+
+Then it becomes:
+
+\begin{align*}
+\min \quad& c^Tx \\
+s.t. \quad& b_i - \bar{a_i}^Tx\geq \Phi^{-1}(m)\Vert\Sigma_i^{\frac{1}{2}}x\Vert_2 \quad i = 1,...,m
+\end{align*}
+
+\subsection{Geometric Program(GP)}
+
+\begin{itemize}
+	\item "Monominials": $h(x) = cx_1^{\alpha_1}x_2^{\alpha_2}...x_n^{\alpha_n}$, $c>0, \alpha_i\in \Re$, $domh = (x\vert x_i>0 \quad \forall i\in {1...n})$
+	
+	\item "Posynomials": $F(x) = \sum^k_{k=1}c_kx_1^{\alpha_{1k}}x_2^{\alpha_{2k}}...x_n^{\alpha_{nk}}$(sum of monomials)
+	
+	$\rightarrow$ note closed under addition, multipilication, non-neg scalings.
+\end{itemize}
+GP: 
+
+\begin{align*}
+\min\quad &F_0(x)\\
+s.t. \quad&F_i(x)\leq 1\quad i = 1,...,m\\
+&h_i(x)= 1\quad i = 1,...,p
+\end{align*}
+where $F_0, F_1,...,F_m$ are posynomials, $h_0, h_1,...,h_m$ are monomials.
+
+To get a GP into convex form, set $y_i = log x_i$, so $x_i = e^{y_i}$(recall $x_i > 0$)
+
+\begin{align*}
+h(x_1,x_2,...,x_m) &= cx_1^{\alpha_1}x_2^{\alpha_2}...x_n^{\alpha_n}\\
+log h(x_1,x_2,...,x_m) &= logc + \alpha log x_1 +\alpha log x_2 + ... + \alpha_n log x_n\\
+log h(e^{y_1},e^{y_2},...,e^{y_m}) &= logc + \alpha_1 log x_1 +\alpha_2 log x_2 + ... + \alpha_n log x_n\\
+\end{align*}
+
+Posynomials:
+
+\begin{align*}
+F(x_1,...,x_n) &= \sum^k_{i=1}c_kx_1^{\alpha_{1k}}x_2^{\alpha_{2k}}...x_n^{\alpha_{nk}}\\
+log F(e^{y_1},e^{y_2},...,e^{y_n}) &= log(\sum^k_{k=1}e^{logc_k}e^{\alpha_{1k}y_1}\cdots e^{\alpha_{nk}y_n})\\
+&=log(\sum^k_{k=1}e^{\alpha_{1k}y_1+\cdots+\alpha_{nk}y_n+logc_k})
+\end{align*}
+
+$\Rightarrow$ Show a convex function of $y$
+
+GP in convex form:
+
+\begin{align*}
+\min\quad & logF_0(e^{y_1},e^{y_2},...,e^{y_n}) \\
+s.t. \quad& logF_1(e^{y_1},e^{y_2},...,e^{y_n}) \leq log(1) = 0\\
+&log h_i(e^{y_1},e^{y_2},...,e^{y_n}) = 0
+\end{align*}
+%Above are notes for Nov 18
+
+
+
+%Below are notes for Nov 20
 
 %Above are notes for Nov 18
