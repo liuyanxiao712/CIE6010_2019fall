@@ -1,1 +1,134 @@
 %% Placeholder for discussion of duality
+
+%Below are notes for Nov 20
+
+\begin{align*}
+\min \quad&F_0(x) \\
+s.t. \quad&F_i(x)\leq 0, i = 1,...,m\\
+&h_i(x)= 0, i = 1,...,p
+\end{align*}
+(no assumption of convexity)
+
+\begin{equation*}
+D = (\cap^m_{i=1}domF_i)\cap(\cap^p_{i=1}domh_i)
+\end{equation*}
+
+Optimal value $p^*$, optimal variable $x^*$.
+
+\begin{definition}{The Lagrangian Function}
+	L($\cdot$,$\cdot$,$\cdot$)
+	
+	\begin{align*}
+	&L(x,\lambda,\nu) = F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu h_i(x)\\
+	&\lambda =\begin{bmatrix}
+	\lambda_1\\
+	\lambda_2\\
+	\vdots\\
+	\lambda_m
+	\end{bmatrix}
+	\nu = \begin{bmatrix}
+		\lambda_1\\
+		\lambda_2\\
+		\vdots\\
+		\lambda_m
+	\end{bmatrix}
+	\end{align*}
+\end{definition}
+
+$(\lambda, \nu)$ are called the "Lagrange multipliers" or "dual variables"
+
+\begin{equation*}
+domL = \mathcal{U}\times \Re^m \times \Re^p
+\end{equation*}
+
+\begin{definition}{The "dual" function}
+	$g(\cdot, \cdot)$, 
+	
+	\begin{equation*}
+	g(\lambda, \nu) = \min_{x\in D}\quad L(x,\lambda,\nu)
+	\end{equation*}
+	
+	Note: removes dependence on $x$
+\end{definition}
+
+\begin{definition}{The dual optimization problem}
+	\begin{align*}
+	\max_{\lambda, \nu} \quad&g(\lambda, \nu) \\
+	s.t. \quad&\lambda \geq 0
+	\end{align*}
+\end{definition}
+Note: $\nu$ unconstrained, optimal value $d^*$, optimal dual variables $\lambda^*$, $\nu^*$.\\
+
+Duality Theory: For most convex optimization problem, $d^* = p^*$.\\
+
+
+\begin{align*}
+\min \quad&F_0(x) \\
+s.t. \quad&F_i(x)\leq 0, \quad i = 1,...,m \\
+&h_i(x)= 0, \quad i = 1,...,p
+\end{align*}
+
+\begin{equation*}
+L(x,\lambda,\nu) = F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu_i h_i(x)
+\end{equation*}
+
+Dual Function:
+
+\begin{equation*}
+g(\lambda, \nu) = \min_{x\in D}\quad L(x,\lambda,\nu) 
+\end{equation*}
+
+
+\begin{align*}
+\max \quad&g(\lambda, \nu) \\
+s.t. \quad&\lambda \geq 0
+\end{align*}
+
+(1) $g(\lambda, \nu)$ is concave in $(\lambda, \nu)$ for all $F_0,...,F_m$, $h_0,...,h_p$.
+
+\begin{equation*}
+g(\lambda, \nu) =\min_{x\in D}[F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x) ]
+\end{equation*}
+
+
+(2) For any:
+
+\begin{enumerate}
+	\item Primal feasible $x$ (ie. $F_i(x)\leq 0, \quad i = 1,...,m$, $h_i(x)= 0, \quad i = 1,...,p$
+	
+	\item Dual feasible $(\lambda, \nu)$ (ie. $\lambda \geq 0$)
+	
+	\begin{equation*}
+	g(\lambda, \nu)\leq F_0(x) \qquad (x, \lambda, \nu) \in \mathcal{C}\times \Re^m_+\times \Re^p
+	\end{equation*}
+\end{enumerate}
+
+\begin{proof}
+	\begin{align*}
+	F_0(x) &\geq F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x)\\
+	&\geq \min_{x\in D} [F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x) ] = g(\lambda, \nu)
+	\end{align*}
+\end{proof}
+
+The point of greatest interest is $x^*$ where $p^* = F_0(x^*)$.
+
+Plug in: 
+\begin{equation*}
+p^* = F_0(x^*) \geq g(\lambda, \nu), \quad \forall \text{dual-feasible} (\lambda, \nu)\rightarrow \lambda \geq 0
+\end{equation*}
+
+Optimize over $(\lambda, \nu)$ where $(\lambda \geq 0)$ to maintain dual feasibility to get greatest lower bound. 
+
+\begin{equation*}
+p^* = F_0(x^*) \geq g(\lambda^*, \nu^*) = d^*
+\end{equation*}
+
+$p^* - d^*(\text{optimal duality gap})\geq 0$ $\rightarrow$ "weak-duality".
+
+(4) For convex primal optimization problems, (i.e. $F_i(x)$ convex and $h_i(x)$ affine) and under certain conditions called "constraint qualification"(i.e. not all constraint sets allowed) then $p^* = d^*$ $\rightarrow$ "strong duality"
+
+Slater's conditions: A set of constrains $F_i(x) \leq 0$, $Ax = b$ satisfies Slater's if $\exists x\in D$ s.t. $F_i(x)<0,(\text{feasible set has an interior}) \forall i = 1,...,m$ and $Ax = b$
+
+
+%Above are notes for Nov 20
+
