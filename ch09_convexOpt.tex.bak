@@ -307,7 +307,7 @@ Notice that, many of the results for ordinary convex optimization problems hold 
 
 \vspace{0.3cm}
 \subsection{Semi-definite program(SDP)}
-When above cone $k$ is $S^n_+$, the cone of PSD $n$ by $n$ matrices, a special case of convex optimization problem with generalized inequality constraints is, the Semi-definite program(SDP) problem,
+When above cone $k$ is $S^n_+$, the cone of PSD $n$ by $n$ matrices, a speacial case of convex optimization problem with generalized inequality constraints is, the Semi-definite program(SDP) problem,
 \begin{align*}
 \min_x\quad & c^Tx \\
 s.t.\quad & A_0+A_1x_1+\cdots+A_nx_n\leq 0\quad \\
@@ -495,7 +495,7 @@ By above argument, we have the problem formulated as
 \min \quad& c^Tx \\
 s.t. \quad& \mathbb{P}[a_i^Tx\leq b_i]\geq \eta,\ \forall i = 1,\cdots,m
 \end{align*}
-and it turns out(we have showed this fact above) that, this is equivalent to a SOCP problem as the following
+and it turns out(we have showed this fact above) that, this is equivalent to a SCOP problem as the following
 \begin{align*}
 \min \quad& c^Tx \\
 s.t. \quad& b_i - \bar{a_i}^Tx\geq \Phi^{-1}(\eta)\Vert\Sigma_i^{\frac{1}{2}}x\Vert_2,\ \forall i = 1,\cdots,m
