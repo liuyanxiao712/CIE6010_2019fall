@@ -1,63 +1,63 @@
 %% Placeholder for discussion of duality
 
 %Below are notes for Nov 20
+In optimization theory, duality or the duality principle is the principle that optimization problems may be viewed from either of two perspectives, that is, the primal problem or the dual problem.
 
+Let's consider the primal problem formulated as follows,
 \begin{align*}
 \min \quad&F_0(x) \\
 s.t. \quad&F_i(x)\leq 0, i = 1,...,m\\
 &h_i(x)= 0, i = 1,...,p
 \end{align*}
-(no assumption of convexity)
+Note that we do not have any assumptions of convexity here.
 
-\begin{equation*}
-D = (\cap^m_{i=1}domF_i)\cap(\cap^p_{i=1}domh_i)
-\end{equation*}
+So the feasible set for this problem is
+$$D = (\cap^m_{i=1}\text{dom}\ F_i)\cap(\cap^p_{i=1}\text{dom}\ h_i)$$ 
+and the optimal value is $p^*$, optimal variable is $x^*$.
 
-Optimal value $p^*$, optimal variable $x^*$.
-
-\begin{definition}{The Lagrangian Function}
-	L($\cdot$,$\cdot$,$\cdot$)
-	
-	\begin{align*}
-	&L(x,\lambda,\nu) = F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu h_i(x)\\
-	&\lambda =\begin{bmatrix}
-	\lambda_1\\
-	\lambda_2\\
-	\vdots\\
-	\lambda_m
-	\end{bmatrix}
-	\nu = \begin{bmatrix}
+\begin{definition}[The Lagrangian Function]
+	We define the Lagrangian function as follows,
+	$$L(x,\lambda,\nu) := F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu h_i(x)$$
+	where
+	$$\lambda =
+	\begin{bmatrix}
 		\lambda_1\\
 		\lambda_2\\
 		\vdots\\
 		\lambda_m
-	\end{bmatrix}
-	\end{align*}
+	\end{bmatrix},\
+	\nu = 
+	\begin{bmatrix}
+		\nu_1\\
+		\nu_2\\
+		\vdots\\
+		\nu_m
+	\end{bmatrix}$$
+
+The pairs $(\lambda, \nu)$ are called the "Lagrange multipliers" or "dual variables", and the domain for the Lagrangian function is given by 
+$$\text{dom}\ L = D\times \Re^m \times \Re^p$$
 \end{definition}
 
-$(\lambda, \nu)$ are called the "Lagrange multipliers" or "dual variables"
-
-\begin{equation*}
-domL = \mathcal{U}\times \Re^m \times \Re^p
-\end{equation*}
-
-\begin{definition}{The "dual" function}
-	$g(\cdot, \cdot)$, 
-	
+\begin{definition}[The "dual" function]
+	The dual function $g(\cdot, \cdot)$ is defined as 
 	\begin{equation*}
 	g(\lambda, \nu) = \min_{x\in D}\quad L(x,\lambda,\nu)
 	\end{equation*}
 	
-	Note: removes dependence on $x$
+	Note: removes dependence on $x$.
 \end{definition}
+
 
 \begin{definition}{The dual optimization problem}
 	\begin{align*}
 	\max_{\lambda, \nu} \quad&g(\lambda, \nu) \\
 	s.t. \quad&\lambda \geq 0
 	\end{align*}
+
+Note: $\nu_i$ are unconstrained, and we denote the optimal value as $d^*$, optimal dual variables as $\lambda^*$ and $\nu^*$.
 \end{definition}
-Note: $\nu$ unconstrained, optimal value $d^*$, optimal dual variables $\lambda^*$, $\nu^*$.\\
+
+
 
 Duality Theory: For most convex optimization problem, $d^* = p^*$.\\
 
