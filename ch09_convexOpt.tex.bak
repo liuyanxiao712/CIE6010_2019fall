@@ -191,40 +191,32 @@ That is, start at the point $x^*\in \mathcal{C}$, move into feasible set in dire
 \end{marginfigure}
 
 \begin{proof}
-	First assume the inequality holds, and we show that $x^*$ is the global optimum. A
-	
-	Apply $1$-st order condition for optimality, i.e. $\forall y \in \mathcal{C}$:
+	First assume $x^*$ is the global optimum, apply $1^{st}$-order condition for optimality, i.e. $\forall y \in \mathcal{C}$:
 	\begin{align*}
 	F_0(y) &\geq F_0(x^*) + \triangledown F_0(x^*)^T(y-x^*)\\
 	&\geq F_0(x^*)
 	\end{align*}
-	where the second term on the r.h.s. must be non-negative by our assumption.
+	$\rightarrow$ Basically same prove now $2^{nd}$ term $\geq 0$(not = 0)
 	
-	So for $\forall y \in \mathcal{C}$, we have $F_0(y)\geq F_0(x^*)$. Hence $x^*$ is a global optimum if the inequality holds.
+	Second: 
 	
-	Secondly, we show that, if $x^*$ is the global optimum, then the inequality must holds. We prove this by contradiction.
-	
-	Suppose that $\exists y\in \mathcal{C}$ such that $\triangledown F_0(x^*)^T(y-x^*)<0$.
+	If $x^*$ is global optimum, and suppose that $\exists y\in \mathcal{C}$s.t. $\triangledown F_0(x^*)^T(y-x^*)<0$.
 	
 	Look at the point $z$ defined as
 	\begin{align*}
 	z 
 	&= \lambda y + (1-\lambda)x^*\\
-	&= x^* + \lambda(y-x^*)
+	&= x^* + \lambda(y-x^*)\quad \lambda \in [0,1]
 	\end{align*}
+	Feasible $\forall \lambda$ because $\mathcal{C}$ is convex set.
 	
-	All the points $z$ defined above must be feasible $\forall \lambda \in [0,1]$, because the set $\mathcal{C}$ is a convex set.
-	
-	We claim that, there exists some points $z$ such that $F_0(z)<F_0(x^*)$, by showing that
 	\begin{align*}
 	\left.\frac{dF_0(z)}{d\lambda}\right|_{\lambda = 0} &=\left.\frac{d}{d\lambda}F_0(x^*+\lambda(y-x^*))\right|_{\lambda = 0}\\
 	&= \triangledown F_0(x^*)^T(y-x^*)\\
 	&< 0
 	\end{align*}
 	
-	Since the slope(the gradient) is strictly negative(as we assume the inequality does not hold), the value of $F_0(z)$ will decreases as $\lambda>0$ increase, so we will have a smaller value $F_0(z)$ compared to $F_0(x^*)$, which contradicts the global optimality of $x^*$.
-	
-	Therefore, if the inequality does not hold, $x^*$ will not be the global optimum. So $x^*$ is the global optimum if and only if the inequality holds.
+	Since slope is strictly negative, as increasing $\lambda>0$, initially $F_0(z)$ decreases $\rightarrow$ contradicts global optimality of $x^*$, therefore have a contradiction. 
 \end{proof}
 
 
@@ -280,7 +272,7 @@ where the constraint $F_0(x) \leq t$ defines a convex set(sub-level set is a con
 	
 	Hence, the function $F_0(x) = \frac{P(x)}{Q(x)}$ is quasi-convex since all its sub-level sets are convex sets.
 	
-	Let's consider the special case for this kind of functions by setting $F_0(x)= \frac{a^T x+b}{c^T x +d}$ with $\text{dom}\ F_0=\{x\mid c^T x+d >0 \}$.
+	Let's consider the special case for this kind of functions by setting $F_0(x)= \frac{a^T x+b}{c^T x +d}$ with $dom\ F_0=\{x\mid c^T x+d >0 \}$.
 	
 	We can show that(by similar approach above), the sub-level sets and super-level sets are convex sets, and thus $F_0(x)= \frac{a^T x+b}{c^T x +d}$ is quasi-linear(both quasi-convex and quasi-concave).
 
@@ -288,7 +280,7 @@ where the constraint $F_0(x) \leq t$ defines a convex set(sub-level set is a con
 
  Important note:
  
- (1) Quasi-convex optimization problems may have local optimum that are NOT global optimum (differ from the convex optimization problems).
+ (1) Quasi-convex optimization problems may have local optimum that are NOT global optimum(differ from the convex optimization problems).
 
 
 
@@ -315,7 +307,7 @@ Notice that, many of the results for ordinary convex optimization problems hold 
 
 \vspace{0.3cm}
 \subsection{Semi-definite program(SDP)}
-When above cone $k$ is $S^n_+$, the cone of PSD $n$ by $n$ matrices, a special case of convex optimization problem with generalized inequality constraints is, the Semi-definite program(SDP) problem,
+When above cone $k$ is $S^n_+$, the cone of PSD $n$ by $n$ matrices, a speacial case of convex optimization problem with generalized inequality constraints is, the Semi-definite program(SDP) problem,
 \begin{align*}
 \min_x\quad & c^Tx \\
 s.t.\quad & A_0+A_1x_1+\cdots+A_nx_n\leq 0\quad \\
@@ -503,7 +495,7 @@ By above argument, we have the problem formulated as
 \min \quad& c^Tx \\
 s.t. \quad& \mathbb{P}[a_i^Tx\leq b_i]\geq \eta,\ \forall i = 1,\cdots,m
 \end{align*}
-and it turns out(we have showed this fact above) that, this is equivalent to a SOCP problem as the following
+and it turns out(we have showed this fact above) that, this is equivalent to a SCOP problem as the following
 \begin{align*}
 \min \quad& c^Tx \\
 s.t. \quad& b_i - \bar{a_i}^Tx\geq \Phi^{-1}(\eta)\Vert\Sigma_i^{\frac{1}{2}}x\Vert_2,\ \forall i = 1,\cdots,m
@@ -569,7 +561,6 @@ Note that:
 %Below are notes for Nov 20
 \vspace{0.5cm}
 \subsection{Semi-definite Programs(SDPs)}
-Recall that, a SDP is formulated as 
 \begin{align*}
 \min \quad&c^Tx \\
 s.t. \quad&F_0 + x_1F_1 + x_2F_2 + ... + x_nF_n \leq 0\\
