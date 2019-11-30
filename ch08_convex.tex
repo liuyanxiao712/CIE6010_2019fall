@@ -3,12 +3,11 @@
 %Below are notes for Oct23
 \section{Linear/affine/convex/conic hulls \& sets}
 Given a set of points $x^{(i)} \in \reals^n$, $i\in [m]$
-
 \begin{equation*}
 P = \{x^{(1)}, x^{(2)},..., x^{(m)} \}
 \end{equation*}
 
-Consider combinations of form $\sum^m_{i=1} \lambda_i x^{(i)}$
+Consider combinations of form $\sum^m_{i=1} \lambda_i x^{(i)}$,
 
 1) The "linear" hull: 
 
@@ -36,7 +35,7 @@ Consider combinations of form $\sum^m_{i=1} \lambda_i x^{(i)}$
 \{x|x = \sum^m_{i=1} \lambda_i x^{(i)}, \lambda_i\in \reals, \lambda_i \geq 0 \}
 \end{equation*}
 
-
+Summary
 \begin{center}
 	\begin{tabular}{|c|c|c|}
 	\hline  
@@ -54,32 +53,35 @@ Conic&  yes  &  no\\
 \end{center}
 
 
+\begin{example}[Linear Hull]
+	
+Let $P = \{x^{(1)}, x^{(2)} \}$, linear hull of $P = \text{span}\{x^{(1)},\cdots,x^{(m)} \} =\text{span}(P)$.
 
-1) Linear Hull
+Note that linear hull of $P$ forms the smallest subspace that contains $P$.
 
-Linear hull of $P = \text{span}\{x^{(1)},...,x^{(m)} \} =\text{span}(P)$
+\end{example}
 
-$\rightarrow$ smallest subspace that contains $P$.
-
-2) Affine hull
-
-Let $P = \{x^{(1)}, x^{(2)} \}$, 
+\begin{example}[Affine Hull]
+Let $P = \{x^{(1)}, x^{(2)} \}$, the point of the affine hull is given by
 \begin{align*}
-x &= \lambda_1x^{(1)} + \lambda_2x^{(2)}\\
+x 
+&= \lambda_1x^{(1)} + \lambda_2x^{(2)}\\
 &= \lambda_1x^{(1)} + (1-\lambda)_1x^{(1)}\\
 &= x^{(2)} + \lambda(x^{(1)} - x^{(2)})
 \end{align*}
-Hence, $aff(P) = x^{(2)} + \text{span}(x^{(1)} - x^{(2)})$.
+Hence, $\text{aff}(P) = x^{(2)} + \text{span}(x^{(1)} - x^{(2)})$.
 
 \vspace{0.3cm}
-Let $P = \{x^{(1)}, x^{(2)}, x^{(3)} \}$,
+Let $P = \{x^{(1)}, x^{(2)}, x^{(3)} \}$, the point of the affine hull is given by
 \begin{align*}
-x &= \lambda_1x^{(1)} + \lambda_2x^{(2)} + \lambda_3x^{(3)}\\
+x 
+&= \lambda_1x^{(1)} + \lambda_2x^{(2)} + \lambda_3x^{(3)}\\
 &= (1 - \lambda_2 - \lambda_3)x^{(1)} + \lambda_2x^{(2)} + \lambda_3x^{(3)}\\
 &= x^{(1)} + \lambda_2(x^{(2)} - x^{(1)}) + \lambda_3(x^{(3)} - x^{(1)})
 \end{align*}
-Hence,  $aff(P) = x^{(1)} + \text{span}(x^{(2)} - x^{(1)}) + \text{span}(x^{(3)} - x^{(1)})$.
+Hence,  $\text{aff}(P) = x^{(1)} + \text{span}(x^{(2)} - x^{(1)}) + \text{span}(x^{(3)} - x^{(1)})$.
 
+Note that, the affine hull is the smallest affine set contains the set $P$.
 
 \begin{marginfigure}
 	\centering
@@ -88,9 +90,11 @@ Hence,  $aff(P) = x^{(1)} + \text{span}(x^{(2)} - x^{(1)}) + \text{span}(x^{(3)}
 	%\label{fig:graph} 
 \end{marginfigure}
 
-3) Convex hulls
+\end{example}
 
-Let $P = \{x^{(1)},  x^{(2)}\}$,
+
+\begin{example}[Convex hull]
+Let $P = \{x^{(1)},  x^{(2)}\}$, the point of convex hull is given by 
 \begin{align*}
 x 
 &= \lambda_1x^{(1)} + \lambda_2x^{(2)}\\
@@ -98,8 +102,8 @@ x
 &= x^{(1)} + \lambda(x^{(2)} - x^{(1)})
 \end{align*}
 
-
-Let $P = \{x^{(1)},  x^{(2)}, x^{(3)} \}$,
+\vspace{0.3cm}
+Let $P = \{x^{(1)},  x^{(2)}, x^{(3)} \}$, the point of convex hull is given by 
 \begin{align*}
 x 
 &= \lambda_1x^{(1)} + \lambda_2x^{(2)} + \lambda_3x^{(3)}\\
@@ -122,9 +126,11 @@ x
 	%\label{fig:graph} 
 \end{marginfigure}
 
-4) Conic hulls: $\sum^n_{i=1}\lambda_i x^{(i)}$, $\lambda_i \geq 0$, $\forall i\in [m]$
+\end{example}
 
-Let $P = \{x^{(1)}, x^{(2)} \}$,
+
+\begin{example}[Conic hull]
+Let $P = \{x^{(1)}, x^{(2)} \}$, the point of conic hull is given by 
 \begin{align*}
 x 
 &= \lambda_1x^{(1)} + \lambda_2x^{(2)}\\
@@ -139,15 +145,18 @@ x
 	%\label{fig:graph} 
 \end{marginfigure}
 
+\end{example}
+
+
 \subsection{Convex Sets}
 
 \begin{definition}[Convex set]
-	A subset $C\subseteq \reals^n$ is a "convex" set if $\forall x,y \in \mathcal{C}$, then $z\in \mathcal{C}$, $\forall z = \lambda x + (1-\lambda)y$, $\lambda \in [0,1]$
+	A subset $C\subseteq \reals^n$ is a convex set if $\forall x,y \in \mathcal{C}$, then $z\in \mathcal{C}$, $\forall z = \lambda x + (1-\lambda)y$, $\lambda \in [0,1].$
 \end{definition}
 
 
 \begin{definition}[Strictly Convex]
-	A convex set is "strictly" convex if $\forall x,y \in \mathcal{C}$, $\forall \lambda \in (0,1)$, $z = \lambda x + (1-\lambda)y \in rel\,int(\mathcal{C})$(relative interior)
+	A convex set is strictly convex if $\forall x,y \in \mathcal{C}$, $\forall \lambda \in (0,1)$, $z = \lambda x + (1-\lambda)y \in rel\,int(\mathcal{C})$(relative interior)
 \end{definition}
 
 Objects with straight edges are not strictly convex sets.
@@ -156,7 +165,8 @@ Objects with straight edges are not strictly convex sets.
 	A set $\mathcal{C}\subseteq \reals^n $ is a cone if $\forall x\in \mathcal{C}$, then $\gamma x\in \mathcal{C}, \forall \gamma \geq 0$.
 \end{definition}
 
-\textbf{Some propositions:}
+
+\subsection{Typical convex sets}
 
 1) Hyper-planes are convex. 
 \begin{proof}
@@ -169,35 +179,37 @@ a^Tz &= a^T(\lambda x + (1-\lambda)y)\\
 \end{align*}	
 \end{proof}
 	
-2) Half-spaces are convex.
+\noindent 2) Half-spaces are convex.
 \begin{proof}
-Consider the half-space defined as $\{x| a^Tx \leq b \}$, we use the similar proof of the hyper-planes case, except we will get an inequality at the end.
+Consider the half-space defined as $\{x| a^Tx \leq b \}$, we use the similar proof of the hyper-planes case, except we replace the $"="$ with $"\leq"$ as follows
 \begin{align*}
 a^Tz &= a^T(\lambda x + (1-\lambda)y)\\
 &= \lambda(a^Tx) + (1-\lambda)y\\
 &\leq \lambda b + (1-\lambda)b\\
-&\leq b
-\end{align*}	
+&= b
+\end{align*}
+Thus, $a^Tz \leq b$, the points $z = \lambda x + (1-\lambda)y$ form a convex set. So the half-space is convex.
 \end{proof}
 
-3) If $C_1, \cdots, C_n$ are convex sets, then the set $\mathcal{C} = \cap^m_{i=1} C_i$ is convex.
+\noindent 3) If $C_1, \cdots, C_n$ are convex sets, then the set $\mathcal{C} = \cap^m_{i=1} C_i$ is convex.
 \begin{proof}
-First we pick any $x,y\in \mathcal{C}$, therefore we also have $x,y\in \mathcal{C}_i,\forall i\in [m]$, and we want to show that $z = \lambda x + (1 - \lambda)y$ is in the set $\mathcal{C}$.
+First we pick any $x,y\in \mathcal{C}$, therefore we have $x,y\in \mathcal{C}_i,\forall i\in [m]$, and we want to show that $z = \lambda x + (1 - \lambda)y$ is in the set $\mathcal{C}$.
 		
-Note that $x,y \in \mathcal{C_i} \forall i\in[m]$ implies that $z\in \mathcal{C}_i\forall i\in [m]$, since $\mathcal{C}_i$ is a convex set, $\forall i\in [m]$
+Note that $x,y \in \mathcal{C}_i \forall i\in[m]$ implies that $z\in \mathcal{C}_i\ \forall i\in [m]$, since $\mathcal{C}_i$ is a convex set$\ \forall i\in [m]$,
 		
-Therefore,  $z\in \cap^m_{i=1}C_i = C$		
+Therefore,  $z\in \cap^m_{i=1}C_i = C$, the set $\mathcal{C}$ is a convex set.		
 \end{proof}
 
+\begin{example}
 
 Recall that in previous LP and QP problems, the feasible set 
 $$\{x|Ax = b \}\cap \{x|Gx\leq b \} = \{\cap^q_{i=1}\{x|a^{(i)^T}x = b_i  \}\cap \{\cap^m_{i=1}\{x|g^{(i)^T}x \leq h_i \}$$
-is the intersection of $m+q$ convex sets so it is a convex set.
+is the intersection of $m+q$ convex sets, so it is a convex set.
+\end{example}
 
-
-4) Affine transformations:
+\noindent 4) Affine transformations preserve the convexity of a set.
 	
-If a map $F: \reals^n \rightarrow \reals^m$ is affine (i.e., $F(x) = Ax + b$) and $\mathcal{C} \subseteq \reals^n$ is convex, then the image of $\mathcal{C}$ under $F$ is convex.
+If a map $F: \reals^n \rightarrow \reals^m$ is affine (i.e., $F(x) = Ax + b$), and a set $\mathcal{C} \subseteq \reals^n$ is convex, then the image of $\mathcal{C}$ under $F$ is convex.
 $$F(\mathcal{C}) = \{F(x) | x\in \mathcal{C} \} \subseteq \reals^m$$
 
 Conversely, the pre-image of a convex set $\tilde{e}$ in $\reals^m$ is also convex
@@ -212,7 +224,7 @@ $$\{x|F(x)\in \mathcal{C} \} \subseteq \reals^n$$.
 \end{marginfigure}
 
 
-5) Norm balls are convex (recall that a norm is defined as $\Vert  x\Vert_p = (\sum^n_{i=1}\vert  x_i\vert^p)^{\frac{1}{p}}$ for $p\geq 1$).
+\noindent 5) Norm balls are convex (recall that a norm is defined as $\Vert  x\Vert_p = (\sum^n_{i=1}\vert  x_i\vert^p)^{\frac{1}{p}}$ for $p\geq 1$).
 
 \begin{marginfigure}
 	\centering
@@ -250,7 +262,9 @@ is a convex set, where $P\in S^n_{++}$.
 &= \{x|\Vert P^{-\frac{1}{2}}(x - x_c)\Vert^2_2 \leq 1 \}\\
 &= \{x|(x - x_c)^TP^{-1}(x - x_c) \leq 1 \}
 \end{align*}
-Recall that in previous QP chapter, we intersect these shapes with polyhedron to get feasible set of QCQP.
+So the set $\xi(x_c, P) =\{x|(x - x_c)^TP^{-1}(x - x_c) \leq 1 \}$ is a convex set.
+
+Also, remind that in previous QP chapter, we intersect these shapes with polyhedron to get the feasible set of QCQP.
 \end{proof}
 \end{example}
 
@@ -307,7 +321,7 @@ Recall that in previous QP chapter, we intersect these shapes with polyhedron to
 %
 %\vspace{0.5cm}
 
-\vspace{0.5cm}
+\vspace{0.4cm}
 \subsection{Cones and generalized inequalities}
 Recall that
 $\mathcal{C}$ is a cone if $\forall x\in \mathcal{C}$ and $\theta \in \reals_{+}$(i,e. $\theta \geq 0$), $\theta x\in \mathcal{C}$.   
@@ -333,7 +347,7 @@ Let $A\in S^n_+$, $B\in S^n_+$, and consider $\lambda A + (1-\lambda)B$ where $\
 
 $\rightarrow$ First note $(\lambda A + (1-\lambda)B)^T= \lambda A^T + (1-\lambda)B^T = \lambda A + (1-\lambda)B \in S^n$
 
-$\rightarrow$ $v^T(\lambda A + (1-\lambda B)v) =\lambda(v^TAv) + (1-\lambda)(v^TBv)\geq 0$\\
+$\rightarrow$ $v^T(\lambda A + (1-\lambda B))v =\lambda(v^TAv) + (1-\lambda)(v^TBv)\geq 0$\\
 
  
 3) $S^n_{++}$ is also a convex cone. 
