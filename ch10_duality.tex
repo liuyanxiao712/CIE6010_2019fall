@@ -31,11 +31,11 @@ and the optimal value is $p^*$, optimal variable is $x^*$.
 		\nu_1\\
 		\nu_2\\
 		\vdots\\
-		\nu_m
+		\nu_p
 	\end{bmatrix}$$
 
 The pairs $(\lambda, \nu)$ are called the "Lagrange multipliers" or "dual variables", and the domain for the Lagrangian function is given by 
-$$\text{dom}\ L = D\times \Re^m \times \Re^p$$
+$$\text{dom}\ L = D\times \reals^m \times \reals^p$$
 \end{definition}
 
 \begin{definition}[The "dual" function]
@@ -48,7 +48,7 @@ $$\text{dom}\ L = D\times \Re^m \times \Re^p$$
 \end{definition}
 
 
-\begin{definition}{The dual optimization problem}
+\begin{definition} The dual optimization problem is formulated as
 	\begin{align*}
 	\max_{\lambda, \nu} \quad&g(\lambda, \nu) \\
 	s.t. \quad&\lambda \geq 0
@@ -58,7 +58,7 @@ Note: $\nu_i$ are unconstrained, and we denote the optimal value as $d^*$, optim
 \end{definition}
 
 
-
+\vspace{0.3cm}
 Duality Theory: For most convex optimization problem, $d^* = p^*$.\\
 
 
@@ -83,67 +83,80 @@ g(\lambda, \nu) = \min_{x\in D}\quad L(x,\lambda,\nu)
 \max \quad&g(\lambda, \nu) \\
 s.t. \quad&\lambda \geq 0
 \end{align*}
-
-(1) $g(\lambda, \nu)$ is concave in $(\lambda, \nu)$ for all $F_0,...,F_m$, $h_0,...,h_p$.
-
-\begin{equation*}
-g(\lambda, \nu) =\min_{x\in D}[F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x) ]
-\end{equation*}
-
-
-(2) For any:
-
 \begin{enumerate}
-	\item Primal feasible $x$ (ie. $F_i(x)\leq 0, \quad i = 1,...,m$, $h_i(x)= 0, \quad i = 1,...,p$
-	
-	\item Dual feasible $(\lambda, \nu)$ (ie. $\lambda \geq 0$)
-	
-	\begin{equation*}
-	g(\lambda, \nu)\leq F_0(x) \qquad (x, \lambda, \nu) \in \mathcal{C}\times \Re^m_+\times \Re^p
-	\end{equation*}
-\end{enumerate}
+
+\item $g(\lambda, \nu)$ is concave in $(\lambda, \nu)$ for all $F_0,...,F_m$, $h_0,...,h_p$.
 
 \begin{proof}
-	\begin{align*}
-	F_0(x) &\geq F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x)\\
-	&\geq \min_{x\in D} [F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x) ] = g(\lambda, \nu)
-	\end{align*}
+Recall that
+$$g(\lambda, \nu) =\min_{x\in D}[F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x) ]$$
+
+First, notice that Lagrange function is an affine function in $(\lambda, \nu)$ so it is concave(of course it is convex at the same time). Secondly, note that the dual function is a pointwise infimum of a family of affine functions in $(\lambda, \nu)$, and thus $g(\lambda, \nu)$ is concave.
 \end{proof}
 
-The point of greatest interest is $x^*$ where $p^* = F_0(x^*)$.
+\item For any primal feasible $x$ (i.e., $F_i(x)\leq 0, \forall i = [m]$, $h_i(x)= 0,\forall i = [p]$ and dual feasible $(\lambda, \nu)$ (i.e., $\lambda \geq 0$), we have
+	$$g(\lambda, \nu)\leq F_0(x)$$
+    for any tuple $(x, \lambda, \nu) \in \mathcal{C}\times \reals^m_+\times \reals^p$, where $\mathcal{C}$ is the feasible set of the primal problem (contains all feasible $x$).
 
-Plug in: 
+\begin{proof}
+	Notice that, we have
+	\begin{align*}
+	F_0(x) &\geq F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x)\\
+	&\geq \min_{x\in D} [F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x)] \\
+	&= g(\lambda, \nu)
+	\end{align*}
+	where the first summation on r.h.s is negative due to $\lambda_i\geq 0$ and $F_i(x)\leq 0$, and the second summation equals to zero due to $h_i(x)=0$. 
+	
+	Thus the desired result can be obtained by the definition of $\min$ function and dual function.
+\end{proof}
+
+The point of greatest interest is $x^*$, where $p^* = F_0(x^*)$.
+
+Plug in to the above inequality, for all dual feasible $(\lambda, \nu)$ (i.e., for $\lambda \geq 0$), we have
 \begin{equation*}
-p^* = F_0(x^*) \geq g(\lambda, \nu), \quad \forall \text{dual-feasible} (\lambda, \nu)\rightarrow \lambda \geq 0
+p^* = F_0(x^*) \geq g(\lambda, \nu)
 \end{equation*}
 
-Optimize over $(\lambda, \nu)$ where $(\lambda \geq 0)$ to maintain dual feasibility to get greatest lower bound. 
-
+Optimize over $(\lambda, \nu)$ where $\lambda \geq 0$ in order to maintain dual feasibility, we can get the greatest lower bound,
 \begin{equation*}
 p^* = F_0(x^*) \geq g(\lambda^*, \nu^*) = d^*
 \end{equation*}
 
-$p^* - d^*(\text{optimal duality gap})\geq 0$ $\rightarrow$ "weak-duality".
+That is, we have the so called \textbf{weak duality}, $p^*\geq d^*$. 
 
-(4) For convex primal optimization problems, (i.e. $F_i(x)$ convex and $h_i(x)$ affine) and under certain conditions called "constraint qualification"(i.e. not all constraint sets allowed) then $p^* = d^*$ $\rightarrow$ "strong duality"
+Furthermore, we refer to the difference $p^* - d^*$ as the \textbf{optimal duality gap}.
 
-Slater's conditions: A set of constrains $F_i(x) \leq 0$, $Ax = b$ satisfies Slater's if $\exists x\in D$ s.t. $F_i(x)<0,(\text{feasible set has an interior}) \forall i = 1,...,m$ and $Ax = b$
 
+\item For convex primal optimization problems, (i.e., $F_i(x)$ are convex and $h_i(x)$ are affine) and under certain conditions called "constraint qualification"(i.e. not all constraint sets allowed), then the \textbf{strong duality} holds, i.e.,
+ $$p^* = d^*$$
+ and thus optimal duality gap is zero.
+
+There are many types of constraint qualification, and we will introduce a simple one called Slater's condition in the next section.
+
+\end{enumerate}
 
 %Above are notes for Nov 20
 
 % Below are notes for Nov 25
 \subsection{Slater Conditions}
 
-A set of constraints $F_i(x)\leq 0$, $i = 1...m$, $Ax = b$, satisfy Slater's conditions if there exists an $x$ s.t.
+\begin{definition}[Slater conditions]
+Consider a primal problem with a set of constraints $F_i(x)\leq 0$, $i = [m]$ and $Ax = b$, it is said to be satisfied the Slater's conditions if there exists an $x\in\text{relint}\ D$ such that
 
 \begin{enumerate}
-	\item $F_i(x) \leq 0\quad i = 1,...,m$
+	\item $F_i(x) < 0,\ \forall i = [m]$
 	
 	\item $Ax = b$
 \end{enumerate}
 
-Can actually weaken a bit, if $F_i$ is affine then $x$ satisfying $F_i(x)\leq 0$ suffices i.e. if $F_i(x) = g_i^Tx + h_i$.
+Furthermore, if some of the inequality contraints are defined by affine functions, this conditions can be weaken a bit. Suppose $F_i$ are affine for $i=1,\cdots, k$, $k<m$, then the Slater conditions requires that there exists an $x\in\text{relint}\ D$ such that
+\begin{enumerate}
+	\item $F_i(x) \geq 0,\ \forall i = 1,\cdots, k$
+	\item $F_i(x) < 0,\ \forall i = k+1,\cdots,m$.
+	\item $Ax = b$
+\end{enumerate}
+
+\end{definition}
 
 \begin{example}
 	Convex problem that doesn't satisfy Slater's:
@@ -179,7 +192,7 @@ Feasible set is $(x_1, x_2) = \{(0,0) \}$
 \end{marginfigure}
 
 \begin{theorem}
-	If the primal optimization problem is convex and satisfies Slater's conditions, then $p^* = d^*$
+	If the primal optimization problem is convex and satisfies Slater's conditions, then $p^* = d^*$, the strong duality holds.
 \end{theorem}
 
 Sketch proof for $m = 1$ (i.e. 1 inequality constraint $p = 0$).
@@ -223,7 +236,7 @@ G &= \{(F_1(x), F_0(x)) \vert x\in D = domF_1\cap domF_0 \}\\
 We can let:
 
 \begin{align*}
-\mathcal{A} &= G + \Re_+ \times \Re_+\\
+\mathcal{A} &= G + \reals_+ \times \reals_+\\
 &= \{(s,t) \vert F_1(x)\leq s, F_0(x)\leq t, x\in D \}\\
 &= \cup_{x\in D}\{(s,t)\vert F_1(x)\leq s, F_0(x)\leq t \}
 \end{align*}
