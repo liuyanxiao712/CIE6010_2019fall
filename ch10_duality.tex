@@ -695,3 +695,156 @@ F_0(x) + \lambda F_1(x) + \cdots + \lambda_mF_m(x) = F_0(x) + \sum^m_{i=1}\lambd
 
 % Above are notes for Nov 27
 
+
+% Below are notes for Dec 2
+\subsection{Dual of LPs}
+
+\begin{align*}
+\min\quad &c^Tx\\
+s.t.\quad &Ax\leq b
+\end{align*}
+
+Lagrangian: 
+
+\begin{align*}
+L(x,\lambda) &= c^Tx + \sum^m_{i=1}(a_i^Tx-b_i)\\
+&= c^Tx+\begin{bmatrix}
+\lambda_1&\lambda_2&\cdots&\lambda_m
+\end{bmatrix}\begin{bmatrix}
+a_i^Tx-b_1\\
+\vdots\\
+a_m^Tx-b_m
+\end{bmatrix} \\
+&=c^Tx+\lambda^T(Ax-b)\\
+&= -\lambda^Tb-(c^T+\lambda^TA)x
+\end{align*}
+
+Dual:
+
+\begin{align*}
+g(\lambda) &= \min_x[-\lambda^Tb+(c^T+\lambda^TA)x]\\
+&=
+\label{eq6}
+\left\{
+\begin{aligned}
+-\lambda^Tb &\quad \text{if} & c^T+\lambda^TA=0 \\
+-\infty &\quad \text{if} & c^T+\lambda^TA\neq 0
+\end{aligned}
+\right.
+\end{align*}
+
+Dual optimization:
+\begin{align*}
+\min\quad &g(\lambda)\\
+s.t.\quad &\lambda \geq 0
+\end{align*}
+
+$\Rightarrow$
+\begin{align*}
+\min\quad &g(\lambda)\\
+s.t.\quad &\lambda\geq 0\\
+&c^T+\lambda^TA=0
+\end{align*}
+
+$\Leftrightarrow$
+
+\begin{align*}
+\min\quad &-\lambda^Tb\\
+s.t.\quad &\lambda\geq 0\\
+&c^T+\lambda^TA=0
+\end{align*}
+
+
+
+
+
+
+\begin{itemize}
+	\item Dual of an LP is an LP
+	
+	\item Maybe not clear from form but have strong duality so $p^*=d^*$.
+\end{itemize}
+
+\begin{tabular}{|c|c|c|}
+	\hline 
+	&Primal & Dual\\
+	\hline  
+	variables & $n$ & $m$\\
+	\hline 
+	constant&$m$&$n+m$\\
+	\hline 
+\end{tabular}
+
+
+\begin{align*}
+\min\quad &b^T\lambda\\
+s.t.\quad &-\lambda\leq 0\quad\text{inequality multipliers }z\\
+&A^T\lambda = -c\quad \text{equality multipliers }y
+\end{align*}
+
+\begin{align*}
+L(\lambda,x,y) &= b^T\lambda + z^T(-\lambda)+y^T(A^T\lambda + c)\\
+g(z,y) = \min_{\lambda}L(\lambda,z,y) &= \min_{\lambda}y^Tc+[b^T-z^T+y^TA^T]\lambda\\
+&=
+%\label{eq6}
+\left\{
+\begin{aligned}
+y^Tc &\quad \text{if} &b^T-z^T+y^TA^T=0 \\
+-\infty &\quad \text{if} &else
+\end{aligned}
+\right.
+\end{align*}
+
+
+
+
+Dual optimization:
+\begin{align*}
+\max\quad &g(z,y)\\
+s.t.\quad &z \geq 0
+\end{align*}
+$\Leftrightarrow$
+
+
+\begin{align*}
+\min\quad &y^Tc\\
+s.t.\quad &b^T-z^T+y^TA^T=0\\
+&z\geq 0
+\end{align*}
+constants:
+
+
+\begin{align*}
+b^T=y^TA^T &= z^T\\
+z&\geq 0
+\end{align*}
+
+$\Leftrightarrow$
+
+\begin{equation*}
+b^T+y^TA^T \geq 0
+\end{equation*}
+
+Thus this problem can also be written as:
+
+
+\begin{align*}
+\max\quad &y^Tc\\
+s.t.\quad &b+Ay \geq 0
+\end{align*}
+
+$\Leftrightarrow$
+
+\begin{align*}
+\max\quad &(-x)^Tc\\
+s.t.\quad &b+A(-x) \geq 0
+\end{align*}
+
+$\Rightarrow$
+
+\begin{align*}
+\max\quad &c^Tx\\
+s.t.\quad &Ax \leq b
+\end{align*}
+
+% Above are notes for Dec 2
