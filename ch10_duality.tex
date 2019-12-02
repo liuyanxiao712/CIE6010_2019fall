@@ -17,7 +17,7 @@ and the optimal value is $p^*$, optimal variable is $x^*$.
 
 \begin{definition}[The Lagrangian Function]
 	We define the Lagrangian function as follows,
-	$$L(x,\lambda,\nu) := F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu h_i(x)$$
+	$$L(x,\lambda,\nu) := F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu_i h_i(x)$$
 	where
 	$$\lambda =
 	\begin{bmatrix}
@@ -54,35 +54,39 @@ and the optimal value is $p^*$, optimal variable is $x^*$.
 		s.t. \quad&\lambda \geq 0
 	\end{align*}
 	
-	Note: $\nu_i$ are unconstrained, and we denote the optimal value as $d^*$, optimal dual variables as $\lambda^*$ and $\nu^*$.
+	Note: $\nu_i$ are unconstrained, and we denote the optimal value for dual problem as $d^*$, optimal dual variables as $\lambda^*$ and $\nu^*$.
 \end{definition}
 
 
-\vspace{0.3cm}
-Duality Theory: For most convex optimization problem, $d^* = p^*$.\\
+\subsection{Duality theory}
+The duality theory says that, \textbf{for most convex optimization problem}, we have $d^* = p^*$, that is, the primal optimum equals to the dual optimum.
 
-
+Recall the problem formulations previously, the primal optimization problem is formulated as 
 \begin{align*}
 	\min \quad&F_0(x) \\
-	s.t. \quad&F_i(x)\leq 0, \quad i = 1,...,m \\
-	&h_i(x)= 0, \quad i = 1,...,p
+	s.t. \quad&F_i(x)\leq 0, \quad i = 1,\cdots,m \\
+	&h_i(x)= 0, \quad i = 1,\cdots,p
 \end{align*}
-
+The Lagrange function is given by 
 \begin{equation*}
 	L(x,\lambda,\nu) = F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu_i h_i(x)
 \end{equation*}
 
-Dual Function:
-
+The dual function is given by
 \begin{equation*}
 	g(\lambda, \nu) = \min_{x\in D}\quad L(x,\lambda,\nu) 
 \end{equation*}
 
-
+So the dual optimization problem is formulated as 
 \begin{align*}
 	\max \quad&g(\lambda, \nu) \\
 	s.t. \quad&\lambda \geq 0
 \end{align*}
+
+
+
+\vspace{0.3cm}
+\noindent\textbf{A few observations}
 \begin{enumerate}
 	
 	\item $g(\lambda, \nu)$ is concave in $(\lambda, \nu)$ for all $F_0,...,F_m$, $h_0,...,h_p$.
@@ -127,13 +131,14 @@ Dual Function:
 	Furthermore, we refer to the difference $p^* - d^*$ as the \textbf{optimal duality gap}.
 	
 	
-	\item For convex primal optimization problems, (i.e., $F_i(x)$ are convex and $h_i(x)$ are affine) and under certain conditions called "constraint qualification"(i.e. not all constraint sets allowed), then the \textbf{strong duality} holds, i.e.,
+	\item For convex primal optimization problems, (i.e., $F_i(x)$ are convex and $h_i(x)$ are affine) and under certain conditions called "constraint qualification" (i.e., not all constraint sets allowed), the \textbf{strong duality} holds, i.e.,
 	$$p^* = d^*$$
-	and thus optimal duality gap is zero.
+	and thus the optimal duality gap is zero.
 	
 	There are many types of constraint qualification, and we will introduce a simple one called Slater's condition in the next section.
 	
 \end{enumerate}
+	
 
 %Above are notes for Nov 20
 
@@ -152,7 +157,7 @@ Dual Function:
 	Furthermore, if some of the inequality contraints are defined by affine functions, this conditions can be weaken a bit. Suppose $F_i$ are affine for $i=1,\cdots, k$, where $k<m$, then the Slater conditions requires that there exists an $x\in\text{relint}\ D$ such that
 	\begin{enumerate}
 		\item $F_i(x) \leq 0,\ \forall i = 1,\cdots, k$
-		\item $F_i(x) < 0,\ \forall i = k+1,\cdots,m$.
+		\item $F_i(x) < 0,\ \forall i = k+1,\cdots, m$.
 		\item $Ax = b$
 	\end{enumerate}
 	
@@ -259,31 +264,37 @@ Observations:
 The boundary of $\mathcal{A}$ is specified by the function:
 \begin{align*}
 	p(u) = &\min \quad F_0(x)\\
-	&s.t. \quad F_i(x) \leq u
+	&s.t. \quad F_1(x) \leq u
 \end{align*}
 ($p$ is the boundary, $\mathcal{A}$ lies above the boundary)
 
-\begin{enumerate}
-	\item $p^* = p(0)$
+A few obervation regarding $p(u)$:
+
+	(1) $p^* = p(0)$.
 	
-	\item $p$ is non-increasing in $u$
+	(2) $p$ is non-increasing in $u$
 	
-	\item $p$ is convex in $u$
+
 	
-	\item $\mathcal{A} = \text{epi}\ p$
-\end{enumerate}
-Proof of (1): 
-\begin{proof}
-	As $u$ gets larger, feasible set of the $p(u)$ optimization gets larger so objective cannot increase $\rightarrow$ therefore non-increasing.
+	(3) $p$ is convex in $u$
+	
+	
+	
+	(4) $\mathcal{A} = \text{epi}\ p$
+
+
+\begin{proof}[proof of (2)]
+
+		As $u$ gets larger, feasible set of the $p(u)$ optimization gets larger so objective cannot increase $\rightarrow$ therefore non-increasing.
+
 \end{proof}
 
-Proof of (2):
 
-\begin{proof}
+\begin{proof}[proof of (3)]
 	Convexity of
 	\begin{align*}
-		p(x) = &\min \quad F_0(x)\\
-		&s.t. \quad F_i(x) \leq u
+		p(u) = &\min \quad F_0(x)\\
+		&s.t. \quad F_1(x) \leq u
 	\end{align*}
 	
 	We need to show that $\forall u_1, u_2\in \text{dom}\ p$, $\forall \lambda\in [0,1]$, we have
@@ -292,24 +303,19 @@ Proof of (2):
 	Let
 	\begin{align*}
 		x_i = &\arg \min \quad F_0(x)\\
-		&s.t. \quad F_i(x) \leq u_i
+		&s.t. \quad F_1(x) \leq u_i
 	\end{align*}
 	
 	i.e. $F_0(x_1) = p(u_1)\& F_0(x_2) =p(u_2)$
 	
-	Let $\tilde{x} = \lambda x_1 + (1-\lambda)x_2$ 
+	Let $\tilde{x} = \lambda x_1 + (1-\lambda)x_2$, where $x_1\in \text{dom}\ F_1\cap \text{dom}\ F_0\cap \{x\vert F_1(x)\leq u_1 \}$, $x_2\in \text{dom}\ F_1\cap \text{dom}\ F_0\cap \{x\vert F_1(x)\leq u_2 \}$.
 	
-	$\leftarrow$ $x_1\in \text{dom}\ F_1\cap \text{dom}\ F_0\cap \{x\vert F_1(x)\leq u_1 \}$, 
-	
-	$x_2\in \text{dom}\ F_1\cap \text{dom}\ F_0\cap \{x\vert F_2(x)\leq u_2 \}$
-	
-	($x_1$, $x_2$ from different sets)
-	
+	So we can write
 	\begin{align*}
 		F_1(\tilde{x}) 
-		&= F_1(\lambda x_1 + (1-\lambda)x_2) &(\text{Since } F_1\text{ is convex}, \tilde{x}\in \text{dom}\ F_1)\\
+		&= F_1(\lambda x_1 + (1-\lambda)x_2) &(\text{Since } \tilde{x}\in \text{dom}\ F_1)\\
 		&\leq \lambda F_1(x_1) + (1-\lambda)F_1(x_2) &(\text{Since } F_1 \text{ is convex})\\
-		&\leq \lambda u_1 + (1-\lambda)u_2 &(\text{Since } F_i(x_i) \leq u_i)
+		&\leq \lambda u_1 + (1-\lambda)u_2 &(\text{Since } F_1(x_i) \leq u_i, i=1, 2)
 	\end{align*}
 	
 	Hence, 
@@ -317,11 +323,12 @@ Proof of (2):
 		\tilde{x} \in \text{dom}\ F_1 \cap \text{dom}\ F_0 \cap \{x\vert F_1(x)\leq \lambda u_1 + (1-\lambda)u_2 \}
 	\end{equation*}
 	
-	
-	That is: $\tilde{x}$ is a feasible point for opt problem $p(\lambda u_1+(1-\lambda)u_2)$	
+	Therefore, $\tilde{x}$ is a feasible point for the optimization problem $p(\lambda u_1+(1-\lambda)u_2)$	
 \end{proof}
 
-Think about tradeoff between $F_1(x)$ and $F_0(x)$ in a slightly different way:
+
+
+Think about trade-off between $F_1(x)$ and $F_0(x)$ in a slightly different way:
 \begin{align*}
 	\min_{(s,t)} \quad&\lambda s + t\\
 	\text{where} \quad&(s,t) \in \mathcal{A}
@@ -344,11 +351,11 @@ which is equivalent to
 	%\label{fig:graph} 
 \end{marginfigure}
 
-For a given $\lambda$, the optimum is attained by some point $(s^*, t^*)$ on boundary of $\mathcal{A}$. Point on boundary is a function of $\lambda$ $(s^*(\lambda), t^*(\lambda)) = (F_1(x^*(\lambda)), F_0(x^*(\lambda)))$. 
+For a given $\lambda$, the optimum is attained by some point $(s^*, t^*)$ on boundary of $\mathcal{A}$. Point on boundary is a function of $\lambda$, so we can write $(s^*(\lambda), t^*(\lambda)) = (F_1(x^*(\lambda)), F_0(x^*(\lambda)))$. 
 
 Consider any point $(s,t)\in \mathcal{A}$:
-
 \begin{align*}
+	&
 	\begin{bmatrix}
 		\lambda &1
 	\end{bmatrix}
@@ -356,7 +363,7 @@ Consider any point $(s,t)\in \mathcal{A}$:
 		F_1(x^*(\lambda))\\
 		F_0(x^*(\lambda))
 	\end{bmatrix}
-	&\leq 
+	\leq 
 	\begin{bmatrix}
 		\lambda &1
 	\end{bmatrix}
@@ -364,7 +371,7 @@ Consider any point $(s,t)\in \mathcal{A}$:
 		s\\
 		t
 	\end{bmatrix}\qquad  (*)\\
-	0&\leq 
+	\Leftrightarrow & 0\leq 
 	\begin{bmatrix}
 		\lambda & 1
 	\end{bmatrix}
@@ -381,13 +388,13 @@ Consider any point $(s,t)\in \mathcal{A}$:
 \end{align*}
 
 \begin{enumerate}
-	\item This optimization yields a tangent plane "supporting hyperplane"
+	\item This optimization yields a tangent plane, "supporting hyperplane"
 	
-	\item In this $2-D$ picture, supporting hyper-plane is a line, change $"\leq"$ in $(*)$ to $"="$ get line 
+	\item In this $2-D$ picture, supporting hyper-plane is a line, change $"\leq"$ in $(*)$ to $"="$ get a line 
 	$$c =\lambda s + t$$
 	where $c$ is the l.h.s of $(*)$.
 	
-	rearrange $t = c - \lambda s$.
+	rearrange yields $t = c - \lambda s$.
 \end{enumerate}
 
 
@@ -402,10 +409,6 @@ This is the problem we just talked about:
 Put together pieces:
 
 
-
-
-
-
 \begin{itemize}
 	\item The dual function $g(x)$ specifies the $y-$intercept of the tangent line of slope $-\lambda$.
 	
@@ -417,7 +420,7 @@ Put together pieces:
 Get best lower bound by maximizing $g(\lambda)$ over $\lambda \geq 0$, solve:
 \begin{align*}
 	\max \quad &g(\lambda)\\
-	s.t. &\lambda \geq 0
+	s.t.\quad &\lambda \geq 0
 \end{align*}
 
 
@@ -451,21 +454,19 @@ Get best lower bound by maximizing $g(\lambda)$ over $\lambda \geq 0$, solve:
 %\end{marginfigure}
 
 
-
+\vspace{0.3cm}
 \subsection{"Pricing" Interpretation}
+There is an interesting and intuitive interpretation for the duality theory called the pricing interpretation. Suppose the variable $x$ denotes how an company operates(i.e., "policy") and $F_0(x)$ denotes the cost of operating at policy $x$. Each constraint denotes representing some limit, such as a limit on resources, labor, etc. 
 
-
+To optimal policy(i.e., $x^*$) with these constraints can be found by solving the problem(consider this is the primal problem)
 \begin{align*}
 	\min \quad & F_0(x)\\
 	s.t.\quad & F_i(x) \leq 0,\quad i = 1,\cdots,m\\
 	& h_i(x) = 0,\quad i = 1,\cdots,p
 \end{align*}
 
-$\rightarrow$ reformulate as an unconstrained problem by introducing $I\& \tilde{I}$
-
-
+In the next step, we reformulate this problem as an unconstrained problem by introducing $I$ and $\tilde{I}$, which are given by
 \begin{equation}
-\label{eq6}
 I(x)=\left\{
 \begin{aligned}
 0 & , & x\leq 0 \\
@@ -482,7 +483,6 @@ I(x)=\left\{
 \end{marginfigure}
 
 \begin{equation}
-\label{eq6}
 \tilde{I}(x)=\left\{
 \begin{aligned}
 0 & , & x= 0 \\
@@ -499,31 +499,32 @@ I(x)=\left\{
 	%\label{fig:graph} 
 \end{marginfigure}
 
+So the primal problem can be reformulated as 
+$$\min_x\quad F_0(x) + \sum^m_{i=1}I(F_i(x)) + \sum^p_{i=1}\tilde{I}(h_i(x)) \qquad (*)$$
 
-\begin{equation*}
-	\min_x\quad F_0(x) + \sum^m_{i=1}I(F_i(x)) + \sum^p_{i=1}\tilde{I}(h_i(x)) \qquad (*)
-\end{equation*}
+This unconstrained problem is the same as primal one, but with "hard" penalties introducing by $I$ and $\tilde{I}$.
 
-$\Rightarrow$ Same problem but with "hard" penalties
+Now, let's consider the case that are more realistic. Suppose the company is allowed to break the limit on their resources by paying an additional cost which is linear in the amount of violation, measure by $F_i$ and $h_i$. More precisely, the additional payment made by the company for the $i$-th constraint is $\lambda_i F_i(x)$, and payments are also made to the company for the constraints that are not right(i.e., $F_i(x)<0$), the $\lambda_i F_i(x)$ represents a payment received by the company. 
 
-$I$ and $\tilde{I}$
+So $\lambda_i$ is interpreted as the "price" for violating constraint $F_i$, and similarly we have $\mu_i$ as the "price" for violating constraint $h_i$.
 
-\begin{equation*}
-	F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu_i h_i(x)
-\end{equation*}
+Under this relaxed setting (i.e., not all constraints are satisfied), the problem can be formulated as 
+$$F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu_i h_i(x)$$
 
-$\lambda_i$ = "price" for violating constraint $F_i$.
+It's obviously that such formulation takes the from of Lagrange function. If we minimize this function to obtain the minimal total cost and then maximize over $\lambda$ and $\nu$, that is
+$$\max_{\lambda, \nu} \min_x F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu_i h_i(x)$$
+where we obtain the optimal cost to the company under the least favorable set of prices. We use $d^*$ to denote this optimal value, and it readily follows that we have an interpretation for the weak duality, i.e.,
+$$d^* \leq p^*$$
 
-$\mu_i$ = "price" for violating constraint $h_i$.
 
-If strong duality holds, the problem $(*)$ becomes
+Furthermore, if strong duality holds, the problem $(*)$ (i.e., problem that is equivalent to the primal problem) becomes
 \begin{align*}
 	(*) 
 	&= \max_{\lambda, \nu, \lambda \geq 0}\quad [\min_x\quad F_0(x) + \sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x)]\\
-	&= \max_{\lambda, \nu}\quad g(\lambda, \nu),\text{where}\quad \lambda \geq 0
+	&= \max_{\lambda, \nu} g(\lambda, \nu) \quad \text{where}\ \lambda \geq 0
 \end{align*}
 
-Adjust prices $\lambda, \nu$ so that the solution to relaxed problem matches the solution to primal
+Implication: Adjust the prices $\lambda, \nu$ so that the solution to relaxed problem matches the solution to the primal problem.
 \subsection{Sensitivity Analysis}
 
 \begin{marginfigure}
@@ -533,18 +534,19 @@ Adjust prices $\lambda, \nu$ so that the solution to relaxed problem matches the
 	%\label{fig:graph} 
 \end{marginfigure}
 
-$\rightarrow$ At dual optimum slope of tangent is $-\lambda^*$
+\quad $\rightarrow$ At dual optimum slope of tangent is $-\lambda^*$
 
 $\rightarrow$
 If change constraint by $\epsilon$, optimum value will change by something like $(-\epsilon \lambda^*)$.
 
 
+We consider the following perturbed version of the original optimization problem (unperturbed), says the perpetuated problem, as follows
 \begin{align*}
 	p^*(u,v) = \min \quad &F_0(x) \\
 	s.t.\quad & F_i(x) \leq u_i ,\quad i = 1,\cdots,m\\
 	& h_i(x) = v_i,\quad i = 1,\cdots, p
 \end{align*}
-
+where when $u=v=0$ is exactly the same as the unperturbed one.
 
 $\rightarrow$ $u_i<0$ "tighten" constraint, $u_i>0$ loosen constraint, $v_i\neq 0$ change set-point.
 
@@ -557,7 +559,7 @@ $\rightarrow$ relate $p^*(u,v)$ to $p^*(0,0)$\\
 \begin{itemize}
 	\item Let $(\lambda^*, \nu^*)$ be optimal dual variables for unperturbed problem
 	
-	\item Consider a convex optimization problem satisfying Slater's, i.e., strong duality holds,
+	\item Consider a convex optimization problem satisfying Slater's conditions, i.e., strong duality holds,
 	\begin{align*}
 		p^*(0,0) &= g(\lambda^*, \nu^*)\\
 		&= \min_{x\in D} L(x, \lambda^*, \nu^*)\\
@@ -566,7 +568,7 @@ $\rightarrow$ relate $p^*(u,v)$ to $p^*(0,0)$\\
 		&= F_0(x) + (\lambda^*)^Tu+(\nu^*)^Tv
 	\end{align*}
 \end{itemize}
-Focus in on $x\in D$ s.t. $x$ is optimal for perturbed problem
+Our focus in on $x\in D$ s.t. $x$ is optimal for perturbed problem
 
 i.e. $F_0(x)=p^*(u,v)$
 
@@ -585,104 +587,113 @@ $\Rightarrow$ $p^*(u,v) \geq p^*(0,0) - (\lambda^*)^Tu - (\nu^*)^Tv$
 \end{enumerate}
 
 \subsection{Lagrange Method}
-To solve:
+In order to solve the following primal problem,
 \begin{align*}
-	\min_x\quad F_0(x)\\
-	s.t. \quad F_i(x) \leq 0,\quad i = 1,...,m
+	\min_x &\quad F_0(x)\\
+	s.t. &\quad F_i(x) \leq 0,\quad i = 1,\cdots,m
 \end{align*}
+we propose the Lagrange method as follows:
 
-\begin{enumerate}
-	\item First write Lagrangian: $L(x, \lambda) = F_0(x) + \sum^m_{i=1}\lambda_iF_i(x)$
+	Step 1. First write Lagrangian: $L(x, \lambda) = F_0(x) + \sum^m_{i=1}\lambda_iF_i(x)$.
 	
-	\item Solve for dual $g(\lambda) = \min_{x} L(x, \lambda)$
+	Step 2. Solve for dual function $g(\lambda) = \min_{x\in D} L(x, \lambda)$, where $D$ is the primal feasible set.
 	
-	\item Find $\lambda^* = \arg\min g(\lambda)$, $s.t. \quad \lambda \geq 0$
+	Step 3. Find $\lambda^* = \arg\max g(\lambda)$, s.t. $\lambda \geq 0$.
 	
-	\item Recover primal optimal $x^*$ by solving:
-	
-	\begin{equation*}
-		\arg\min[L(x, \lambda^*) = F_0(x) + \sum^m_{i=1}\lambda_i^*F_i(x)]
-	\end{equation*}
-\end{enumerate}
+	Step 4. Recover the primal optimal $x^*$ by solving $\arg\min L(x, \lambda^*)$, that is, solve
+		$$\arg\min F_0(x) + \sum^m_{i=1}\lambda_i^*F_i(x).$$
 
+\noindent\textbf{Remarks:}
 \begin{itemize}
-	\item Nice approach if problem has nice structure, in particular if easy to solve for $(\lambda^*, \nu^*)$ analytically or numerically. 
+	\item It is a nice approach if the problem has a nice structure, in particular if it is easy to solve for $(\lambda^*, \nu^*)$ analytically or numerically. 
 	
-	\item Even if $(\lambda^*, \nu^*)$ are unique, the $x$ that minimized $L(x, \lambda^*, \nu^*)$ may not be.
+	\item Even if the dual optimum $(\lambda^*, \nu^*)$ is unique, the primal optimum $x^*$ that minimized $L(x, \lambda^*, \nu^*)$ may not be unique.
 \end{itemize}
 
 
 
-\begin{example}
-	Lagrange Duality for LS problems
+\begin{example}[Lagrange Duality for LS problems]
+	Consider the problem
 	\begin{align*}
 		\min_x \quad &\Vert x \Vert_2^2\\
 		s.t.\quad &Ax = b
 	\end{align*}
+	where $x\in\reals^n$, $A\in\reals^{p\times n}$, $\rank(A) = p< n$.
 	
-	"under-determined LS", $x^* = A^T(AA^T)^{-1}b$, $\rank(A) = m$
+	Recall the chapter least square, this an under determined LS problem, and the optimal solution is given by 
+	$$x^* = A^T(AA^T)^{-1}b$$
 	
-	(1) Form Lagrangian $L(x, \nu) = x^Tx + \nu^T(Ax - b)$
+	To verify that this solution is coincide with the one obtained by Lagrange's method, we proceed following procedure to solve this question.
 	
-	(2) Evaluate dual
+	(1) Form the Lagrange function:
+	 $$L(x, \nu) = x^Tx + \nu^T(Ax - b)$$
+	
+	(2) Solve for the dual function $g(\lambda) = \min_x L(x, \nu)$:
+		
+		Notice that Lagrange function here is a convex quadratic function of $x$(you may verify this), so simply by the first-order condition, we have
+		$$\frac{\partial}{\partial x} L(x, \nu) = 2x+A^T\nu = 0\Rightarrow x^*(\nu) = -\frac{1}{2}A^T\nu$$
+
+	(3) Find the dual optimum $\nu^*$:
+	
+	Now, we have dual problem as
 	\begin{align*}
-		g(\lambda) &= \min_x \quad L(x, \nu)\\
-		\frac{\partial}{\partial x} L(x, \nu) &= 2x+A^T\nu = 0\Rightarrow x^*(\nu) = -\frac{1}{2}A^T\nu
-	\end{align*}
-	
-	
-	(3) Find
-	\begin{align*}
-		\max_{\nu} g(\nu) &= \max_{\nu} L(x^*(\nu)\nu)\\
-		&= \max_{\nu}[x^Tx + \nu^T(Ax - b)]\\
+		\max_{\nu} g(\nu) &= \max_{\nu} L(x^*(\nu), \nu)\\
+		&= \max_{\nu}[x^*(\nu)^Tx^*(\nu) + \nu^T(Ax^*(\nu) - b)]\\
 		&= \max_{\nu}[\frac{1}{4}\nu^TAA^T\nu + \nu^T(A(-\frac{1}{2}A^T\nu)-b)]\\
 		&= \max_{\nu}[\frac{1}{4}\nu^TAA^T\nu - \frac{1}{2}\nu^TAA^T\nu - \nu^Tb]\\
 		&= \max_{\nu}[-\frac{1}{4}\nu^TAA^T\nu - \nu^Tb]
 	\end{align*}
-\end{example}
+	
+	Note that $g(\nu)$ is a concave quadratic function of $\nu$, and therefore utilize the first-order condition we yields
+	\begin{align*}
+	&\frac{\partial}{\partial \nu}(-\frac{1}{4}\nu^TAA^T\nu - \nu^Tb)= 0\\
+	\Leftrightarrow&-\frac{1}{4} 2AA^T\nu - b = 0\\
+	\Leftrightarrow& (AA^T)\nu = -2b\\
+	\Leftrightarrow& \nu^* = -2(AA^T)^{-1}b
+	\end{align*}
 
-\begin{align*}
-	\frac{\partial}{\partial \nu}(-\frac{1}{4}\nu^TAA^T\nu &- \nu^Tb)\\
-	\frac{1}{4}2AA^T\nu - b &= 0\\
-	(AA^T)\nu &= -2b\\
-	\nu^* &= -2(AA^T)^{-1}b
-\end{align*}
-
-Substitute into $x^*(\nu)$ to get:
-\begin{align*}
-	x^*(\nu^*) &= -\frac{1}{2}A^T(-2(AA^T)^{-1}b)\\
+	(4) Substitute into $x^*(\nu)$ to get the primal optimum:
+	\begin{align*}
+	x^*(\nu^*) 
+	&=-\frac{1}{2} A^T v^* \\
+	&= -\frac{1}{2}A^T(-2(AA^T)^{-1}b)\\
 	&= A^T(AA^T)^{-1}b
-\end{align*}
+	\end{align*}
 
-Example: Lagrange Duality For LS problems
+Hence, the optimal solution is coincide with our previous result in LS chapter, that is, for under-determined LS problem we have $x^* = A^T(AA^T)^{-1}b$.
+
+Furthermore, at step (3), we have the problem
+$$\max_{\nu} [- \frac{1}{4}\nu^TAA^T\nu - \nu^Tb ]$$
+
+which is equivalent to 
+$$\min_{\nu} [\frac{1}{4}\nu^TAA^T\nu + \nu^Tb ]$$
+
+and it turns out, this minimization problem is equivalent to the following norm minimization problem,
 \begin{align*}
-	\min_x \quad & \Vert x\Vert^2_2\\
-	s.t. \quad & Ax = b
+\min_\nu\quad & \Vert\frac{1}{2}A^T\nu + x_0\Vert^2_2\\
+s.t.\quad & Ax_0 = b 
 \end{align*}
+since they enjoy the same optimal solution $x^*$, and the difference of the optimal value is just a scalar.
 
-"under-determined LS": $x^* = A^T(AA^T)^{-1}b$.
-
-\begin{equation*}
-	\frac{1}{4}\nu^TAA^T\nu+\nu^Tb
-\end{equation*}
-
-$\Rightarrow$ same as the following $\min_y\quad \Vert\frac{1}{2}A^T\nu + x_0\Vert^2_2$ for any $x_0$ s.t. $Ax_0 = b$.
-
+More precisely, that's because
 \begin{align*}
-	\Vert \frac{1}{2}A^T\nu + x_0\Vert_2^2 &= (\frac{1}{2}A^T\nu+x_0)^T(\frac{1}{2}A^T\nu+x_0)\\
+	\Vert \frac{1}{2}A^T\nu + x_0\Vert_2^2 
+	&= (\frac{1}{2}A^T\nu+x_0)^T(\frac{1}{2}A^T\nu+x_0)\\
 	&= \frac{1}{4}\nu^TAA^T\nu + 2\frac{1}{4}\nu^TAx_0 + x_0^Tx_0\\
 	&= \frac{1}{4}\nu^TAA^T\nu + \nu^Tb+x_0^Tx_0
 \end{align*}
 
+\end{example}
+
+
 \subsection{Final interpretation}
+Consider the problem
 \begin{align*}
 	\min \quad & F_0(x)\\
-	s.t. \quad & F_i(x)\leq 0\quad i = 1,...,m
+	s.t. \quad & F_i(x)\leq 0\quad i = 1,\cdots,m
 \end{align*}
 
-Connect to problems with multiple (vector) objective $(F_0,F_1,\cdots,F_m)$.
-
-One approach is to "scalarize" the objective as 
+We want connect to the problems with multiple (vector) objective $(F_0,F_1,\cdots,F_m)$, and one approach is to "scalarize" the objective as 
 \begin{equation*}
 	F_0(x) + \lambda F_1(x) + \cdots + \lambda_mF_m(x) = F_0(x) + \sum^m_{i=1}\lambda_iF_i(x)
 \end{equation*}
@@ -755,6 +766,7 @@ s.t.\quad &\lambda\geq 0\\
 
 
 
+Following is initial note on Dec 2nd.
 
 \begin{itemize}
 	\item Dual of an LP is an LP
