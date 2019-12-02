@@ -200,32 +200,31 @@ Feasible set is $(x_1, x_2) = \{(0,0) \}$
 	If the primal optimization problem is convex and satisfies Slater's conditions, then $p^* = d^*$, the strong duality holds.
 \end{theorem}
 
-Sketch proof for $m = 1$ (i.e. 1 inequality constraint $p = 0$).
+\begin{proof}
 
-Primal problem:
+We propose a sketch proof for the case $m = 1$, i.e., 1 inequality constraint and there is no equality constraint so $p = 0$.
 
+Given the basic setting for this case, the primal problem is given by
 \begin{align*}
 	\min \quad & F_0(x)\\
 	s.t. \quad & F_1(x) \leq 0
 \end{align*}
+and we let $p^*$ be the optimal value of the primal problem.
 
-$\Rightarrow$optimal solution $p^*$.
+The Lagrange function is:
+$$L(x, \lambda) = F_0(x) + \lambda F_1(x)$$
 
-Lagrange function: $L(x, \lambda) = F_0(x) + \lambda F_1(x)$
+The dual function is
+$g(\lambda) = \min_{x\in D} L(x,\lambda) = \min_x{F_0(x) + \lambda F_1(x)}$
 
-Dual function: $g(\lambda) = \min_{x\in D} L(x,\lambda) = \min_x{F_0(x) + \lambda F_1(x)}$
-
-Dual optimal: 
-
+The dual optimal problem is formulated as
 \begin{align*}
 	\max \quad & g(\lambda)\\
 	s.t. \quad & \lambda  \geq 0
 \end{align*}
+and we let $d^*$ be the optimal value of the dual problem.
 
-$\Rightarrow$ dual optimal is $d^*$.
-
-To start, define:
-
+To start, we define a set
 \begin{align*}
 	G 
 	&= \{(F_1(x), F_0(x)) \vert x\in D = \text{dom}\ F_1\cap \text{dom}\ F_0 \}\\
@@ -239,22 +238,21 @@ To start, define:
 	%\label{fig:graph} 
 \end{marginfigure}
 
-We can let:
-
+and also define the set $\mathcal{A}$
 \begin{align*}
-	\mathcal{A} &= G + \reals_+ \times \reals_+\\
+	\mathcal{A} 
+	&= G + \reals_+ \times \reals_+\\
 	&= \{(s,t) \vert F_1(x)\leq s, F_0(x)\leq t, x\in D \}\\
 	&= \cup_{x\in D}\{(s,t)\vert F_1(x)\leq s, F_0(x)\leq t \}
 \end{align*}
 
-Observations: 
-
+A few observations regarding these two sets:
 \begin{itemize}
-	\item $G$ contains all information about primal problem.
+	\item The set $G$ contains all information about primal problem.
 	
-	\item $\mathcal{A}$ contains all points "above" \& to "right" of each point in $G$.
+	\item The set $\mathcal{A}$ contains all points "above" and to "right" of each point in $G$.
 	
-	$\rightarrow$ each such point(above and to right) is less interesting than the point in $G$.
+	\item Each such point(above and to right) is less interesting than the point in $G$ due to  
 	
 	(1) Perhaps higher cost
 	
@@ -268,55 +266,53 @@ The boundary of $\mathcal{A}$ is specified by the function:
 \end{align*}
 ($p$ is the boundary, $\mathcal{A}$ lies above the boundary)
 
-A few obervation regarding $p(u)$:
+A few observations regarding $p(u)$:
 
 	(1) $p^* = p(0)$.
 	
 	(2) $p$ is non-increasing in $u$
 	
-
-	
 	(3) $p$ is convex in $u$
-	
-	
 	
 	(4) $\mathcal{A} = \text{epi}\ p$
 
-
-\begin{proof}[proof of (2)]
-
-		As $u$ gets larger, feasible set of the $p(u)$ optimization gets larger so objective cannot increase $\rightarrow$ therefore non-increasing.
-
+\begin{proof}[proof of (1)]
+	When $u=0$, we just get the original primal problem so certainly $p^* = p(0)$.
 \end{proof}
 
+\begin{proof}[proof of (2)]
+		As $u$ gets larger, feasible set of the $p(u)$ optimization gets larger so objective cannot increase $\rightarrow$ therefore non-increasing.
+\end{proof}
 
 \begin{proof}[proof of (3)]
-	Convexity of
+	We want to prove the convexity of the problem
 	\begin{align*}
 		p(u) = &\min \quad F_0(x)\\
 		&s.t. \quad F_1(x) \leq u
 	\end{align*}
 	
-	We need to show that $\forall u_1, u_2\in \text{dom}\ p$, $\forall \lambda\in [0,1]$, we have
-	$$p(\lambda u_1 + (1-\lambda)u_2) \leq \lambda  p(u_1) + (1-\lambda)p(u_2)$$
+    and this means that we need to show $\forall u_1, u_2\in \text{dom}\ p$, $\forall \lambda\in [0,1]$, we have
+	$$p(\lambda u_1 + (1-\lambda)u_2) \leq \lambda  p(u_1) + (1-\lambda)p(u_2).$$
 	
-	Let
+	Consider $i=1, 2$, let
 	\begin{align*}
 		x_i = &\arg \min \quad F_0(x)\\
 		&s.t. \quad F_1(x) \leq u_i
 	\end{align*}
 	
-	i.e. $F_0(x_1) = p(u_1)\& F_0(x_2) =p(u_2)$
+	That is, $F_0(x_1) = p(u_1)$ and $F_0(x_2) =p(u_2)$.
 	
-	Let $\tilde{x} = \lambda x_1 + (1-\lambda)x_2$, where $x_1\in \text{dom}\ F_1\cap \text{dom}\ F_0\cap \{x\vert F_1(x)\leq u_1 \}$, $x_2\in \text{dom}\ F_1\cap \text{dom}\ F_0\cap \{x\vert F_1(x)\leq u_2 \}$.
+	Let $\tilde{x} = \lambda x_1 + (1-\lambda)x_2$, and note that
+	 $$x_1\in \text{dom}\ F_1\cap \text{dom}\ F_0\cap \{x\vert F_1(x)\leq u_1 \}$$ $$x_2\in \text{dom}\ F_1\cap \text{dom}\ F_0\cap \{x\vert F_1(x)\leq u_2 \}$$
 	
 	So we can write
 	\begin{align*}
 		F_1(\tilde{x}) 
-		&= F_1(\lambda x_1 + (1-\lambda)x_2) &(\text{Since } \tilde{x}\in \text{dom}\ F_1)\\
-		&\leq \lambda F_1(x_1) + (1-\lambda)F_1(x_2) &(\text{Since } F_1 \text{ is convex})\\
-		&\leq \lambda u_1 + (1-\lambda)u_2 &(\text{Since } F_1(x_i) \leq u_i, i=1, 2)
+		&= F_1(\lambda x_1 + (1-\lambda)x_2)\\
+		&\leq \lambda F_1(x_1) + (1-\lambda)F_1(x_2) \\
+		&\leq \lambda u_1 + (1-\lambda)u_2
 	\end{align*}
+	where the first equality is due to $\tilde{x}\in \text{dom}\ F_1$, the first inequality is due to convexity of $F_1$, and the second inequality is due to $F_1(x_i) \leq u_i, i=1, 2.$
 	
 	Hence, 
 	\begin{equation*}
@@ -328,14 +324,14 @@ A few obervation regarding $p(u)$:
 
 
 
-Think about trade-off between $F_1(x)$ and $F_0(x)$ in a slightly different way:
+Think about the trade-off between $F_1(x)$ and $F_0(x)$ in a slightly different way:
 \begin{align*}
 	\min_{(s,t)} \quad&\lambda s + t\\
 	\text{where} \quad&(s,t) \in \mathcal{A}
 \end{align*}
 which is equivalent to
 \begin{align*}
-	\min \quad&\begin{bmatrix}
+	\min_{(s,t)} \quad&\begin{bmatrix}
 		\lambda &1 
 	\end{bmatrix}\begin{bmatrix}
 		s\\
@@ -351,7 +347,7 @@ which is equivalent to
 	%\label{fig:graph} 
 \end{marginfigure}
 
-For a given $\lambda$, the optimum is attained by some point $(s^*, t^*)$ on boundary of $\mathcal{A}$. Point on boundary is a function of $\lambda$, so we can write $(s^*(\lambda), t^*(\lambda)) = (F_1(x^*(\lambda)), F_0(x^*(\lambda)))$. 
+For a given $\lambda$, the optimum is attained by some point $(s^*, t^*)$ on boundary of $\mathcal{A}$. Point on boundary is a function of $\lambda$, so we can write $$(s^*(\lambda), t^*(\lambda)) = (F_1(x^*(\lambda)), F_0(x^*(\lambda)))$$ 
 
 Consider any point $(s,t)\in \mathcal{A}$:
 \begin{align*}
@@ -394,7 +390,7 @@ Consider any point $(s,t)\in \mathcal{A}$:
 	$$c =\lambda s + t$$
 	where $c$ is the l.h.s of $(*)$.
 	
-	rearrange yields $t = c - \lambda s$.
+	Rearrange yields $t = c - \lambda s$.
 \end{enumerate}
 
 
@@ -404,26 +400,26 @@ This is the problem we just talked about:
 	&= \lambda F_1(x^*(\lambda)) + F_0(x^*(\lambda))\\
 	&= \min_{x\in D} \quad[\lambda F_1(x) + F_0(x)]\\
 	&= g(\lambda) 
-\end{align*} the "Dual Function"
+\end{align*}
+so it is the dual function.
 
-Put together pieces:
+Put these pieces all together:
 
-
-\begin{itemize}
-	\item The dual function $g(x)$ specifies the $y-$intercept of the tangent line of slope $-\lambda$.
+	(1) The dual function $g(\lambda)$ specifies the $y-$intercept of the tangent line of slope $-\lambda$.
 	
-	\item Last time proved $g(\lambda)$ is a lower bound on $p^*$ as long as $\lambda$ are dual-feasible (i.e., $\lambda \geq 0$).
+	(2) Last time proved $g(\lambda)$ is a lower bound on $p^*$ as long as $\lambda$ are dual-feasible (i.e., $\lambda \geq 0$).
 	
-	\item The $y-$intercept is a lower bound on $p^*$, i.e., $c\leq p^{*}$.
-\end{itemize}
+	(3) The $y-$intercept is a lower bound on $p^*$, i.e., $c\leq p^{*}$.
 
-Get best lower bound by maximizing $g(\lambda)$ over $\lambda \geq 0$, solve:
+
+Get best lower bound by maximizing $g(\lambda)$ over $\lambda \geq 0$, that is, solve the following optimization problem
 \begin{align*}
 	\max \quad &g(\lambda)\\
 	s.t.\quad &\lambda \geq 0
 \end{align*}
+which exactly takes the form of dual problem.
 
-
+\end{proof}
 
 
 % Above are notes for Nov 25
@@ -575,11 +571,8 @@ i.e. $F_0(x)=p^*(u,v)$
 $\Rightarrow$ $p^*(u,v) \geq p^*(0,0) - (\lambda^*)^Tu - (\nu^*)^Tv$
 
 \begin{enumerate}
-	\item E.g. If $\lambda_i >> 0$ and tighten constraint $F_i$ slightly so that $F_i(x)\leq -\epsilon < 0$\\
-	
-	\begin{equation*}
-		p^*(u,v)\geq p^*(0,0) - (\lambda^*)^Tu - (\nu^*)^Tv
-	\end{equation*}
+	\item E.g. If $\lambda_i >> 0$ and tighten constraint $F_i$ slightly so that $F_i(x)\leq -\epsilon < 0$
+	$$p^*(u,v)\geq p^*(0,0) - (\lambda^*)^Tu - (\nu^*)^Tv$$
 	
 	\item Note not symmetric in general, big relaxation in constraint doesn't necessary mean big drop in cost.
 	
@@ -705,15 +698,15 @@ We want connect to the problems with multiple (vector) objective $(F_0,F_1,\cdot
 
 
 % Below are notes for Dec 2
+\vspace{0.5cm}
 \subsection{Dual of LPs}
-
+Consider the primal problem is an LP problem as follows,
 \begin{align*}
 \min\quad &c^Tx\\
 s.t.\quad &Ax\leq b
 \end{align*}
 
-Lagrangian: 
-
+The Lagrange function is 
 \begin{align*}
 L(x,\lambda) &= c^Tx + \sum^m_{i=1}(a_i^Tx-b_i)\\
 &= c^Tx+\begin{bmatrix}
@@ -727,8 +720,7 @@ a_m^Tx-b_m
 &= -\lambda^Tb-(c^T+\lambda^TA)x
 \end{align*}
 
-Dual:
-
+The dual function is
 \begin{align*}
 g(\lambda) &= \min_x[-\lambda^Tb+(c^T+\lambda^TA)x]\\
 &=
@@ -741,7 +733,7 @@ g(\lambda) &= \min_x[-\lambda^Tb+(c^T+\lambda^TA)x]\\
 \right.
 \end{align*}
 
-Dual optimization:
+So the dual optimization problem is formulated as
 \begin{align*}
 \min\quad &g(\lambda)\\
 s.t.\quad &\lambda \geq 0
@@ -755,7 +747,6 @@ s.t.\quad &\lambda\geq 0\\
 \end{align*}
 
 $\Leftrightarrow$
-
 \begin{align*}
 \min\quad &-\lambda^Tb\\
 s.t.\quad &\lambda\geq 0\\
@@ -774,6 +765,7 @@ Following is initial note on Dec 2nd.
 	\item Maybe not clear from form but have strong duality so $p^*=d^*$.
 \end{itemize}
 
+\begin{center}
 \begin{tabular}{|c|c|c|}
 	\hline 
 	&Primal & Dual\\
@@ -783,6 +775,7 @@ Following is initial note on Dec 2nd.
 	constant&$m$&$n+m$\\
 	\hline 
 \end{tabular}
+\end{center}
 
 
 \begin{align*}
@@ -835,22 +828,18 @@ b^T+y^TA^T \geq 0
 \end{equation*}
 
 Thus this problem can also be written as:
-
-
 \begin{align*}
 \max\quad &y^Tc\\
 s.t.\quad &b+Ay \geq 0
 \end{align*}
 
 $\Leftrightarrow$
-
 \begin{align*}
 \max\quad &(-x)^Tc\\
 s.t.\quad &b+A(-x) \geq 0
 \end{align*}
 
 $\Rightarrow$
-
 \begin{align*}
 \max\quad &c^Tx\\
 s.t.\quad &Ax \leq b
