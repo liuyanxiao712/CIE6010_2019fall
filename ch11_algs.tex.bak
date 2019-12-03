@@ -109,7 +109,7 @@ KKT conditions:
 	Then if any $(\tilde{x},\tilde{\lambda},\tilde{\nu})$ satisfy KKT:
 	
 	\begin{itemize}
-		\item Strong duality holds
+		\item Storng duality holds
 		
 		\item $\tilde{x}$ is primal optimal
 		
