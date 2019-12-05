@@ -11,21 +11,21 @@ For any $A\in \reals^{n\times n}$ that is diagonalizable,  we can express $A$ as
 A = U\Lambda U^{-1}
 \end{equation*}
 
-$U$: $n$ by $n$ invertible matrix of linear independent eigenvectors $\in \mathbb{C}^n$, that is, each column of $U$ is an eigenvector of $A$.
+$U$: $n$ by $n$ invertible matrix of linear independent eigenvectors $\in \complex^n$, that is, each column of $U$ is an eigenvector of $A$.
 
-$\Lambda$: a diagonal matrix whose diagonal entries are eigenvalues of $A$, and $\lambda_i\in \mathbb{C}$.
+$\Lambda$: a diagonal matrix whose diagonal entries are eigenvalues of $A$, and $\lambda_i\in \complex$.
 
 
 \subsection{Spectral decomposition}
 
 For any $n$ by $n$ symmetric matrix $A$, we can express $A$ as
 \begin{equation*}
-A = U\Lambda U^T
+A = U\Lambda U^{\trans}
 \end{equation*}
 
-$U$: Orthogonal matrix ($\perp$ \& normalized) $U^{(i)}\in \Re^n$;
+$U$: Orthogonal matrix ($\perp$ \& normalized) $U^{(i)}\in \reals^n$;
 
-$\Lambda$: Diagonal matrix of $\lambda_i \in \Re$.
+$\Lambda$: Diagonal matrix of $\lambda_i \in \reals$.
 
 
 
@@ -33,12 +33,12 @@ $\Lambda$: Diagonal matrix of $\lambda_i \in \Re$.
 
 For any matrix $A\in \reals^{m\times n}$, we can be expressed $A$ as 
 \begin{equation*}
-A =U\tilde{\Sigma} V^T
+A =U\tilde{\Sigma} V^{\trans}
 \end{equation*}
 
-$U\in \reals^{m\times m}$: An orthogonal matrix, so $UU^T =U^TU = I_m$
+$U\in \reals^{m\times m}$: An orthogonal matrix, so $UU^{\trans} =U^{\trans}U = I_m$
 
-$V\in \reals^{n\times n}$: An orthogonal matrix, so $VV^T = V^TV =I_n$
+$V\in \reals^{n\times n}$: An orthogonal matrix, so $VV^{\trans} = V^{\trans}V =I_n$
 
 $$\tilde{\Sigma} = 
 \left[
@@ -49,20 +49,21 @@ $$\tilde{\Sigma} =
 \right]\in \reals^{m\times n}
 $$
 
-where $\Sigma = diag(\sigma_1,...,\sigma_r)> 0$.
+where $\Sigma = diag(\sigma_1,...,\sigma_r)> 0$, $\textbf{0}$ denotes part with all 0. 
 
+\vspace{0.3cm}
 
 Comments on SVD: 
 \begin{itemize}
 	\item Inherits $\perp$ matrices of spectral decomposition and all $\lambda_i$ are real.
-	\item Generalizes eigen-decomposition and spectral decomposition to a non-square matrices.
+	\item Generalizes eigen decomposition and spectral decomposition to a non-square matrix.
 	\item Lose the property of direction invariance of eigen-decomposition.
 \end{itemize}
 
 
 \vspace{0.5cm}
 \begin{example}
-	Let's consider an example, $y = Ax = U\tilde{\Sigma} V^Tx$, and see how these matrices impose influences on a vector $x$(refer to the figures on the r.h.s)
+	Let's consider an example, $y = Ax = U\tilde{\Sigma} V^{\trans}x$, and see how these matrices impose influences on a vector $x$(refer to the figures on the r.h.s)
 	$$U = 
 	\left[
 	\begin{matrix}
@@ -115,7 +116,7 @@ $
 	\end{marginfigure}
 
 
-$ 2) w = V^Tx = 
+$ 2) w = V^{\trans}x = 
 	\left[
 	\begin{matrix}
 	-\frac{1}{\sqrt{2}}\\
@@ -174,16 +175,16 @@ This example and the figures show that the SVD of a matrix $A$ has lost the prop
 
 \vspace{2cm}
 \subsection{Computing SVD}
-The idea of singular value decomposition(SVD) follows from eigen-decomp of $A^TA$ and $AA^T$, since both of these two matrices are symmetric, so the spectral theorem is applicable(i.e., $A^TA$ and $AA^T$ can be orthogonally diagonalize). 
+The idea of singular value decomposition(SVD) follows from eigen decomposition of $A^{\trans}A$ and $AA^{\trans}$, since both of these two matrices are symmetric, so the spectral theorem is applicable(i.e., $A^{\trans}A$ and $AA^{\trans}$ can be orthogonally diagonalized). 
 
-Let $A$ be an $m$ by $n$ matrix. First, we let $\lambda_i$ denote eigenvalues of the symmetric matrix $A A^T$ (or of matrix $A^T A$), and arrange these eigenvalues in a decreasing order, that is, $\lambda_1\geq \lambda_2\geq \cdots \geq \lambda_m$(there are $n$ eigenvalues if we consider $A^TA$). We define the singular value of a matrix $A$ as the square root of the eigenvalues and arrange them in a decreasing order as well, i.e., $\sigma_i=\sqrt{\lambda_i}$ and suppose we have $r$ singular values that are positive, so $\sigma_1\geq \sigma_2\geq \cdots \geq \sigma_r>0$.
+Let $A$ be an $m$ by $n$ matrix. First, we let $\lambda_i$ denote eigenvalues of the symmetric matrix $A A^{\trans}$ (or of matrix $A^{\trans} A$), and arrange these eigenvalues in a decreasing order, that is, $\lambda_1\geq \lambda_2\geq \cdots \geq \lambda_m$(there are $n$ eigenvalues if we consider $A^{\trans}A$). We define the singular value of a matrix $A$ as the square root of the eigenvalues and arrange them in a decreasing order as well, i.e., $\sigma_i=\sqrt{\lambda_i}$ and suppose we have $r$ singular values that are positive, so $\sigma_1\geq \sigma_2\geq \cdots \geq \sigma_r>0$.
 
 
 By spectral theorem, we write out $U$ and $V$ as (note that $\rank(A)=r$):
 $$ U =   
 \left[
 \begin{matrix}
-U^{(1)} & ... & U^{(r)} & U^{(r+1)} & ... & U^{(m)}
+U^{(1)} & \cdot & U^{(r)} & U^{(r+1)} & \cdot & U^{(m)}
 \end{matrix}
 \right] =
 \left[
@@ -208,7 +209,7 @@ $$
 
 Thus,
 \begin{align*}
-AA^T &= U\tilde{\Sigma} V^TV\tilde{\Sigma}^TU^T\\
+AA^{\trans} &= U\tilde{\Sigma} V^{\trans}V\tilde{\Sigma}^{\trans}U^{\trans}\\
 &=
 \begin{bmatrix}
 \mathcal{U}_r & \mathcal{U}_{mr}
@@ -218,12 +219,12 @@ AA^T &= U\tilde{\Sigma} V^TV\tilde{\Sigma}^TU^T\\
 \textbf{0}&\textbf{0}
 \end{bmatrix}
 \begin{bmatrix}
-\Sigma & \textbf{0}\\
+\Sigma^{\trans} & \textbf{0}\\
 \textbf{0}&\textbf{0}
 \end{bmatrix}
 \begin{bmatrix}
-\mathcal{U}_r^T\\
-\mathcal{U}_{mr}^T
+\mathcal{U}_r^{\trans}\\
+\mathcal{U}_{mr}^{\trans}
 \end{bmatrix}\\
 &
 =\begin{bmatrix}
@@ -234,39 +235,41 @@ AA^T &= U\tilde{\Sigma} V^TV\tilde{\Sigma}^TU^T\\
 \textbf{0}&\textbf{0}
 \end{bmatrix}
 \begin{bmatrix}
-\mathcal{U}_r^T\\
-\mathcal{U}_{mr}^T
+\mathcal{U}_r^{\trans}\\
+\mathcal{U}_{mr}^{\trans}
 \end{bmatrix}\\
-&= \sum^r_{i=1}(\sigma_i)^2u^{(i)}u^{(i)^T}\\
-&= \sum^m_{i=1}(\sigma_i)^2u^{(i)}u^{(i)^T}
+&= \sum^r_{i=1}(\sigma_i)^2u^{(i)}u^{(i)^{\trans}}\\
+&= \sum^m_{i=1}(\sigma_i)^2u^{(i)}u^{(i)^{\trans}}
 \end{align*}
 
-We may noticed that the vector $u^{(k)}$ is $k^{th}$ eigenvector of $AA^T$ by showing that
+where $\sigma_i = 0$ if $r+1\leq i\leq m$.
+
+We may notice that the vector $u^{(k)}$ is $k^{th}$ eigenvector of $AA^{\trans}$ by showing that
 \begin{align*}
-(AA^T)u^{(k)} 
-& = \sum^m_{i=1}\sigma_i^2u^{(i)}(u^{(i)})^Tu^{(k)}\\
+(AA^{\trans})u^{(k)} 
+& = \sum^m_{i=1}\sigma_i^2u^{(i)}(u^{(i)})^{\trans}u^{(k)}\\
 & = \sum^m_{i=1}\sigma_i^2 \mathbb{1}_{i=k} u^{(i)} \\
 & = \sigma^2_ku^{(k)}\\
 & = \lambda_k u^{(k)}
 \end{align*}
-where $\lambda_k$ is the k-th eigenvalue of $AA^T$, and the indicator function comes from the orthogonality of matrix $\mathcal{U}$.
+where $\lambda_k$ is the $k$-th eigenvalue of $AA^{\trans}$, and the indicator function comes from the orthogonality of matrix $\mathcal{U}$.
 
-The same logic can be applied to $A^TA$ and shows that $v^{(k)}$ is $k^{th}$ eigenvector of $A^TA$.
+The same logic can be applied to $A^{\trans}A$ and shows that $v^{(k)}$ is $k$-th eigenvector of $A^{\trans}A$.
 
-Accordingly, we have already to know how to obtain he SVD  of a matrix.
+Accordingly, we have already known how to obtain he SVD  of a matrix.
 
+\vspace{0.3cm}
+We summarize the procedure that how we compute the SVD of a matrix $m$ by $n$ matrix $A$ as follows:
 
-We summarize the procedure that how we compute the SVD of a matrix $m$ by $n$ matrix $A$ as follows
+1) Singular values: Compute eigenvalues of $AA^{\trans}$ or $A^{\trans}A$, and to find the $r$ positive singular values $\sigma_i = \sqrt{\lambda_i(A^{\trans}A)}$, so we have the matrix $\tilde{\Sigma}$ with diagonal entries are these positive singular values and other entries are zero.
 
-1) Singular values: Compute eigenvalues of $AA^T$ or $A^TA$, and to find the $r$ positive singular values $\sigma_i = \sqrt{\lambda_i(A^TA)}$, so we have the matrix $\tilde{\Sigma}$ with diagonal entries are these positive singular values and other entries are zero.
+%$x^{\trans}A^{\trans}Ax = w^{\trans}w =\Vert w\Vert^2$
 
-%$x^TA^TAx = w^Tw =\Vert w\Vert^2$
+2) Right-Singular vectors $v^{(i)}$: Find the eigenvectors of $A^{\trans}A$, so we have an $n$ by $n$ orthogonal matrix $V$.
 
-2) Right-Singular vectors $v^{(i)}$: Find the eigenvectors of $A^TA$, so we have an $n$ by $n$ orthogonal matrix $V$.
+3) Left-Singular vectors $u^{(i)}$: Find the eigenvectors of $AA^{\trans}$, so we have an $m$ by $m$ orthogonal matrix $\mathcal{U}$.
 
-3) Left-Singular vectors $u^{(i)}$: Find the eigenvectors of $AA^T$, so we have an $m$ by $m$ orthogonal matrix $\mathcal{U}$.
-
-4) Write down the expression $A = \mathcal{U} \tilde{\Sigma} V^T$.
+4) Write down the expression $A = \mathcal{U} \tilde{\Sigma} V^{\trans}$.
 
 \vspace{0.5cm}
 
@@ -274,7 +277,7 @@ We summarize the procedure that how we compute the SVD of a matrix $m$ by $n$ ma
 Let's consider arbitrary $x\in \reals^n$, 
 \begin{align*}
 Ax 
-&= U\tilde{\Sigma} V^Tx\\
+&= U\tilde{\Sigma} V^{\trans}x\\
 &= 
 \begin{bmatrix}%
 U_r & U_{mr}
@@ -284,8 +287,8 @@ U_r & U_{mr}
 \textbf{0}& \textbf{0}
 \end{bmatrix}
 \begin{bmatrix}%
-V_r^T\\
-V_{mr}^T
+V_r^{\trans}\\
+V_{nr}^{\trans}
 \end{bmatrix}x\\
 &= 
 \begin{bmatrix}%
@@ -296,11 +299,11 @@ U_r & U_{mr}
 \textbf{0}
 \end{bmatrix}
 \begin{bmatrix}%
-V_r^T
+V_r^{\trans}
 \end{bmatrix}x\\
 &=
-U_r \Sigma V_r^T x\\
-&= \Sigma^r_{i=1}\sigma_iu^{(i)}(v^{(i)})^Tx
+U_r \Sigma V_r^{\trans} x\\
+&= \Sigma^r_{i=1}\sigma_iu^{(i)}(v^{(i)})^{\trans}x
 \end{align*}
 \\
 
@@ -308,13 +311,13 @@ The above equalities show us that we have lost all components of $x$ along $v^{(
 
 (1) All direction in output are in span $\{u^{(1)} ,..., u^{(n)}\}$
 
-(2) Columns of $V_{r}$ provide basis for $R(A^T)$
+(2) Columns of $V_{r}$ provide basis for $R(A^{\trans})$
 
 (3) Columns of $V_{nr}$ provide basis for $N(A)$.
 
 (4) Columns of $U_r$ provide basis for $R(A)$.
 
-(5) Columns of $U_{mr}$ provide basis for $N(A^T)$
+(5) Columns of $U_{mr}$ provide basis for $N(A^{\trans})$
 
 
 
@@ -331,8 +334,8 @@ The above equalities show us that we have lost all components of $x$ along $v^{(
 %\mathbf{0} & \mathbf{0}
 %\end{bmatrix}
 %\begin{bmatrix}
-%V_r^T\\
-%V_{nr}^T
+%V_r^{\trans}\\
+%V_{nr}^{\trans}
 %\end{bmatrix}\\
 %&= 
 %\begin{bmatrix}
@@ -343,22 +346,22 @@ The above equalities show us that we have lost all components of $x$ along $v^{(
 %\mathbf{0} & 
 %\end{bmatrix}
 %\begin{bmatrix}
-%V_r^T
+%V_r^{\trans}
 %\end{bmatrix}\\
-%&= \mathcal{U}_r\Sigma V_r^T\\
+%&= \mathcal{U}_r\Sigma V_r^{\trans}\\
 %\end{align*}
 
-%$$\mathcal{U}_r^TAV_r &= \mathcal{U}_r^T(\mathcal{U}_r\Sigma V_r^T)V_r = \Sigma$$
+%$$\mathcal{U}_r^{\trans}AV_r &= \mathcal{U}_r^{\trans}(\mathcal{U}_r\Sigma V_r^{\trans})V_r = \Sigma$$
 
 
 %\begin{align*}
-%A &= \mathcal{U}_r\Sigma V_r^T \\
-%&= \sum^r_{i=1}\mathcal{U}^{(i)}(V^{(i)})^T\sigma_i\\
-%&= \sigma_1\mathcal{U}^{(1)}V^{(1)^T}+ \sigma_2\mathcal{U}^{(2)}V^{(2)^T}
+%A &= \mathcal{U}_r\Sigma V_r^{\trans} \\
+%&= \sum^r_{i=1}\mathcal{U}^{(i)}(V^{(i)})^{\trans}\sigma_i\\
+%&= \sigma_1\mathcal{U}^{(1)}V^{(1)^{\trans}}+ \sigma_2\mathcal{U}^{(2)}V^{(2)^{\trans}}
 %\end{align*}
 
 %\begin{equation*}
-%\sigma_1\mathcal{U}V^{(1)^T} = 
+%\sigma_1\mathcal{U}V^{(1)^{\trans}} = 
 %\begin{bmatrix}
 %\sigma_1V_1^{(1)}\mathcal{U}^{(1)} & \sigma_1V_2^{(1)}\mathcal{U}^{(1)} & ... & %\sigma_1V_n^{(1)}\mathcal{U}^{(1)}
 %\end{bmatrix}
@@ -370,7 +373,7 @@ The above equalities show us that we have lost all components of $x$ along $v^{(
 Most numerical computations involving an equation $Ax = b$ are as reliable as possible when the SVD of $A$ is used. The two
 orthogonal matrices $U$ and $V$ do not affect lengths of vectors or angles between vectors. Any possible instabilities in numerical calculations are identified in $\Sigma$. If the singular values of $A$ are extremely large or small, roundoff errors are almost inevitable, but an error analysis is aided by knowing the entries in $\Sigma$ and $V$.
 
-If $A$ is an invertible $n$ by $n$ matrix, then the ratio $\sigma_1/\sigma_n$ of the largest and smallest singular values gives the \textbf{condition number} of $A$ (Actually, a “condition number” of $A$ can be computed in several ways).
+If $A$ is an invertible $n$ by $n$ matrix, then the ratio $\frac{\sigma_1}{\sigma_n}$ of the largest and smallest singular values gives the \textbf{condition number} of $A$ (Actually, a “condition number” of $A$ can be computed in several ways).
 
 Let's consider $Ax = b$ when $A$ is invertible. We solve for $x$ and obtain that $x = A^{-1}b$. What if $b = b_r + e$? how much does solution change (let's take $b$ as the true value and $e$ as the round-off error here) ?
 
@@ -381,8 +384,8 @@ Now, our solution is $\hat{x} = A^{-1}b_r + A^{-1}e$.
 \end{equation*}
 
 \begin{align*}
-max_{e,b\neq 0} \, \frac{\Vert A^{-1}e\Vert}{\Vert e\Vert} \frac{\Vert b\Vert}{\Vert A^{-1}b\Vert} 
-&= \left[\max_{e\neq 0}\, \frac{\Vert A^{-1}e\Vert}{\Vert e\Vert}\right]\left[max_{b\neq 0}\, \frac{\Vert b\Vert}{\Vert A^{-1}b\Vert}\right]\\
+\max_{e,b\neq 0} \, \frac{\Vert A^{-1}e\Vert}{\Vert e\Vert} \frac{\Vert b\Vert}{\Vert A^{-1}b\Vert} 
+&= \left[\max_{e\neq 0}\, \frac{\Vert A^{-1}e\Vert}{\Vert e\Vert}\right]\left[\max_{b\neq 0}\, \frac{\Vert b\Vert}{\Vert A^{-1}b\Vert}\right]\\
 &= \frac{\sigma_{\max}(A^{-1})}{\sigma_{\min}(A^{-1})}\\
 &= \frac{\frac{1}{\sigma_n}}{\frac{1}{\sigma_1}}\\
 &= \frac{\sigma_1}{\sigma_n}\\
@@ -401,15 +404,15 @@ where $K(A)$ is defined as the condition number of matrix $A$.
 Note that, by the SVD of $A^{-1}$ we have
 \begin{align*}
 A^{-1} 
-&= (\mathcal{U}\Sigma V^T)^{-1} \\
-&= V\Sigma^{-1}\mathcal{U}^T\\
+&= (\mathcal{U}\Sigma V^{\trans})^{-1} \\
+&= V\Sigma^{-1}\mathcal{U}^{\trans}\\
 &= V
 \begin{bmatrix}
 \frac{1}{\sigma_1} & &\\
 & \ddots & \\
 & & \frac{1}{\sigma_n}
 \end{bmatrix}
-\mathcal{U}^T
+\mathcal{U}^{\trans}
 \end{align*}
 
 and by the definition of Rayleigh Quotients we have 
@@ -429,13 +432,13 @@ A &= \mathcal{U}\tilde{\Sigma}V^r\\
 \mathbf{0} & \mathbf{0}
 \end{bmatrix}
 \begin{bmatrix}
-V_r^T\\
-V_{nr}^T
+V_r^{\trans}\\
+V_{nr}^{\trans}
 \end{bmatrix}\\
-&= \mathcal{U}_r\Sigma V_r^T\\
+&= \mathcal{U}_r\Sigma V_r^{\trans}\\
 \end{align*}
 Noticed that the diagonal entries of matrix $\Sigma$ are non-zero, so we may have the pseudo inverse(i.e., Moore–Penrose inverse) of matrix $A$, which is given by
-$$A^{+} = V_r \Sigma^{-1} \mathcal{U}_r^T $$
+$$A^{+} = V_r \Sigma^{-1} \mathcal{U}_r^{\trans} $$
 
 
 \subsection{SVD and matrix norms}
@@ -443,11 +446,11 @@ Recall the definition of matrix norms (Frobenius norm), it turns out that there 
 \begin{align*}
 \Vert A\Vert_F^2 
 &=\sum_i \sum_j	a_{ij}^2\\
-&=\trace(A^TA)\\
-&=\trace(V\tilde{\Sigma}^T U^T U \tilde{\Sigma} V^T)\\
-&=\trace(V \tilde{\Sigma}^T \tilde{\Sigma} V^T)\\
-&=\trace(V V^T \tilde{\Sigma}^T \tilde{\Sigma})\\
-&=\trace(\tilde{\Sigma}^T \tilde{\Sigma})\\
+&=\trace(A^{\trans}A)\\
+&=\trace(V\tilde{\Sigma}^{\trans} U^{\trans} U \tilde{\Sigma} V^{\trans})\\
+&=\trace(V \tilde{\Sigma}^{\trans} \tilde{\Sigma} V^{\trans})\\
+&=\trace(V V^{\trans} \tilde{\Sigma}^{\trans} \tilde{\Sigma})\\
+&=\trace(\tilde{\Sigma}^{\trans} \tilde{\Sigma})\\
 &=\trace(\tilde{\Sigma}^2)\\
 &=\sum_{i=1}^{r} \sigma_i^2
 \end{align*}
