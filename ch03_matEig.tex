@@ -35,7 +35,7 @@ a_{1n} & a_{2n} & ... & a_{mn}
 \right] \in \reals^{m\times n}
 $$
 
-So $[A]_{ij}  = [A^T]_{ji}$ if $A\in \reals^{m\times n}$ and $A^T\in \reals^{n\times m}$
+So $[A]_{ij}  = [A^T]_{ji}$ if $A\in \reals^{m\times n}$ then $A^T\in \reals^{n\times m}$
 
 Operations of matrices:
 
@@ -182,7 +182,7 @@ $$J_F(x_0) =
 \right]_{x = x_0}
 $$
 
-For $x$ 'near' $x_0$, the variation $\delta_F(x) =F(x) - F(x_0)$ can be approximated described by a linear map:
+For $x$ 'near' to $x_0$, the variation $\delta_F(x) =F(x) - F(x_0)$ can be approximated described by a linear map:
 $$\delta_F(x) = J_F(x_0)\delta_x, \,\, \delta_x = x - x_0$$
 
 \subsection{Orthogonal Matrices}
@@ -194,7 +194,7 @@ $$\delta_F(x) = J_F(x_0)\delta_x, \,\, \delta_x = x - x_0$$
 	$$ U^{(i)^T}U^{(j)}=\left\{
 	\begin{aligned}
 	0\quad \forall i\neq j\\
-	1\quad \text{if} i = j
+	1\quad \text{if } i = j
 	\end{aligned}
 	\right.
 	$$
@@ -202,7 +202,7 @@ $$\delta_F(x) = J_F(x_0)\delta_x, \,\, \delta_x = x - x_0$$
 
 Then $UU^T = U^TU = I$\\
 
-Next, let's see how orthogonal transformation do to geometry,i.e., to length and angles between vectors. Let $U$ be an $n$ by $n$ orthogonal matrix which defines a linear map from $x\in\reals^{n}$ to $y\in\reals^{n}$, that is, $y= Ux$.
+Next, let's see how orthogonal transformation do to geometry, i.e., to length and angles between vectors. Let $U$ be an $n$ by $n$ orthogonal matrix which defines a linear map from $x\in\reals^{n}$ to $y\in\reals^{n}$, that is, $y= Ux$.
 
 (a) Length between vectors
 $$\Vert y\Vert^2 = (Ux)^T(Ux) = x^TU^TUx = x^Tx = \Vert x\Vert^2$$

@@ -164,9 +164,9 @@ We prove this theorem for two particular instances:
 	\end{align*}
 
 	\begin{itemize}
-	\item For unconstrained case $x^*$ is optimal iff $\triangledown F(x^*) = 0$
+	\item For unconstrained case $x^*$ is optimal iff $\nabla F(x^*) = 0$
 	
-	\item For constrained optimization it is very possible there is no $x\in \mathcal{C}$ satisfies $\triangledown F(x) = 0$
+	\item For constrained optimization it is very possible there is no $x\in \mathcal{C}$ satisfies $\nabla F(x) = 0$
 	\end{itemize}
 
 	Therefore, in this case a local minimum is also a global minimum(recall that first order condition is a necessary condition for a local optimum but not a sufficient condition).
@@ -177,7 +177,7 @@ We prove this theorem for two particular instances:
 \begin{theorem}
 	For a convex optimization problem with (convex) feasible set $\mathcal{C}$ and differentiable (convex) objective $F_0: \reals^n \rightarrow \reals$, a point $x^* \in \mathcal{C}$ is optimal iff:
 	\begin{equation*}
-	\triangledown F_0(x^*)^T(y - x^*) \geq 0  \quad \forall y \in \mathcal{C}
+	\nabla F_0(x^*)^T(y - x^*) \geq 0  \quad \forall y \in \mathcal{C}
 	\end{equation*}
 
 That is, start at the point $x^*\in \mathcal{C}$, move into feasible set in direction $v$ and then evaluate $F_0(x^*+tv)$. $F_0(x^*+tv)$ must be non-decreasing for $t\geq 0$.
@@ -195,7 +195,7 @@ That is, start at the point $x^*\in \mathcal{C}$, move into feasible set in dire
 	
 	Apply $1$-st order condition for optimality, i.e. $\forall y \in \mathcal{C}$:
 	\begin{align*}
-	F_0(y) &\geq F_0(x^*) + \triangledown F_0(x^*)^T(y-x^*)\\
+	F_0(y) &\geq F_0(x^*) + \nabla F_0(x^*)^T(y-x^*)\\
 	&\geq F_0(x^*)
 	\end{align*}
 	where the second term on the r.h.s. must be non-negative by our assumption.
@@ -204,7 +204,7 @@ That is, start at the point $x^*\in \mathcal{C}$, move into feasible set in dire
 	
 	Secondly, we show that, if $x^*$ is the global optimum, then the inequality must holds. We prove this by contradiction.
 	
-	Suppose that $\exists y\in \mathcal{C}$ such that $\triangledown F_0(x^*)^T(y-x^*)<0$.
+	Suppose that $\exists y\in \mathcal{C}$ such that $\nabla F_0(x^*)^T(y-x^*)<0$.
 	
 	Look at the point $z$ defined as
 	\begin{align*}
@@ -218,7 +218,7 @@ That is, start at the point $x^*\in \mathcal{C}$, move into feasible set in dire
 	We claim that, there exists some points $z$ such that $F_0(z)<F_0(x^*)$, by showing that
 	\begin{align*}
 	\left.\frac{dF_0(z)}{d\lambda}\right|_{\lambda = 0} &=\left.\frac{d}{d\lambda}F_0(x^*+\lambda(y-x^*))\right|_{\lambda = 0}\\
-	&= \triangledown F_0(x^*)^T(y-x^*)\\
+	&= \nabla F_0(x^*)^T(y-x^*)\\
 	&< 0
 	\end{align*}
 	
