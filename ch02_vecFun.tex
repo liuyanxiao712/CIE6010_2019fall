@@ -23,7 +23,7 @@ x = \left[ \begin{array}{c} x_1 \\ x_2 \\ \vdots \\ x_n\end{array} \right].
 \end{equation*}
 where each $x_i \in \reals$ or $x_i \in \complex$. The length $n$ of the vector is also termed as the "dimension" of the vector, which will subsequently be defined formally.
 
-Our default will be a column vector as we describe above. Transpose x yields a row vector,   
+Our default will be a column vector as we describe above. Transpose $x$ yields a row vector,   
 \begin{equation*}
 x^\trans = [ x_1 \ x_2 \ \ldots x_n].
 \end{equation*}
@@ -96,7 +96,7 @@ Note: Some authors prefer “linear space" rather than "vector space" since elem
 
 \textbf{Span and subspace}
 
-Let $S$ be a set of vectors in a real vector space $V$, i.e.,$S=\{v^{(1)}, v^{(2)}, \cdots ,v^{(m)}\}$, where each $v^{(i)}\in \reals^{n}$.Then, the span of $S$, denoted by span($S$), is the set consisting of all the vectors that are linear combinations of $\{v^{(1)}, v^{(2)}, \cdots ,v^{(m)}\}$, that is, 
+Let $S$ be a set of vectors in a real vector space $V$, i.e.,$S=\{v^{(1)}, v^{(2)}, \ldots ,v^{(m)}\}$, where each $v^{(i)}\in \reals^{n}$. Then, the span of $S$, denoted by span($S$), is the set consisting of all the vectors that are linear combinations of $\{v^{(1)}, v^{(2)}, \cdots ,v^{(m)}\}$, that is, 
 $$\text{span}(S)=\left\{\sum_{i=1}^{m} a_{i}v^{(i)}\middle| a_{i}\in \reals ,\forall i\in [m]\right\}$$
 
 This set is also called a \textbf{subspace} of $V$.
@@ -182,7 +182,7 @@ Note:
 
 A set $S=\{v^{(1)},\cdots , v^{(n)}\}$ is a linearly independent set if there is no element of $S$ can be expressed as a linear combination of the others.
 
-The set $S$ is linearly independent if the only $a_{i}$ that satisfies
+The set $S$ is linearly independent if the only if $a_{i}$ that satisfies
 $$\sum_{i=1}^{m}a_{i}v^{(i)}=0\quad \text{is if} \quad a_{i}=0 \ \forall i\in [m]$$
 
 
@@ -507,7 +507,7 @@ for any $p, q\geq 1$ such that $1/p+1/q=1$.
 A second important connection of inner product and norm is that
 $$\Vert x\Vert_{2}=\sqrt{x^{\trans} x}=\langle x,x\rangle$$
 
-The $L_{2}$ norm is "induced" by the inner product. In fact, any inner product induces a norm (by the properties of inner product) However, there are norms that are not induced by any inner product, e.g., $L_{1}$ and $L_{\infty}$. Inner product space has a more special structure than a "normed" vector space.
+The $L_{2}$ norm is "induced" by the inner product. In fact, any inner product induces a norm (by the properties of inner product). However, there are norms that are not induced by any inner product, e.g., $L_{1}$ and $L_{\infty}$. Inner product space has a more special structure than a "normed" vector space.
 
 \begin{figure}
 	\centering
@@ -563,7 +563,7 @@ By Cauchy-Schwartz $\frac{\vert \langle x,y\rangle\vert}{\Vert x\Vert \Vert y\Ve
 
 (b) If $\vert\cos\theta\vert = 0$, then $\theta = 90^{\circ}$, and $\frac{\vert\langle x,y\rangle\vert}{\Vert x\Vert \Vert y\Vert}=0$, or equivalently, $\langle x,y\rangle=0$ (assuming $x\neq 0$ and $y\neq 0$). In this case, $\theta$ is a "right" angle, and $x$, $y$ are orthogonal vectors.
 
-(c) If $\vert \theta\vert <90^{\circ}$ ,then $\cos\theta >0$, and $\langle x,y\rangle >0$, and $\theta$ is a "acute angle", whereas if $\vert \theta\vert >90^{circ}$, then $\cos\theta <0$ and $\langle x,y\rangle <0$, $\theta$ is a "obtuse angle".
+(c) If $\vert \theta\vert <90^{\circ}$ ,then $\cos\theta >0$, and $\langle x,y\rangle >0$, and $\theta$ is a "acute angle", whereas if $\vert \theta\vert >90^{\circ}$, then $\cos\theta <0$ and $\langle x,y\rangle <0$, $\theta$ is a "obtuse angle".
 
 
 
@@ -594,7 +594,7 @@ Note that we use $\Vert\cdot\Vert_{2}$ to measure length because it is induced b
 %\end{marginfigure}
 
 \vspace{0.3cm}
-\textbf{Orthogonal complement}: Given a subspace $S\in \nu$, a vector $x\in\nu$ is orthogonal to $S$ if $x\perp s \forall s\in S$, i.e., $\perp$ to all vectors in the subspace $S$. The orthogonal complement to $S$ is defined as a collection of such vectors $x$, namely
+\textbf{Orthogonal complement}: Given a subspace $S\in \nu$, a vector $x\in\nu$ is orthogonal to $S$ if $x\perp s, \forall s\in S$, i.e., $\perp$ to all vectors in the subspace $S$. The orthogonal complement to $S$ is defined as a collection of such vectors $x$, namely
 $$ S^{\perp} =\{x\in\nu|x\perp s\}$$
 
 Some results of $S^{\perp}$:
@@ -695,7 +695,7 @@ A necessary and sufficient condition for $x^{*}$ is
 (2). $x-x^{*}\perp S$
 
 \vspace{0.3cm}
-Now let's consider how to Solve for $x^{*}$ in this general case.
+Now let's consider how to solve for $x^{*}$ in this general case.
 
 Let $S=\text{span}\left(\{x^{(1)},x^{(2)},\cdots\,x^{(d)}\}\right)$. Notice that $x^{*}\in S$ can be written as $x^{*}=\sum_{i=1}^{d}a_{i}x^{(i)}$ for some $a_{i}$, and $(x-x^{*}) \perp S$, then if $(x-x^{*}) \perp x^{(k)}$ $\forall k\in [d]$, that will be $\perp$ to all linear combination of the spanning set and hence $\perp$ to $S$.
 
@@ -959,7 +959,7 @@ Let $\{ u^{(1)}, \dots, u^{(n-1)} \}$ be a basis for $u$, and we choose $a \perp
 
 
 \vspace{0.3cm}
-Example: 2-D case
+Example: 2-D case.
 Let normal direction be $a = (1, \frac{1}{2})$, offset $b = 2$.
 \begin{align*}
 \mathcal{H} &= \{z \in \mathbb{R}^2 | a^{T} z = b \} \\
@@ -975,7 +975,7 @@ Let normal direction be $a = (1, \frac{1}{2})$, offset $b = 2$.
 \end{figure}
 
 
-$\mathcal{H} = \{ z \in \mathbb{R}^n | z = u + z^{(0)}, u \in \mathcal{S}, z^{(0)} = \begin{bmatrix} 2\\ 0\\ \end{bmatrix} \}$
+$\mathcal{H} = \{ z \in \mathbb{R}^n \vert z = u + z^{(0)}, u \in \mathcal{S}, z^{(0)} = \begin{bmatrix} 2\\ 0\\ \end{bmatrix} \}$
 
 when 
 \begin{align*}
@@ -990,7 +990,7 @@ $$\mathcal{H} = \{ z \in \mathbb{R}^n | z = u + z^{(0)}, u \in S, z^{(0)} = \beg
 
 \vspace{0.3cm}
 Now let's back to the first example, projection onto hyperplane.
-$$\mathcal{H}=\{z\in\reals^{n}|a^{\trans} z=b\}=\{z\in\reals^{n}|z=x_{s}+z^{(0)},x_{s}\in S, z^{(0)}\in \mathcal{H}\}$$
+$$\mathcal{H}=\{z\in\reals^{n}\vert a^{\trans} z=b\}=\{z\in\reals^{n}|z=x_{s}+z^{(0)},x_{s}\in S, z^{(0)}\in \mathcal{H}\}$$
 
 \begin{figure}
 	\centering
@@ -1007,7 +1007,7 @@ Now, we want to solve for $\lambda^{*}$ but notice that there are 2 unknowns $(\
 \begin{align*}
 &\qquad p-p^{*}=\lambda^{*}a\\
 &\Leftrightarrow a^{\trans} (p-p^{*})=a^{\trans} (\lambda^{*}a)\\
-&\Leftrightarrow a^{\trans} p-a^{\trans} p^{*})=\lambda^{*}a^{\trans} a\\
+&\Leftrightarrow a^{\trans} p-a^{\trans} p^{*}=\lambda^{*}a^{\trans} a\\
 &\Leftrightarrow a^{\trans} p-b=\lambda^{*}a^{\trans} a\\
 &\Leftrightarrow \lambda^{*}=\frac{a^{\trans} p-b}{a^{\trans} a}\\
 &\Leftrightarrow \lambda^{*}=\frac{a^{\trans} p-b}{\Vert a\Vert^{2}}\\
@@ -1178,7 +1178,7 @@ It is also useful to consider points at(or below) a height
 (3) The "level" set
 $$c_{F}(t)=\{x\in\reals^{n}:F(x)=t\}$$
 
-(4) The "Sub-level" set
+(4) The "sub-level" set
 $$L_{F}(t)=\{x\in\reals^{n}:F(x)\leq t\}$$
 
 Note: graph and epigraph are in $\reals^{n+1}$, level and sublevel set are in $\reals^{n}$

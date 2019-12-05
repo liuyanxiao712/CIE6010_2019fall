@@ -522,7 +522,6 @@ Furthermore, if strong duality holds, the problem $(*)$ (i.e., problem that is e
 
 Implication: Adjust the prices $\lambda, \nu$ so that the solution to relaxed problem matches the solution to the primal problem.
 \subsection{Sensitivity Analysis}
-
 \begin{marginfigure}
 	\centering
 	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1127_4.png}
@@ -845,4 +844,471 @@ $\Rightarrow$
 s.t.\quad &Ax \leq b
 \end{align*}
 
+
+\subsection{KKT conditions}
+Consider: optimization problem for which primal\&dual optimal values are obtained and $p^*=d^*$(ie. strong duality)
+
+$x^*$ is primal optimal
+
+$(\lambda^*,\nu^*)$ is dual optimal
+
+
+\begin{align*}
+\max\quad &F_0(x)\\
+s.t.\quad &F_i(x)\leq 0\quad i = 1,...,m\\
+&h_i(x)\leq 0\quad i = 1,...,p
+\end{align*}
+
+(Note: no assumption of convexity)
+
+
+\begin{align*}
+L(x,\lambda,\nu) &= F_0(x)+\sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x)\\
+g(\lambda,\nu)&= \min_xL(x,\lambda,\nu)
+\end{align*}
+
+Since strong duality holds of $(x^*,\lambda^*,\nu^*)$
+
+\begin{align*}
+F_0(x^*) &= g(\lambda^*,\nu^*) = \min_{x}[F_0(x)+\sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x)]\\
+&\leq F_0(x^*) +\sum^m_{i=1}\lambda_iF_i(x^*) + \sum^p_{i=1}\nu_ih_i(x^*)\\
+&\leq F_0(x^*)
+\end{align*}
+
+\begin{enumerate}
+	\item The primal optimal $x^*$ must minimize $L(x^*,\lambda^*,\nu^*)$
+	
+	\item To get "=" in (2) need $\lambda^*F_i(x^*)=0,\quad \forall i = 1,...m$
+\end{enumerate}
+Complementary slackness:
+
+\begin{enumerate}
+	\item If $i^{th}$ constraint is "active" (ie. $F_i(x)=0)$ then $\lambda_i^*=0$ or $\lambda_i^*>0$.
+	
+	\item If $i^{th}$ constraint is "inactive" (ie. $F_i(x)<0)$ then $\lambda_i^*=0$.
+\end{enumerate}
+
+Conversely,
+
+\begin{enumerate}
+	\item If $\lambda_i^*=0$ then $F_i(x^*_=0)$ or $F_i(x^*)<0$
+	
+	\item If $\lambda_i^*>0$ then $F_i(x^*_=0)$ 
+\end{enumerate}
+
+Recall pricing perspective
+
+$\rightarrow$ perturb $F_i(x)\leq 0$ to $F_i(x)\leq \epsilon$
+
+$\rightarrow$ $\lambda_i^* = \frac{d}{d\epsilon}p^*(0,0)$
+
+
+If constraint is "inactive" then there is slack in resource $i$ but since $\lambda_i^* = 0$ no gain by having more of that resource.
+
+If constraint is "active" then resource is totally used so cannot use more even if you want to.\\
+
+We can say more if problem is differentiable:
+
+\begin{itemize}
+	\item $F_i(x)\& h_i(x)$ all differentiable
+	
+	\item Still assume strong convexity
+\end{itemize}
+
+Recall: Just observed $x^*$ ,minimizes $L(x,\lambda^*,\nu^*)$
+
+$\rightarrow$ since Lagrangian is differentiable:
+
+\begin{equation*}
+\triangledown_x L(x,\lambda^*,\nu^*) {\vert}_{x=x^*} = 0
+\end{equation*}
+("First-order" condition)\\
+
+
+KKT conditions:
+
+\begin{enumerate}
+	\item $triangledown_x L(x,\lambda^*,\nu^*) = \triangledown F_0(x^*)+\sum^m_{i=1}\lambda^*_i+\triangledown F_i(x^*)+\sum^p_{i=1}\nu_i^*\triangledown h_i(x^*)=0$
+	
+	\item $F_i(x^*) \leq 0,\quad i=1,...,m,\quad h_i(x^*)=0\quad i=1,...,p$
+	
+	\item $\lambda_i^*\geq 0\quad i=1,...,m$
+	
+	\item $\lambda_i^*F_i(x_i^*)= 0\quad i=1,...,m$
+\end{enumerate}
+
+\begin{theorem}{}
+	If $(x^*,\lambda^*,\nu^*)$ are primal\&dual optimal, for a differentiable problem for which strong duality holds, they must satisfy KKT.
+\end{theorem}
+(necessary but not sufficient)
+
+\begin{theorem}
+	Start with optimization problem:
+	\begin{itemize}
+		\item $F_i\&h_i$ all differentiable
+		
+		\item $F_i$ convex \& $h_i$ affine
+	\end{itemize}
+	
+	Then if any $(\tilde{x},\tilde{\lambda},\tilde{\nu})$ satisfy KKT:
+	
+	\begin{itemize}
+		\item Strong duality holds
+		
+		\item $\tilde{x}$ is primal optimal
+		
+		\item $(\tilde{\lambda},\tilde{\nu})$ is dual optimal
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	Prove by convexity assumption \& dual feasible of $\tilde{\lambda}$(KKT)
+	
+	\begin{equation*}
+	L(x,\tilde{\lambda}, \tilde{\nu}) = F_0(x) + \sum^m_{i=1}\tilde{\lambda_i}F_i(x) + \sum^p_{i=1}\tilde{\nu_i}h_i(x)
+	\end{equation*}
+	
+	is a convex function in $x$, therefore therefore if can find a point of zero-gradient, that is global optimum
+	
+	But KKT-(1) tells us that $\triangledown_xL(\tilde{x},\tilde{\lambda},\tilde{\nu})$ hence $\tilde{x}$ minimizes $L(x,\tilde{\lambda},\tilde{\nu})$
+	
+	$g(\tilde{\lambda}, \tilde{\nu}) = \min_xL(x,\tilde{\lambda},\tilde{\nu}) = L(\tilde{x},\tilde{\lambda},\tilde{\nu})$
+	
+	
+	\begin{align*}
+	L(\tilde{x},\tilde{\lambda},\tilde{\nu}) &= F_0(\tilde{x}) + \sum^m_{i=1}\tilde{\lambda_i}F_i(x) + \sum^p_{i=1}\tilde{\nu_i}h_i(\tilde{x})\\
+	&= F_0(\tilde{x})
+	\end{align*}
+	
+	\begin{itemize}
+		\item $\Rightarrow$ In other words since $g(\tilde{\lambda},\tilde{\nu}) = F_0(\tilde{x})$, the duality gap is zero $\Rightarrow$ strong duality holds
+		
+		\item $\Rightarrow$ also by KKT-(2) $\tilde{x}$ is primal feasible.
+		
+		\item $\Rightarrow$ $(\tilde{\lambda},\tilde{\nu})$ attains $d^*$.
+		
+		\item $\Rightarrow$ $(\tilde{x})$ attains $p^*$.
+		
+		\item $\Rightarrow$ $p^* = d^*$
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}{A}
+	(If strong duality holds) Any tuple $(\tilde{x},\tilde{\lambda},\tilde{\nu})$ of primal/dual optimal variables must satisfy KKT (necessary condition for optimality)
+\end{theorem}
+
+\begin{theorem}{B}
+	(Assume convex problem) If $(\tilde{x},\tilde{\lambda},\tilde{\nu})$ satisfy KKT, $\Rightarrow$ strong duality holds, primal/dual feasible. (sufficient)
+\end{theorem}
+
+Want to combine so KKT necessary \& sufficient.
+
+Need:
+\begin{enumerate}
+	\item optimization problem that is differentiable so KKT conditions exist
+	
+	\item Convex so have Theorem B (sufficiently)
+	
+	\item Strong duality to hold (necessity)
+\end{enumerate}
+
+$\Rightarrow$ Convex optimization problems that are differentiable \& satisfy Slater's satisfy (1)-(3)
+
+
+
 % Above are notes for Dec 2
+
+
+% Below are notes for Dec 4
+
+\subsection{Walter-pouring Problem}
+\begin{align*}
+\max_{P_1,...,P_n}\quad &\sum^n_{i=1}log[1+\frac{P_i}{N_i}]\\
+s.t. \quad & 0 \leq P_i\quad i\in[m]\\
+&\sum^n_{i=1}P_i\leq P_T
+\end{align*}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_1.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+
+\begin{equation*}
+L(P, \lambda, \mu) = -\sum^n_{l=1}log_l[1+\frac{P_l}{N_l}] + \lambda(\sum^n_{l=1}P_l-P_T) - \sum^n_{l=1}\mu_lP_l
+\end{equation*}
+
+KKT:
+\begin{align*}
+(1) \quad &\frac{\partial}{\partial P_i}L(P, \lambda, \mu) = -\frac{N_i}{N_i+P_i}\frac{1}{N_i} + \lambda - \mu_i = 0 \Leftrightarrow N_i+P_i = \frac{1}{\lambda-\mu_i}\\
+(2)\quad &P_i \geq 0,\quad \forall i \in[m],\quad \sum^n_{l=1}P_l \leq P_T\\
+(3)\quad &\lambda \geq 0,\mu\geq 0\\
+(4)\quad &\mu_iP_i = 0\Leftrightarrow If \quad P_i > 0, \quad then\quad \mu_i =0\\
+&\lambda(\sum^n_{l=1}P_l - P_T) = 0
+\end{align*}
+
+To solve:
+
+\begin{enumerate}
+	\item First observe you will use all power since $F_0$ is monotonically increasing in each $P_i$
+	
+	$\Rightarrow$ $\sum^n_{l=1}P_l = P_T$
+	
+	\item Look at KKT-(1):
+	
+	(a) If $P_i>0$ then $\mu_i = 0$ and therefore $N_i+P_i = \frac{1}{\lambda}$
+	
+	(b) If $P_i= 0$ then KKT-(2), $N_i = \frac{1}{\lambda - \mu_i}\geq \frac{1}{\lambda}$
+	
+	(c) $P_i = \max\{\frac{1}{\lambda}-N_i, 0 \}$
+\end{enumerate}
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_2.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+
+
+
+
+Let's give you $P_T+\epsilon$ power, say $|u^*| = n^*$
+
+$\frac{\epsilon}{n^*}$ to each channel (that is active)
+
+\begin{align*}
+log[1+\frac{P_i+\frac{\epsilon}{n^*}}{N_i}] - log[1+\frac{P_i}{N_i}] &= log[\frac{N_i+P_i+\frac{\epsilon}{n^*}}{N_i+P_i}]\\
+&= log[1+\frac{\frac{\epsilon}{n^*}}{N_i+P_i}] \\
+&= log[1+\frac{\frac{\epsilon}{n^*}}{\frac{1}{\lambda^*}}]\\
+&= log[1+\frac{\epsilon}{n^*}\lambda^*]\\
+&\approx \frac{\epsilon\lambda^*}{n^*} \quad\leftarrow \text{change in rate for ith channel}
+\end{align*}
+
+Total change in rate  = $n^*\frac{\epsilon\lambda^*}{n^*} = \epsilon \lambda^*$
+
+$\frac{\partial F_o(x^*)}{\partial P_T} = \lambda^*$
+
+\subsection{Geometric interpretation of KKT}
+
+\begin{align*}
+\min \quad & F_0(x)\\
+s.t. \quad & F_i(x)\leq 0\quad i=1,...,m\\
+&h_i(x) = 0\quad i=1,...,p
+\end{align*}
+
+$\Leftrightarrow$ 
+
+\begin{align*}
+\min \quad & F_0(x)\\
+s.t. \quad & F_i(x)= 0\\
+&h_i(x) = 0
+\end{align*}
+
+Consider linear constraints:
+
+\begin{align*}
+\min \quad & F_0(x)\\
+s.t. \quad & Ax = b
+\end{align*}
+
+Consider the optimum point $x^*$\& small perturbations about $x^*$ i.e. $x^*+\triangle x$ which perturbations stay feasible.\\
+
+For feasibility $A(x^*+\triangle x) = b$:
+
+\begin{equation*}
+Ax^* + A\triangle x = b\Leftrightarrow A\triangle x = 0\Leftrightarrow \triangle x \in N(A)
+\end{equation*}
+
+Put together with condition for optimality of constrained problem
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_3.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+
+A point $x^*\in\mathcal{C}$ is optimal iff 
+
+\begin{equation*}
+\langle\triangledown F_0(x^*)\frac{y-x^*}{\triangle x}\rangle\geq 0,\quad \forall y\in\mathcal{C}
+\end{equation*}
+
+Therefore:
+
+\begin{align*}
+\triangledown F_0(x^*)\triangle x &\geq 0, \forall \triangle x\in N(A)\\
+\Leftrightarrow \nabla F_0(x^*) &\perp N(A)\\
+\Leftrightarrow \triangle F_0(x^*) &\in N(A)^{\perp} = R(A^T)
+\end{align*}
+
+\begin{align*}
+L(x,\nu) &= F_0(x) +\nu^T(Ax-b)\\
+\triangledown_xL(x,\nu) &= \triangledown F_0(x) + A^T\nu  = 0\\
+\triangledown F_0(x) &= -A^T\nu
+\end{align*}
+
+
+Because $\nu$ is constrained, $-A^{T}\nu$ can by any vector in $R(A^T)$
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_4.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+
+
+\subsection{First-order for general problem}
+
+\begin{align*}
+\triangledown_x L(x,\lambda,\nu) &= \triangledown F_0(x) + \sum^m_{i=1}\lambda_i\triangledown F_i(x) + \sum^p_{i=1}\nu_i \triangledown h_i(x) = 0\\
+\triangledown F_0(x) &= \sum^m_{i=1}(-\lambda_i)\triangledown F_i(x) - \sum^p_{i=1}\nu_i\triangledown h_i(x)\\
+\end{align*}
+
+Think about $m=1$, $p=0$, $\nabla F_0(x)=-\lambda_i\nabla F_1(x)$
+
+\begin{align*}
+\min \quad & x_1+x_2\\
+s.t. \quad & (x_1+1)^2 + x_2^2 \leq 1\\
+&(x_1-2)^2 + x_2^2 \leq 4
+\end{align*}
+
+\begin{align*}
+\nabla F_0(x) &=\begin{bmatrix}
+1\\
+1
+\end{bmatrix}\\
+\nabla F_1(x) &=\begin{bmatrix}
+2(x_1+1)\\
+2x_2
+\end{bmatrix}_{x=x^*=\begin{bmatrix}
+	0\\
+	0
+	\end{bmatrix}}=\begin{bmatrix}
+2\\
+0
+\end{bmatrix}\\
+\nabla F_2(x) &=\begin{bmatrix}
+2(x_1-1)\\
+2x_2
+\end{bmatrix}_{x=x^*=\begin{bmatrix}
+	0\\
+	0
+	\end{bmatrix}}=\begin{bmatrix}
+-4\\
+0
+\end{bmatrix}\\
+\end{align*}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_5.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+
+Recall generalized inequalities and defined with respect to proper cones.
+
+\begin{itemize}
+	\item closed
+	
+	\item convex
+	
+	\item pointed (if $x\in k \& -x\in k$ then $x=0$)
+	
+	\item Solid
+\end{itemize}
+
+SDP:
+\begin{align*}
+\min\quad &c^Tx\\
+s.t.\quad &x_1F_1+x_2F_2+\ldots+x_nF_n+G\leq 0
+\end{align*}
+where $F_i\in S^n$, $G\in S^n$, inequality $k=S^m_+$.
+
+
+Recall derivation of weak duality:
+
+\begin{align*}
+g(\lambda) &= \min_x[F_0(x) + \sum^m_{i=1}\lambda_iF_i(x)]\\
+&\leq F_0(x^*) + \sum^m_{i=1}\lambda_i F_i(x^*) \\
+&\leq F_0(x^*)
+\end{align*}
+
+To accommodate generalized inequalities need to identify what set dual variables need to be restricted to keep
+\begin{equation*}
+\langle \lambda, F(x)\rangle\leq 0,\quad \forall x \text{ feasible}
+\end{equation*}
+
+
+
+\begin{itemize}
+	\item If the feasibility inequality constraints defined by a cone k
+	
+	\item The dual variables will need to the dual cone $k^*$
+\end{itemize}
+
+\begin{equation*}
+k^*=\{\langle x,y\rangle \geq 0, \quad \forall x\in k \}
+\end{equation*}
+
+Dual of SDPs:
+
+\begin{align*}
+\min\quad &c^Tx\\
+s.t.\quad &x_1F_1+x_2F_2+\ldots+x_nF_n+G\leq 0
+\end{align*}
+$x\in \Re^n$, $F_i\in S^m$, $G\in S^m$.
+
+Dual variables: $x\in S^m$
+
+Lagrangian:
+
+\begin{align*}
+L(x,z) &= c^Tx + <z,x_1F_1+\ldots +x_nF_n+G>\\
+&= c^Tx + \sum^n_{i=1}<z,x_1F_1>+<z,G>\\
+&= \sum^n_{i=1}x_i(c_i+<z_1F_1>)+<z,G>
+\end{align*}
+
+Dual:
+\begin{equation}
+\label{eq6}
+g(z) = \min_x L(x,z)\left\{
+\begin{aligned}
+-\infty & , & \text{if }\exists i,s.t.\quad c_i+Tr(zF_i)\neq0 \\
+x_{bc} & , & Tr(zG)\quad\text{else}
+\end{aligned}
+\right.
+\end{equation}
+
+Dual optimization:
+
+\begin{align*}
+\max_z\quad &tr(zG)\\
+s.t.\quad &tr(zF_1)=-c_i\quad u=1,...,n\\
+&z\geq 0
+\end{align*}
+
+\begin{enumerate}
+	\item Given a cone $k$ find dual cone $k^*$
+	
+	\item Restrict multipliers to be in $k^*$
+\end{enumerate}
+
+
+$g(z)=\min_x L(x,z)$
+
+$\min[c^Tx-<z_1-(x_1F_1+...+x_nF_n+G)>]$ where $x\in k^*$. If primal feasible, $(x_1F_1+...+x_nF_n+G)$ is in $k=S^m_+$
+
+
+
+
+
+% Above are notes for Dec 4
