@@ -24,13 +24,17 @@ There are three possibilities:
 
 (a) Existence:\\
 
-Since $Ax\in \mathcal{R}(A)$, a solution will exist if $y\in \mathcal{R}(A)$
+Since $Ax\in R(A)$, a solution will exist if $y\in R(A)$
 
-A Simple test based on the ranks of augmented matrix and coefficient matrix:
+A simple test based on the ranks of augmented matrix and coefficient matrix:
 
-1) $rank([A\ y]) = rank[A]$: solution to ($*$) exists
+1) $rank(\begin{bmatrix}
+A&y
+\end{bmatrix}) = rank(A)$: solution to ($*$) exists
 
-2) $rank([A\ y]) > rank[A]$: no solution to ($*$) exists\\
+2) $rank(\begin{bmatrix}
+A&y
+\end{bmatrix}) > rank(A)$: no solution to ($*$) exists\\
 
 \vspace{0.4cm}
 If a solution exists, is it unique?
@@ -68,12 +72,12 @@ The three cases typically bread down into a question about dimensions of $A\in \
 
 1) Overdetermined: $m > n$
 
-Assume $A$ is full (column) rank, $rank(A) =n$. $A$ is a tall and thin matrix. $dim(\mathcal{R}(A)) = n < m$. $y\in \reals^m$.\\
+Assume $A$ is full (column) rank, $rank(A) =n$. $A$ is a tall and thin matrix. $dim(R(A)) = n < m$. $y\in \reals^m$.\\
 
 We want to find $x^*$ such that $Ax^*$ is the 'closest' to $y$:
 \begin{align*}
-x^* &= \arg \, \min_{x\in \reals^n}||Ax - y||_2\\
-\min_{x\in \reals^{n}}||Ax - y||_2 &= min_{\hat{y}\in \mathcal{R}(A)}||\hat{y} - y||_2 =\prod_{\mathcal{R}(A)}(y)\\
+x^* &= \arg \min_{x\in \reals^n}\Vert Ax - y\Vert_2\\
+\min_{x\in \reals^{n}}||Ax - y\Vert_2 &= \min_{\hat{y}\in R(A)}\Vert \hat{y} - y\Vert_2 =\prod_{R(A)}(y)\\
 \end{align*}
 
 \begin{figure}
@@ -92,55 +96,55 @@ where
 $$ A =   
 \left[
 \begin{matrix}
-a^{(1)} & ... & a^{(n)}
+a^{(1)} & \cdots & a^{(n)}
 \end{matrix}
 \right]
 $$
 
 Solve for $x^*$ via
 \begin{equation*}
-\sum^n_{i=1}x_i^*<a^{(k)}, a^{(i)}> = <a^{(k)}, y>, \quad \forall k \in \{1,2,...,m \}
+\sum^n_{i=1}x_i^*\langle a^{(k)}, a^{(i)}\rangle = \langle a^{(k)}, y\rangle, \quad \forall k \in \{1,2,...,m \}
 \end{equation*}
 
 Stack up to get 
 \begin{equation*}
-A^TAx^* = A^Ty
+A^{\trans}Ax^* = A^{\trans}y
 \end{equation*}
 
-There are 2 possibilities: (1)$A^TA$ is invertible; (2) $A^TA$ is not invertible.
+There are 2 possibilities: (1)$A^{\trans}A$ is invertible; (2) $A^{\trans}A$ is not invertible.
 
-1) When $A^TA$ is invertible
+1) When $A^{\trans}A$ is invertible
 \begin{align*}
-x^* &= (A^TA)^{-1}A^Ty\\
-\hat{y}^* &= A(A^TA)^{-1}A^Ty
+x^* &= (A^{\trans}A)^{-1}A^{\trans}y\\
+\hat{y}^* &= A(A^{\trans}A)^{-1}A^{\trans}y
 \end{align*}
 
-2) When $A^TA$ is not invertible
-We apply SVD to $A^T A$
+2) When $A^{\trans}A$ is not invertible
+We apply SVD to $A^{\trans} A$
 \begin{align*}
-\hat{y}^* &= A(A^TA)^{-1}A^Ty\\
+\hat{y}^* &= A(A^{\trans}A)^{-1}A^{\trans}y\\
 &= A(V
 \begin{bmatrix}
 \Sigma & \textbf{0}
 \end{bmatrix}
-\mathcal{U}^T\mathcal{U}
+\mathcal{U}^{\trans}\mathcal{U}
 \begin{bmatrix}
 \Sigma \\
 \textbf{0}
 \end{bmatrix}
-V^T)^{-1}A^Ty\\
-&= A(V\Sigma^2V^T)^{-1}A^Ty\\
-&= AV(\Sigma^{-1})^2V^TA^Ty\\
+V^{\trans})^{-1}A^{\trans}y\\
+&= A(V\Sigma^2V^{\trans})^{-1}A^{\trans}y\\
+&= AV(\Sigma^{-1})^2V^{\trans}A^{\trans}y\\
 &= \mathcal{U}
 \begin{bmatrix}
 \Sigma \\
 \textbf{0}
 \end{bmatrix}
-V^TV\Sigma^{-2}V^TV
+V^{\trans}V\Sigma^{-2}V^{\trans}V
 \begin{bmatrix}
 \Sigma & \textbf{0}
 \end{bmatrix}
-\mathcal{U}^Ty\\
+\mathcal{U}^{\trans}y\\
 &= \mathcal{U}
 \begin{bmatrix}
 \Sigma \\
@@ -150,7 +154,7 @@ V^TV\Sigma^{-2}V^TV
 \begin{bmatrix}
 \Sigma & \textbf{0}
 \end{bmatrix}
-\mathcal{U}^Ty\\
+\mathcal{U}^{\trans}y\\
 &= \mathcal{U}
 \begin{bmatrix}
 I_r\\
@@ -159,25 +163,25 @@ I_r\\
 \begin{bmatrix}
 I_r & \textbf{0}
 \end{bmatrix}
-\mathcal{U}^Ty\\
+\mathcal{U}^{\trans}y\\
 &= \mathcal{U}
 \begin{bmatrix}
 I_r& \textbf{0}\\
 \textbf{0} & \textbf{0}
 \end{bmatrix}
-\mathcal{U}^Ty\\
+\mathcal{U}^{\trans}y\\
 &= \mathcal{U}
 \begin{bmatrix}
 I_r& \textbf{0}\\
 \textbf{0} &  \textbf{0}
 \end{bmatrix}
 \begin{bmatrix}
-<u^{(1)}, y>\\
-<u^{(2)}, y>\\
+\langle u^{(1)}, y\rangle\\
+\langle u^{(2)}, y\rangle \\
 \vdots\\
-<u^{(m)}, y>
+\langle u^{(m)}, y\rangle
 \end{bmatrix}\\
-&= \sum^r_{i=1}<u^{(i)}, y>u^{(i)}
+&= \sum^r_{i=1}\langle u^{(i)}, y\rangle u^{(i)}
 \end{align*}
 
 
@@ -192,9 +196,9 @@ x^* = A^{-1}y
 \end{equation*}
 
 \begin{itemize}
-	\item $A$ has full rank (columns\& rows).
+	\item $A$ has full rank (columns \& rows).
 	
-	\item equal number of constraints and parameters.
+	\item Equal number of constraints and parameters.
 	
 	\item $A$ is square matrix with full rank so $A^{-1}$ exists.
 \end{itemize}
@@ -216,17 +220,17 @@ c) Underdetermined($m<n$)
 Idea: pick solution $x$ that satisfies($*$) with the shortest length in the sense of $L_2$ norm
 
 \begin{equation*}
-x^* = \arg \, \min_{Ax = y, x\in \reals^n}\vert x\Vert_2
+x^* = \arg  \min_{Ax = y, x\in \reals^n}\Vert x\Vert _2
 \end{equation*}
 
 \begin{equation*}
-\min_{Ax = y, x\in \reals^n}||x|| = \min_{x\in \reals^n, x\in \mathcal{A}}||x - 0|| = \prod_{\mathcal{A}}(0)
+\min_{Ax = y, x\in \reals^n}\Vert x\Vert  = \min_{x\in \reals^n, x\in \mathcal{A}}\Vert x - 0\Vert  = \prod_{\mathcal{A}}(0)
 \end{equation*}
 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure3.png}
+	\includegraphics[width=1.6in,height=1.6in]{figures/ch06/figure3.png}
 	%\caption{This is an inserted JPG graphic} 
 	%\label{fig:graph} 
 \end{figure}
@@ -234,58 +238,58 @@ x^* = \arg \, \min_{Ax = y, x\in \reals^n}\vert x\Vert_2
 To solve for $x^*$, note (from before) error vector 
 \begin{align*}
 e &= x^* - 0 = x^* \perp N(A)\\
-x^* &\in N(A)^{\perp} = R(A^T)
+x^* &\in N(A)^{\perp} = R(A^{\trans})
 \end{align*}
 
-So we can write $x^* = A^T\alpha$ for some $\alpha \in \reals^m$. 
+So we can write $x^* = A^{\trans}\alpha$ for some $\alpha \in \reals^m$. 
 For $x^*$ to be in $\mathcal{A}$ it must be satisfies that $Ax^* = y$
 
 Substituting in we get 
 \begin{equation*}
-y = Ax^* = AA^T\alpha
+y = Ax^* = AA^{\trans}\alpha
 \end{equation*}
 
-By assumption, $A$ is full row rank so $AA^T$ is invertible.
-$$x^* = A^T \alpha = A^T(AA^T)^{-1}y$$
+By assumption, $A$ is full row rank so $AA^{\trans}$ is invertible.
+$$x^* = A^{\trans} \alpha = A^{\trans}(AA^{\trans})^{-1}y$$
 
-Furthermore, we apply SVD to $AA^T$,
+Furthermore, we apply SVD to $AA^{\trans}$,
 \begin{align*}
-x^* &= A^T(AA^T)^{-1}y\\
-&= A^T\left[\mathcal{U}
+x^* &= A^{\trans}(AA^{\trans})^{-1}y\\
+&= A^{\trans}\left[\mathcal{U}
 \begin{bmatrix}
 \Sigma & \mathbf{0}
 \end{bmatrix}
-V^TV
+V^{\trans}V
 \begin{bmatrix}
 \Sigma\\
 \mathbf{0}
 \end{bmatrix}
-\mathcal{U}^T\right]^{-1}y\\
-&= A^T(\mathcal{U}\Sigma^2\mathcal{U}^T)^{-1}y\\
-&= A^T\mathcal{U}\Sigma^{-2}\mathcal{U}^Ty\\
+\mathcal{U}^{\trans}\right]^{-1}y\\
+&= A^{\trans}(\mathcal{U}\Sigma^2\mathcal{U}^{\trans})^{-1}y\\
+&= A^{\trans}\mathcal{U}\Sigma^{-2}\mathcal{U}^{\trans}y\\
 &= V
 \begin{bmatrix}
 \Sigma\\
 \mathbf{0}
 \end{bmatrix}
-\mathcal{U}^T\mathcal{U}\Sigma^{-2}\mathcal{U}^Ty\\
+\mathcal{U}^{\trans}\mathcal{U}\Sigma^{-2}\mathcal{U}^{\trans}y\\
 &=V
 \begin{bmatrix}
 \Sigma^{-1} \\
 \mathbf{0}
 \end{bmatrix}
-\mathcal{U}^Ty\\
+\mathcal{U}^{\trans}y\\
 &= V
 \begin{bmatrix}
 \Sigma^{-1}\\
 \mathbf{0}
 \end{bmatrix}
 \begin{bmatrix}
-<u^{(1)}, y>\\
+\langle u^{(1)}, y\rangle\\
 ...\\
-<u^{(n)}, y>
+\langle u^{(n)}, y\rangle
 \end{bmatrix}\\
-&= \sum^r_{i=1}\frac{1}{\sigma_i}<u^{(i)}, y>v^{(i)}
+&= \sum^r_{i=1}\frac{1}{\sigma_i}\langle u^{(i)}, y\rangle v^{(i)}
 \end{align*}
 
 
@@ -297,12 +301,12 @@ V^TV
 
 %1. over determined
 %
-%$A^TAx=A^Ty$
+%$A^{\trans}Ax=A^{\trans}y$
 
 
 %2. under determined m<n
 
-%$X^* \in R(A^T)  $ 
+%$X^* \in R(A^{\trans})  $ 
 
 %3. invertible
 
@@ -310,7 +314,8 @@ V^TV
 
 
 
-\subsection{Interpretation of $x^*= \arg \min_x \Vert y-Ax\Vert_2$}
+\textbf{Interpretation of $x^*= \arg \min_x \Vert y-Ax\Vert_2$}:
+\vspace{0.3cm}
 
 \quad\ (1). Approximated solution to $y=Ax$
 
@@ -328,13 +333,17 @@ $y^*=Ax^*$ is the 'best' approximated solution in the sense of $L_2$ norm, which
 (3). Perturb both $y$ and $A$ to get 'feasibility'
 
 'Total least square'
-$$\min_{\delta y,  \delta A} \Vert [\delta A\  \delta y] \Vert_F$$
+$$\min_{\delta y,  \delta A} \Vert \begin{bmatrix}
+\delta A & \delta y
+\end{bmatrix} \Vert_F$$
 
-where $\delta A$ is $m$ by $n$ matrix and thus $[\delta A\  \delta y]$ is $m$ by $n+1$, $y+\delta y\in R(A+\delta A)$.
+where $\delta A$ is $m$ by $n$ matrix and thus $\begin{bmatrix}
+\delta A & \delta y
+\end{bmatrix}$ is $m$ by $n+1$, $y+\delta y\in R(A+\delta A)$.
 
 
 (4). Linear regression
-$$\Vert y-Ax\Vert ^2_2 = \sum_{i=1}^{m} ( y_i - <a^{(i)} , x>)^2 = \sum_{i=1}^{m} r_i^2$$
+$$\Vert y-Ax\Vert ^2_2 = \sum_{i=1}^{m} ( y_i - \langle a^{(i)} , x\rangle )^2 = \sum_{i=1}^{m} r_i^2$$
 where $r_i$ defined as the residual.
 
 \begin{figure}
@@ -378,7 +387,7 @@ x_2
 \end{align*}
 
 Solve for $x^*$, we have
-$x^*=(A^TA)^{-1}A^Ty=[5 , -3]^T$
+$x^*=(A^{\trans}A)^{-1}A^{\trans}y=[5 , -3]^{\trans}$
 
 Thus, the equation for this line is
 $$\hat{y}=x_1^*+ax_2^*=5-3a$$            %so x1 and x2 are parameters
@@ -402,9 +411,9 @@ Weighted least square:
 where $W=\diag(w_1, w_2, \cdots, w_m)$ and each $w_i\geq 0$, $\bar{y} \triangleq Wy$ and $\bar{A} \triangleq WA$. From the last two equities, we may find that this is very similar with the classic one but now we need to solve for $x$ in a transformed coordinate system.
 
 In fact, we can use a more general transform with PSD:
-$$\Vert W (y-Ax)\Vert ^2_2 = (y-Ax)^TW^TW(y-Ax)=r^TW^TWr$$
+$$\Vert W (y-Ax)\Vert ^2_2 = (y-Ax)^{\trans}W^{\trans}W(y-Ax)=r^{\trans}W^{\trans}Wr$$
 Note that $r$ is the residual in the original coordinate system. Solve for $x^*$, we have 
-$$x^*=(A^T W W^T A)^{-1} A^T W W^T y$$
+$$x^*=(A^{\trans} W W^{\trans} A)^{-1} A^{\trans} W W^{\trans} y$$
 
 \vspace{0.3cm}
 Standard LS
@@ -439,7 +448,7 @@ Weighted LS with $W$ is PSD (rotation)
 
 
 In the original least square, 
-$$x*=\arg_{x\in\reals_{n}} \min \Vert Y-Ax\Vert ^2_2$$
+$$x^*=\arg_{x\in\reals_{n}} \min \Vert y-Ax\Vert ^2_2$$
 
 we do not have preference for any specific $x$ over any other, and often $x$ is a vector of resources consumed.
 
@@ -470,7 +479,7 @@ $$
 
 $$\Vert Ax - y\Vert ^2_2 + \gamma \Vert x\Vert ^2_2=\Vert \bar{A}x-\bar{y}\Vert^2_2$$
 
-$$x^*=(\bar{A}^T A)^{-1} \bar{A}^T \bar{y}=(A^T A+\gamma I)^{-1} A^T y$$
+$$x^*=(\bar{A}^{\trans} A)^{-1} \bar{A}^{\trans} \bar{y}=(A^{\trans} A+\gamma I)^{-1} A^{\trans} y$$
 
 
 \vspace{0.5cm}
@@ -547,10 +556,10 @@ c_1
 \end{align*}
 
 The first term on the last equality is a scalar 6(from previous example), and so we focus on the geometry of second term.
-$$\Vert A(x-x_{ls}^*)\Vert^2_2= (x-x_{ls}^*)^T A^TA (x-x_{ls}^*)$$. 
-Note that $A^TA$ is a PSD matrix. Understand geometry of level set of $\Vert A(x-x_{ls})\Vert^2_2$ via eigenvector of the PSD matrix $A^T A$
+$$\Vert A(x-x_{ls}^*)\Vert^2_2= (x-x_{ls}^*)^{\trans} A^{\trans}A (x-x_{ls}^*)$$. 
+Note that $A^{\trans}A$ is a PSD matrix. Understand geometry of level set of $\Vert A(x-x_{ls})\Vert^2_2$ via eigenvector of the PSD matrix $A^{\trans} A$
 
-$$A^TA=
+$$A^{\trans}A=
 \begin{bmatrix}
 3&3\\
 3&5
@@ -579,7 +588,7 @@ $$
 
 \subsection{Brief summary of Least Squares}
 \begin{equation*}
-x^* = \arg\, \min_{x\in \reals^n}||y-Ax||_2^2 \,\,\,\,\, (*)
+x^* = \arg \min_{x\in \reals^n}\Vert y-Ax\Vert_2^2 \qquad (*)
 \end{equation*}
 
 	(1) Standard LS variant in ($*$) weights all elements of error vector equally.(weighted LS)
@@ -589,11 +598,11 @@ x^* = \arg\, \min_{x\in \reals^n}||y-Ax||_2^2 \,\,\,\,\, (*)
 	(3) Standard LS ignores that certain elements of $x$ may "cost" more than others.(regularization)
 
 \subsection{"Tikhanov regularization"}
-$$x^* =arg\,min_{x\in \reals^n}||w_1(y-Ax)||_2^2 + ||w_2(x - x^{(0)})||_2^2$$
+$$x^* =\arg\min_{x\in \reals^n}\Vert w_1(y-Ax)\Vert_2^2 + \Vert w_2(x - x^{(0)})\Vert_2^2$$
 
 We do a simple example:
 \begin{equation*}
-x^* = arg\,min_{x\in \reals^n}||y-Ax||_2^2 + \gamma||x||_2^2
+x^* = \arg\min_{x\in \reals^n}\Vert y-Ax\Vert_2^2 + \gamma\Vert x\Vert_2^2
 \end{equation*}
 
 \begin{marginfigure}
@@ -605,39 +614,39 @@ x^* = arg\,min_{x\in \reals^n}||y-Ax||_2^2 + \gamma||x||_2^2
 
 Look at form of optional solution to 
 \begin{align*}
-x^* &= arg\,min_{x\in \reals^n}||y-Ax||_2^2 + \gamma||x||^2_2\\
-&= (A^TA + \gamma I)^{-1}A^Ty\\
-\hat{y}&= Ax^* = A(A^TA + \gamma I)^{-1}A^Ty\\
+x^* &= \arg\min_{x\in \reals^n}\Vert y-Ax\Vert_2^2 + \gamma\Vert x\Vert^2_2\\
+&= (A^{\trans}A + \gamma I)^{-1}A^{\trans}y\\
+\hat{y}&= Ax^* = A(A^{\trans}A + \gamma I)^{-1}A^{\trans}y\\
 \end{align*}
 Apply SVD to A,
-$$A = \mathcal{U}\tilde{\Sigma}V^T$$
+$$A = \mathcal{U}\tilde{\Sigma}V^{\trans}$$
 
-First thing is to analyze $(A^TA + \gamma I)^{-1}$:
+First thing is to analyze $(A^{\trans}A + \gamma I)^{-1}$:
 \begin{align*}
-(A^TA + \gamma I)^{-1} &= (V\tilde{\Sigma}^T\mathcal{U}^T\mathcal{U}\tilde{\Sigma}V^T + \gamma I)^{-1}\\
+(A^{\trans}A + \gamma I)^{-1} &= (V\tilde{\Sigma}^{\trans}\mathcal{U}^{\trans}\mathcal{U}\tilde{\Sigma}V^{\trans} + \gamma I)^{-1}\\
 &= (V
 \begin{bmatrix}
-\Sigma^T & 0\\
+\Sigma^{\trans} & 0\\
 0 & 0\\
 \end{bmatrix}
 \begin{bmatrix}
 \Sigma & 0\\
 0 & 0\\
 \end{bmatrix}
-V^T + \gamma I)^{-1}\\
+V^{\trans} + \gamma I)^{-1}\\
 &=(V
 \begin{bmatrix}
 \Sigma^2 & 0\\
 0  & 0
 \end{bmatrix}
-V^T + \gamma VV^T
+V^{\trans} + \gamma VV^{\trans}
 )^{-1}\\
 &= (V(
 \begin{bmatrix}
 \Sigma^2 & 0\\
 0 & 0
 \end{bmatrix}
-+\gamma I)V^T)^{-1}\\
++\gamma I)V^{\trans})^{-1}\\
 &= V
 \left[
 \begin{array}{c|c}
@@ -645,7 +654,7 @@ V^T + \gamma VV^T
 & I_{n-r}
 \end{array}
 \right]
-V^T\\
+V^{\trans}\\
 &=
 V
 \left[
@@ -654,7 +663,7 @@ V
 & (I_{n-r})^{-1}
 \end{array}
 \right]
-V^T\\
+V^{\trans}\\
 &=
 V
 \left[
@@ -671,7 +680,7 @@ V
 \end{matrix}
 \end{array}
 \right]
-V^T
+V^{\trans}
 \end{align*}
 
 %\begin{matrix}
@@ -697,8 +706,8 @@ V^T
 %\right]
 
 \begin{align*}
-y^* &= Ax^* = A(A^TA + \gamma I)^{-1}A^Ty\\
-&= \mathcal{U}\tilde{\Sigma}V^T\left(V
+y^* &= Ax^* = A(A^{\trans}A + \gamma I)^{-1}A^{\trans}y\\
+&= \mathcal{U}\tilde{\Sigma}V^{\trans}\left(V
 \left[
 \begin{array}{c|c}
 \begin{matrix}
@@ -713,7 +722,7 @@ y^* &= Ax^* = A(A^TA + \gamma I)^{-1}A^Ty\\
 \end{matrix}
 \end{array}
 \right]
-V^T\right)V\tilde{\Sigma}\mathcal{U}^Ty\\
+V^{\trans}\right)V\tilde{\Sigma}\mathcal{U}^{\trans}y\\
 &= \mathcal{U}
 \begin{bmatrix}
 \Sigma & 0\\
@@ -734,10 +743,10 @@ V^T\right)V\tilde{\Sigma}\mathcal{U}^Ty\\
 \end{array}
 \right]
 \begin{bmatrix}
-\Sigma^T & 0\\
+\Sigma^{\trans} & 0\\
 0 & 0
 \end{bmatrix}
-\mathcal{U}^Ty\\
+\mathcal{U}^{\trans}y\\
 &= \mathcal{U}
 \left[
 \begin{array}{c|c}
@@ -749,7 +758,7 @@ V^T\right)V\tilde{\Sigma}\mathcal{U}^Ty\\
 & 0
 \end{array}
 \right]
-\mathcal{U}^Ty
+\mathcal{U}^{\trans}y
 \\
 &= \mathcal{U}
 \left[
@@ -763,33 +772,33 @@ V^T\right)V\tilde{\Sigma}\mathcal{U}^Ty\\
 \end{array}
 \right]
 \begin{bmatrix}
-<u^{(1)}, y>\\
-<u^{(2)}, y>\\
+\langle u^{(1)}, y\rangle\\
+\langle u^{(2)}, y\rangle\\
 \vdots\\
-<u^{(m)}, y>
+\langle u^{(m)}, y\rangle
 \end{bmatrix}\\
 &=\mathcal{U}
 \begin{bmatrix}
-\frac{\sigma_1^2}{\sigma_1^2+\gamma}<u^{(1)}, y>\\
+\frac{\sigma_1^2}{\sigma_1^2+\gamma}\langle u^{(1)}, y\rangle\\
 \vdots\\
-\frac{\sigma_r^2}{\sigma_r^2+\gamma}<u^{(r)}, y>\\
+\frac{\sigma_r^2}{\sigma_r^2+\gamma}\langle u^{(r)}, y\rangle\\
 0\\
 \vdots\\
 0
 \end{bmatrix}\\
-&= \sum^r_{i=1}\frac{\sigma_i^2}{\sigma_i^2 + \gamma}<u^{(i)}, y>u^{(i)}
+&= \sum^r_{i=1}\frac{\sigma_i^2}{\sigma_i^2 + \gamma}\langle u^{(i)}, y\rangle u^{(i)}
 \end{align*}
 
 From the last equality,
 \begin{equation*}
-\sum^r_{i=1}\frac{\sigma_i^2}{\sigma_i^2 + \gamma}<u^{(i)}, y>u^{(i)}
+\sum^r_{i=1}\frac{\sigma_i^2}{\sigma_i^2 + \gamma}\langle u^{(i)}, y\rangle u^{(i)}
 \end{equation*}
 
 We should note that:
 \begin{itemize}
 	\item $\frac{\sigma_i^2}{\sigma_i^2 + \gamma}$: scaling is changed by regularization. If $\gamma = 0$, then  $\frac{\sigma_i^2}{\sigma_i^2 + \gamma} = 1$ and get back standard LS. If $\gamma > 0$, it's shrinkage. 
 	
-	\item $<u^{(i)}, y>$: projection of data vector $y$ along that $i^{th}$ direction. 
+	\item $\langle u^{(i)}, y\rangle $: projection of data vector $y$ along that $i^{th}$ direction. 
 	
 	\item $u^{(i)}$: component of approximation along $i^{th}$ direction or $i^{th}$ basis element. 
 \end{itemize}
