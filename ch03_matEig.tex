@@ -227,9 +227,9 @@ Some important terminology regarding this map are illustrated as follows:
 	\item Domain
 \end{itemize}
 
-$\text{dom}(A)$ = $\reals^n$, $A = [a^{(1)}...a^{(n)}]$
+${\rm dom}(A)$ = $\reals^n$, $A = [a^{(1)}...a^{(n)}]$
 
-$\text{dom}(A^T)$ = $\reals^m$, $A^T = [a^{(1)}...a^{(m)}]$
+${\rm dom}(A^T)$ = $\reals^m$, $A^T = [a^{(1)}...a^{(m)}]$
 
 
 \begin{itemize}
@@ -270,18 +270,18 @@ N(A) = \{x\in \reals^n | Ax = 0\}
 	\item Fundamental Theorem
 \end{itemize}
 
-We can find that for any $x\in R(A^T)$ and any $z\in N(A)$, it holds that $x^Tz = 0$.\\
+We can find that $\forall$ $x\in R(A^T)$ and $\forall$ $z\in N(A)$, it holds that $x^Tz = 0$.\\
 
-$\reals^n = R(A^T) \bigoplus N(A)$: $\forall x\in \reals^n$ there is a unique $x = x_{R(A^T)} = x_{N(A)}$.\\
+$\reals^n = R(A^T) \oplus N(A)$: $\forall x\in \reals^n$ there is a unique $x = x_{R(A^T)} = x_{N(A)}$.\\
 
 \begin{theorem}{Fundamental theorem of linear algebra}
 	
-	For any given matrix $A\in \reals^{m,n}$, it holds that $N(A) \perp R(A^T)$ and $R(A) \perp N(A^T)$, hence
+	For any given matrix $A\in \reals^{m\times n}$, it holds that $N(A) \perp R(A^T)$ and $R(A) \perp N(A^T)$, hence
 	\begin{align*}
-	\text{N}(A) \bigoplus \text{R}(A^T) &= \reals^n\\
-	\text{R}(A) \bigoplus \text{N}(A^T) &= \reals^m\\
-	\text{dim} \text{N}(A) + \rank(A) &=n\\
-	\text{dim} \text{N}(A^T) + \rank(A) &=m
+	\text{N}(A) \oplus \text{R}(A^T) &= \reals^n\\
+	\text{R}(A) \oplus \text{N}(A^T) &= \reals^m\\
+	\text{dim } \text{N}(A) + \rank(A) &=n\\
+	\text{dim } \text{N}(A^T) + \rank(A) &=m
 	\end{align*}
 \end{theorem}
 
@@ -295,7 +295,7 @@ $$x = A^T\xi + z,\ \text{where}\ z\in \text{N}(A)$$
 
 %Lecture Sep 16
 
-PageRank algorithm: More important web page should be ranked higher
+PageRank algorithm: More important web page should be ranked higher.
 
 
 A page's important score can be interpreted as the number of “votes” that a page has received from other pages(or, the sum of importance score received from all its neighbors), and also a page can make a vote to other pages as well. Further more, if one page has made multiple votes to the others, then each vote it made is scaled by its total vote.
@@ -409,7 +409,7 @@ x^{(2)} &= A(Ax^{(0)}) = \sum^n_{i=1}\alpha_i(A^2u^{(i)}) = \sum^n_{i=1}\alpha_i
 x^{(k)} &= A^kx{(0)} = \sum^n_{i=1}\alpha_i(\lambda_i)^ku^{(i)}\\
 &= \alpha_1(\lambda_1)^ku^{(1)} + \sum^n_{i=2}\alpha_i(\lambda_i)^ku^{(i)} \\
 &= \alpha_1u^{(1)} + \sum^n_{i=2}\alpha_i(\lambda_i)^ku^{(i)}\\
-&when \,k \rightarrow \infty\\
+&\text{when} \,k \rightarrow \infty\\
 &= \alpha_1u^{(1)}
 \end{align*}
 
@@ -506,7 +506,7 @@ It turns out, when a matrix $A$ is diagonalizable, it is easier for us to comput
 
 In previous eigenvalue decomposition, we need to solve for $\lambda$ from $det(A - \lambda I) = 0$ (characteristic function). 
 
-The best way the understand determinant net is geometrically as a scaling factor associated with a linear map. Let's take a look at the following example.
+The best way to understand determinant net is geometrically as a scaling factor associated with a linear map. Let's take a look at the following example.
 
 
 
