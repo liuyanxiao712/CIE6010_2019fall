@@ -4,30 +4,30 @@
 \subsection{Terminology and concepts regarding LP problem}
 Consider following problem, i.e., Liner programming with equality and inequity constraints:
 \begin{align*}
-	\min_{x\in \reals^n}& c^Tx + d\\
+	\min_{x\in \reals^n}& c^{\trans}x + d\\
 	s.t. \quad &Ax = b\\
 	&Gx \leq h
 \end{align*}
 
 where $x\in \reals^n, c\in \reals^n, d\in \reals, A\in \reals^{q\times n}, b\in \reals^q, G\in \reals^{m\times n}, h\in \reals^m$.
 
-Note that, the function $p(x)=c^Tx + d$ is called the objective function and $x$ is called the decision variable. The goal of this problem is to find $x^*$ such that the optimal value $p^*$ of the objective function is achieved.
+Note that, the function $p(x)=c^{\trans}x + d$ is called the objective function and $x$ is called the decision variable. The goal of this problem is to find $x^*$ such that the optimal value $p^*$ of the objective function is achieved.
 
 This formulation is the general form, and let's write it in matrix form(list of vectors), that is,
 
 $$
 A = 
 \begin{bmatrix}
-\alpha^{(1)^T}\\
+\alpha^{(1)^{\trans}}\\
 ...\\
-\alpha^{(q)^T}
+\alpha^{(q)^{\trans}}
 \end{bmatrix}
 \qquad	
 G = 
 \begin{bmatrix}
-g^{(1)^T}\\
+g^{(1)^{\trans}}\\
 ...\\
-g^{(q)^T}
+g^{(q)^{\trans}}
 \end{bmatrix}
 $$
 
@@ -38,8 +38,8 @@ Note that, there are also two other forms which are commonly used.
 
 1. Inequality form (only contains inequity constraints)
 \begin{align*}
-	min \,\,\, &c^Tx+d\\
-	s.t. \,\,\, &Gx\leq h\\
+	min \quad &c^{\trans}x+d\\
+	s.t. \quad &Gx\leq h\\
 \end{align*}
 Given the general form, to get the inequality form, we simply break the equality
 \begin{equation*}
@@ -47,7 +47,7 @@ Given the general form, to get the inequality form, we simply break the equality
 \end{equation*}
 So we can get inequality form as follows:
 \begin{align*}
-	\min c^Tx&+d\\
+	\min c^{\trans}x&+d\\
 	\qquad s.t. \quad Gx &\leq h\\
 	Ax &\leq b\\
 	-Ax &\leq -b
@@ -55,7 +55,7 @@ So we can get inequality form as follows:
 
 2. Standard form (only contains equality and all variables are non negative)
 \begin{align*}
-	\min \quad&c^Tx+d\\
+	\min \quad&c^{\trans}x+d\\
 	s.t. \quad&Ax = b\\
 	&x\geq 0
 \end{align*}
@@ -66,13 +66,13 @@ Step 1: Introducing the slack variables $s$
 
 Given the general form,
 \begin{align*}
-	\min \quad&c^Tx+d\\
+	\min \quad&c^{\trans}x+d\\
 	s.t. \quad&Gx\leq h\\
 	&Ax = b
 \end{align*}
 We add the slack variables $s$ so that the formulation become:
 \begin{align*}
-	\min \quad&c^Tx+d\\
+	\min \quad&c^{\trans}x+d\\
 	s.t. \quad&Gx + s = h\\
 	&Ax = b\\
 	&s\geq 0
@@ -82,7 +82,7 @@ Note that the slack variables $s$ must be non negative here.
 
 Step 2: We break the decision variable $x$ by $x= x^+ - x^-$
 \begin{align*}
-	\min \quad &c^T(x^{+} - x^{-})+d\\
+	\min \quad &c^{\trans}(x^{+} - x^{-})+d\\
 	s.t. \quad&G(x^{+} - x^{-}) + s = h\\
 	&A(x^{+} - x^{-}) = b\\
 	&s\geq 0\\
@@ -110,8 +110,8 @@ $$\{x\in\reals^{n}|Gx\leq h\}$$
 \vspace{0.5cm}
 Let $p^*$ be the optimal value of the given objective function under the constraints, i.e.,
 \begin{align*}
-	p^* = min \,\,\, &c^Tx + d\\
-	s.t.\,\,\, &Ax = b\\
+	p^* = \min \quad &c^{\trans}x + d\\
+	s.t.\quad &Ax = b\\
 	&Gx\leq h
 \end{align*}
 
@@ -129,8 +129,8 @@ Remarks on "optimal" value $p^*$ of program:
 \vspace{0.5cm}
 Let $x^*$ be the optimal choice of the decision variable $x$, i.e.,
 \begin{align*}
-	x^* = \arg \min \,\,\, &c^Tx + d\\
-	s.t.\,\,\, &Ax = b\\
+	x^* = \arg \min \quad&c^{\trans}x + d\\
+	s.t.\quad &Ax = b\\
 	&Gx\leq h
 \end{align*}
 
@@ -241,22 +241,22 @@ Rewrite it as $Gx\leq h$, that is,
 
 Consider the LP does not have constraints, so we have
 \begin{align*}
-	p^* &= \min c^Tx+d\\
-	x^* &= \arg \min_{x\in \reals^n} \,\,\, c^Tx+d
+	p^* &= \min c^{\trans}x+d\\
+	x^* &= \arg \min_{x\in \reals^n} \quad c^{\trans}x+d
 \end{align*}
 
 \vspace{0.5cm}
 Situation 1: $c = 0 \in \reals^n$
 \begin{align*}
-	p^* &= \min_{x\in \reals^n} \,\,\, d=d\\
-	x^* &= \arg \min_{x\in \reals^n} \,\,\, d = \reals^n
+	p^* &= \min_{x\in \reals^n} \quad d=d\\
+	x^* &= \arg \min_{x\in \reals^n} \quad d = \reals^n
 \end{align*}
 
 Situation 2: $c \neq 0 \in \reals^n$
 \begin{align*}
-	p^* &= -\infty\,\,\, \text{by convention if no minimum}\\
-	x(\alpha) &= -\alpha c \,\,\, \alpha \geq 0\\
-	c^Tx + d &= c^T(-\alpha c) + d = \alpha - \alpha c^Tc = \alpha - \alpha||c||^2_2\\
+	p^* &= -\infty\quad \text{by convention if no minimum}\\
+	x(\alpha) &= -\alpha c \quad \alpha \geq 0\\
+	c^{\trans}x + d &= c^{\trans}(-\alpha c) + d = \alpha - \alpha c^{\trans}c = \alpha - \alpha\Vert c\Vert^2_2\\
 	x^* &\text{doesn't exist}
 \end{align*}
 
@@ -281,14 +281,14 @@ $$
 
 Let's think about the geometry of cost function:
 $$
-F_0(x) =c^Tx + d
+F_0(x) =c^{\trans}x + d
 $$
 where $F_0(x)$ is the objective function and it turns out that it is also an affine function.
 
 Recall that the level set for $F_0(x)$, 
 \begin{align*}
-	c_{F_0}(t) &=\{ x\in \reals^n | F_0(x) = c^Tx + d = t \}\\
-	&= \{x\in \reals^n | C^Tx = (t-d) \}
+	c_{F_0}(t) &=\{ x\in \reals^n | F_0(x) = c^{\trans}x + d = t \}\\
+	&= \{x\in \reals^n | C^{\trans}x = (t-d) \}
 \end{align*}
 
 Obviously, the level set for $F_0(x)$ defines a hyperplane, and when $t=d$ it defines a subspace(go through the origin). Let's consider two level sets, for $t_1$ and $t_2$,
@@ -304,9 +304,9 @@ Note that $c$ is the normal vector to $x$. Let's find the relationship between $
 
 Approach (1)
 \begin{align*}
-	t_2 &= c^T(x^{(0)}+\alpha c) + d\\
-	t_1 &= c^Tx^{(0)} + d\\
-	t_2 - t_1 &= [c^Tx^{(0)} + d + \alpha ||c||^2] - c^Tx^{(0)} = \alpha \Vert c \Vert^2
+	t_2 &= c^{\trans}(x^{(0)}+\alpha c) + d\\
+	t_1 &= c^{\trans}x^{(0)} + d\\
+	t_2 - t_1 &= [c^{\trans}x^{(0)} + d + \alpha \Vert c\Vert ^2] - c^{\trans}x^{(0)} = \alpha \Vert c \Vert^2
 \end{align*}
 So apparently $t_2>t_1$.
 
@@ -314,9 +314,9 @@ Approach (2)
 \begin{equation*}
 	\nabla F_0(x) =
 	\begin{bmatrix}
-		\frac{\sigma}{\sigma x_1}(c^Tx+d)\\
+		\frac{\sigma}{\sigma x_1}(c^{\trans}x+d)\\
 		\vdots\\
-		\frac{\sigma}{\sigma x_n}(c^Tx+d)
+		\frac{\sigma}{\sigma x_n}(c^{\trans}x+d)
 	\end{bmatrix} = 
 	\begin{bmatrix}
 		c_1\\
@@ -569,7 +569,7 @@ The rows of matrix $G$ are the normal directions of the hyperplanes that define 
 	In this example(see picture above) constraints g(1) and g(2) are active at optimum.
 	
 	Note that, we could improve(decrease) the cost if:
-	$$c^T(x^{(0)} + \bigtriangleup) + d < c^Tx^{(0)} + d$$
+	$$c^{\trans}(x^{(0)} + \bigtriangleup) + d < c^{\trans}x^{(0)} + d$$
 	That is, $\langle c, \bigtriangleup\rangle < 0$, the angle between displacement vector $\bigtriangleup$ and normal vector $c$ is an obtuse angle(see the picture above).
 \end{example}
 
@@ -587,12 +587,12 @@ Some observations:
 	$\rightarrow$ opposite vector that define active constraints.
 	
 	\begin{equation*}
-		v - \alpha g^{(1)} - \beta g^{(2)}, \,\,\, \alpha, \beta \geq 0
+		v - \alpha g^{(1)} - \beta g^{(2)}, \quad \alpha, \beta \geq 0
 	\end{equation*}
 	
 	\item Are these any choices of $\alpha, \beta$ that decrease the cost?
 	\begin{align*}
-		c^T(v - \alpha g^{(1)} - \beta g^{(2)}) + d &\leq c^Tx + d\\
+		c^{\trans}(v - \alpha g^{(1)} - \beta g^{(2)}) + d &\leq c^{\trans}x + d\\
 		-\alpha \langle c, g^{(1)}\rangle  - \beta \langle c, g^{(2)}\rangle &\leq 0
 	\end{align*}
 \end{itemize}
@@ -608,7 +608,7 @@ no more into feasible set will decrease the cost.\\
 \vspace{0.5cm}
 Condition for optimality:
 
-A feasible vertex $v$: $v\in\{x|Gx \leq h \}$ is an optimal solution to LP with cost $F_0(x) = c^Tx + d$ if $c^Tg^{(i)} < 0$, $\forall i\in$ active set.\\
+A feasible vertex $v$: $v\in\{x|Gx \leq h \}$ is an optimal solution to LP with cost $F_0(x) = c^{\trans}x + d$ if $c^{\trans}g^{(i)} < 0$, $\forall i\in$ active set.\\
 
 \begin{figure}
 	\centering
@@ -703,7 +703,7 @@ Simplex algorithm:
 \begin{example}
 	Consider the problem:
 	\begin{align*}
-		min_x &||Ax - b||_1, \,\,\,\,\, A\in \reals^{q\times n}\\
+		\min_x &\Vert Ax - b\Vert _1, \qquad A\in \reals^{q\times n}\\
 		s.t. &Gx\leq h
 	\end{align*}
 	\begin{figure}
@@ -715,7 +715,7 @@ Simplex algorithm:
 	
 	Recall the definition of $L_1$ norm:
 	\begin{equation*}
-		||u||_1 = \sum^q_{i=1} |u_i|
+		\Vert u\Vert_1 = \sum^q_{i=1} |u_i|
 	\end{equation*}
 	
 	%	\begin{figure}
@@ -727,8 +727,8 @@ Simplex algorithm:
 	
 	Let's introduce the helper vector $t\in \reals^q$,
 	\begin{align*}
-		min_{x,t} &\sum^q_{i=1}t_i\\
-		s.t. \,\,\,\,\,&Gx \leq h\\
+		\min_{x,t} &\sum^q_{i=1}t_i\\
+		s.t. \quad&Gx \leq h\\
 		&Ax -b \leq t\\
 		&Ax -b \geq -t
 	\end{align*}
@@ -740,13 +740,13 @@ Simplex algorithm:
 \begin{example}
 	Consider following problem:
 	\begin{align*}
-		min \,\,\, max_{i\in [q]} &(c^{(i)^T}x + d_i)\\
+		min \quad max_{i\in [q]} &(c^{(i)^{\trans}}x + d_i)\\
 		s.t. &Gx\leq h
 	\end{align*}
 	This case is similar to the $L_\infty$ norm case due to the inner max function, but it is one-sided(no lower bound). So we could convert the original one to the following:
 	\begin{align*}
 		min  &\qquad t\\
-		s.t. &(c^{(i)^T}x + d_i)\leq t,\,\,\,\,\, \forall i\in [q]\\
+		s.t. &(c^{(i)^{\trans}}x + d_i)\leq t,\quad \forall i\in [q]\\
 		&Gx\leq h
 	\end{align*}
 	\begin{marginfigure}
@@ -788,35 +788,35 @@ Note that:
 \begin{itemize}
 	\item A sphere is fully parameterized by its center $x_c$ and its radius $r$
 	
-	\item A sphere $(x_c, r)$ fits in $p$ if: $x_c + u \in p$, $\forall u \,\,\, s.t. ||u||_2\leq r$
+	\item A sphere $(x_c, r)$ fits in $p$ if: $x_c + u \in p$, $\forall u \quad s.t. \Vert u\Vert _2\leq r$
 \end{itemize}
 
 \vspace{0.3cm}
 Now, let's formulate as an LP. To accomplish this, observe that 
 
-$x_c+u \in p$ means that $g^{(i)^T}(x_c + u) \leq h_i,\,\,\, \forall i\in [q]$, $\forall u$ s.t. $||u||_2\leq r$.
+$x_c+u \in p$ means that $g^{(i)^{\trans}}(x_c + u) \leq h_i,\quad \forall i\in [q]$, $\forall u$ s.t. $\Vert u\Vert _2\leq r$.
 
 \vspace{0.2cm}
-Examine the constraint $g^{({i})^T}x_c + g^{({i})^T}u \leq h_i$ at a time:
+Examine the constraint $g^{({i})^{\trans}}x_c + g^{({i})^{\trans}}u \leq h_i$ at a time:
 
-As for $g^{({i})^T}u$, what's the direction of $u$ in order to make this term large as possible? It turns out, $u$ must be aligned with $g^{(i)}$, the same direction with $g^{(i)}$.
+As for $g^{({i})^{\trans}}u$, what's the direction of $u$ in order to make this term large as possible? It turns out, $u$ must be aligned with $g^{(i)}$, the same direction with $g^{(i)}$.
 
 Furthermore, what's the value of $u$ that is aligned with $g^{(i)}$ and satisfies  $\vert u\vert_2=r?$ It should be:
-$$u^*=\frac{g^{(1)}}{||g^{(1)}||}r$$
+$$u^*=\frac{g^{(1)}}{\Vert g^{(1)}\Vert }r$$
 
 
 So, if the following is satisfied:
-$$g^{(i)^T}[x_c + u^*] \leq h_i$$\
+$$g^{(i)^{\trans}}[x_c + u^*] \leq h_i$$\
 Then constraint $i$ will be satisfied for all $u$ such that $\vert u\vert \leq r$.
 
 Substituting in $u^*$, the constraints become:
-$$g^{(i)^T} x_c + \Vert g^{(i)}\Vert_2 r\leq h_i$$
+$$g^{(i)^{\trans}} x_c + \Vert g^{(i)}\Vert_2 r\leq h_i$$
 Note that the constraint is linear in $x_c$ and $r$.
 
 The problem of finding the largest sphere becomes the following:
 \begin{align*}
 	\max \quad & r\\
-	s.t.\quad &g^{(i)^T}x_c + r ||g^{(i)}||_2\leq h_i \qquad \forall i\in [q]
+	s.t.\quad &g^{(i)^{\trans}}x_c + r \Vert g^{(i)}\Vert _2\leq h_i \qquad \forall i\in [q]
 \end{align*}
 
 
@@ -843,8 +843,8 @@ Remarks:
 
 A quadratic programming problem is formulated in a general way as follows
 \begin{align*}
-p^* = min_{x\in \reals^n}\,\,\,\,\, &\frac{1}{2}x^THx + c^Tx + d\\
- s.t.\,\,\,\,\, &Ax = b\\
+p^* = \min_{x\in \reals^n}\quad &\frac{1}{2}x^{\trans}Hx + c^{\trans}x + d\\
+ s.t.\quad &Ax = b\\
  &Gx\leq h
 \end{align*}
 
@@ -859,9 +859,9 @@ The feasible set(feasible region) is illustrated as follows
 \subsection{Connection between LS problem and QP problem}
 Recall the lest square problem we have studied, it turns out that we can convert the least square problem into a QP problem.
 \begin{align*}
-||Ax - y||_2^2 &= (Ax - y)^T(Ax - y)\\
-&= x^TA^TAx - 2y^TAx + y^Ty\\
-&= \frac{1}{2}x^T(2A^TA)x - 2y^TAx + ||y||_2^2
+\Vert Ax - y\Vert _2^2 &= (Ax - y)^{\trans}(Ax - y)\\
+&= x^{\trans}A^{\trans}Ax - 2y^{\trans}Ax + y^{\trans}y\\
+&= \frac{1}{2}x^{\trans}(2A^{\trans}A)x - 2y^{\trans}Ax + \Vert y\Vert _2^2
 \end{align*}
 
 However, for the converse case, we can not always manipulate the objective of a QP into a  LS problem.
@@ -872,8 +872,8 @@ A basic idea of solving such kind of problem is to substitute the equality const
 
 Consider a formulation of such kind of problem,
 \begin{align*}
-p^* = min_{x\in \reals^n}\,\,\,\,\, &\frac{1}{2}x^THx + c^Tx + d\\
-s.t.\,\,\,\,\, &Ax = b
+p^* = min_{x\in \reals^n}\quad &\frac{1}{2}x^{\trans}Hx + c^{\trans}x + d\\
+s.t.\quad &Ax = b
 \end{align*}
 
 
@@ -885,7 +885,7 @@ s.t.\,\,\,\,\, &Ax = b
 \end{figure}
 
 The feasible set could be expressed as follows
-$$\mathcal{A} =\{x | x = \bar{x} + \xi,\,\,\, \text{where } \xi \in N(A) \}$$
+$$\mathcal{A} =\{x | x = \bar{x} + \xi,\quad \text{where } \xi \in N(A) \}$$
 where $\bar{x}$ is a particular solution to the equation $Ax=b$.
 
 Let $N$ be a basis for $N(A)$, so that we can express $\xi \in N(A)$ as $\xi = Nz$, where $z\in \reals^k$, $k =\text{dim}(N(A)) \leq n$.
@@ -895,13 +895,13 @@ Substitute this expression for any feasible $x$ into the objective $F_0(\cdot)$
 F_0(x) 
 &= F_0(\bar{x} + \xi)\\
 &= F(\bar{x} + Nz)\\
-&= \frac{1}{2}(\bar{x} + Nz)^TH(\bar{x}+Nz) + c^T(\bar{x} + Nz) + d\\
-&= \frac{1}{2}z^T[N^THN]z + [c^TN + \bar{x}^THN]z + [\frac{1}{2}\bar{x}^TH\bar{x} + c^Tx + d] \\
-&= \frac{1}{2}z^T\tilde{H}z + \tilde{c^T}z + \tilde{d}\\
+&= \frac{1}{2}(\bar{x} + Nz)^{\trans}H(\bar{x}+Nz) + c^{\trans}(\bar{x} + Nz) + d\\
+&= \frac{1}{2}z^{\trans}[N^{\trans}HN]z + [c^{\trans}N + \bar{x}^{\trans}HN]z + [\frac{1}{2}\bar{x}^{\trans}H\bar{x} + c^{\trans}x + d] \\
+&= \frac{1}{2}z^{\trans}\tilde{H}z + \tilde{c^{\trans}}z + \tilde{d}\\
 \end{align*}
-where we newly define $\tilde{H}$, $\tilde{c^T}$, and $\tilde{d}$ in the last equality. So now we have obtain an unconstrained QP problem which is formulated as
+where we newly define $\tilde{H}$, $\tilde{c^{\trans}}$, and $\tilde{d}$ in the last equality. So now we have obtain an unconstrained QP problem which is formulated as
 \begin{equation*}
-p^* = min_{z\in \reals^k}\,\,\,\,\, \frac{1}{2}z^T\tilde{H}z + \tilde{c^T}z + \tilde{d}
+p^* = min_{z\in \reals^k}\quad \frac{1}{2}z^{\trans}\tilde{H}z + \tilde{c^{\trans}}z + \tilde{d}
 \end{equation*}
 
 Hence, to summarize,
@@ -937,17 +937,17 @@ Hence, to summarize,
 
 		\item Expected returns: $\bar{x_i} = \mathbb{E}[x_i]$. In general, it is a known estimator based on historical data.
 		
-		\item Your return (random) is $\sum^n_{i=1}p_ix_i = p^Tx$
+		\item Your return (random) is $\sum^n_{i=1}p_ix_i = p^{\trans}x$
 		
-		\item Your expected return $\mathbb{E}[\sum^n_{i=1}p_ix_i] = \sum^n_{i=1}p_i\mathbb{E}[x_i] = \sum^n_{i=1}p_i\bar{x_i} = p^T\bar{x}$
+		\item Your expected return $\mathbb{E}[\sum^n_{i=1}p_ix_i] = \sum^n_{i=1}p_i\mathbb{E}[x_i] = \sum^n_{i=1}p_i\bar{x_i} = p^{\trans}\bar{x}$
 		
 		\item variance in your return:
 		\begin{align*}
-		var(p^Tx) &=\mathbb{E}[(p^Tx - p^T\bar{x})^2]\\
-		&= \mathbb{E}[(p^T(x - x^T))^2]\\
-		&= \mathbb{E}[p^T(x - \bar{x})(x - \bar{x})^Tp]\\
-		&= p^T\mathbb{E}[(x - \bar{x})(x - \bar{x})^T]p\\
-		&= p^T\Sigma p
+		var(p^{\trans}x) &=\mathbb{E}[(p^{\trans}x - p^{\trans}\bar{x})^2]\\
+		&= \mathbb{E}[(p^{\trans}(x - x^{\trans}))^2]\\
+		&= \mathbb{E}[p^{\trans}(x - \bar{x})(x - \bar{x})^{\trans}p]\\
+		&= p^{\trans}\mathbb{E}[(x - \bar{x})(x - \bar{x})^{\trans}]p\\
+		&= p^{\trans}\Sigma p
 		\end{align*}
 	\end{itemize}
 	
@@ -956,9 +956,9 @@ Hence, to summarize,
 	
 	The problem is formulated as:
 	\begin{align*}
-	min_{p\in \reals^n}\,\,\,\,\, &p^T\Sigma p\\
-	s.t. \,\,\,\,\,&p^T\bar{x}\geq r_{min}\\
-	&\textbf{1}^Tp = 1\\
+	min_{p\in \reals^n}\quad &p^{\trans}\Sigma p\\
+	s.t. \quad&p^{\trans}\bar{x}\geq r_{min}\\
+	&\textbf{1}^{\trans}p = 1\\
 	&p\geq 0
 	\end{align*}
 \end{example}
@@ -968,8 +968,8 @@ Hence, to summarize,
 \subsection{Geometry of QP}
 Consider the general form of QP
 \begin{align*}
-p^* = min_{x\in \reals^n}\,\,\,\,\, &\frac{1}{2}x^THx + x^Tx + d\\
-s.t.\,\,\,\,\, &Ax = b\\
+p^* = min_{x\in \reals^n}\quad &\frac{1}{2}x^{\trans}Hx + x^{\trans}x + d\\
+s.t.\quad &Ax = b\\
 &Gx\leq h
 \end{align*}
 Follow the same as LP, we would like to discuss the geometry of QP.
@@ -1001,9 +1001,9 @@ Follow the same as LP, we would like to discuss the geometry of QP.
 
 (2) Geometry of objective: Without loss of generality(w.l.o.g), we can assume that $H\in S^n$, i.e., $H$ is symmetric, since
 \begin{align*}
-x^THx 
-&=\frac{1}{2}[x^THx + x^TH^Tx]\\
-&= \frac{1}{2}x^T(H+H^T)x
+x^{\trans}Hx 
+&=\frac{1}{2}[x^{\trans}Hx + x^{\trans}H^{\trans}x]\\
+&= \frac{1}{2}x^{\trans}(H+H^{\trans})x
 \end{align*}
 clearly $H$ is symmetric.\\
 
@@ -1012,7 +1012,7 @@ Recal that for symmetric matrices, we have
 a) Eigenvalues: purely real eigenvalues (so we can arrange them in an order).
 
 b) Eigenvectors: can be chosen to be $\perp$ and can always diagonalize $H$, i.e., we can write
-$$H = \mathcal{U}\Lambda \mathbb{U}^T  = \sum^n_{i=1}\lambda_iu^{(i)}u^{(i)^T}$$
+$$H = \mathcal{U}\Lambda \mathbb{U}^{\trans}  = \sum^n_{i=1}\lambda_iu^{(i)}u^{(i)^{\trans}}$$
 
 Consider following 3 different cases for the matrix $H$:
 \begin{itemize}
@@ -1047,16 +1047,16 @@ Consider following 3 different cases for the matrix $H$:
 %Now, let's look at visualization for cases A to C.
 
 %If we only consider the quadratic term,
-%$$F_0(x) =\frac{1}{2}x^THx$$
+%$$F_0(x) =\frac{1}{2}x^{\trans}Hx$$
 %Clearly, we have following results
 
 Consider the 3 cases for $H$ given above and the following different objective functions, we plot these figures on r.h.s. for illustration.
 
-Plot 1: $F_0(x) =\frac{1}{2}x^THx$
+Plot 1: $F_0(x) =\frac{1}{2}x^{\trans}Hx$
 
-Plot 2: $F_0(x) =\frac{1}{2}x^THx + [0.5\,\,\, 0.5]x$
+Plot 2: $F_0(x) =\frac{1}{2}x^{\trans}Hx + [0.5\quad 0.5]x$
 
-Plot 3: $F_0(x) =\frac{1}{2}x^THx + [0.5\,\,\, 0]x$
+Plot 3: $F_0(x) =\frac{1}{2}x^{\trans}Hx + [0.5\quad 0]x$
 
 
 \vspace{0.5cm}
@@ -1069,8 +1069,8 @@ For such $H$, there must be an eigenvalue/vector pair $(\lambda, u)$ s.t. $\lamb
 Set $x_{\alpha} = \alpha u$ for some $\alpha \in \reals$, we have
 
 \begin{align*}
-F_0(\alpha u) &= \frac{1}{2}(\alpha u)^TH(\alpha u) + c^T(\alpha u) + d\\
-&= \frac{{\alpha}^2}{2} u^T[\sum^n_{i=1}\lambda_i u^{(i)} u^{(i)^T}]u + \alpha c^Tu + d\\
+F_0(\alpha u) &= \frac{1}{2}(\alpha u)^{\trans}H(\alpha u) + c^{\trans}(\alpha u) + d\\
+&= \frac{{\alpha}^2}{2} u^{\trans}[\sum^n_{i=1}\lambda_i u^{(i)} u^{(i)^{\trans}}]u + \alpha c^{\trans}u + d\\
 &= \frac{{\alpha}^2}{2}\lambda + \alpha <c,u> + d
 \end{align*}
 
@@ -1086,19 +1086,19 @@ $\rightarrow$ $H$ has at least 1 zero eigenvalue.\\
 \vspace{0.3cm}
 \textbf{Case B (i)} $H\in S_+^n$ but $H\notin S^n_{++}$ and $c \notin R(H)$.
 
-There is a complement of $c$ in $R(H)^{\perp} = N(H^T) = N(H)$, and thus we can move in that direction without affecting $2^{nd}$ order term while driving $1^{st} $ order term to $-\infty$.
+There is a complement of $c$ in $R(H)^{\perp} = N(H^{\trans}) = N(H)$, and thus we can move in that direction without affecting $2^{nd}$ order term while driving $1^{st} $ order term to $-\infty$.
 
-Let $c_{||} = \prod_{R(H)}(c)$,  and $c_{\perp} = \prod_{N(H)}(c)$, where the first one is the component in $R(A)$ and second one is the component in $N(H)$.
+Let $c_{\Vert} = \prod_{R(H)}(c)$,  and $c_{\perp} = \prod_{N(H)}(c)$, where the first one is the component in $R(A)$ and second one is the component in $N(H)$.
 
-Notice that $R(H)^{\perp}= N(H^T) = N(H)$, since $H$ is symmetric. By orthogonal decomposition lemma, there is an unique decomposition
+Notice that $R(H)^{\perp}= N(H^{\trans}) = N(H)$, since $H$ is symmetric. By orthogonal decomposition lemma, there is an unique decomposition
 $$c = c_{\Vert} + c_{\perp}$$
 
 Now, let $x_{\alpha} =-\alpha c_{\perp}$, where $\alpha \in \reals_+$.
 \begin{align*}
 F_0(x_{\alpha}) 
-&=\frac{{\alpha}^2}{2}c_{\perp}^THc_{\perp} + c^T(-\alpha c_{\perp}) + d\\
-&= 0 - \alpha(c_{\Vert} + c_{\perp})^Tc_{\perp} + d\\
-&= -\alpha(c_{\Vert}^Tc_{\perp} + c_{\perp}^Tc_{\perp}) + d\\
+&=\frac{{\alpha}^2}{2}c_{\perp}^{\trans}Hc_{\perp} + c^{\trans}(-\alpha c_{\perp}) + d\\
+&= 0 - \alpha(c_{\Vert} + c_{\perp})^{\trans}c_{\perp} + d\\
+&= -\alpha(c_{\Vert}^{\trans}c_{\perp} + c_{\perp}^{\trans}c_{\perp}) + d\\
 &= -\alpha \Vert c_{\perp}\Vert^2_2 + d
 \end{align*}
 
@@ -1113,15 +1113,15 @@ $$p^*=-\infty$$
 First, remind us of some results from previous chapter,
 \begin{align*}
 H 
-&= \sum^n_{i=1}\lambda_i U^{(i)}U^{(i)^T} \\
-&= \sum^r_{i=1}\lambda_i U^{(i)}U^{(i)^T}\\
-&= U_r\Sigma Y_r^T
+&= \sum^n_{i=1}\lambda_i U^{(i)}U^{(i)^{\trans}} \\
+&= \sum^r_{i=1}\lambda_i U^{(i)}U^{(i)^{\trans}}\\
+&= U_r\Sigma Y_r^{\trans}
 \end{align*}
 and,
 \begin{align*}
-H^{\frac{1}{2}} &= U_r\Sigma^{\frac{1}{2}}U_r^T\\
-H^{+} &= U_r\Sigma^{-1}U_r^T\\
-(H^{\frac{1}{2}})^+ &= U_r\Sigma^{-\frac{1}{2}}U_r^T
+H^{\frac{1}{2}} &= U_r\Sigma^{\frac{1}{2}}U_r^{\trans}\\
+H^{+} &= U_r\Sigma^{-1}U_r^{\trans}\\
+(H^{\frac{1}{2}})^+ &= U_r\Sigma^{-\frac{1}{2}}U_r^{\trans}
 \end{align*}
 
 where 
@@ -1150,7 +1150,7 @@ where $\xi \in N(H^{\frac{1}{2}})$. Note that choice of $y$ is not unique and th
 
 Explicitly, we have 
 \begin{equation*}
-C = (U_r\Sigma^{\frac{1}{2}}U_r^T)y = \sum^r_{i=1}U^{(i)}\sqrt{\lambda_i}(U^{(i)^T}y)
+C = (U_r\Sigma^{\frac{1}{2}}U_r^{\trans})y = \sum^r_{i=1}U^{(i)}\sqrt{\lambda_i}(U^{(i)^{\trans}}y)
 \end{equation*}
 
 Now, the question is, which $y$ we should pick? Let's pick the $y$ with min-norm, that is, 
@@ -1160,14 +1160,14 @@ s.t\  C &= H^{\frac{1}{2}}\bar{y}
 \end{align*}
 
 It turns out that, this is an under determined and rank-deficient LS problem. So the solution to this question is given by
-$$y = (H^{\frac{1}{2}})^+C = U_r \Sigma^{-\frac{1}{2}} U_r^T C$$
+$$y = (H^{\frac{1}{2}})^+C = U_r \Sigma^{-\frac{1}{2}} U_r^{\trans} C$$
 
 
 So, when $C = H^{\frac{1}{2}}y$, we can pick $y = (H^{\frac{1}{2}})^+C$. Let's look back at the objective to understanding such choice.
 \begin{align*}
-\frac{1}{2}x^THx + c^Tx + d &= \frac{1}{2}x^TH^{\frac{1}{2}}H^{\frac{1}{2}}x+y^TH^{\frac{1}{2}}x + d\\
-&= \frac{1}{2}\tilde{x}^T\tilde{x} + y^T\tilde{x} + d\\
-&= \frac{1}{2}(\tilde{x}^Tx+2y^T\tilde{x}+y^Ty) - \frac{1}{2}y^Ty + d \\
+\frac{1}{2}x^{\trans}Hx + c^{\trans}x + d &= \frac{1}{2}x^{\trans}H^{\frac{1}{2}}H^{\frac{1}{2}}x+y^{\trans}H^{\frac{1}{2}}x + d\\
+&= \frac{1}{2}\tilde{x}^{\trans}\tilde{x} + y^{\trans}\tilde{x} + d\\
+&= \frac{1}{2}(\tilde{x}^{\trans}x+2y^{\trans}\tilde{x}+y^{\trans}y) - \frac{1}{2}y^{\trans}y + d \\
 &= \frac{1}{2}\Vert\tilde{x}+y\Vert^2_2 - \frac{1}{2}\Vert y \Vert^2_2 + d &(*)
 \end{align*}
 In the second equality we let $\tilde{x} = H^{\frac{1}{2}} x$.
@@ -1179,9 +1179,9 @@ Since $y = (H^{\frac{1}{2}})^+C\in R((H^{\frac{1}{2}})^+) = R(H) = R(H^{\frac{1}
 Thus, to minimize $(*)$ we set $\tilde{x} = -y$ where $\tilde{x} = H^{\frac{1}{2}}x$, and yields
 \begin{align*}
 F_0(x) \geq p^* &= d - \frac{1}{2}\Vert y \Vert_2^2\\
-&= d - \frac{1}{2}y^Ty\\
-&= d - \frac{1}{2}C^T(H^{\frac{1}{2}})^+(H^{\frac{1}{2}})^+C\\
-&= d - \frac{1}{2}C^T
+&= d - \frac{1}{2}y^{\trans}y\\
+&= d - \frac{1}{2}C^{\trans}(H^{\frac{1}{2}})^+(H^{\frac{1}{2}})^+C\\
+&= d - \frac{1}{2}C^{\trans}
 \begin{bmatrix}
 U_r
 \end{bmatrix}
@@ -1189,7 +1189,7 @@ U_r
 \Sigma^{-\frac{1}{2}}]
 \end{bmatrix}
 \begin{bmatrix}
-U_r^T
+U_r^{\trans}
 \end{bmatrix}
 \begin{bmatrix}
 U_r
@@ -1198,13 +1198,13 @@ U_r
 \Sigma^{-\frac{1}{2}}]
 \end{bmatrix}
 \begin{bmatrix}
-U_r^T
+U_r^{\trans}
 \end{bmatrix}
 \begin{bmatrix}
 C
 \end{bmatrix}\\
-&= d - \frac{1}{2}C^T(U_r\Sigma^{-1}U^T_r)C\\
-&= d - \frac{1}{2}C^TH^+C
+&= d - \frac{1}{2}C^{\trans}(U_r\Sigma^{-1}U^{\trans}_r)C\\
+&= d - \frac{1}{2}C^{\trans}H^+C
 \end{align*}
 
 What is the minimizing choice of $x\in \reals^n$?
@@ -1233,21 +1233,21 @@ From previous solution, we have
 \begin{align*}
 x 
 &= -H^{+}C\\
-&= -U_r \Sigma^{-1} U_r^T C\\
-&= -U_r \Sigma^{-1} U_n^T C\\
+&= -U_r \Sigma^{-1} U_r^{\trans} C\\
+&= -U_r \Sigma^{-1} U_n^{\trans} C\\
 &= - H^{-1} C
 \end{align*}
 So in this case $H^+ = H^{-1}$. The optimal value is given by
-$$p^* = d - \frac{1}{2}C^TH^{-1}C$$
+$$p^* = d - \frac{1}{2}C^{\trans}H^{-1}C$$
 
 
 \textbf{Summary }
 
-Consider the QP problem $p^* = min_{x\in \reals^n}\frac{1}{2}x^THx + c^Tx + d$,
+Consider the QP problem $p^* = min_{x\in \reals^n}\frac{1}{2}x^{\trans}Hx + c^{\trans}x + d$,
 \begin{equation}
 p^* = \left\{
 \begin{array}{lr}
-d - \frac{1}{2}c^TH^+c &\text{$H$ is PD, or, $H$ is PSD but not PD and $c \in R(H)$}\\
+d - \frac{1}{2}c^{\trans}H^+c &\text{$H$ is PD, or, $H$ is PSD but not PD and $c \in R(H)$}\\
 -\infty &\text{$H$ is not PSD, or, $H$ is PSD but not PD and $c\notin R(H)$}
 \end{array}
 \right.\nonumber
@@ -1318,7 +1318,7 @@ Step 2
  \begin{align*}
 \min_{x\in \reals^2} \quad
 &
-\frac{1}{2}x^T
+\frac{1}{2}x^{\trans}
 \begin{bmatrix}
 2&0\\
 0&2
@@ -1353,15 +1353,15 @@ $N=
 0
 \end{bmatrix}$,
 
-$$\tilde{H} = N^THN = 2$$
-$$\tilde{C}^T = (c^TN + \bar{x}^T HN)= -2$$
-$$\tilde{d}= (d+c^Tx + \frac{1}{2}\bar{x}^TH\bar{x})=0$$
+$$\tilde{H} = N^{\trans}HN = 2$$
+$$\tilde{C}^{\trans} = (c^{\trans}N + \bar{x}^{\trans} HN)= -2$$
+$$\tilde{d}= (d+c^{\trans}x + \frac{1}{2}\bar{x}^{\trans}H\bar{x})=0$$
 
 
 So we have converted the problem to :
 \begin{align*}
 z^* 
-&= \arg\min_{z\in\reals} \frac{1}{2} z^T\tilde{H}z + \tilde{c}^Tz + \tilde{d}\\
+&= \arg\min_{z\in\reals} \frac{1}{2} z^{\trans}\tilde{H}z + \tilde{c}^{\trans}z + \tilde{d}\\
 &= \arg\min_{z\in\reals} \frac{1}{2}2z^2 + (-2z)+ 0\\
 &= \arg\min_{z\in\reals} z^2 - 2z
 \end{align*}
@@ -1487,13 +1487,13 @@ We pick $N=
 \end{bmatrix}
 $.
 
-$$\tilde{H} = N^THN = 10$$
-$$\tilde{C}^T = (c^TN + \bar{x}^T HN)= -7$$
-$$\tilde{d}= (d+c^Tx + \frac{1}{2}\bar{x}^TH\bar{x})=-4$$
+$$\tilde{H} = N^{\trans}HN = 10$$
+$$\tilde{C}^{\trans} = (c^{\trans}N + \bar{x}^{\trans} HN)= -7$$
+$$\tilde{d}= (d+c^{\trans}x + \frac{1}{2}\bar{x}^{\trans}H\bar{x})=-4$$
 
 \begin{align*}
 z^* 
-&= \arg\min_{z\in\reals} \frac{1}{2} z^T\tilde{H}z + \tilde{c}^Tz + \tilde{d}\\
+&= \arg\min_{z\in\reals} \frac{1}{2} z^{\trans}\tilde{H}z + \tilde{c}^{\trans}z + \tilde{d}\\
 &= \arg\min_{z\in\reals} \frac{1}{2}10 z^2 + (-7z) - 4\\
 &= \arg\min_{z\in\reals} 5z^2 - 7z -4
 \end{align*}
@@ -1525,9 +1525,9 @@ Note $x^{(3)}$ is the global optimum so we end this algorithm here.
 \subsection{Quadratically Constrained Quadratic Program (QCQP)}
 Let's formulate such kind of problem first
 \begin{align*}
-\min_{x\in \reals^n} \quad &\frac{1}{2}x^TH_0 x + c_0^T x + d_0\\
-s.t.\quad &\frac{1}{2}x^TH_ix + c^T_i x + d_i \leq 0  & i\in [m]\\
-&\frac{1}{2} x^T \tilde{H}_ix + \tilde{c}_i^Tx + \tilde{d}_i = 0 & i\in [q]
+\min_{x\in \reals^n} \quad &\frac{1}{2}x^{\trans}H_0 x + c_0^{\trans} x + d_0\\
+s.t.\quad &\frac{1}{2}x^{\trans}H_ix + c^{\trans}_i x + d_i \leq 0  & i\in [m]\\
+&\frac{1}{2} x^{\trans} \tilde{H}_ix + \tilde{c}_i^{\trans}x + \tilde{d}_i = 0 & i\in [q]
 \end{align*}
 
 \textbf{Note:}
@@ -1540,7 +1540,7 @@ s.t.\quad &\frac{1}{2}x^TH_ix + c^T_i x + d_i \leq 0  & i\in [m]\\
 \end{itemize}
 
 To see that why $\tilde{H}_i \neq 0$ makes things difficult, let's consider a single  equality constraint $q = 1$, and a scalar problem $x\in \reals$:
-$$\tilde{H}_1 = 1 \,\,\, \tilde{c}_i = 0 \,\,\, \tilde{d}_i = -\frac{1}{2}$$
+$$\tilde{H}_1 = 1 \quad \tilde{c}_i = 0 \quad \tilde{d}_i = -\frac{1}{2}$$
 So the equality constraint becomes:
 $$\frac{1}{2}x_1^2 + 0 - \frac{1}{2} = 0 \Leftrightarrow x_1^2 = 1 \Leftrightarrow x_1\in\{-1, 1\} $$
 Notice that the feasible set is not a continuum of possibilities, i.e., it is a distinct set so the problem is "Combinatorial".
@@ -1566,7 +1566,7 @@ H_1=\begin{bmatrix}
 0 &\frac{1}{2}
 \end{bmatrix}
 \qquad 
-c_1^T = \begin{bmatrix}
+c_1^{\trans} = \begin{bmatrix}
 0 & 0
 \end{bmatrix}
 \qquad 
@@ -1575,7 +1575,7 @@ d_1 = -1
 
 So this constraint can be written as
 \begin{align*}
-\frac{1}{2}x^TH_1x + c_1^Tx + d_1 \leq 0 &\Leftrightarrow 2x_1^2 + \frac{1}{2}x_2^2 \leq 2\\
+\frac{1}{2}x^{\trans}H_1x + c_1^{\trans}x + d_1 \leq 0 &\Leftrightarrow 2x_1^2 + \frac{1}{2}x_2^2 \leq 2\\
 &\Leftrightarrow\frac{x_1^2}{1} + \frac{x_2^2}{4}\leq 1
 \end{align*}
 
@@ -1596,7 +1596,7 @@ H_2=
 0 & 0
 \end{bmatrix}
 \qquad
-c_2^T = 
+c_2^{\trans} = 
 \begin{bmatrix}
 -1 & 1
 \end{bmatrix}
@@ -1635,7 +1635,7 @@ H_3=
 0 & 2
 \end{bmatrix}
 \qquad
-c_3^T = 
+c_3^{\trans} = 
 \begin{bmatrix}
 -1 & 0
 \end{bmatrix}
