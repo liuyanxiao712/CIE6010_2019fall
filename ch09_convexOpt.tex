@@ -3,13 +3,13 @@
 General form: Consider the functions $F_i(x), h_i(x): \reals^n\rightarrow \reals$.
 \begin{align*}
 \min_{x\in \reals^n} \quad &F_0(x) \quad \text{"objective function"}\\
-s.t. \quad &F_i(x) \leq 0, i = 1...m \quad\text{inequality constraints}\\
-&h_i(x) =0,i =1...p \quad \text{equality constraints}
+s.t. \quad &F_i(x) \leq 0, i = 1,...,m \quad\text{inequality constraints}\\
+&h_i(x) =0,i =1,...,p \quad \text{equality constraints}
 \end{align*}
 
 
 Feasible set for this question:
-$$\mathcal{C} = \{x\vert F_i(x) \leq 0,i=1...m,h_i(x) = 0,i = 1...p \}$$
+$$\mathcal{C} = \{x\vert F_i(x) \leq 0,i=1,...,m,h_i(x) = 0,i = 1,...,p \}$$
 
 
 Optimal value: $p^* = \inf_{x\in \mathcal{C}}F_0(x)$. Note that it could be $\infty$, and also could be empty.
@@ -21,7 +21,7 @@ Optimal points: $\{x\in \mathcal{C}\vert F_0(x) = p^* \}$. Note that it could be
 \begin{example}
 Consider the optimization problem:
 \begin{align*}
-\min_x \quad &\min x_1 + x_2 \\
+\min_x \quad & x_1 + x_2 \\
 s.t. 
 &-x_1\leq 0\\
 &-x_2\leq 0\\
@@ -33,7 +33,7 @@ So $x^*=
 1\\
 1
 \end{bmatrix}$
-and $p^* = 2$, as illustrated in the figure.
+and $p^* = 2$.
 
 \end{example}
 
@@ -42,21 +42,21 @@ and $p^* = 2$, as illustrated in the figure.
 \textbf{Convex optimization problem: }
 \begin{align*}
 \min_x \quad &F_0(x) \\
-s.t. &F_i(x)\leq 0 \quad i = 1,\cdots,m\\
-&a^T_i x - b_i = 0 \quad i =i,\cdots,p\\
+s.t. \quad&F_i(x)\leq 0 \quad i = 1,...,,m\\
+&a^{\trans}_i x - b_i = 0 \quad i =i,...,p\\
 \end{align*}
-$a^T_i + b_i = 0$ is often written as:
+$a^{\trans}_i + b_i = 0$ is often written as:
 $$
 \begin{bmatrix}
-a_1^T\\
-a_2^T\\
+a_1^{\trans}\\
+a_2^{\trans}\\
 \vdots\\
-a_p^T
+a_p^{\trans}
 \end{bmatrix}x = 
 \begin{bmatrix}
 b_1\\
 \vdots\\
-b_P
+b_p
 \end{bmatrix}
 \Leftrightarrow
 Ax=b
@@ -83,7 +83,7 @@ $$
 \begin{enumerate}
 	\item Think about feasible set,
 	\begin{equation*}
-	\mathcal{C} = ( \cap^m_{i=1}\{x\vert F_i(x) \leq 0 \} ) \cap (\cap^p_{i=1}\{x\vert a_i^Tx - b_i = 0 \})
+	\mathcal{C} = ( \cap^m_{i=1}\{x\vert F_i(x) \leq 0 \} ) \cap (\cap^p_{i=1}\{x\vert a_i^{\trans}x - b_i = 0 \})
 	\end{equation*}
 	
 	For the first part, each is a sublevel set of a convex function therefore convex.
@@ -114,7 +114,7 @@ $$
 \begin{align*}
 \min_x\quad & F_0(x) \\
 s.t.\quad & F_i(x) \leq 0 \quad i = 1,...,m\\
-& a_i^Tx - b_i = 0\quad i = 1,...,p
+& a_i^{\trans}x - b_i = 0\quad i = 1,...,p
 \end{align*}
 
 \begin{itemize}
@@ -160,7 +160,7 @@ We prove this theorem for two particular instances:
 	\begin{align*}
 	\min_x\quad & F_0(x) \\
 	s.t.\quad & F_i(x) \leq 0 \quad i = 1,...,m\\
-	& a_i^Tx - b_i = 0\quad i = 1,...,p
+	& a_i^{\trans}x - b_i = 0\quad i = 1,...,p
 	\end{align*}
 
 	\begin{itemize}
@@ -177,7 +177,7 @@ We prove this theorem for two particular instances:
 \begin{theorem}
 	For a convex optimization problem with (convex) feasible set $\mathcal{C}$ and differentiable (convex) objective $F_0: \reals^n \rightarrow \reals$, a point $x^* \in \mathcal{C}$ is optimal iff:
 	\begin{equation*}
-	\nabla F_0(x^*)^T(y - x^*) \geq 0  \quad \forall y \in \mathcal{C}
+	\nabla F_0(x^*)^{\trans}(y - x^*) \geq 0  \quad \forall y \in \mathcal{C}
 	\end{equation*}
 
 That is, start at the point $x^*\in \mathcal{C}$, move into feasible set in direction $v$ and then evaluate $F_0(x^*+tv)$. $F_0(x^*+tv)$ must be non-decreasing for $t\geq 0$.
@@ -195,7 +195,7 @@ That is, start at the point $x^*\in \mathcal{C}$, move into feasible set in dire
 	
 	Apply $1$-st order condition for optimality, i.e. $\forall y \in \mathcal{C}$:
 	\begin{align*}
-	F_0(y) &\geq F_0(x^*) + \nabla F_0(x^*)^T(y-x^*)\\
+	F_0(y) &\geq F_0(x^*) + \nabla F_0(x^*)^{\trans}(y-x^*)\\
 	&\geq F_0(x^*)
 	\end{align*}
 	where the second term on the r.h.s. must be non-negative by our assumption.
@@ -204,7 +204,7 @@ That is, start at the point $x^*\in \mathcal{C}$, move into feasible set in dire
 	
 	Secondly, we show that, if $x^*$ is the global optimum, then the inequality must holds. We prove this by contradiction.
 	
-	Suppose that $\exists y\in \mathcal{C}$ such that $\nabla F_0(x^*)^T(y-x^*)<0$.
+	Suppose that $\exists y\in \mathcal{C}$ such that $\nabla F_0(x^*)^{\trans}(y-x^*)<0$.
 	
 	Look at the point $z$ defined as
 	\begin{align*}
@@ -218,11 +218,11 @@ That is, start at the point $x^*\in \mathcal{C}$, move into feasible set in dire
 	We claim that, there exists some points $z$ such that $F_0(z)<F_0(x^*)$, by showing that
 	\begin{align*}
 	\left.\frac{dF_0(z)}{d\lambda}\right|_{\lambda = 0} &=\left.\frac{d}{d\lambda}F_0(x^*+\lambda(y-x^*))\right|_{\lambda = 0}\\
-	&= \nabla F_0(x^*)^T(y-x^*)\\
+	&= \nabla F_0(x^*)^{\trans}(y-x^*)\\
 	&< 0
 	\end{align*}
 	
-	Since the slope(the gradient) is strictly negative(as we assume the inequality does not hold), the value of $F_0(z)$ will decreases as $\lambda>0$ increase, so we will have a smaller value $F_0(z)$ compared to $F_0(x^*)$, which contradicts the global optimality of $x^*$.
+	Since the slope(the gradient) is strictly negative(as we assume the inequality does not hold), the value of $F_0(z)$ will decrease as $\lambda>0$ increase, so we will have a smaller value $F_0(z)$ compared to $F_0(x^*)$, which contradicts the global optimality of $x^*$.
 	
 	Therefore, if the inequality does not hold, $x^*$ will not be the global optimum. So $x^*$ is the global optimum if and only if the inequality holds.
 \end{proof}
@@ -246,14 +246,14 @@ Consider the Quasi-convex minimization problem as follows,
 \begin{align*}
 \min_x\quad & F_0(x) \quad \text{quasi-convex}\\
 s.t.\quad & F_i(x) \leq 0 \quad i = 1,\cdots,m\quad \text{convex}\\
-& a_i^T - b_i = 0\quad i = 1,\cdots,m \quad \text{affine}
+& a_i^{\trans}x - b_i = 0\quad i = 1,\cdots,m \quad \text{affine}
 \end{align*}
 We can rewrite this formulation into the form of feasibility problem,
 \begin{align*}
 \min_x\quad & \\%F_0(x) \quad \leftarrow \text{convex set}\\
 s.t.\quad  & F_0(x) \leq t  \\
 & F_i(x) \leq 0 \quad i = 1,\cdots,m \\
-& a_i^T - b_i = 0\quad i = 1,\cdots,m
+& a_i^{\trans} - b_i = 0\quad i = 1,\cdots,m
 \end{align*}
 where the constraint $F_0(x) \leq t$ defines a convex set(sub-level set is a convex set).
 
@@ -280,9 +280,9 @@ where the constraint $F_0(x) \leq t$ defines a convex set(sub-level set is a con
 	
 	Hence, the function $F_0(x) = \frac{P(x)}{Q(x)}$ is quasi-convex since all its sub-level sets are convex sets.
 	
-	Let's consider the special case for this kind of functions by setting $F_0(x)= \frac{a^T x+b}{c^T x +d}$ with $\text{dom}\ F_0=\{x\mid c^T x+d >0 \}$.
+	Let's consider the special case for this kind of functions by setting $F_0(x)= \frac{a^{\trans} x+b}{c^{\trans} x +d}$ with $\text{dom}\ F_0=\{x\mid c^{\trans} x+d >0 \}$.
 	
-	We can show that(by similar approach above), the sub-level sets and super-level sets are convex sets, and thus $F_0(x)= \frac{a^T x+b}{c^T x +d}$ is quasi-linear(both quasi-convex and quasi-concave).
+	We can show that(by similar approach above), the sub-level sets and super-level sets are convex sets, and thus $F_0(x)= \frac{a^{\trans} x+b}{c^{\trans} x +d}$ is quasi-linear(both quasi-convex and quasi-concave).
 
 \end{example}
 
@@ -317,7 +317,7 @@ Notice that, many of the results for ordinary convex optimization problems hold 
 \subsection{Semi-definite program(SDP)}
 When above cone $k$ is $S^n_+$, the cone of PSD $n$ by $n$ matrices, a special case of convex optimization problem with generalized inequality constraints is, the Semi-definite program(SDP) problem,
 \begin{align*}
-\min_x\quad & c^Tx \\
+\min_x\quad & c^{\trans}x \\
 s.t.\quad & A_0+A_1x_1+\cdots+A_nx_n\leq 0\quad \\
 & Fx = g
 \end{align*}
@@ -336,8 +336,8 @@ where the inequality constraint is defined by a linear matrix inequity (LMI), $A
 \subsection{Second-Order Cone Program (SOCPs)}
 A SOCP problem is formulated as
 \begin{align*}
-\min \quad&F^Tx\\
-s.t. \quad& \Vert A_ix+b_i\Vert_2 \leq c_i^Tx + d_i\quad i = 1,...,m\\
+\min \quad&F^{\trans}x\\
+s.t. \quad& \Vert A_ix+b_i\Vert_2 \leq c_i^{\trans}x + d_i\quad i = 1,...,m\\
 &Fx \leq g
 \end{align*}
 where $A_i\in \reals^{n_i\times n}$, $x\in \reals^n$, $b_i\in \reals^{n_i}$, $F\in \reals^{p\times n}$ and $g\in \reals^p$.
@@ -365,7 +365,7 @@ Norm cone:
 
 
 \begin{proof}
-	We first prove that the set $\mathcal{C}$ is a Cone, and then prove it is a convex cone on the second part.
+	We first prove that the set $\mathcal{C}$ is a cone, and then prove it is a convex cone on the second part.
 	
 	\begin{enumerate}
 		\item Pick any $(x_0, t_0)\in \mathcal{C}$, we show that for $(\theta x_0, \theta t_0)\in \mathcal{C}$ and $\forall \theta \in \reals_+$, we have
@@ -392,10 +392,10 @@ Norm cone:
 		\begin{equation*}
 		F_i(x) = \begin{bmatrix}
 		A_ix+b_i\\
-		c_i^Tx+d_i
+		c_i^{\trans}x+d_i
 		\end{bmatrix}\in \reals^{n+ 1}
 		\end{equation*}
-		For $i$-th constraint, we want to have $\Vert A_ix+b_i\Vert \leq c^T_ix+d_i$, and this is equivalent to require
+		For $i$-th constraint, we want to have $\Vert A_ix+b_i\Vert \leq c^{\trans}_ix+d_i$, and this is equivalent to require
 		\begin{equation*}
 		\{x\vert F_i(x)\in \mathcal{C}_{n+ 1}\} = F_i^{-1}(\mathcal{C}_{n+ 1})
 		\end{equation*}
@@ -415,8 +415,8 @@ Norm cone:
 \subsection{Robust Linear Programs}
 We consider a linear program in inequality form,
 \begin{align*}
-\min \quad&c^Tx\\
-s.t. \quad&a_i^Tx\leq b_i\quad i = 1,\cdots,m
+\min \quad&c^{\trans}x\\
+s.t. \quad&a_i^{\trans}x\leq b_i\quad i = 1,...,m
 \end{align*}
 in which there is some uncertainty or variation in the parameters $c$, $a_i$, $b_i$. To simplify the exposition we assume that $c$ and $b_i$ are fixed, and that $a_i$ are the parameters with uncertainty.
 
@@ -432,25 +432,25 @@ $P_i = 0$ means that $a_i$ is known perfectly).
 
 Hence, the robust linear program problem is formulated as
 \begin{align*}
-\min\quad &c^Tx\\
-s.t. \quad&a_i^Tx\leq b_i\quad \forall a_i \in \xi_i \quad i = 1,\cdots,m
+\min\quad &c^{\trans}x\\
+s.t. \quad&a_i^{\trans}x\leq b_i\quad \forall a_i \in \xi_i \quad i = 1,\cdots,m
 \end{align*}
 
 Notice that the constraint of above formulation can be expressed as
-$$(\bar{a_i} + P_iu)^Tx\leq b_i\ \text{and}\ \Vert u_i\Vert \leq 1,\ \forall i = 1,\cdots,m$$
+$$(\bar{a_i} + P_iu)^{\trans}x\leq b_i\ \text{and}\ \Vert u_i\Vert \leq 1,\ \forall i = 1,\cdots,m$$
 Or equivalently,
-$$\sup_{\Vert u_i\Vert \leq 1}(\bar{a_i} + P_iu)^Tx\leq b_i,\ \forall i = 1,\cdots,m$$
+$$\sup_{\Vert u_i\Vert \leq 1}(\bar{a_i} + P_iu)^{\trans}x\leq b_i,\ \forall i = 1,\cdots,m$$
 Furthermore, this constraint can be expressed as a second order cone constraint, since
 \begin{align*}
-(\bar{a_i} + P_iu)^Tx &= \bar{a_i}^Tx + u^TP_i^Tx \\
-&\leq \bar{a_i}^Tx + (\frac{P_i^Tx}{\Vert P_i^Tx\Vert})^TP_i^Tx\\
-&= \bar{a_i}^Tx + \frac{x^TP_iP_i^Tx}{\Vert P_i^Tx\Vert_2}\\
-&= \bar{a_i}^Tx + \Vert P_i^Tx\Vert_2
+(\bar{a_i} + P_iu)^{\trans}x &= \bar{a_i}^{\trans}x + u^{\trans}P_i^{\trans}x \\
+&\leq \bar{a_i}^{\trans}x + (\frac{P_i^{\trans}x}{\Vert P_i^{\trans}x\Vert})^{\trans}P_i^{\trans}x\\
+&= \bar{a_i}^{\trans}x + \frac{x^{\trans}P_iP_i^{\trans}x}{\Vert P_i^{\trans}x\Vert_2}\\
+&= \bar{a_i}^{\trans}x + \Vert P_i^{\trans}x\Vert_2
 \end{align*}\\
 so this robust LP can be expressed as the SOCP formulated as
 \begin{align*}
-\min\quad &c^Tx\\
-s.t. \quad&\bar{a_i}^T + \Vert P_i^T x\Vert_2\leq b_i,\ \forall i = 1,\cdots,m
+\min\quad &c^{\trans}x\\
+s.t. \quad&\bar{a_i}^{\trans} + \Vert P_i^{\trans} x\Vert_2\leq b_i,\ \forall i = 1,\cdots,m
 \end{align*}
 Note that the additional norm terms act as regularization terms; they prevent $x$ from being large in directions with considerable uncertainty in the parameters $a_i$.
 
@@ -460,28 +460,28 @@ Note that the additional norm terms act as regularization terms; they prevent $x
 
 In this case, we assume that $a_i$ are independent Gaussian random vectors such that $a_i \sim N(\bar{a_i}, \Sigma_i)$.
 
-Recall a little bit regarding the statistics, since each component $a_i$ are independent, we could consider the mean and variance for the random variables $a_i^Tx - b_i$ respectively,
+Recall a little bit regarding the statistics, since each component $a_i$ are independent, we could consider the mean and variance for the random variables $a_i^{\trans}x - b_i$ respectively,
 
 The mean is given by
-$$\mathbb{E}[a_i^Tx - b_i] = \bar{a_i}^Tx - b_i = \mu_i$$
+$$\mathbb{E}[a_i^{\trans}x - b_i] = \bar{a_i}^{\trans}x - b_i = \mu_i$$
 
 The variance is given by
 \begin{align*}
-\mathbb{E}[((a_i^Tx - b_i) - (\bar{a_i}^Tx - b_i))^2] 
-&= \mathbb{E}[((a_i - \bar{a_i})^Tx)^2]\\
-&= \mathbb{E}[x^T(a_i - \bar{a_i})(a_i - \bar{a_i})^Tx] \\
-&= x^T\mathbb{E}[(a_i - \bar{a_i})(a_i - \bar{a_i})^T]x\\
-&= x^T\Sigma_i x \\
+\mathbb{E}[((a_i^{\trans}x - b_i) - (\bar{a_i}^{\trans}x - b_i))^2] 
+&= \mathbb{E}[((a_i - \bar{a_i})^{\trans}x)^2]\\
+&= \mathbb{E}[x^{\trans}(a_i - \bar{a_i})(a_i - \bar{a_i})^{\trans}x] \\
+&= x^{\trans}\mathbb{E}[(a_i - \bar{a_i})(a_i - \bar{a_i})^{\trans}]x\\
+&= x^{\trans}\Sigma_i x \\
 &= \sigma^2\\
-&= x^T \Sigma_i^{\frac{1}{2}}\Sigma_i^{\frac{1}{2}} x\\
+&= x^{\trans} \Sigma_i^{\frac{1}{2}}\Sigma_i^{\frac{1}{2}} x\\
 &= \Vert \Sigma_i^{\frac{1}{2}} x\Vert^2_2
 \end{align*}
 
 Since the constraints involve randomness, we would like to consider the probability such that the constraint holds, which is given by
 \begin{align*}
-\mathbb{P}[a^T_i x\leq b_i]
-&= \Phi\left(\frac{b_i - \bar{a_i}^Tx}{\sigma_i}\right)\\
-&= \Phi\left(\frac{b_i - \bar{a_i}^Tx}{\Vert \Sigma_i^{\frac{1}{2}} x\Vert_2}\right)
+\mathbb{P}[a^{\trans}_i x\leq b_i]
+&= \Phi\left(\frac{b_i - \bar{a_i}^{\trans}x}{\sigma_i}\right)\\
+&= \Phi\left(\frac{b_i - \bar{a_i}^{\trans}x}{\Vert \Sigma_i^{\frac{1}{2}} x\Vert_2}\right)
 \end{align*}
 
 \begin{marginfigure}
@@ -493,20 +493,20 @@ Since the constraints involve randomness, we would like to consider the probabil
 
 Suppose now we require that each constraint should hold with a probability exceeding $\eta$, that is,
 \begin{align*}
-& \mathbb{P}[a_i^Tx\leq b_i]\geq \eta\\
-\Leftrightarrow&\Phi(\frac{b_i - \bar{a_i}^Tx}{\sigma_i})\geq \eta\\
-\Leftrightarrow&\frac{b_i - \bar{a_i}^Tx}{\sigma_i}\geq \Phi^{-1}(\eta)
+& \mathbb{P}[a_i^{\trans}x\leq b_i]\geq \eta\\
+\Leftrightarrow&\Phi(\frac{b_i - \bar{a_i}^{\trans}x}{\sigma_i})\geq \eta\\
+\Leftrightarrow&\frac{b_i - \bar{a_i}^{\trans}x}{\sigma_i}\geq \Phi^{-1}(\eta)
 \end{align*}
 
 By above argument, we have the problem formulated as 
 \begin{align*}
-\min \quad& c^Tx \\
-s.t. \quad& \mathbb{P}[a_i^Tx\leq b_i]\geq \eta,\ \forall i = 1,\cdots,m
+\min \quad& c^{\trans}x \\
+s.t. \quad& \mathbb{P}[a_i^{\trans}x\leq b_i]\geq \eta,\ \forall i = 1,\cdots,m
 \end{align*}
 and it turns out(we have showed this fact above) that, this is equivalent to a SOCP problem as the following
 \begin{align*}
-\min \quad& c^Tx \\
-s.t. \quad& b_i - \bar{a_i}^Tx\geq \Phi^{-1}(\eta)\Vert\Sigma_i^{\frac{1}{2}}x\Vert_2,\ \forall i = 1,\cdots,m
+\min \quad& c^{\trans}x \\
+s.t. \quad& b_i - \bar{a_i}^{\trans}x\geq \Phi^{-1}(\eta)\Vert\Sigma_i^{\frac{1}{2}}x\Vert_2,\ \forall i = 1,\cdots,m
 \end{align*}
 
 
@@ -523,7 +523,7 @@ Before introducing GP, we give some definitions first,
 	$\rightarrow$ note closed under addition, multiplication, non-negative scaling.
 \end{itemize}
 
-With these definitions in mind, a Geometric program problem is formulated as 
+With these definitions in mind, a Geometric Program problem is formulated as 
 \begin{align*}
 \min\quad &F_0(x)\\
 s.t. \quad&F_i(x)\leq 1,\quad i = 1,\cdots,m\\
@@ -571,7 +571,7 @@ Note that:
 \subsection{Semi-definite Programs(SDPs)}
 Recall that, a SDP is formulated as 
 \begin{align*}
-\min \quad&c^Tx \\
+\min \quad&c^{\trans}x \\
 s.t. \quad&F_0 + x_1F_1 + x_2F_2 + ... + x_nF_n \leq 0\\
 &Gx = h
 \end{align*}
@@ -601,14 +601,14 @@ To obtain the above standard form, similar with what we did in LP, we
 \subsection{Relaxation of homogeneous QCQP}
 First, recall that a QCQP problem is formulated as 
 \begin{align*}
-\min \quad&\frac{1}{2}x^TP_0x + q_0^Tx + r_0 \\
-s.t. \quad&\frac{1}{2}x^TP_ix + q_i^Tx + r_i\leq 0,\quad i = 1,...,m\\
+\min \quad&\frac{1}{2}x^{\trans}P_0x + q_0^{\trans}x + r_0 \\
+s.t. \quad&\frac{1}{2}x^{\trans}P_ix + q_i^{\trans}x + r_i\leq 0,\quad i = 1,...,m\\
 &Fx = g
 \end{align*}
 
 Notice that,
 \begin{itemize}
-	\item The QCQP is homogeneous if $q_i = 0, \forall i\in \{0,1,...m \}$;
+	\item The QCQP is homogeneous if $q_i = 0, \forall i\in \{0,1,...,m \}$;
 	
 	\item The QCQP is convex if all $P_i$ are PSD;
 	
@@ -619,17 +619,17 @@ Notice that,
 \vspace{0.3cm}
 Now, lets consider the homogeneous QCQP with the following formulation
 \begin{align*}
-\min \quad&x^TCx \\
-s.t. \quad&x^TF_ix \leq g_i\\
-&x^TH_ix = l_i
+\min \quad&x^{\trans}Cx \\
+s.t. \quad&x^{\trans}F_ix \leq g_i\\
+&x^{\trans}H_ix = l_i
 \end{align*}
 which is not necessary to be convex optimization problem.
 
 Notice that
 \begin{equation*}
-x^TCx = \trace(x^TCx) = \trace(Cxx^T) = \trace(CX)
+x^{\trans}Cx = \trace(x^{\trans}Cx) = \trace(Cxx^{\trans}) = \trace(CX)
 \end{equation*}
-where we let $X := xx^T$, $\rank(X) = 1$, $X\geq0$. 
+where we let $X := xx^{\trans}$, $\rank(X) = 1$, $X\geq0$. 
 
 So, the above homogeneous QCQP can also be written as:
 \begin{align*}
@@ -646,7 +646,7 @@ $\rightarrow$ $\min$ is the lower bound to original problem's optimum value.
 
 $\rightarrow$ Maybe (if relaxation is good) you can figure out an $X$ that is a good enough solution to original:
 \begin{equation*}
-X^*_{relaxed} =\sum^n_{i=1}v_iv^T_i\lambda_i \Rightarrow \lambda_1v_1 v^T_1
+X^*_{relaxed} =\sum^n_{i=1}v_iv^{\trans}_i\lambda_i \Rightarrow \lambda_1v_1 v^{\trans}_1
 \end{equation*}
 
 
@@ -667,18 +667,18 @@ X^*_{relaxed} =\sum^n_{i=1}v_iv^T_i\lambda_i \Rightarrow \lambda_1v_1 v^T_1
 
 With this problem setting, this question can be formulated as a non convex optimization problem as follows
 \begin{align*}
-\min \quad&x^TWx \\
+\min \quad&x^{\trans}Wx \\
 s.t. \quad&x_i\in \{1,-1 \},\ \forall i=1,\cdots, n
 \end{align*}
 Equivalently, we have
 \begin{align*}
-\min \quad&x^TWx \\
+\min \quad&x^{\trans}Wx \\
 s.t. \quad&x_i^2 = 1,\ \forall i = 1,\cdots,n
 \end{align*}
 
 Notice that
 \begin{equation*}
-x^TWx = \sum^n_{i=1}W_{ii}(x_i)^2+\sum_{i\neq j}(W_{ij}+W_{ji})x_ix_j
+x^{\trans}Wx = \sum^n_{i=1}W_{ii}(x_i)^2+\sum_{i\neq j}(W_{ij}+W_{ji})x_ix_j
 \end{equation*}
 and thus the original formulation can be expressed as
 \begin{align*}
