@@ -4,7 +4,7 @@
 \subsection{Terminology and concepts regarding LP problem}
 Consider following problem, i.e., Liner programming with equality and inequity constraints:
 \begin{align*}
-	\min_{x\in \reals^n}& c^{\trans}x + d\\
+	\min_{x\in \reals^n}\quad& c^{\trans}x + d\\
 	s.t. \quad &Ax = b\\
 	&Gx \leq h
 \end{align*}
@@ -19,26 +19,26 @@ $$
 A = 
 \begin{bmatrix}
 \alpha^{(1)^{\trans}}\\
-...\\
+\vdots\\
 \alpha^{(q)^{\trans}}
 \end{bmatrix}
 \qquad	
 G = 
 \begin{bmatrix}
 g^{(1)^{\trans}}\\
-...\\
+\vdots\\
 g^{(q)^{\trans}}
 \end{bmatrix}
 $$
 
-$$<\alpha^{(i)}, x> =b_i,\ i\in \left[q\right]$$
-$$<G^{(i)}, x>\leq h_i,\ i\in \left[m\right]$$
+$$\langle \alpha^{(i)}, x\rangle =b_i,\ i\in \left[q\right]$$
+$$\langle G^{(i)}, x\rangle\leq h_i,\ i\in \left[m\right]$$
 
 Note that, there are also two other forms which are commonly used.
 
 1. Inequality form (only contains inequity constraints)
 \begin{align*}
-	min \quad &c^{\trans}x+d\\
+	\min \quad &c^{\trans}x+d\\
 	s.t. \quad &Gx\leq h\\
 \end{align*}
 Given the general form, to get the inequality form, we simply break the equality
@@ -47,7 +47,7 @@ Given the general form, to get the inequality form, we simply break the equality
 \end{equation*}
 So we can get inequality form as follows:
 \begin{align*}
-	\min c^{\trans}x&+d\\
+	\min c^{\trans}x\quad&+d\\
 	\qquad s.t. \quad Gx &\leq h\\
 	Ax &\leq b\\
 	-Ax &\leq -b
@@ -77,7 +77,7 @@ We add the slack variables $s$ so that the formulation become:
 	&Ax = b\\
 	&s\geq 0
 \end{align*}
-Note that the slack variables $s$ must be non negative here.
+Note that the slack variables $s$ must be non-negative here.
 
 
 Step 2: We break the decision variable $x$ by $x= x^+ - x^-$
@@ -117,11 +117,11 @@ Let $p^*$ be the optimal value of the given objective function under the constra
 
 Remarks on "optimal" value $p^*$ of program:
 \begin{itemize}
-	\item Lowest cost choice amongst all feasible $x$.
+	\item Lowest cost choice among all feasible $x$.
 	
-	\item Possible here is no minimal choice
+	\item Possible here is no minimal choice.
 	
-	\item possible no feasible choice
+	\item possible no feasible choice.
 	
 	\item $p^*\in \reals$
 \end{itemize}
@@ -201,8 +201,8 @@ Constrains:
 	40x_1 + 200x_2 &\geq 400\\
 	100x_1 + 20x_2 &\geq 200\\
 	5x_1 + 40x_2 &\geq 40\\
-	x_1 \geq 0\\
-	x_2 \geq 0
+	x_1 &\geq 0\\
+	x_2 &\geq 0
 \end{align*}
 
 
@@ -241,7 +241,7 @@ Rewrite it as $Gx\leq h$, that is,
 
 Consider the LP does not have constraints, so we have
 \begin{align*}
-	p^* &= \min c^{\trans}x+d\\
+	p^* &= \min\quad c^{\trans}x+d\\
 	x^* &= \arg \min_{x\in \reals^n} \quad c^{\trans}x+d
 \end{align*}
 
@@ -341,14 +341,14 @@ Now, let's turn back to LP with following constraints as we specified before:
 Interesting results and interpretation for these two kind of constraints:
 
 (1) $Ax=b$ (Equality constraints): force $x^*$ into an affine set
-$$\{x\in \reals^n|Ax = b \} =  \cap^q_{i=1}\{x\in \reals^n|<\alpha^{(i)}, x> = b_i \}$$
+$$\{x\in \reals^n|Ax = b \} =  \cap^q_{i=1}\{x\in \reals^n|\langle\alpha^{(i)}, x\rangle = b_i \}$$
 
 (2) $Gx\leq h$ (Inequality constraints): force $x^*$ to be in an intersection of half-spaces
-$$\{x\in \reals^n|Gx \leq h \} =  \cap^q_{i=1}\{x\in \reals^n| <g^{(i)}, x> \leq h_i \}$$
+$$\{x\in \reals^n|Gx \leq h \} =  \cap^q_{i=1}\{x\in \reals^n| \langle g^{(i)}, x\rangle \leq h_i \}$$
 
 (3) The feasible set: intersection of half-spaces and hyperplanes
 $$
-S = \left(\cap^q_{i=1}\{x\in \reals^n | <\alpha^{(i)}, x> = b_i \}\right) \cap \left(\cap^m_{i=1}\{x\in \reals^n | <g^{(i)}, x> \leq h_i \}\right)
+S = \left(\cap^q_{i=1}\{x\in \reals^n | \langle \alpha^{(i)}, x\rangle = b_i \}\right) \cap \left(\cap^m_{i=1}\{x\in \reals^n | \langle g^{(i)}, x\rangle \leq h_i \}\right)
 $$
 
 
@@ -496,11 +496,15 @@ A few remarks:
 		\end{bmatrix}\\
 	\end{align*}
 	
+	
 	So we have
-	$$x_1 \geq 0$$
-	$$x_2 \geq 0$$
-	$$x_2 \geq -1 + \frac{1}{2}x_1$$
-	$$x_2 \leq 3 - x_1$$
+	\begin{align*}
+	x_1 &\geq 0\\
+	x_2 &\geq 0\\
+	x_2 &\geq -1 + \frac{1}{2}x_1\\
+	x_2 &\leq 3 - x_1
+	\end{align*}
+	
 	
 	Sketch the feasible set:
 	
@@ -569,8 +573,8 @@ The rows of matrix $G$ are the normal directions of the hyperplanes that define 
 	In this example(see picture above) constraints g(1) and g(2) are active at optimum.
 	
 	Note that, we could improve(decrease) the cost if:
-	$$c^{\trans}(x^{(0)} + \bigtriangleup) + d < c^{\trans}x^{(0)} + d$$
-	That is, $\langle c, \bigtriangleup\rangle < 0$, the angle between displacement vector $\bigtriangleup$ and normal vector $c$ is an obtuse angle(see the picture above).
+	$$c^{\trans}(x^{(0)} + \triangle) + d < c^{\trans}x^{(0)} + d$$
+	That is, $\langle c, \triangle\rangle < 0$, the angle between displacement vector $\bigtriangleup$ and normal vector $c$ is an obtuse angle(see the picture above).
 \end{example}
 
 
@@ -678,11 +682,11 @@ Simplex algorithm:
 \begin{example}
 	Consider the problem:
 	\begin{align*}
-		&min \Vert Ax - b\Vert_{\infty}\\
-		&s.t. Gx \leq h
+		\min\quad& \Vert Ax - b\Vert_{\infty}\\
+		s.t. \quad Gx \leq h
 	\end{align*}
 	
-	Recall that $\Vert u\Vert_{\infty} = max_{i\in [n]}|u_i|$,
+	Recall that $\Vert u\Vert_{\infty} = \max_{i\in [n]}|u_i|$,
 	\begin{figure}
 		\centering
 		\includegraphics[width=2.1in,height=2.1in]{figures/ch07/figure1016_2.png}
@@ -692,8 +696,8 @@ Simplex algorithm:
 	
 	Introduce a helper(auxiliary) variable $t\in \reals$ which corresponding to the value of the norm, so the we convert the original problem into following problem:	
 	\begin{align*}
-		min &\qquad t\\
-		s.t. &Ax - b\leq t\textbf{1}\\
+		\min \quad &t\\
+		s.t. \quad&Ax - b\leq t\textbf{1}\\
 		&Ax - b\geq (-t)\textbf{1}\\
 		&Gx \leq h
 	\end{align*}
@@ -703,8 +707,8 @@ Simplex algorithm:
 \begin{example}
 	Consider the problem:
 	\begin{align*}
-		\min_x &\Vert Ax - b\Vert _1, \qquad A\in \reals^{q\times n}\\
-		s.t. &Gx\leq h
+		\min_x\quad &\Vert Ax - b\Vert _1, \quad A\in \reals^{q\times n}\\
+		s.t. \quad&Gx\leq h
 	\end{align*}
 	\begin{figure}
 		\centering
@@ -740,13 +744,13 @@ Simplex algorithm:
 \begin{example}
 	Consider following problem:
 	\begin{align*}
-		min \quad max_{i\in [q]} &(c^{(i)^{\trans}}x + d_i)\\
-		s.t. &Gx\leq h
+		\min \quad \max_{i\in [q]} \quad&(c^{(i)^{\trans}}x + d_i)\\
+		s.t. \quad&Gx\leq h
 	\end{align*}
 	This case is similar to the $L_\infty$ norm case due to the inner max function, but it is one-sided(no lower bound). So we could convert the original one to the following:
 	\begin{align*}
-		min  &\qquad t\\
-		s.t. &(c^{(i)^{\trans}}x + d_i)\leq t,\quad \forall i\in [q]\\
+		\min \quad &t\\
+		s.t. \quad&(c^{(i)^{\trans}}x + d_i)\leq t,\quad \forall i\in [q]\\
 		&Gx\leq h
 	\end{align*}
 	\begin{marginfigure}
@@ -872,7 +876,7 @@ A basic idea of solving such kind of problem is to substitute the equality const
 
 Consider a formulation of such kind of problem,
 \begin{align*}
-p^* = min_{x\in \reals^n}\quad &\frac{1}{2}x^{\trans}Hx + c^{\trans}x + d\\
+p^* = \min_{x\in \reals^n}\quad &\frac{1}{2}x^{\trans}Hx + c^{\trans}x + d\\
 s.t.\quad &Ax = b
 \end{align*}
 
@@ -906,20 +910,20 @@ p^* = min_{z\in \reals^k}\quad \frac{1}{2}z^{\trans}\tilde{H}z + \tilde{c^{\tran
 
 Hence, to summarize,
 
-(1)We have got a newly lower-dimensional optimization problem since $k =\text{dim}(N(A)) \leq n $.
+(1) We have got a newly lower-dimensional optimization problem since $k =\text{dim}(N(A)) \leq n $.
 
-(2)The new problem is still a QP, but is an unconstrained QP.
+(2) The new problem is still a QP, but is an unconstrained QP.
 
 
 
-\begin{example}{Markowitz Portfolio optimization/Mean/variance" analysis}  Harry Markowitz(1990 Nobel Prize)
+\begin{example}{Markowitz Portfolio optimization/mean/variance" analysis}  Harry Markowitz(1990 Nobel Prize)
 	
 	
 	\textbf{Problem formulation}: 
 	\begin{itemize}
 		\item Objective: For a fixed level of (expected) returns, we want to minimize the variance of returns.
 		
-		\item There are $n$ stocks, and we only consider a single investment period\\
+		\item There are $n$ stocks, and we only consider a single investment period.\\
 		
 		\item Design an optimal investment strategy $p\in \reals^n$, where the component $p_i = $ is the weight of your total wealth invested in the stock $i$.
 		
@@ -1007,12 +1011,12 @@ x^{\trans}Hx
 \end{align*}
 clearly $H$ is symmetric.\\
 
-Recal that for symmetric matrices, we have
+Recall that for symmetric matrices, we have
 
 a) Eigenvalues: purely real eigenvalues (so we can arrange them in an order).
 
 b) Eigenvectors: can be chosen to be $\perp$ and can always diagonalize $H$, i.e., we can write
-$$H = \mathcal{U}\Lambda \mathbb{U}^{\trans}  = \sum^n_{i=1}\lambda_iu^{(i)}u^{(i)^{\trans}}$$
+$$H = \mathcal{U}\Lambda \mathcal{U}^{\trans}  = \sum^n_{i=1}\lambda_iu^{(i)}u^{(i)^{\trans}}$$
 
 Consider following 3 different cases for the matrix $H$:
 \begin{itemize}
@@ -1071,10 +1075,10 @@ Set $x_{\alpha} = \alpha u$ for some $\alpha \in \reals$, we have
 \begin{align*}
 F_0(\alpha u) &= \frac{1}{2}(\alpha u)^{\trans}H(\alpha u) + c^{\trans}(\alpha u) + d\\
 &= \frac{{\alpha}^2}{2} u^{\trans}[\sum^n_{i=1}\lambda_i u^{(i)} u^{(i)^{\trans}}]u + \alpha c^{\trans}u + d\\
-&= \frac{{\alpha}^2}{2}\lambda + \alpha <c,u> + d
+&= \frac{{\alpha}^2}{2}\lambda + \alpha \langle c,u\rangle + d
 \end{align*}
 
-Since $\lambda<0$, let $\alpha \to \infty$ leads to an unbounded objective function, i.e., $p^* = -\infty$.
+Since $\lambda<0$, let $\alpha \to \infty$ lead to an unbounded objective function, i.e., $p^* = -\infty$.
 
 
 
@@ -1088,7 +1092,7 @@ $\rightarrow$ $H$ has at least 1 zero eigenvalue.\\
 
 There is a complement of $c$ in $R(H)^{\perp} = N(H^{\trans}) = N(H)$, and thus we can move in that direction without affecting $2^{nd}$ order term while driving $1^{st} $ order term to $-\infty$.
 
-Let $c_{\Vert} = \prod_{R(H)}(c)$,  and $c_{\perp} = \prod_{N(H)}(c)$, where the first one is the component in $R(A)$ and second one is the component in $N(H)$.
+Let $c_{\Vert} = \prod_{R(H)}(c)$,  and $c_{\perp} = \prod_{N(H)}(c)$, where the first one is the component in $R(H)$ and second one is the component in $N(H)$.
 
 Notice that $R(H)^{\perp}= N(H^{\trans}) = N(H)$, since $H$ is symmetric. By orthogonal decomposition lemma, there is an unique decomposition
 $$c = c_{\Vert} + c_{\perp}$$
@@ -1115,7 +1119,7 @@ First, remind us of some results from previous chapter,
 H 
 &= \sum^n_{i=1}\lambda_i U^{(i)}U^{(i)^{\trans}} \\
 &= \sum^r_{i=1}\lambda_i U^{(i)}U^{(i)^{\trans}}\\
-&= U_r\Sigma Y_r^{\trans}
+&= U_r\Sigma U_r^{\trans}
 \end{align*}
 and,
 \begin{align*}
@@ -1155,8 +1159,8 @@ C = (U_r\Sigma^{\frac{1}{2}}U_r^{\trans})y = \sum^r_{i=1}U^{(i)}\sqrt{\lambda_i}
 
 Now, the question is, which $y$ we should pick? Let's pick the $y$ with min-norm, that is, 
 \begin{align*}
-y &=\arg\min_{\bar{y}\in\reals^n}\Vert \bar{y}\Vert_2\\
-s.t\  C &= H^{\frac{1}{2}}\bar{y}
+y=\arg\min_{\bar{y}\in\reals^n}\quad&\Vert \bar{y}\Vert_2\\
+s.t\quad  C &= H^{\frac{1}{2}}\bar{y}
 \end{align*}
 
 It turns out that, this is an under determined and rank-deficient LS problem. So the solution to this question is given by
@@ -1243,11 +1247,11 @@ $$p^* = d - \frac{1}{2}C^{\trans}H^{-1}C$$
 
 \textbf{Summary }
 
-Consider the QP problem $p^* = min_{x\in \reals^n}\frac{1}{2}x^{\trans}Hx + c^{\trans}x + d$,
+Consider the QP problem $p^* = \min_{x\in \reals^n}\quad \frac{1}{2}x^{\trans}Hx + c^{\trans}x + d$,
 \begin{equation}
 p^* = \left\{
 \begin{array}{lr}
-d - \frac{1}{2}c^{\trans}H^+c &\text{$H$ is PD, or, $H$ is PSD but not PD and $c \in R(H)$}\\
+d - \frac{1}{2}c^{\trans}H+c &\text{$H$ is PD, or, $H$ is PSD but not PD and $c \in R(H)$}\\
 -\infty &\text{$H$ is not PSD, or, $H$ is PSD but not PD and $c\notin R(H)$}
 \end{array}
 \right.\nonumber
@@ -1297,9 +1301,9 @@ x_2
 \end{marginfigure}
 
 \begin{itemize}
-	\item at optimum some subset of inequality constraints satisfied with equality "active" set
+	\item At optimum some subset of inequality constraints satisfied with equality "active" set.
 	
-	\item Best "loose"
+	\item Best "loose".
 	
 	\item If you know the active set or optimum, just solve an "equality"-constrained QP"
 \end{itemize}
@@ -1326,7 +1330,7 @@ Step 2
 x + 
 \begin{bmatrix}
 -2 & -5
-\end{bmatrix} 
+\end{bmatrix}x
 + (1 + 2.5^2)\\
 s.t.\quad &
 \begin{bmatrix}
@@ -1408,7 +1412,7 @@ $.
 
 (4) But there may be a "blocking" constraint in way. In this example, this is the first constraint $\{x|-x_1 +2x_2\leq 2 \}$
 
-(5) Instead, we solve for the a step size $\gamma$ to make the constraint light, i.e., $g^{(i)T}(x^{(1)}+\gamma \Delta) = h_1$. 
+(5) Instead, we solve for the a step size $\gamma$ to make the constraint light, i.e., $g^{(i)^T}(x^{(1)}+\gamma \Delta) = h_1$. 
 
 So we have,
 $$[-1\ 2] 
