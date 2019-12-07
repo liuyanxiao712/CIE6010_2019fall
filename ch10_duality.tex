@@ -11,7 +11,7 @@ Let's consider the primal problem formulated as follows,
 \end{align*}
 Note that we do not have any assumptions of convexity here.
 
-So the feasible set for this problem is
+So the domain of this problem is
 $$D = (\cap^m_{i=1}\text{dom}\ F_i)\cap(\cap^p_{i=1}\text{dom}\ h_i)$$ 
 and the optimal value is $p^*$, optimal variable is $x^*$.
 
@@ -560,18 +560,18 @@ $\rightarrow$ relate $p^*(u,v)$ to $p^*(0,0)$\\
 		&= \min_{x\in D} L(x, \lambda^*, \nu^*)\\
 		&\leq F_0(x) + \sum^m_{i=1}\lambda_i^* F_i(x) + \sum^p_{i=1}\nu_i^* h_i(x)\\
 		&\leq F_0(x) + \sum^m_{i=1}\lambda_i^* u_i + \sum^p_{i=1}\nu^*_iv_i\\
-		&= F_0(x) + (\lambda^*)^Tu+(\nu^*)^Tv
+		&= F_0(x) + (\lambda^*)^{\trans}u+(\nu^*)^{\trans}v
 	\end{align*}
 \end{itemize}
 Our focus in on $x\in D$ s.t. $x$ is optimal for perturbed problem
 
 i.e. $F_0(x)=p^*(u,v)$
 
-$\Rightarrow$ $p^*(u,v) \geq p^*(0,0) - (\lambda^*)^Tu - (\nu^*)^Tv$
+$\Rightarrow$ $p^*(u,v) \geq p^*(0,0) - (\lambda^*)^{\trans}u - (\nu^*)^{\trans}v$
 
 \begin{enumerate}
 	\item E.g. If $\lambda_i >> 0$ and tighten constraint $F_i$ slightly so that $F_i(x)\leq -\epsilon < 0$
-	$$p^*(u,v)\geq p^*(0,0) - (\lambda^*)^Tu - (\nu^*)^Tv$$
+	$$p^*(u,v)\geq p^*(0,0) - (\lambda^*)^{\trans}u - (\nu^*)^{\trans}v$$
 	
 	\item Note not symmetric in general, big relaxation in constraint doesn't necessary mean big drop in cost.
 	
@@ -613,66 +613,66 @@ we propose the Lagrange method as follows:
 	where $x\in\reals^n$, $A\in\reals^{p\times n}$, $\rank(A) = p< n$.
 	
 	Recall the chapter least square, this an under determined LS problem, and the optimal solution is given by 
-	$$x^* = A^T(AA^T)^{-1}b$$
+	$$x^* = A^{\trans}(AA^{\trans})^{-1}b$$
 	
 	To verify that this solution is coincide with the one obtained by Lagrange's method, we proceed following procedure to solve this question.
 	
 	(1) Form the Lagrange function:
-	 $$L(x, \nu) = x^Tx + \nu^T(Ax - b)$$
+	 $$L(x, \nu) = x^{\trans}x + \nu^{\trans}(Ax - b)$$
 	
 	(2) Solve for the dual function $g(\lambda) = \min_x L(x, \nu)$:
 		
 		Notice that Lagrange function here is a convex quadratic function of $x$(you may verify this), so simply by the first-order condition, we have
-		$$\frac{\partial}{\partial x} L(x, \nu) = 2x+A^T\nu = 0\Rightarrow x^*(\nu) = -\frac{1}{2}A^T\nu$$
+		$$\frac{\partial}{\partial x} L(x, \nu) = 2x+A^{\trans}\nu = 0\Rightarrow x^*(\nu) = -\frac{1}{2}A^{\trans}\nu$$
 
 	(3) Find the dual optimum $\nu^*$:
 	
 	Now, we have dual problem as
 	\begin{align*}
 		\max_{\nu} g(\nu) &= \max_{\nu} L(x^*(\nu), \nu)\\
-		&= \max_{\nu}[x^*(\nu)^Tx^*(\nu) + \nu^T(Ax^*(\nu) - b)]\\
-		&= \max_{\nu}[\frac{1}{4}\nu^TAA^T\nu + \nu^T(A(-\frac{1}{2}A^T\nu)-b)]\\
-		&= \max_{\nu}[\frac{1}{4}\nu^TAA^T\nu - \frac{1}{2}\nu^TAA^T\nu - \nu^Tb]\\
-		&= \max_{\nu}[-\frac{1}{4}\nu^TAA^T\nu - \nu^Tb]
+		&= \max_{\nu}[x^*(\nu)^{\trans}x^*(\nu) + \nu^{\trans}(Ax^*(\nu) - b)]\\
+		&= \max_{\nu}[\frac{1}{4}\nu^{\trans}AA^{\trans}\nu + \nu^{\trans}(A(-\frac{1}{2}A^{\trans}\nu)-b)]\\
+		&= \max_{\nu}[\frac{1}{4}\nu^{\trans}AA^{\trans}\nu - \frac{1}{2}\nu^{\trans}AA^{\trans}\nu - \nu^{\trans}b]\\
+		&= \max_{\nu}[-\frac{1}{4}\nu^{\trans}AA^{\trans}\nu - \nu^{\trans}b]
 	\end{align*}
 	
 	Note that $g(\nu)$ is a concave quadratic function of $\nu$, and therefore utilize the first-order condition we yields
 	\begin{align*}
-	&\frac{\partial}{\partial \nu}(-\frac{1}{4}\nu^TAA^T\nu - \nu^Tb)= 0\\
-	\Leftrightarrow&-\frac{1}{4} 2AA^T\nu - b = 0\\
-	\Leftrightarrow& (AA^T)\nu = -2b\\
-	\Leftrightarrow& \nu^* = -2(AA^T)^{-1}b
+	&\frac{\partial}{\partial \nu}(-\frac{1}{4}\nu^{\trans}AA^{\trans}\nu - \nu^{\trans}b)= 0\\
+	\Leftrightarrow&-\frac{1}{4} 2AA^{\trans}\nu - b = 0\\
+	\Leftrightarrow& (AA^{\trans})\nu = -2b\\
+	\Leftrightarrow& \nu^* = -2(AA^{\trans})^{-1}b
 	\end{align*}
 
 	(4) Substitute into $x^*(\nu)$ to get the primal optimum:
 	\begin{align*}
 	x^*(\nu^*) 
-	&=-\frac{1}{2} A^T v^* \\
-	&= -\frac{1}{2}A^T(-2(AA^T)^{-1}b)\\
-	&= A^T(AA^T)^{-1}b
+	&=-\frac{1}{2} A^{\trans} v^* \\
+	&= -\frac{1}{2}A^{\trans}(-2(AA^{\trans})^{-1}b)\\
+	&= A^{\trans}(AA^{\trans})^{-1}b
 	\end{align*}
 
-Hence, the optimal solution is coincide with our previous result in LS chapter, that is, for under-determined LS problem we have $x^* = A^T(AA^T)^{-1}b$.
+Hence, the optimal solution is coincide with our previous result in LS chapter, that is, for under-determined LS problem we have $x^* = A^{\trans}(AA^{\trans})^{-1}b$.
 
 Furthermore, at step (3), we have the problem
-$$\max_{\nu} [- \frac{1}{4}\nu^TAA^T\nu - \nu^Tb ]$$
+$$\max_{\nu} [- \frac{1}{4}\nu^{\trans}AA^{\trans}\nu - \nu^{\trans}b ]$$
 
 which is equivalent to 
-$$\min_{\nu} [\frac{1}{4}\nu^TAA^T\nu + \nu^Tb ]$$
+$$\min_{\nu} [\frac{1}{4}\nu^{\trans}AA^{\trans}\nu + \nu^{\trans}b ]$$
 
 and it turns out, this minimization problem is equivalent to the following norm minimization problem,
 \begin{align*}
-\min_\nu\quad & \Vert\frac{1}{2}A^T\nu + x_0\Vert^2_2\\
+\min_\nu\quad & \Vert\frac{1}{2}A^{\trans}\nu + x_0\Vert^2_2\\
 s.t.\quad & Ax_0 = b 
 \end{align*}
 since they enjoy the same optimal solution $x^*$, and the difference of the optimal value is just a scalar.
 
 More precisely, that's because
 \begin{align*}
-	\Vert \frac{1}{2}A^T\nu + x_0\Vert_2^2 
-	&= (\frac{1}{2}A^T\nu+x_0)^T(\frac{1}{2}A^T\nu+x_0)\\
-	&= \frac{1}{4}\nu^TAA^T\nu + 2\frac{1}{4}\nu^TAx_0 + x_0^Tx_0\\
-	&= \frac{1}{4}\nu^TAA^T\nu + \nu^Tb+x_0^Tx_0
+	\Vert \frac{1}{2}A^{\trans}\nu + x_0\Vert_2^2 
+	&= (\frac{1}{2}A^{\trans}\nu+x_0)^{\trans}(\frac{1}{2}A^{\trans}\nu+x_0)\\
+	&= \frac{1}{4}\nu^{\trans}AA^{\trans}\nu + 2\frac{1}{4}\nu^{\trans}Ax_0 + x_0^{\trans}x_0\\
+	&= \frac{1}{4}\nu^{\trans}AA^{\trans}\nu + \nu^{\trans}b+x_0^{\trans}x_0
 \end{align*}
 
 \end{example}
@@ -701,33 +701,33 @@ We want connect to the problems with multiple (vector) objective $(F_0,F_1,\cdot
 \subsection{Dual of LPs}
 Consider the primal problem is an LP problem as follows,
 \begin{align*}
-\min\quad &c^Tx\\
+\min\quad &c^{\trans}x\\
 s.t.\quad &Ax\leq b
 \end{align*}
 
 The Lagrange function is 
 \begin{align*}
-L(x,\lambda) &= c^Tx + \sum^m_{i=1}(a_i^Tx-b_i)\\
-&= c^Tx+\begin{bmatrix}
+L(x,\lambda) &= c^{\trans}x + \sum^m_{i=1}(a_i^{\trans}x-b_i)\\
+&= c^{\trans}x+\begin{bmatrix}
 \lambda_1&\lambda_2&\cdots&\lambda_m
 \end{bmatrix}\begin{bmatrix}
-a_i^Tx-b_1\\
+a_i^{\trans}x-b_1\\
 \vdots\\
-a_m^Tx-b_m
+a_m^{\trans}x-b_m
 \end{bmatrix} \\
-&=c^Tx+\lambda^T(Ax-b)\\
-&= -\lambda^Tb-(c^T+\lambda^TA)x
+&=c^{\trans}x+\lambda^{\trans}(Ax-b)\\
+&= -\lambda^{\trans}b-(c^{\trans}+\lambda^{\trans}A)x
 \end{align*}
 
 The dual function is
 \begin{align*}
-g(\lambda) &= \min_x[-\lambda^Tb+(c^T+\lambda^TA)x]\\
+g(\lambda) &= \min_x[-\lambda^{\trans}b+(c^{\trans}+\lambda^{\trans}A)x]\\
 &=
 \label{eq6}
 \left\{
 \begin{aligned}
--\lambda^Tb &\quad \text{if} & c^T+\lambda^TA=0 \\
--\infty &\quad \text{if} & c^T+\lambda^TA\neq 0
+-\lambda^{\trans}b &\quad \text{if} & c^{\trans}+\lambda^{\trans}A=0 \\
+-\infty &\quad \text{if} & c^{\trans}+\lambda^{\trans}A\neq 0
 \end{aligned}
 \right.
 \end{align*}
@@ -742,14 +742,14 @@ $\Rightarrow$
 \begin{align*}
 \min\quad &g(\lambda)\\
 s.t.\quad &\lambda\geq 0\\
-&c^T+\lambda^TA=0
+&c^{\trans}+\lambda^{\trans}A=0
 \end{align*}
 
 $\Leftrightarrow$
 \begin{align*}
-\min\quad &-\lambda^Tb\\
+\min\quad &-\lambda^{\trans}b\\
 s.t.\quad &\lambda\geq 0\\
-&c^T+\lambda^TA=0
+&c^{\trans}+\lambda^{\trans}A=0
 \end{align*}
 
 
@@ -778,19 +778,19 @@ Following is initial note on Dec 2nd.
 
 
 \begin{align*}
-\min\quad &b^T\lambda\\
+\min\quad &b^{\trans}\lambda\\
 s.t.\quad &-\lambda\leq 0\quad\text{inequality multipliers }z\\
-&A^T\lambda = -c\quad \text{equality multipliers }y
+&A^{\trans}\lambda = -c\quad \text{equality multipliers }y
 \end{align*}
 
 \begin{align*}
-L(\lambda,x,y) &= b^T\lambda + z^T(-\lambda)+y^T(A^T\lambda + c)\\
-g(z,y) = \min_{\lambda}L(\lambda,z,y) &= \min_{\lambda}y^Tc+[b^T-z^T+y^TA^T]\lambda\\
+L(\lambda,x,y) &= b^{\trans}\lambda + z^{\trans}(-\lambda)+y^{\trans}(A^{\trans}\lambda + c)\\
+g(z,y) = \min_{\lambda}L(\lambda,z,y) &= \min_{\lambda}y^{\trans}c+[b^{\trans}-z^{\trans}+y^{\trans}A^{\trans}]\lambda\\
 &=
 %\label{eq6}
 \left\{
 \begin{aligned}
-y^Tc &\quad \text{if} &b^T-z^T+y^TA^T=0 \\
+y^{\trans}c &\quad \text{if} &b^{\trans}-z^{\trans}+y^{\trans}A^{\trans}=0 \\
 -\infty &\quad \text{if} &else
 \end{aligned}
 \right.
@@ -808,39 +808,39 @@ $\Leftrightarrow$
 
 
 \begin{align*}
-\min\quad &y^Tc\\
-s.t.\quad &b^T-z^T+y^TA^T=0\\
+\min\quad &y^{\trans}c\\
+s.t.\quad &b^{\trans}-z^{\trans}+y^{\trans}A^{\trans}=0\\
 &z\geq 0
 \end{align*}
 constants:
 
 
 \begin{align*}
-b^T=y^TA^T &= z^T\\
+b^{\trans}=y^{\trans}A^{\trans} &= z^{\trans}\\
 z&\geq 0
 \end{align*}
 
 $\Leftrightarrow$
 
 \begin{equation*}
-b^T+y^TA^T \geq 0
+b^{\trans}+y^{\trans}A^{\trans} \geq 0
 \end{equation*}
 
 Thus this problem can also be written as:
 \begin{align*}
-\max\quad &y^Tc\\
+\max\quad &y^{\trans}c\\
 s.t.\quad &b+Ay \geq 0
 \end{align*}
 
 $\Leftrightarrow$
 \begin{align*}
-\max\quad &(-x)^Tc\\
+\max\quad &(-x)^{\trans}c\\
 s.t.\quad &b+A(-x) \geq 0
 \end{align*}
 
 $\Rightarrow$
 \begin{align*}
-\max\quad &c^Tx\\
+\max\quad &c^{\trans}x\\
 s.t.\quad &Ax \leq b
 \end{align*}
 
@@ -1143,17 +1143,17 @@ Therefore:
 \begin{align*}
 \nabla F_0(x^*)\triangle x &\geq 0, \forall \triangle x\in N(A)\\
 \Leftrightarrow \nabla F_0(x^*) &\perp N(A)\\
-\Leftrightarrow \triangle F_0(x^*) &\in N(A)^{\perp} = R(A^T)
+\Leftrightarrow \triangle F_0(x^*) &\in N(A)^{\perp} = R(A^{\trans})
 \end{align*}
 
 \begin{align*}
-L(x,\nu) &= F_0(x) +\nu^T(Ax-b)\\
-\nabla_xL(x,\nu) &= \nabla F_0(x) + A^T\nu  = 0\\
-\nabla F_0(x) &= -A^T\nu
+L(x,\nu) &= F_0(x) +\nu^{\trans}(Ax-b)\\
+\nabla_xL(x,\nu) &= \nabla F_0(x) + A^{\trans}\nu  = 0\\
+\nabla F_0(x) &= -A^{\trans}\nu
 \end{align*}
 
 
-Because $\nu$ is constrained, $-A^{T}\nu$ can by any vector in $R(A^T)$
+Because $\nu$ is constrained, $-A^{T}\nu$ can by any vector in $R(A^{\trans})$
 
 \begin{marginfigure}
 	\centering
@@ -1228,7 +1228,7 @@ Recall generalized inequalities and defined with respect to proper cones.
 
 SDP:
 \begin{align*}
-\min\quad &c^Tx\\
+\min\quad &c^{\trans}x\\
 s.t.\quad &x_1F_1+x_2F_2+\ldots+x_nF_n+G\leq 0
 \end{align*}
 where $F_i\in S^n$, $G\in S^n$, inequality $k=S^m_+$.
@@ -1262,7 +1262,7 @@ k^*=\{\langle x,y\rangle \geq 0, \quad \forall x\in k \}
 Dual of SDPs:
 
 \begin{align*}
-\min\quad &c^Tx\\
+\min\quad &c^{\trans}x\\
 s.t.\quad &x_1F_1+x_2F_2+\ldots+x_nF_n+G\leq 0
 \end{align*}
 $x\in \Re^n$, $F_i\in S^m$, $G\in S^m$.
@@ -1272,8 +1272,8 @@ Dual variables: $x\in S^m$
 Lagrangian:
 
 \begin{align*}
-L(x,z) &= c^Tx + <z,x_1F_1+\ldots +x_nF_n+G>\\
-&= c^Tx + \sum^n_{i=1}<z,x_1F_1>+<z,G>\\
+L(x,z) &= c^{\trans}x + <z,x_1F_1+\ldots +x_nF_n+G>\\
+&= c^{\trans}x + \sum^n_{i=1}<z,x_1F_1>+<z,G>\\
 &= \sum^n_{i=1}x_i(c_i+<z_1F_1>)+<z,G>
 \end{align*}
 
@@ -1305,7 +1305,7 @@ s.t.\quad &tr(zF_1)=-c_i\quad u=1,...,n\\
 
 $g(z)=\min_x L(x,z)$
 
-$\min[c^Tx-<z_1-(x_1F_1+...+x_nF_n+G)>]$ where $x\in k^*$. If primal feasible, $(x_1F_1+...+x_nF_n+G)$ is in $k=S^m_+$
+$\min[c^{\trans}x-<z_1-(x_1F_1+...+x_nF_n+G)>]$ where $x\in k^*$. If primal feasible, $(x_1F_1+...+x_nF_n+G)$ is in $k=S^m_+$
 
 
 
