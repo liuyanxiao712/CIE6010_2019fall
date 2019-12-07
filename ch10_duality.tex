@@ -1,6 +1,6 @@
 %% Placeholder for discussion of duality
 
-%Below are notes for Nov 20
+%Below are notes for Nov 20 
 In optimization theory, duality or the duality principle is the principle that optimization problems may be viewed from either of two perspectives, that is, the primal problem or the dual problem.
 
 Let's consider the primal problem formulated as follows,
@@ -64,8 +64,8 @@ The duality theory says that, \textbf{for most convex optimization problem}, we 
 Recall the problem formulations previously, the primal optimization problem is formulated as 
 \begin{align*}
 	\min \quad&F_0(x) \\
-	s.t. \quad&F_i(x)\leq 0, \quad i = 1,\cdots,m \\
-	&h_i(x)= 0, \quad i = 1,\cdots,p
+	s.t. \quad&F_i(x)\leq 0, \quad i = 1,...,m \\
+	&h_i(x)= 0, \quad i = 1,...,p
 \end{align*}
 
 The Lagrange function is given by 
@@ -155,10 +155,10 @@ So the dual optimization problem is formulated as
 		\item $Ax = b$
 	\end{enumerate}
 	
-	Furthermore, if some of the inequality constraints are defined by affine functions, this conditions can be weaken a bit. Suppose $F_i$ are affine for $i=1,\cdots, k$, where $k<m$, then the Slater conditions requires that there exists an $x\in\text{relint}\ D$ such that
+	Furthermore, if some of the inequality constraints are defined by affine functions, this conditions can be weaken a bit. Suppose $F_i$ are affine for $i=1,..., k$, where $k<m$, then the Slater conditions requires that there exists an $x\in\text{relint}\ D$ such that
 	\begin{enumerate}
-		\item $F_i(x) \leq 0,\ \forall i = 1,\cdots, k$
-		\item $F_i(x) < 0,\ \forall i = k+1,\cdots, m$.
+		\item $F_i(x) \leq 0,\ \forall i = 1,..., k$
+		\item $F_i(x) < 0,\ \forall i = k+1,..., m$.
 		\item $Ax = b$
 	\end{enumerate}
 	
@@ -455,11 +455,11 @@ which exactly takes the form of dual problem.
 \subsection{"Pricing" Interpretation}
 There is an interesting and intuitive interpretation for the duality theory called the pricing interpretation. Suppose the variable $x$ denotes how an company operates(i.e., "policy") and $F_0(x)$ denotes the cost of operating at policy $x$. Each constraint denotes representing some limit, such as a limit on resources, labor, etc. 
 
-To optimal policy(i.e., $x^*$) with these constraints can be found by solving the problem(consider this is the primal problem)
+To optimize policy(i.e., $x^*$) with these constraints can be found by solving the problem(consider this is the primal problem)
 \begin{align*}
 	\min \quad & F_0(x)\\
-	s.t.\quad & F_i(x) \leq 0,\quad i = 1,\cdots,m\\
-	& h_i(x) = 0,\quad i = 1,\cdots,p
+	s.t.\quad & F_i(x) \leq 0,\quad i = 1,...,m\\
+	& h_i(x) = 0,\quad i = 1,...,p
 \end{align*}
 
 In the next step, we reformulate this problem as an unconstrained problem by introducing $I$ and $\tilde{I}$, which are given by
@@ -501,7 +501,7 @@ $$\min_x\quad F_0(x) + \sum^m_{i=1}I(F_i(x)) + \sum^p_{i=1}\tilde{I}(h_i(x)) \qq
 
 This unconstrained problem is the same as primal one, but with "hard" penalties introducing by $I$ and $\tilde{I}$.
 
-Now, let's consider the case that are more realistic. Suppose the company is allowed to break the limit on their resources by paying an additional cost which is linear in the amount of violation, measure by $F_i$ and $h_i$. More precisely, the additional payment made by the company for the $i$-th constraint is $\lambda_i F_i(x)$, and payments are also made to the company for the constraints that are not right(i.e., $F_i(x)<0$), the $\lambda_i F_i(x)$ represents a payment received by the company. 
+Now, let's consider the case that are more realistic. Suppose the company is allowed to break the limit on their resources by paying an additional cost which is linear in the amount of violation, measured by $F_i$ and $h_i$. More precisely, the additional payment made by the company for the $i$-th constraint is $\lambda_i F_i(x)$, and payments are also made to the company for the constraints that are not right(i.e., $F_i(x)<0$), the $\lambda_i F_i(x)$ represents a payment received by the company. 
 
 So $\lambda_i$ is interpreted as the "price" for violating constraint $F_i$, and similarly we have $\mu_i$ as the "price" for violating constraint $h_i$.
 
@@ -539,8 +539,8 @@ If change constraint by $\epsilon$, optimum value will change by something like 
 We consider the following perturbed version of the original optimization problem (unperturbed), says the perpetuated problem, as follows
 \begin{align*}
 	p^*(u,v) = \min \quad &F_0(x) \\
-	s.t.\quad & F_i(x) \leq u_i ,\quad i = 1,\cdots,m\\
-	& h_i(x) = v_i,\quad i = 1,\cdots, p
+	s.t.\quad & F_i(x) \leq u_i ,\quad i = 1,...,m\\
+	& h_i(x) = v_i,\quad i = 1,..., p
 \end{align*}
 where when $u=v=0$ is exactly the same as the unperturbed one.
 
@@ -561,18 +561,18 @@ $\rightarrow$ relate $p^*(u,v)$ to $p^*(0,0)$\\
 		&= \min_{x\in D} L(x, \lambda^*, \nu^*)\\
 		&\leq F_0(x) + \sum^m_{i=1}\lambda_i^* F_i(x) + \sum^p_{i=1}\nu_i^* h_i(x)\\
 		&\leq F_0(x) + \sum^m_{i=1}\lambda_i^* u_i + \sum^p_{i=1}\nu^*_iv_i\\
-		&= F_0(x) + (\lambda^*)^Tu+(\nu^*)^Tv
+		&= F_0(x) + (\lambda^*)^{\trans}u+(\nu^*)^{\trans}v
 	\end{align*}
 \end{itemize}
 Our focus in on $x\in D$ s.t. $x$ is optimal for perturbed problem
 
 i.e. $F_0(x)=p^*(u,v)$
 
-$\Rightarrow$ $p^*(u,v) \geq p^*(0,0) - (\lambda^*)^Tu - (\nu^*)^Tv$
+$\Rightarrow$ $p^*(u,v) \geq p^*(0,0) - (\lambda^*)^{\trans}u - (\nu^*)^{\trans}v$
 
 \begin{enumerate}
 	\item E.g. If $\lambda_i >> 0$ and tighten constraint $F_i$ slightly so that $F_i(x)\leq -\epsilon < 0$
-	$$p^*(u,v)\geq p^*(0,0) - (\lambda^*)^Tu - (\nu^*)^Tv$$
+	$$p^*(u,v)\geq p^*(0,0) - (\lambda^*)^{\trans}u - (\nu^*)^{\trans}v$$
 	
 	\item Note not symmetric in general, big relaxation in constraint doesn't necessary mean big drop in cost.
 	
@@ -583,7 +583,7 @@ $\Rightarrow$ $p^*(u,v) \geq p^*(0,0) - (\lambda^*)^Tu - (\nu^*)^Tv$
 In order to solve the following primal problem,
 \begin{align*}
 	\min_x &\quad F_0(x)\\
-	s.t. &\quad F_i(x) \leq 0,\quad i = 1,\cdots,m
+	s.t. &\quad F_i(x) \leq 0,\quad i = 1,...,m
 \end{align*}
 we propose the Lagrange method as follows:
 
@@ -614,66 +614,66 @@ we propose the Lagrange method as follows:
 	where $x\in\reals^n$, $A\in\reals^{p\times n}$, $\rank(A) = p< n$.
 	
 	Recall the chapter least square, this an under determined LS problem, and the optimal solution is given by 
-	$$x^* = A^T(AA^T)^{-1}b$$
+	$$x^* = A^{\trans}(AA^{\trans})^{-1}b$$
 	
 	To verify that this solution is coincide with the one obtained by Lagrange's method, we proceed following procedure to solve this question.
 	
 	(1) Form the Lagrange function:
-	 $$L(x, \nu) = x^Tx + \nu^T(Ax - b)$$
+	 $$L(x, \nu) = x^{\trans}x + \nu^{\trans}(Ax - b)$$
 	
 	(2) Solve for the dual function $g(\lambda) = \min_x L(x, \nu)$:
 		
 		Notice that Lagrange function here is a convex quadratic function of $x$(you may verify this), so simply by the first-order condition, we have
-		$$\frac{\partial}{\partial x} L(x, \nu) = 2x+A^T\nu = 0\Rightarrow x^*(\nu) = -\frac{1}{2}A^T\nu$$
+		$$\frac{\partial}{\partial x} L(x, \nu) = 2x+A^{\trans}\nu = 0\Rightarrow x^*(\nu) = -\frac{1}{2}A^{\trans}\nu$$
 
 	(3) Find the dual optimum $\nu^*$:
 	
 	Now, we have dual problem as
 	\begin{align*}
 		\max_{\nu} g(\nu) &= \max_{\nu} L(x^*(\nu), \nu)\\
-		&= \max_{\nu}[x^*(\nu)^Tx^*(\nu) + \nu^T(Ax^*(\nu) - b)]\\
-		&= \max_{\nu}[\frac{1}{4}\nu^TAA^T\nu + \nu^T(A(-\frac{1}{2}A^T\nu)-b)]\\
-		&= \max_{\nu}[\frac{1}{4}\nu^TAA^T\nu - \frac{1}{2}\nu^TAA^T\nu - \nu^Tb]\\
-		&= \max_{\nu}[-\frac{1}{4}\nu^TAA^T\nu - \nu^Tb]
+		&= \max_{\nu}[x^*(\nu)^{\trans}x^*(\nu) + \nu^{\trans}(Ax^*(\nu) - b)]\\
+		&= \max_{\nu}[\frac{1}{4}\nu^{\trans}AA^{\trans}\nu + \nu^{\trans}(A(-\frac{1}{2}A^{\trans}\nu)-b)]\\
+		&= \max_{\nu}[\frac{1}{4}\nu^{\trans}AA^{\trans}\nu - \frac{1}{2}\nu^{\trans}AA^{\trans}\nu - \nu^{\trans}b]\\
+		&= \max_{\nu}[-\frac{1}{4}\nu^{\trans}AA^{\trans}\nu - \nu^{\trans}b]
 	\end{align*}
 	
 	Note that $g(\nu)$ is a concave quadratic function of $\nu$, and therefore utilize the first-order condition we yields
 	\begin{align*}
-	&\frac{\partial}{\partial \nu}(-\frac{1}{4}\nu^TAA^T\nu - \nu^Tb)= 0\\
-	\Leftrightarrow&-\frac{1}{4} 2AA^T\nu - b = 0\\
-	\Leftrightarrow& (AA^T)\nu = -2b\\
-	\Leftrightarrow& \nu^* = -2(AA^T)^{-1}b
+	&\frac{\partial}{\partial \nu}(-\frac{1}{4}\nu^{\trans}AA^{\trans}\nu - \nu^{\trans}b)= 0\\
+	\Leftrightarrow&-\frac{1}{4} 2AA^{\trans}\nu - b = 0\\
+	\Leftrightarrow& (AA^{\trans})\nu = -2b\\
+	\Leftrightarrow& \nu^* = -2(AA^{\trans})^{-1}b
 	\end{align*}
 
 	(4) Substitute into $x^*(\nu)$ to get the primal optimum:
 	\begin{align*}
 	x^*(\nu^*) 
-	&=-\frac{1}{2} A^T v^* \\
-	&= -\frac{1}{2}A^T(-2(AA^T)^{-1}b)\\
-	&= A^T(AA^T)^{-1}b
+	&=-\frac{1}{2} A^{\trans} v^* \\
+	&= -\frac{1}{2}A^{\trans}(-2(AA^{\trans})^{-1}b)\\
+	&= A^{\trans}(AA^{\trans})^{-1}b
 	\end{align*}
 
-Hence, the optimal solution is coincide with our previous result in LS chapter, that is, for under-determined LS problem we have $x^* = A^T(AA^T)^{-1}b$.
+Hence, the optimal solution is coincide with our previous result in LS chapter, that is, for under-determined LS problem we have $x^* = A^{\trans}(AA^{\trans})^{-1}b$.
 
 Furthermore, at step (3), we have the problem
-$$\max_{\nu} [- \frac{1}{4}\nu^TAA^T\nu - \nu^Tb ]$$
+$$\max_{\nu} [- \frac{1}{4}\nu^{\trans}AA^{\trans}\nu - \nu^{\trans}b ]$$
 
 which is equivalent to 
-$$\min_{\nu} [\frac{1}{4}\nu^TAA^T\nu + \nu^Tb ]$$
+$$\min_{\nu} [\frac{1}{4}\nu^{\trans}AA^{\trans}\nu + \nu^{\trans}b ]$$
 
 and it turns out, this minimization problem is equivalent to the following norm minimization problem,
 \begin{align*}
-\min_\nu\quad & \Vert\frac{1}{2}A^T\nu + x_0\Vert^2_2\\
+\min_\nu\quad & \Vert\frac{1}{2}A^{\trans}\nu + x_0\Vert^2_2\\
 s.t.\quad & Ax_0 = b 
 \end{align*}
 since they enjoy the same optimal solution $x^*$, and the difference of the optimal value is just a scalar.
 
 More precisely, that's because
 \begin{align*}
-	\Vert \frac{1}{2}A^T\nu + x_0\Vert_2^2 
-	&= (\frac{1}{2}A^T\nu+x_0)^T(\frac{1}{2}A^T\nu+x_0)\\
-	&= \frac{1}{4}\nu^TAA^T\nu + 2\frac{1}{4}\nu^TAx_0 + x_0^Tx_0\\
-	&= \frac{1}{4}\nu^TAA^T\nu + \nu^Tb+x_0^Tx_0
+	\Vert \frac{1}{2}A^{\trans}\nu + x_0\Vert_2^2 
+	&= (\frac{1}{2}A^{\trans}\nu+x_0)^{\trans}(\frac{1}{2}A^{\trans}\nu+x_0)\\
+	&= \frac{1}{4}\nu^{\trans}AA^{\trans}\nu + 2\frac{1}{4}\nu^{\trans}Ax_0 + x_0^{\trans}x_0\\
+	&= \frac{1}{4}\nu^{\trans}AA^{\trans}\nu + \nu^{\trans}b+x_0^{\trans}x_0
 \end{align*}
 
 \end{example}
@@ -683,12 +683,12 @@ More precisely, that's because
 Consider the problem
 \begin{align*}
 	\min \quad & F_0(x)\\
-	s.t. \quad & F_i(x)\leq 0\quad i = 1,\cdots,m
+	s.t. \quad & F_i(x)\leq 0\quad i = 1,...,m
 \end{align*}
 
 We want connect to the problems with multiple (vector) objective $(F_0,F_1,\cdots,F_m)$, and one approach is to "scalarize" the objective as 
 \begin{equation*}
-	F_0(x) + \lambda F_1(x) + \cdots + \lambda_mF_m(x) = F_0(x) + \sum^m_{i=1}\lambda_iF_i(x)
+	F_0(x) + \lambda_1 F_1(x) + \cdots + \lambda_mF_m(x) = F_0(x) + \sum^m_{i=1}\lambda_iF_i(x)
 \end{equation*}
 
 % Above are notes for Nov 27
@@ -702,39 +702,39 @@ We want connect to the problems with multiple (vector) objective $(F_0,F_1,\cdot
 \subsection{Dual of LPs}
 Consider an LP problem as the primal problem, which is given by
 \begin{align*}
-\min\quad &c^Tx\\
+\min\quad &c^{\trans}x\\
 s.t.\quad &Ax\leq b
 \end{align*}
-where the constraint is the matrix form of $a_i^T x\leq b_i$, for $i=1,\cdots, m$.
+where the constraint is the matrix form of $a_i^{\trans} x\leq b_i$, for $i=1,..., m$.
 
 The Lagrange function is 
 \begin{align*}
 L(x,\lambda) 
-&= c^Tx + \sum^m_{i=1}\lambda_i (a_i^Tx-b_i)\\
-&= c^Tx+
+&= c^{\trans}x + \sum^m_{i=1}\lambda_i (a_i^{\trans}x-b_i)\\
+&= c^{\trans}x+
 \begin{bmatrix}
 \lambda_1&\lambda_2&\cdots&\lambda_m
 \end{bmatrix}
 \begin{bmatrix}
-a_i^Tx-b_1\\
+a_i^{\trans}x-b_1\\
 \vdots\\
-a_m^Tx-b_m
+a_m^{\trans}x-b_m
 \end{bmatrix} \\
-&=c^Tx+\lambda^T(Ax-b)\\
-&= -\lambda^Tb+(c^T+\lambda^TA)x
+&=c^{\trans}x+\lambda^{\trans}(Ax-b)\\
+&= -\lambda^{\trans}b+(c^{\trans}+\lambda^{\trans}A)x
 \end{align*}
 
 The dual function is
 \begin{align*}
 g(\lambda) 
 &= \min_x L(x,\lambda) \\
-&= \min_x[-\lambda^Tb+(c^T+\lambda^TA)x]\\
+&= \min_x[-\lambda^{\trans}b+(c^{\trans}+\lambda^{\trans}A)x]\\
 &=
 \label{eq6}
 \left\{
 \begin{aligned}
--\lambda^Tb &\quad \text{if} & c^T+\lambda^TA=0 \\
--\infty &\quad \text{if} & c^T+\lambda^TA\neq 0
+-\lambda^{\trans}b &\quad \text{if} & c^{\trans}+\lambda^{\trans}A=0 \\
+-\infty &\quad \text{if} & c^{\trans}+\lambda^{\trans}A\neq 0
 \end{aligned}
 \right.
 \end{align*}
@@ -745,18 +745,18 @@ The dual optimization problem is formulated as
 s.t.\quad &\lambda \geq 0
 \end{align*}
 
-As we showed above, the dual problem is feasible iff $c^T+\lambda^TA=0$, so in order to maintain the feasibility we may consider the problem with the form
+As we showed above, the dual problem is feasible iff $c^{\trans}+\lambda^{\trans}A=0$, so in order to maintain the feasibility we may consider the problem with the form
 \begin{align*}
 \max\quad &g(\lambda)\\
 s.t.\quad &\lambda\geq 0\\
-&c^T+\lambda^TA=0
+&c^{\trans}+\lambda^{\trans}A=0
 \end{align*}
 
 which is equivalent to
 \begin{align*}
-\max\quad &-\lambda^Tb\\
+\max\quad &-\lambda^{\trans}b\\
 s.t.\quad &\lambda\geq 0\\
-&c^T+\lambda^TA=0
+&c^{\trans}+\lambda^{\trans}A=0
 \end{align*}
 
 
@@ -785,26 +785,26 @@ To verify above results, we show that, for this LP case, the dual of the dual pr
 
 The dual optimization problem we obtain above can be expressed as follows
 \begin{align*}
-\min\quad &b^T\lambda\\
+\min\quad &b^{\trans}\lambda\\
 s.t.\quad &-\lambda\leq 0\quad\\
-&A^T\lambda = -c\quad 
+&A^{\trans}\lambda = -c\quad 
 \end{align*}
 which has the same optimal solution.
 
 Let $z_i$ be the inequalities multipliers, and $y_i$ be the equality multipliers.
 
 The Lagrange function is
-$$L(\lambda,x,y) = b^T\lambda + z^T(-\lambda)+y^T(A^T\lambda + c)$$
+$$L(\lambda,x,y) = b^{\trans}\lambda + z^{\trans}(-\lambda)+y^{\trans}(A^{\trans}\lambda + c)$$
 
 The dual function is
 \begin{align*}
 g(z,y) 
 &= \min_{\lambda}L(\lambda,z,y)\\
-&= \min_{\lambda}y^Tc+(b^T-z^T+y^TA^T)\lambda\\
+&= \min_{\lambda}y^{\trans}c+(b^{\trans}-z^{\trans}+y^{\trans}A^{\trans})\lambda\\
 &=
 \left\{
 \begin{aligned}
-y^Tc &\quad \text{if}\ b^T-z^T+y^TA^T=0 \\
+y^{\trans}c &\quad \text{if}\ b^{\trans}-z^{\trans}+y^{\trans}A^{\trans}=0 \\
 -\infty &\quad\text{else}
 \end{aligned}
 \right.
@@ -818,41 +818,41 @@ s.t.\quad &z \geq 0
 
 To main the feasibility, we may have the form
 \begin{align*}
-\min\quad &y^Tc\\
-s.t.\quad &b^T-z^T+y^TA^T=0\\
+\min\quad &y^{\trans}c\\
+s.t.\quad &b^{\trans}-z^{\trans}+y^{\trans}A^{\trans}=0\\
 &z\geq 0
 \end{align*}
 
 Notice that, the constraints
 \begin{align*}
-b^T-z^T+y^TA^T&=0\\
+b^{\trans}-z^{\trans}+y^{\trans}A^{\trans}&=0\\
 z&\geq 0
 \end{align*}
 
 is equivalent to
-$$b^T+y^TA^T \geq 0$$
+$$b^{\trans}+y^{\trans}A^{\trans} \geq 0$$
 by a simple rearrangement and substitution.
 
 
 Thus, this dual problem can also be written as:
 \begin{align*}
-\max\quad &y^Tc\\
+\max\quad &y^{\trans}c\\
 s.t.\quad &b+Ay \geq 0
 \end{align*}
 
 $\Leftrightarrow$
 \begin{align*}
-\max\quad &(-x)^Tc\\
+\max\quad &(-x)^{\trans}c\\
 s.t.\quad &b+A(-x) \geq 0
 \end{align*}
 
 $\Rightarrow$
 \begin{align*}
-\min\quad &c^Tx\\
+\min\quad &c^{\trans}x\\
 s.t.\quad &Ax \leq b
 \end{align*}
 
-Note that the second form is just utilize the change of variable and let $-x=y$, and the third one has exactly the same optimal solution(but not optimal value), and the optimal value have a opposite sign.
+Note that the second form is just utilizing the change of variable and let $-x=y$, and the third one has exactly the same optimal solution(but not optimal value), and the optimal value have a opposite sign.
 
 By this argument, we show that, the dual of the dual problem is just the original LP problem, it implies the strong duality holds by the validation of weak duality(i.e., use weak duality for twice), since the two inequality holds only if the equality holds.
 
@@ -865,8 +865,8 @@ Let $x^*$ be the primal optimum, and $(\lambda^*,\nu^*)$ be the dual optimum.
 Consider the primal problem:
 \begin{align*}
 \max\quad &F_0(x)\\
-s.t.\quad &F_i(x)\leq 0\quad i = 1,\cdots,m\\
-&h_i(x)\leq 0\quad i = 1,\cdots,p
+s.t.\quad &F_i(x)\leq 0\quad i = 1,...,m\\
+&h_i(x)= 0\quad i = 1,...,p
 \end{align*}
 
 Note: we have no assumption of convexity for this problem.
@@ -1093,14 +1093,14 @@ $\frac{\partial F_o(x^*)}{\partial P_T} = \lambda^*$
 Consider the primal problem
 \begin{align*}
 \min \quad & F_0(x)\\
-s.t. \quad & F_i(x)\leq 0\quad i=1,\cdots,m\\
-&h_i(x) = 0\quad i=1,\cdots,p
+s.t. \quad & F_i(x)\leq 0\quad i=1,...,m\\
+&h_i(x) = 0\quad i=1,...,p
 \end{align*}
 which is equivalent to 
 \begin{align*}
 \min \quad & F_0(x)\\
 s.t. \quad & F_i(x)= 0,\ \forall i\in\{i | F_i(x^*)=0\}\\
-&h_i(x) = 0\quad i=1,\cdots,p
+&h_i(x) = 0\quad i=1,...,p
 \end{align*}
 
 Consider linear constraints:
@@ -1116,12 +1116,12 @@ $$Ax^* + A\triangle x = b\Leftrightarrow A\triangle x = 0\Leftrightarrow \triang
 
 Apply first order condition,
 \begin{align*}
-&L(x,\nu) = F_0(x) +\nu^T(Ax-b)\\
-\Leftrightarrow & \nabla_xL(x,\nu) = \nabla F_0(x) + A^T\nu  = 0\\
-\Leftrightarrow & \nabla F_0(x) = -A^T\nu
+&L(x,\nu) = F_0(x) +\nu^{\trans}(Ax-b)\\
+\Leftrightarrow & \nabla_xL(x,\nu) = \nabla F_0(x) + A^{\trans}\nu  = 0\\
+\Leftrightarrow & \nabla F_0(x) = -A^{\trans}\nu
 \end{align*}
 
-Because $\nu$ is unconstrained, $-A^{T}\nu$ can by any vector in $R(A^T)$.
+Because $\nu$ is unconstrained, $-A^{T}\nu$ can by any vector in $R(A^{\trans})$.
 
 
 
@@ -1137,9 +1137,9 @@ $$\langle\nabla F_0(x^*), (y-x^*)\rangle\geq 0,\quad \forall y\in\mathcal{C}$$
 
 Since,
 \begin{align*}
-\nabla F_0(x^*)^T \triangle x &\geq 0, \forall \triangle x\in N(A)\\
+\nabla F_0(x^*)^{\trans} \triangle x &\geq 0, \forall \triangle x\in N(A)\\
 \Leftrightarrow \nabla F_0(x^*) &\perp N(A)\\
-\Leftrightarrow \nabla F_0(x^*) &\in N(A)^{\perp} = R(A^T)
+\Leftrightarrow \nabla F_0(x^*) &\in N(A)^{\perp} = R(A^{\trans})
 \end{align*}
 
 
@@ -1252,7 +1252,7 @@ $$k^*=\{y| \langle x,y\rangle \geq 0, \quad \forall x\in k \}$$
 
 Recall the SDP problem,
 \begin{align*}
-\min\quad &c^Tx\\
+\min\quad &c^{\trans}x\\
 s.t.\quad &x_1F_1+x_2F_2+\ldots+x_nF_n+G\leq 0
 \end{align*}
 where $F_i\in S^m$, $G\in S^m$, inequality $k=S^m_+$.
@@ -1264,8 +1264,8 @@ Dual variables: $x\in S^m$
 
 Lagrangian function:
 \begin{align*}
-L(x,z) &= c^Tx + \langle z,x_1F_1+\ldots +x_nF_n+G\rangle \\
-&= c^Tx + \sum^n_{i=1}\langle z,x_iF_i\rangle+\langle z,G\rangle\\
+L(x,z) &= c^{\trans}x + \langle z,x_1F_1+\ldots +x_nF_n+G\rangle \\
+&= c^{\trans}x + \sum^n_{i=1}\langle z,x_iF_i\rangle+\langle z,G\rangle\\
 &= \sum^n_{i=1}x_i(c_i+\langle z, F_i\rangle)+\langle z,G\rangle
 \end{align*}
 
@@ -1296,7 +1296,7 @@ s.t.\quad &tr(zF_i)=-c_i\quad i=1,...,n\\
 
 $g(z)=\min_x L(x,z)$
 
-$\min[c^Tx-<z_1-(x_1F_1+...+x_nF_n+G)>]$ where $x\in k^*$. If primal feasible, $(x_1F_1+...+x_nF_n+G)$ is in $k=S^m_+$
+$\min[c^{\trans}x-<z_1-(x_1F_1+...+x_nF_n+G)>]$ where $x\in k^*$. If primal feasible, $(x_1F_1+...+x_nF_n+G)$ is in $k=S^m_+$
 
 
 
