@@ -679,7 +679,7 @@ More precisely, that's because
 \end{example}
 
 
-\subsection{Final interpretation}
+\subsection{A final interpretation}
 Consider the problem
 \begin{align*}
 	\min \quad & F_0(x)\\
@@ -1020,9 +1020,10 @@ If a convex optimization problem with differentiable objective and constraints f
 % Below are notes for Dec 4
 \vspace{0.5cm}
 \subsection{Walter-pouring Problem}
+Given the maximization problem
 \begin{align*}
-\max_{P_1,...,P_n}\quad &\sum^n_{i=1}log[1+\frac{P_i}{N_i}]\\
-s.t. \quad & 0 \leq P_i\quad i\in[m]\\
+\max_{P_1,\cdots,P_n}\quad &\sum^n_{i=1}log[1+\frac{P_i}{N_i}]\\
+s.t. \quad & 0 \leq P_i,\ i\in[m]\\
 &\sum^n_{i=1}P_i\leq P_T
 \end{align*}
 
@@ -1032,35 +1033,37 @@ s.t. \quad & 0 \leq P_i\quad i\in[m]\\
 	%\caption{This is an inserted JPG graphic} 
 	%\label{fig:graph} 
 \end{marginfigure}
-
-
-\begin{equation*}
-L(P, \lambda, \mu) = -\sum^n_{l=1}log_l[1+\frac{P_l}{N_l}] + \lambda(\sum^n_{l=1}P_l-P_T) - \sum^n_{l=1}\mu_lP_l
-\end{equation*}
-
-KKT:
+We convert it to the general form (minimize the objective),
 \begin{align*}
-(1) \quad &\frac{\partial}{\partial P_i}L(P, \lambda, \mu) = -\frac{N_i}{N_i+P_i}\frac{1}{N_i} + \lambda - \mu_i = 0 \Leftrightarrow N_i+P_i = \frac{1}{\lambda-\mu_i}\\
-(2)\quad &P_i \geq 0,\quad \forall i \in[m],\quad \sum^n_{l=1}P_l \leq P_T\\
-(3)\quad &\lambda \geq 0,\mu\geq 0\\
-(4)\quad &\mu_iP_i = 0\Leftrightarrow If \quad P_i > 0, \quad then\quad \mu_i =0\\
-&\lambda(\sum^n_{l=1}P_l - P_T) = 0
+\min_{P_1,\cdots,P_n}\quad &-\sum^n_{i=1}log[1+\frac{P_i}{N_i}]\\
+s.t. \quad & 0 \leq P_i,\ i\in[m]\\
+&\sum^n_{i=1}P_i\leq P_T
 \end{align*}
 
-To solve:
+The Lagrange function is formulated as
+$$L(P, \lambda, \mu) = -\sum^n_{l=1}log_l[1+\frac{P_l}{N_l}] + \lambda(\sum^n_{l=1}P_l-P_T) - \sum^n_{l=1}\mu_lP_l $$
 
+By the KKT condtions, we have
+\begin{align*}
+(1)\quad &\frac{\partial}{\partial P_i}L(P, \lambda, \mu) = -\frac{N_i}{N_i+P_i}\frac{1}{N_i} + \lambda - \mu_i = 0 \Leftrightarrow N_i+P_i = \frac{1}{\lambda-\mu_i}\\
+(2)\quad &P_i \geq 0,\ \forall i\in[m]\ \text{and}\ \sum^n_{l=1}P_l \leq P_T\\
+(3)\quad &\lambda\geq 0,\ \mu\geq 0\\
+(4)\quad &\lambda(\sum^n_{l=1}P_l - P_T) = 0\ \text{and}\ \mu_iP_i = 0\Leftrightarrow \text{if}\ P_i > 0, \text{then}\ \mu_i =0\ 
+\end{align*}
+
+To solve this question,
 \begin{enumerate}
-	\item First observe you will use all power since $F_0$ is monotonically increasing in each $P_i$
-	
-	$\Rightarrow$ $\sum^n_{l=1}P_l = P_T$
+	\item First observe that you will use all power since $F_0$ is monotonically increasing in each $P_i$, so we have
+	$$\sum^n_{l=1}P_l = P_T$$
 	
 	\item Look at KKT-(1):
 	
-	(a) If $P_i>0$ then $\mu_i = 0$ and therefore $N_i+P_i = \frac{1}{\lambda}$
+	(a) If $P_i>0$ then $\mu_i = 0$ by KKT-(4), and therefore $N_i+P_i = \frac{1}{\lambda}$.
 	
-	(b) If $P_i= 0$ then KKT-(2), $N_i = \frac{1}{\lambda - \mu_i}\geq \frac{1}{\lambda}$
+	(b) If $P_i= 0$, by KKT-(3) $\mu_i\ge 0$, and therefore $N_i = \frac{1}{\lambda - \mu_i}\geq \frac{1}{\lambda}$.
 	
-	(c) $P_i = \max\{\frac{1}{\lambda}-N_i, 0 \}$
+	(c) By KKT-(2), we require $P_i\geq 0$, so we conclude that 
+	$$P_i = \max\{\frac{1}{\lambda}-N_i, 0 \}$$
 \end{enumerate}
 \begin{marginfigure}
 	\centering
@@ -1069,25 +1072,20 @@ To solve:
 	%\label{fig:graph} 
 \end{marginfigure}
 
+\vspace{0.3cm}
+Let's give you $P_T+\epsilon$ power, says $|u^*| = n^*$, and we increase the power by $\frac{\epsilon}{n^*}$ to each channel (that is active),
 
-
-
-
-Let's give you $P_T+\epsilon$ power, say $|u^*| = n^*$
-
-$\frac{\epsilon}{n^*}$ to each channel (that is active)
-
+So the change in rate for $i$-th channel can be computed as
 \begin{align*}
-log[1+\frac{P_i+\frac{\epsilon}{n^*}}{N_i}] - log[1+\frac{P_i}{N_i}] &= log[\frac{N_i+P_i+\frac{\epsilon}{n^*}}{N_i+P_i}]\\
-&= log[1+\frac{\frac{\epsilon}{n^*}}{N_i+P_i}] \\
-&= log[1+\frac{\frac{\epsilon}{n^*}}{\frac{1}{\lambda^*}}]\\
-&= log[1+\frac{\epsilon}{n^*}\lambda^*]\\
-&\approx \frac{\epsilon\lambda^*}{n^*} \quad\leftarrow \text{change in rate for $i$-th channel}
+\log[1+\frac{P_i+\frac{\epsilon}{n^*}}{N_i}] - \log[1+\frac{P_i}{N_i}] &= \log[\frac{N_i+P_i+\frac{\epsilon}{n^*}}{N_i+P_i}]\\
+&= \log[1+\frac{\frac{\epsilon}{n^*}}{N_i+P_i}] \\
+&= \log[1+\frac{\frac{\epsilon}{n^*}}{\frac{1}{\lambda^*}}]\\
+&= \log[1+\frac{\epsilon}{n^*}\lambda^*]\\
+&\approx \frac{\epsilon\lambda^*}{n^*} 
 \end{align*}
 
-Total change in rate  = $n^*\frac{\epsilon\lambda^*}{n^*} = \epsilon \lambda^*$
-
-$\frac{\partial F_o(x^*)}{\partial P_T} = \lambda^*$
+Hence, Total change in rate  = $n^*\frac{\epsilon\lambda^*}{n^*} = \epsilon \lambda^*$, where $\lambda^*$ can be computed by
+$$\frac{\partial F_o(x^*)}{\partial P_T} = \lambda^*$$
 
 \subsection{Geometric interpretation of KKT}
 Consider the primal problem
@@ -1103,15 +1101,15 @@ s.t. \quad & F_i(x)= 0,\ \forall i\in\{i | F_i(x^*)=0\}\\
 &h_i(x) = 0\quad i=1,\cdots,p
 \end{align*}
 
-Consider linear constraints:
+Stacking up the constraints, we may expressed this problem with a linear constraint (in matrix form),
 \begin{align*}
 \min \quad & F_0(x)\\
 s.t. \quad & Ax = b
 \end{align*}
 
-Consider the optimum point $x^*$ and small perturbations about $x^*$, i.e., $x^*+\triangle x$ which perturbations stay feasible.\\
+Consider the optimum point $x^*$ and small perturbations about $x^*$, i.e., $x^*+\triangle x$ which perturbations stay feasible (so the point $x^*+\triangle x$ is still within feasible set).
 
-For feasibility $A(x^*+\triangle x) = b$:
+By feasibility, we have $A(x^*+\triangle x) = b$, and
 $$Ax^* + A\triangle x = b\Leftrightarrow A\triangle x = 0\Leftrightarrow \triangle x \in N(A)$$
 
 Apply first order condition,
@@ -1132,7 +1130,7 @@ Because $\nu$ is unconstrained, $-A^{T}\nu$ can by any vector in $R(A^T)$.
 	%\label{fig:graph} 
 \end{marginfigure}
 
-Put together with condition for optimality of constrained problem, a point $x^*\in\mathcal{C}$ is optimal iff 
+Put together with the condition for optimality of constrained problem, a point $x^*\in\mathcal{C}$ is optimal iff 
 $$\langle\nabla F_0(x^*), (y-x^*)\rangle\geq 0,\quad \forall y\in\mathcal{C}$$
 
 Since,
@@ -1160,12 +1158,20 @@ Since,
 From the first-order condition,
 $$\nabla_x L(x,\lambda,\nu) = \nabla F_0(x) + \sum^m_{i=1}\lambda_i\nabla F_i(x) + \sum^p_{i=1}\nu_i \nabla h_i(x) = 0$$
 
-we have
+We have
 $$\nabla F_0(x) = \sum^m_{i=1}(-\lambda_i)\nabla F_i(x) - \sum^p_{i=1}\nu_i\nabla h_i(x)$$
 
-Let's think about the case $m=1$, $p=0$, so we have $\nabla F_0(x)=-\lambda_1\nabla F_1(x)$.
+Let's think about the case $m=1$ and $p=0$, so we have $\nabla F_0(x)=-\lambda_1\nabla F_1(x)$.
+
+However, this method not always work since we require the KKT condition holds, as we show in the following example.
 
 \begin{example}
+	\begin{marginfigure}
+		\centering
+		\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_5.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
+	\end{marginfigure}
 Consider the optimization problem,
 \begin{align*}
 \min \quad & x_1+x_2\\
@@ -1173,105 +1179,126 @@ s.t. \quad & (x_1+1)^2 + x_2^2 \leq 1\\
 &(x_1-2)^2 + x_2^2 \leq 4
 \end{align*}
 
-\begin{marginfigure}
-	\centering
-	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_5.png}
-	%\caption{This is an inserted JPG graphic} 
-	%\label{fig:graph} 
-\end{marginfigure}
+Note that, this is a convex optimization problem with differentiable objective, and feasible set $\mathcal{C}=\{(0, 0)\}$, a singleton.
 
-Apply first order condition, we have
+
+If we compute the gradients for objective and constraints, and evaluate the gradient at the point $\{(0, 0)\}$ (since $x$ is only feasible at $\{(0, 0)\}$ ), we may find that
 \begin{align*}
-\nabla F_0(x) &=\begin{bmatrix}
+\nabla F_0(x) &=
+\begin{bmatrix}
 1\\
 1
 \end{bmatrix}\\
-\nabla F_1(x) &=\begin{bmatrix}
+\nabla F_1(x) &=
+\begin{bmatrix}
 2(x_1+1)\\
 2x_2
-\end{bmatrix}_{x=x^*=\begin{bmatrix}
+\end{bmatrix}
+|_{x=x^*=
+	\begin{bmatrix}
 	0\\
 	0
-	\end{bmatrix}}=\begin{bmatrix}
+	\end{bmatrix}
+}=
+\begin{bmatrix}
 2\\
 0
 \end{bmatrix}\\
-\nabla F_2(x) &=\begin{bmatrix}
-2(x_1-1)\\
+\nabla F_2(x) &=
+\begin{bmatrix}
+2(x_1-2)\\
 2x_2
-\end{bmatrix}_{x=x^*=\begin{bmatrix}
+\end{bmatrix}
+|_{x=x^*=
+	\begin{bmatrix}
 	0\\
 	0
-	\end{bmatrix}}=\begin{bmatrix}
+	\end{bmatrix}
+}=
+\begin{bmatrix}
 -4\\
 0
 \end{bmatrix}\\
 \end{align*}
 
+Apparently, we can not find $\lambda_1$ and $\lambda_2$ such that 
+$$\nabla F_0(x) =-\lambda_1\nabla F_i(x) -\lambda_2 \nabla F_2(x) $$
+
+In other words, the first order condition is not applicable here. The reason for this situation is, the Slater's condition does not hold for this problem.
+
+The feasible set here is $\mathcal{C}=\{(0, 0)\}$, it is a singleton. \textbf{For any finite set $\mathcal{C}\in\reals^{n}$, there is no interior point for such set $\mathcal{C}$, that is, $\text{int}(\mathcal{C}) =\emptyset$, and thus $\text{relint}(\mathcal{C}) =\emptyset$ as well.} Recall that, the Slater's condition requires there exist a relative interior point, so the condition fails here, and thus the strong duality and the KKT condition do not hold.
+
 
 \end{example}
 
 
-
+\subsection{Extend duality theory to generalized inequality}
 Recall generalized inequalities are defined with respect to proper cones. A cone is proper if it is
 
 	(1) closed
 	
 	(2) convex
 	
-	(3) pointed (if $x\in k and -x\in k$, then $x=0$)
+	(3) pointed (if $x\in k$ and $-x\in k$, then $x=0$)
 	
 	(4) Solid
 
 
-
-
-
-Recall derivation of weak duality:
+\vspace{0.3cm}
+As we want similar properties still hold when we extend to generalized inequality defined a proper cone, recall our previous derivation of weak duality:
 \begin{align*}
 g(\lambda) &= \min_x[F_0(x) + \sum^m_{i=1}\lambda_iF_i(x)]\\
 &\leq F_0(x^*) + \sum^m_{i=1}\lambda_i F_i(x^*) \\
 &\leq F_0(x^*)
 \end{align*}
 
-To accommodate generalized inequalities need to identify what set dual variables need to be restricted to keep
+To accommodate generalized inequalities, we need to identify what set dual variables need to be restricted to keep the following holds (so that the weak duality holds),
 \begin{equation*}
-\langle \lambda, F(x)\rangle\leq 0,\quad \forall x \text{ feasible}
+\langle \lambda, F(x)\rangle\leq 0,\ \forall x \text{ feasible}
 \end{equation*}
 
-
-
-\begin{itemize}
-	\item If the feasibility inequality constraints defined by a cone k
+Now, we are considering the feasibility inequality constraints are defined by a cone $k$, and we say that the dual variable need to be restricted in the dual cone $k^*$.
 	
-	\item The dual variables will need to the dual cone $k^*$
-$$k^*=\{y| \langle x,y\rangle \geq 0, \quad \forall x\in k \}$$
-\end{itemize}
+A dual cone $k^*$ is defined as 
+$$k^*=\{y| \langle x,y\rangle \geq 0,\ \forall x\in k \}$$
+and the dual cone $k^*$ is always closed and convex, whether the cone $k$ is convex or not.
+
+Also note that, a cone $k$ is self dual if $k^*=k$. For instance, The non-negative orthant cone ($\reals_+^m$), second order cone and PSD cone ($S^m_+$) are self dual.
+
+With this definition for dual cone, apparently we could keep 
+\begin{equation*}
+\langle \lambda, F(x)\rangle\leq 0,\ \forall x \text{ feasible}
+\end{equation*}
+so that the weak duality holds. 
 
 
-
+\begin{example}
 Recall the SDP problem,
 \begin{align*}
 \min\quad &c^Tx\\
-s.t.\quad &x_1F_1+x_2F_2+\ldots+x_nF_n+G\leq 0
+s.t.\quad &x_1F_1+x_2F_2+\ldots+x_nF_n+G\leq_k 0
 \end{align*}
-where $F_i\in S^m$, $G\in S^m$, inequality $k=S^m_+$.
+where $x\in\reals^n$, $F_i\in S^m$, $G\in S^m$, the cone $k=S^m_+$.
 
 
-$x\in \reals^n$
+Let $z\in S^m$ be the dual variable.
 
-Dual variables: $x\in S^m$
-
-Lagrangian function:
+The Lagrangian function given by
 \begin{align*}
 L(x,z) &= c^Tx + \langle z,x_1F_1+\ldots +x_nF_n+G\rangle \\
 &= c^Tx + \sum^n_{i=1}\langle z,x_iF_i\rangle+\langle z,G\rangle\\
 &= \sum^n_{i=1}x_i(c_i+\langle z, F_i\rangle)+\langle z,G\rangle
 \end{align*}
+is affine in $x$.
 
-Dual function:
+If you are confused where this inner product comes from, recall the definition of Frobenius inner product, for any $A, B\in\reals^{m\times n}$, we have the inner product,
+$$\langle A, B\rangle_F = \trace (A^T B)$$
+Furthermore, if $A, B\in S^m$, then
+$$\langle A, B\rangle_F = \trace (A^T B)=\trace (A B) $$
+and also remind yourself, the trace of a square matrix equals to sum of all its eigenvalues.
+
+The dual function is give by
 \begin{equation*}
-\label{eq6}
 g(z) = \min_x L(x,z)=\left\{
 \begin{aligned}
 -\infty &\quad\text{if}\ \exists i\ \text{s.t.}\ c_i+Tr(zF_i)\neq 0 \\
@@ -1280,23 +1307,26 @@ Tr(zG) & \quad\text{else}
 \right.
 \end{equation*}
 
-Dual optimization problem:
+Hence, to maintain the feasibility, the dual optimization problem can be expressed as
 \begin{align*}
 \max_z\quad &tr(zG)\\
-s.t.\quad &tr(zF_i)=-c_i\quad i=1,...,n\\
+s.t.\quad &tr(zG)=-c_i\quad \forall i=1,\cdots,n\\
 &z\geq 0
 \end{align*}
+where we utilize the fact that $S_+^m$ is self-dual, that is, $(S_+^m)^*= S_+^m$.
 
+In summarize, to formulate the dual problem, what we need to do are
 \begin{enumerate}
-	\item Given a cone $k$ find dual cone $k^*$
+	\item Given a cone $k$, find the dual cone $k^*$.
 	
-	\item Restrict multipliers to be in $k^*$
+	\item Restrict multipliers to be in $k^*$.
 \end{enumerate}
 
+\end{example}
 
-$g(z)=\min_x L(x,z)$
-
-$\min[c^Tx-<z_1-(x_1F_1+...+x_nF_n+G)>]$ where $x\in k^*$. If primal feasible, $(x_1F_1+...+x_nF_n+G)$ is in $k=S^m_+$
+%$g(z)=\min_x L(x,z)$
+%
+%$\min[c^Tx-<z_1-(x_1F_1+...+x_nF_n+G)>]$ where $x\in k^*$. If primal feasible, $(x_1F_1+...+x_nF_n+G)$ is in $k=S^m_+$
 
 
 
