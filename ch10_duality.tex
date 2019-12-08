@@ -164,6 +164,35 @@ So the dual optimization problem is formulated as
 	
 \end{definition}
 
+We also introduce some concepts here, e.g., relative interior and interior.
+
+Let $\mathcal{C}\subseteq \reals^n$, and let $x$ be some point in $\reals^n$, $B(x, \epsilon)$ be an open ball of radius $\epsilon$ centered at $x$ (i.e., a ball exclude the boundary points). Then
+
+\begin{definition}
+$x$ is on the boundary of $\mathcal{C}$, namely, $\partial\mathcal{C}$, if for all $\epsilon>0$, $B(x, \epsilon)\cap \mathcal{C} \neq \emptyset$ and $B(x, \epsilon)\cap \mathcal{C}^c \neq \emptyset$ .
+\end{definition}
+
+\begin{definition}
+	$x$ is in the interior of $\mathcal{C}$, namely, $\text{int}\ \mathcal{C}$, if $\exists \epsilon>0$ such that $B(x, \epsilon)\subset \mathcal{C}$.
+\end{definition}
+
+\begin{definition}
+	$x$ is in the relative interior o $\mathcal{C}$, namely, $\text{rel int}\ \mathcal{C}$, if $\exists \epsilon>0$ such that $B(x, \epsilon)\cap \text{aff}\ \mathcal{C} \subseteq \mathcal{C}$.
+\end{definition}
+
+\begin{definition}
+	The closure of $\mathcal{C}$ is defined as $\text{cl}\ \mathcal{C} = \mathcal{C} \cup \partial\mathcal{C}$.
+\end{definition}
+
+\begin{definition}
+	The relative boundary of $\mathcal{C}$ is defined as $\text{rel}\ \partial\mathcal{C} = \text{cl}\  \mathcal{C}\backslash \text{rel int}\ \mathcal{C}$.
+\end{definition}
+
+\begin{definition}
+	$\mathcal{C}$ is closed if $\partial\mathcal{C} \subset \mathcal{C}$, open if $\partial\mathcal{C} \cap \mathcal{C} =\emptyset$, and compact if it is closed and bounded in $\reals^{n}$.
+\end{definition}
+
+
 \begin{example}
 	Convex problem that doesn't satisfy Slater's:
 	\begin{align*}
