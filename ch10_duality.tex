@@ -1084,11 +1084,11 @@ So the change in rate for $i$-th channel can be computed as
 &\approx \frac{\epsilon\lambda^*}{n^*} 
 \end{align*}
 
-Hence, Total change in rate  = $n^*\frac{\epsilon\lambda^*}{n^*} = \epsilon \lambda^*$, where $\lambda^*$ can be computed by
+Hence, total change in rate  = $n^*\frac{\epsilon\lambda^*}{n^*} = \epsilon \lambda^*$, where $\lambda^*$ can be computed by
 $$\frac{\partial F_o(x^*)}{\partial P_T} = \lambda^*$$
 
 \subsection{Geometric interpretation of KKT}
-Consider the primal problem
+Consider the minimization problem
 \begin{align*}
 \min \quad & F_0(x)\\
 s.t. \quad & F_i(x)\leq 0\quad i=1,\cdots,m\\
@@ -1107,7 +1107,7 @@ Stacking up the constraints, we may expressed this problem with a linear constra
 s.t. \quad & Ax = b
 \end{align*}
 
-Consider the optimum point $x^*$ and small perturbations about $x^*$, i.e., $x^*+\triangle x$ which perturbations stay feasible (so the point $x^*+\triangle x$ is still within feasible set).
+Consider the optimum point $x^*$ and small perturbations about $x^*$, i.e., $x^*+\triangle x$ which perturbations stay feasible (so the point $x^*+\triangle x \in \mathcal{C}$ as well).
 
 By feasibility, we have $A(x^*+\triangle x) = b$, and
 $$Ax^* + A\triangle x = b\Leftrightarrow A\triangle x = 0\Leftrightarrow \triangle x \in N(A)$$
@@ -1119,10 +1119,6 @@ Apply first order condition,
 \Leftrightarrow & \nabla F_0(x) = -A^T\nu
 \end{align*}
 
-Because $\nu$ is unconstrained, $-A^{T}\nu$ can by any vector in $R(A^T)$.
-
-
-
 \begin{marginfigure}
 	\centering
 	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_3.png}
@@ -1130,27 +1126,34 @@ Because $\nu$ is unconstrained, $-A^{T}\nu$ can by any vector in $R(A^T)$.
 	%\label{fig:graph} 
 \end{marginfigure}
 
-Put together with the condition for optimality of constrained problem, a point $x^*\in\mathcal{C}$ is optimal iff 
-$$\langle\nabla F_0(x^*), (y-x^*)\rangle\geq 0,\quad \forall y\in\mathcal{C}$$
-
-Since,
-\begin{align*}
-\nabla F_0(x^*)^T \triangle x &\geq 0, \forall \triangle x\in N(A)\\
-\Leftrightarrow \nabla F_0(x^*) &\perp N(A)\\
-\Leftrightarrow \nabla F_0(x^*) &\in N(A)^{\perp} = R(A^T)
-\end{align*}
-
-
-
-
-
-
 \begin{marginfigure}
 	\centering
 	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_4.png}
 	%\caption{This is an inserted JPG graphic} 
 	%\label{fig:graph} 
 \end{marginfigure}
+
+Because $\nu$ is unconstrained, $-A^{T}\nu$ can by any vector in $R(A^T)$.
+
+Also notice that,
+\begin{align*}
+&\quad \nabla F_0(x) = -A^T\nu\in R(A^T) \\
+&\Rightarrow \nabla F_0(x)\in R(A^T) \\
+&\Leftrightarrow F_0(x^*) \in N(A)^{\perp} \\
+&\Leftrightarrow F_0(x^*) \perp N(A)
+\end{align*}
+
+
+Put together with the condition for optimality of constrained problem, a point $x^*\in\mathcal{C}$ is optimal if and only if 
+$$\langle\nabla F_0(x^*), (y-x^*)\rangle\geq 0,\quad \forall y\in\mathcal{C}$$
+
+In a word, there is no $\delta_x$ such that has an angle with $\nabla F_0(x^*)$ less than 90 degree, which will leads to a descend of the objective (the above inner produce is non-negative grantees that there is only possible to increase the objective ).
+
+
+
+
+
+
 
 
 
@@ -1269,7 +1272,7 @@ With this definition for dual cone, apparently we could keep
 \begin{equation*}
 \langle \lambda, F(x)\rangle\leq 0,\ \forall x \text{ feasible}
 \end{equation*}
-so that the weak duality holds. 
+so that the weak duality holds. Similar conditions, propositions and theorems could also be derived for the general inequality case, please refer to \textit{Convex optimization} for more details.
 
 
 \begin{example}
