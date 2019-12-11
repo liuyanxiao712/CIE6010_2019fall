@@ -983,7 +983,7 @@ Thus, we have the \textbf{KKT conditions}:
 
 
 \begin{theorem}\label{kktsufficient}
-	When the primal problem is convex, the KKT condtions are also sufficient for the points to be primal and dual optimal with zero duality gap, that is, 
+	When the primal problem is convex, the KKT conditions are also sufficient for the points to be primal and dual optimal with zero duality gap, that is, 
 	
 	If
 	
@@ -1072,7 +1072,7 @@ s.t. \quad & 0 \leq P_i,\ i\in[m]\\
 The Lagrange function is formulated as
 $$L(P, \lambda, \mu) = -\sum^n_{l=1}log_l[1+\frac{P_l}{N_l}] + \lambda(\sum^n_{l=1}P_l-P_T) - \sum^n_{l=1}\mu_lP_l $$
 
-By the KKT condtions, we have
+By the KKT conditions, we have
 \begin{align*}
 (1)\quad &\frac{\partial}{\partial P_i}L(P, \lambda, \mu) = -\frac{N_i}{N_i+P_i}\frac{1}{N_i} + \lambda - \mu_i = 0 \Leftrightarrow N_i+P_i = \frac{1}{\lambda-\mu_i}\\
 (2)\quad &P_i \geq 0,\ \forall i\in[m]\ \text{and}\ \sum^n_{l=1}P_l \leq P_T\\
@@ -1176,7 +1176,7 @@ Also notice that,
 Put together with the condition for optimality of constrained problem, a point $x^*\in\mathcal{C}$ is optimal if and only if 
 $$\langle\nabla F_0(x^*), (y-x^*)\rangle\geq 0,\quad \forall y\in\mathcal{C}$$
 
-In a word, there is no $\Delta_x$ such that has an angle with $\nabla F_0(x^*)$ less than 90 degree, which will leads to a descend of the objective (the above inner produce is non-negative grantees that there is only possible to increase the objective ).
+In a word, there is no $\Delta_x$ such that has an angle with $\nabla F_0(x^*)$ less than 90 degree, which will leads to a descend of the objective (the above inner produce is non-negative guaranteeing that there is only possible to increase the objective ).
 
 
 

@@ -67,6 +67,7 @@ Recall the problem formulations previously, the primal optimization problem is f
 	s.t. \quad&F_i(x)\leq 0, \quad i = 1,\cdots,m \\
 	&h_i(x)= 0, \quad i = 1,\cdots,p
 \end{align*}
+
 The Lagrange function is given by 
 \begin{equation*}
 	L(x,\lambda,\nu) = F_0(x) + \sum^m_{i=1}\lambda_i F_i(x) + \sum^p_{i=1}\nu_i h_i(x)
@@ -89,7 +90,7 @@ So the dual optimization problem is formulated as
 \noindent\textbf{A few observations}
 \begin{enumerate}
 	
-	\item $g(\lambda, \nu)$ is concave in $(\lambda, \nu)$ for all $F_0,...,F_m$, $h_0,...,h_p$.
+	\item $g(\lambda, \nu)$ is concave in $(\lambda, \nu)$ for all $F_0,\cdots,F_m$, $h_0,\cdots,h_p$.
 	
 	\begin{proof}
 		Recall that
@@ -154,7 +155,7 @@ So the dual optimization problem is formulated as
 		\item $Ax = b$
 	\end{enumerate}
 	
-	Furthermore, if some of the inequality contraints are defined by affine functions, this conditions can be weaken a bit. Suppose $F_i$ are affine for $i=1,\cdots, k$, where $k<m$, then the Slater conditions requires that there exists an $x\in\text{relint}\ D$ such that
+	Furthermore, if some of the inequality constraints are defined by affine functions, this conditions can be weaken a bit. Suppose $F_i$ are affine for $i=1,\cdots, k$, where $k<m$, then the Slater conditions requires that there exists an $x\in\text{relint}\ D$ such that
 	\begin{enumerate}
 		\item $F_i(x) \leq 0,\ \forall i = 1,\cdots, k$
 		\item $F_i(x) < 0,\ \forall i = k+1,\cdots, m$.
@@ -162,6 +163,35 @@ So the dual optimization problem is formulated as
 	\end{enumerate}
 	
 \end{definition}
+
+We also introduce some concepts here, e.g., relative interior and interior.
+
+Let $\mathcal{C}\subseteq \reals^n$, and let $x$ be some point in $\reals^n$, $B(x, \epsilon)$ be an open ball of radius $\epsilon$ centered at $x$ (i.e., a ball exclude the boundary points). Then
+
+\begin{definition}
+$x$ is on the boundary of $\mathcal{C}$, namely, $\partial\mathcal{C}$, if for all $\epsilon>0$, $B(x, \epsilon)\cap \mathcal{C} \neq \emptyset$ and $B(x, \epsilon)\cap \mathcal{C}^c \neq \emptyset$ .
+\end{definition}
+
+\begin{definition}
+	$x$ is in the interior of $\mathcal{C}$, namely, $\text{int}\ \mathcal{C}$, if $\exists \epsilon>0$ such that $B(x, \epsilon)\subset \mathcal{C}$.
+\end{definition}
+
+\begin{definition}
+	$x$ is in the relative interior o $\mathcal{C}$, namely, $\text{rel int}\ \mathcal{C}$, if $\exists \epsilon>0$ such that $B(x, \epsilon)\cap \text{aff}\ \mathcal{C} \subseteq \mathcal{C}$.
+\end{definition}
+
+\begin{definition}
+	The closure of $\mathcal{C}$ is defined as $\text{cl}\ \mathcal{C} = \mathcal{C} \cup \partial\mathcal{C}$.
+\end{definition}
+
+\begin{definition}
+	The relative boundary of $\mathcal{C}$ is defined as $\text{rel}\ \partial\mathcal{C} = \text{cl}\  \mathcal{C}\backslash \text{rel int}\ \mathcal{C}$.
+\end{definition}
+
+\begin{definition}
+	$\mathcal{C}$ is closed if $\partial\mathcal{C} \subset \mathcal{C}$, open if $\partial\mathcal{C} \cap \mathcal{C} =\emptyset$, and compact if it is closed and bounded in $\reals^{n}$.
+\end{definition}
+
 
 \begin{example}
 	Convex problem that doesn't satisfy Slater's:
@@ -522,7 +552,6 @@ Furthermore, if strong duality holds, the problem $(*)$ (i.e., problem that is e
 
 Implication: Adjust the prices $\lambda, \nu$ so that the solution to relaxed problem matches the solution to the primal problem.
 \subsection{Sensitivity Analysis}
-
 \begin{marginfigure}
 	\centering
 	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1127_4.png}
@@ -679,7 +708,7 @@ More precisely, that's because
 \end{example}
 
 
-\subsection{Final interpretation}
+\subsection{A final interpretation}
 Consider the problem
 \begin{align*}
 	\min \quad & F_0(x)\\
@@ -700,29 +729,35 @@ We want connect to the problems with multiple (vector) objective $(F_0,F_1,\cdot
 % Below are notes for Dec 2
 \vspace{0.5cm}
 \subsection{Dual of LPs}
-Consider the primal problem is an LP problem as follows,
+Consider an LP problem as the primal problem, which is given by
 \begin{align*}
 \min\quad &c^Tx\\
 s.t.\quad &Ax\leq b
 \end{align*}
+where the constraint is the matrix form of $a_i^T x\leq b_i$, for $i=1,\cdots, m$.
 
 The Lagrange function is 
 \begin{align*}
-L(x,\lambda) &= c^Tx + \sum^m_{i=1}(a_i^Tx-b_i)\\
-&= c^Tx+\begin{bmatrix}
+L(x,\lambda) 
+&= c^Tx + \sum^m_{i=1}\lambda_i (a_i^Tx-b_i)\\
+&= c^Tx+
+\begin{bmatrix}
 \lambda_1&\lambda_2&\cdots&\lambda_m
-\end{bmatrix}\begin{bmatrix}
+\end{bmatrix}
+\begin{bmatrix}
 a_i^Tx-b_1\\
 \vdots\\
 a_m^Tx-b_m
 \end{bmatrix} \\
 &=c^Tx+\lambda^T(Ax-b)\\
-&= -\lambda^Tb-(c^T+\lambda^TA)x
+&= -\lambda^Tb+(c^T+\lambda^TA)x
 \end{align*}
 
 The dual function is
 \begin{align*}
-g(\lambda) &= \min_x[-\lambda^Tb+(c^T+\lambda^TA)x]\\
+g(\lambda) 
+&= \min_x L(x,\lambda) \\
+&= \min_x[-\lambda^Tb+(c^T+\lambda^TA)x]\\
 &=
 \label{eq6}
 \left\{
@@ -733,36 +768,32 @@ g(\lambda) &= \min_x[-\lambda^Tb+(c^T+\lambda^TA)x]\\
 \right.
 \end{align*}
 
-So the dual optimization problem is formulated as
+The dual optimization problem is formulated as
 \begin{align*}
-\min\quad &g(\lambda)\\
+\max\quad &g(\lambda)\\
 s.t.\quad &\lambda \geq 0
 \end{align*}
 
-$\Rightarrow$
+As we showed above, the dual problem is feasible iff $c^T+\lambda^TA=0$, so in order to maintain the feasibility we may consider the problem with the form
 \begin{align*}
-\min\quad &g(\lambda)\\
+\max\quad &g(\lambda)\\
 s.t.\quad &\lambda\geq 0\\
 &c^T+\lambda^TA=0
 \end{align*}
 
-$\Leftrightarrow$
+which is equivalent to
 \begin{align*}
-\min\quad &-\lambda^Tb\\
+\max\quad &-\lambda^Tb\\
 s.t.\quad &\lambda\geq 0\\
 &c^T+\lambda^TA=0
 \end{align*}
 
 
-
-
-
-Following is initial note on Dec 2nd.
-
+\textbf{Observations:}
 \begin{itemize}
-	\item Dual of an LP is an LP
+	\item The dual of an LP problem is still an LP problem.
 	
-	\item Maybe not clear from form but have strong duality so $p^*=d^*$.
+	\item It maybe not clear from the form, but we have strong duality holds, so $p^*=d^*$.
 \end{itemize}
 
 \begin{center}
@@ -770,64 +801,69 @@ Following is initial note on Dec 2nd.
 	\hline 
 	&Primal & Dual\\
 	\hline  
-	variables & $n$ & $m$\\
+	number of variables & $n$ & $m$\\
 	\hline 
-	constant&$m$&$n+m$\\
+	number of constraints&$m$&$n+m$\\
 	\hline 
 \end{tabular}
 \end{center}
 
 
+\vspace{0.3cm}
+To verify above results, we show that, for this LP case, the dual of the dual problem is just the given primal problem (i.e., we retrieve the original primal problem).
+
+The dual optimization problem we obtain above can be expressed as follows
 \begin{align*}
 \min\quad &b^T\lambda\\
-s.t.\quad &-\lambda\leq 0\quad\text{inequality multipliers }z\\
-&A^T\lambda = -c\quad \text{equality multipliers }y
+s.t.\quad &-\lambda\leq 0\quad\\
+&A^T\lambda = -c\quad 
 \end{align*}
+which has the same optimal solution.
 
+Let $z_i$ be the inequalities multipliers, and $y_i$ be the equality multipliers.
+
+The Lagrange function is
+$$L(\lambda,x,y) = b^T\lambda + z^T(-\lambda)+y^T(A^T\lambda + c)$$
+
+The dual function is
 \begin{align*}
-L(\lambda,x,y) &= b^T\lambda + z^T(-\lambda)+y^T(A^T\lambda + c)\\
-g(z,y) = \min_{\lambda}L(\lambda,z,y) &= \min_{\lambda}y^Tc+[b^T-z^T+y^TA^T]\lambda\\
+g(z,y) 
+&= \min_{\lambda}L(\lambda,z,y)\\
+&= \min_{\lambda}y^Tc+(b^T-z^T+y^TA^T)\lambda\\
 &=
-%\label{eq6}
 \left\{
 \begin{aligned}
-y^Tc &\quad \text{if} &b^T-z^T+y^TA^T=0 \\
--\infty &\quad \text{if} &else
+y^Tc &\quad \text{if}\ b^T-z^T+y^TA^T=0 \\
+-\infty &\quad\text{else}
 \end{aligned}
 \right.
 \end{align*}
 
-
-
-
-Dual optimization:
+The dual problem is
 \begin{align*}
 \max\quad &g(z,y)\\
 s.t.\quad &z \geq 0
 \end{align*}
-$\Leftrightarrow$
 
-
+To main the feasibility, we may have the form
 \begin{align*}
 \min\quad &y^Tc\\
 s.t.\quad &b^T-z^T+y^TA^T=0\\
 &z\geq 0
 \end{align*}
-constants:
 
-
+Notice that, the constraints
 \begin{align*}
-b^T=y^TA^T &= z^T\\
+b^T-z^T+y^TA^T&=0\\
 z&\geq 0
 \end{align*}
 
-$\Leftrightarrow$
+is equivalent to
+$$b^T+y^TA^T \geq 0$$
+by a simple rearrangement and substitution.
 
-\begin{equation*}
-b^T+y^TA^T \geq 0
-\end{equation*}
 
-Thus this problem can also be written as:
+Thus, this dual problem can also be written as:
 \begin{align*}
 \max\quad &y^Tc\\
 s.t.\quad &b+Ay \geq 0
@@ -841,8 +877,491 @@ s.t.\quad &b+A(-x) \geq 0
 
 $\Rightarrow$
 \begin{align*}
-\max\quad &c^Tx\\
+\min\quad &c^Tx\\
 s.t.\quad &Ax \leq b
 \end{align*}
 
+Note that the second form is just utilize the change of variable and let $-x=y$, and the third one has exactly the same optimal solution(but not optimal value), and the optimal value have a opposite sign.
+
+By this argument, we show that, the dual of the dual problem is just the original LP problem, it implies the strong duality holds by the validation of weak duality(i.e., use weak duality for twice), since the two inequality holds only if the equality holds.
+
+
+\subsection{Karush-Kuhn-Tucker(KKT) conditions}
+Consider the optimization problem for which primal and dual optimal values are obtained and $p^*=d^*$ (i.e., strong duality holds).
+
+Let $x^*$ be the primal optimum, and $(\lambda^*,\nu^*)$ be the dual optimum.
+
+Consider the primal problem:
+\begin{align*}
+\max\quad &F_0(x)\\
+s.t.\quad &F_i(x)\leq 0\quad i = 1,\cdots,m\\
+&h_i(x)\leq 0\quad i = 1,\cdots,p
+\end{align*}
+
+Note: we have no assumption of convexity for this problem.
+
+The Lagrange function and the dual function are given by 
+\begin{align*}
+L(x,\lambda,\nu) &= F_0(x)+\sum^m_{i=1}\lambda_iF_i(x) + \sum^p_{i=1}\nu_ih_i(x)\\
+g(\lambda,\nu)&= \min_xL(x,\lambda,\nu)
+\end{align*}
+
+Since strong duality holds at $(x^*,\lambda^*,\nu^*)$,
+\begin{align*}
+F_0(x^*) 
+&= g(\lambda^*,\nu^*) \\
+&= \min_{x}[F_0(x)+\sum^m_{i=1}\lambda_i^*F_i(x) + \sum^p_{i=1}\nu_i^*h_i(x)]\\
+&\leq F_0(x^*) +\sum^m_{i=1}\lambda_i^* F_i(x^*) + \sum^p_{i=1}\nu_i^* h_i(x^*)\\
+&\leq F_0(x^*)
+\end{align*}
+
+
+The first inequality is because the primal optimal $x^*$ must minimize $L(x^*,\lambda^*,\nu^*)$, and the second inequality is due to the negativity of the second term on r.h.s. 
+
+We claim that the second inequity must hold at equality, since $F_0(x^*)=F_0(x^*)$, and an interesting result can be derived from this fact.
+
+
+\vspace{0.3cm}
+\textbf{Complementary slackness:}
+
+The complementary slackness condition
+$$\sum^m_{i=1}\lambda_iF_i(x^*)=0,\ \forall i\in [m]$$
+holds for any primal optimal $x^*$ and any dual optimal $\lambda^*$, when the strong duality holds.
+
+We can express the complementary slackness condition as
+
+	(1) If $i$-th constraint is "active" (i.e., $F_i(x)=0)$, then $\lambda_i^*=0$ or $\lambda_i^*>0$.
+	
+	(2) If $i$-th constraint is "inactive" (i.e., $F_i(x)<0)$, then $\lambda_i^*=0$.
+
+Conversely,
+
+	(3) If $\lambda_i^*=0$, then $F_i(x^*)=0$ or $F_i(x^*)<0$.
+	
+	(4) If $\lambda_i^*>0$, then $F_i(x^*)=0$.
+
+\vspace{0.5cm}
+Recall the pricing interpretation,
+
+$\rightarrow$ perturb $F_i(x)\leq 0$ to $F_i(x)\leq \epsilon$
+
+$\rightarrow$ $\lambda_i^* = - \frac{d}{d\epsilon}p^*(0,0)$
+
+
+If constraint is "inactive", then there is slack in resource $i$ but since $\lambda_i^* = 0$, no gain by having more of that resource.
+
+If constraint is "active", then resource is totally used, so cannot use more even if you want to.
+
+
+\vspace{0.5cm}
+We can say more if the problem is differentiable, assume that
+\begin{itemize}
+	\item $F_i(x)$ and $h_i(x)$ are all differentiable.
+	
+	\item Strong convexity holds.
+\end{itemize}
+
+Observe that $x^*$ minimizes $L(x,\lambda^*,\nu^*)$, and since Lagrangian function is differentiable, we have the first order condition:
+\begin{equation*}
+\nabla_x L(x,\lambda^*,\nu^*) {\vert}_{x=x^*} = 0
+\end{equation*}
+
+Thus, we have the \textbf{KKT conditions}:
+\begin{enumerate}
+	\item $\nabla_x L(x^*,\lambda^*,\nu^*) = \nabla F_0(x^*)+\sum^m_{i=1}\lambda^*_i \nabla F_i(x^*)+\sum^p_{i=1}\nu_i^*\nabla h_i(x^*)=0$
+	
+	\item $F_i(x^*) \leq 0,\forall i=[m]$,\  $h_i(x^*)=0,\forall i=[p]$.
+	
+	\item $\lambda_i^*\geq 0,\forall i=[m]$.
+	
+	\item $\lambda_i^*F_i(x_i^*)= 0,\forall i=[m]$.
+\end{enumerate}
+
+\begin{theorem}\label{kktnecessary}
+	If $(x^*,\lambda^*,\nu^*)$ are primal and dual optimal, for a differentiable problem for which strong duality holds, they must satisfy KKT conditions. Note that this is necessary but not sufficient.
+\end{theorem}
+
+
+\begin{theorem}\label{kktsufficient}
+	When the primal problem is convex, the KKT condtions are also sufficient for the points to be primal and dual optimal with zero duality gap, that is, 
+	
+	If
+	
+		(1) $F_i$ and $h_i$ are all differentiable, and
+		
+		(2) $F_i$ are convex functions and $h_i$ are affine functions
+	
+	Then for any points $(\tilde{x},\tilde{\lambda},\tilde{\nu})$ satisfy the KKT conditions, we may have
+		
+	 	(1)	$\tilde{x}$ is primal optimal, $(\tilde{\lambda},\tilde{\nu})$ is  dual optimal, and
+	 	
+	 	(2) Duality gap is zero (i.e., Strong duality holds).
+	 	
+
+\end{theorem}
+
+\begin{proof}
+	Let $(\tilde{x},\tilde{\lambda},\tilde{\nu})$ be a point that satisfy the KKT conditions. 
+	
+	Notice that, the Lagrange function
+	$$L(x,\tilde{\lambda}, \tilde{\nu}) = F_0(x) + \sum^m_{i=1}\tilde{\lambda_i}F_i(x) + \sum^p_{i=1}\tilde{\nu_i}h_i(x)$$
+	is a convex function in $x$. 
+	
+	Therefore, if we can find a point of zero-gradient, that is the global optimum.
+	
+	The KKT-(1) tells us that , for the point $(\tilde{x},\tilde{\lambda},\tilde{\nu})$ we have
+	$$\nabla_xL(\tilde{x},\tilde{\lambda},\tilde{\nu}) = 0$$
+
+	Hence, $\tilde{x}$ minimizes $L(x,\tilde{\lambda},\tilde{\nu})$. 
+	
+	So the dual function is given by	
+	\begin{align*}
+	g(\tilde{\lambda}, \tilde{\nu}) 
+	&= \min_xL(x,\tilde{\lambda},\tilde{\nu})\\
+	&= L(\tilde{x},\tilde{\lambda},\tilde{\nu})\\
+	&= F_0(\tilde{x}) + \sum^m_{i=1}\tilde{\lambda_i}F_i(\tilde{x}) + \sum^p_{i=1}\tilde{\nu_i}h_i(\tilde{x})\\
+	&= F_0(\tilde{x})
+	\end{align*}
+	where the third equality comes from the KKT-(2) and KKT-(4).
+	
+	Since $g(\tilde{\lambda},\tilde{\nu}) = F_0(\tilde{x})$, $\tilde{x}$ and $(\tilde{\lambda},\tilde{\nu})$ have zero duality gap so the strong duality holds, and therefore $\tilde{x}$ is primal optimal and $(\tilde{\lambda},\tilde{\nu})$ is dual optimal.
+\end{proof}
+So far, we have proposed two theorems regarding KKT conditions. One is necessary and the other one is sufficient. Certainly it is better if there is a theorem that is both necessary and sufficient.
+
+To combine the above results such that KKT is necessary and sufficient, we need the following
+
+	(1) Optimization problem that is differentiable so that KKT conditions exist;
+	
+	(2) Convex optimization problem so that we can apply Theorem \ref{kktsufficient} (sufficiently);
+	
+	(3) Strong duality holds so that we can apply Theorem \ref{kktnecessary} (necessity).
+
+To summarize, we have the theorem,
+\begin{theorem}
+If a convex optimization problem with differentiable objective and constraints functions satisfy Slater's condition(i.e., strong duality holds), then the KKT conditions provide necessary and sufficient conditions for optimality. 
+\end{theorem}
+
 % Above are notes for Dec 2
+
+
+
+
+% Below are notes for Dec 4
+\vspace{0.5cm}
+\subsection{Walter-pouring Problem}
+Given the maximization problem
+\begin{align*}
+\max_{P_1,\cdots,P_n}\quad &\sum^n_{i=1}log[1+\frac{P_i}{N_i}]\\
+s.t. \quad & 0 \leq P_i,\ i\in[m]\\
+&\sum^n_{i=1}P_i\leq P_T
+\end{align*}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_1.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+We convert it to the general form (minimize the objective),
+\begin{align*}
+\min_{P_1,\cdots,P_n}\quad &-\sum^n_{i=1}log[1+\frac{P_i}{N_i}]\\
+s.t. \quad & 0 \leq P_i,\ i\in[m]\\
+&\sum^n_{i=1}P_i\leq P_T
+\end{align*}
+
+The Lagrange function is formulated as
+$$L(P, \lambda, \mu) = -\sum^n_{l=1}log_l[1+\frac{P_l}{N_l}] + \lambda(\sum^n_{l=1}P_l-P_T) - \sum^n_{l=1}\mu_lP_l $$
+
+By the KKT condtions, we have
+\begin{align*}
+(1)\quad &\frac{\partial}{\partial P_i}L(P, \lambda, \mu) = -\frac{N_i}{N_i+P_i}\frac{1}{N_i} + \lambda - \mu_i = 0 \Leftrightarrow N_i+P_i = \frac{1}{\lambda-\mu_i}\\
+(2)\quad &P_i \geq 0,\ \forall i\in[m]\ \text{and}\ \sum^n_{l=1}P_l \leq P_T\\
+(3)\quad &\lambda\geq 0,\ \mu\geq 0\\
+(4)\quad &\lambda(\sum^n_{l=1}P_l - P_T) = 0\ \text{and}\ \mu_iP_i = 0\Leftrightarrow \text{if}\ P_i > 0, \text{then}\ \mu_i =0\ 
+\end{align*}
+
+To solve this question,
+\begin{enumerate}
+	\item First observe that you will use all power since $F_0$ is monotonically increasing in each $P_i$, so we have
+	$$\sum^n_{l=1}P_l = P_T$$
+	
+	\item Look at KKT-(1):
+	
+	(a) If $P_i>0$ then $\mu_i = 0$ by KKT-(4), and therefore $N_i+P_i = \frac{1}{\lambda}$.
+	
+	(b) If $P_i= 0$, by KKT-(3) $\mu_i\ge 0$, and therefore $N_i = \frac{1}{\lambda - \mu_i}\geq \frac{1}{\lambda}$.
+	
+	(c) By KKT-(2), we require $P_i\geq 0$, so we conclude that 
+	$$P_i = \max\{\frac{1}{\lambda}-N_i, 0 \}$$
+\end{enumerate}
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_2.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\vspace{0.3cm}
+Let's give you $P_T+\epsilon$ power, says $|u^*| = n^*$, and we increase the power by $\frac{\epsilon}{n^*}$ to each channel (that is active),
+
+So the change in rate for $i$-th channel can be computed as
+\begin{align*}
+\log[1+\frac{P_i+\frac{\epsilon}{n^*}}{N_i}] - \log[1+\frac{P_i}{N_i}] &= \log[\frac{N_i+P_i+\frac{\epsilon}{n^*}}{N_i+P_i}]\\
+&= \log[1+\frac{\frac{\epsilon}{n^*}}{N_i+P_i}] \\
+&= \log[1+\frac{\frac{\epsilon}{n^*}}{\frac{1}{\lambda^*}}]\\
+&= \log[1+\frac{\epsilon}{n^*}\lambda^*]\\
+&\approx \frac{\epsilon\lambda^*}{n^*} 
+\end{align*}
+
+Hence, total change in rate  = $n^*\frac{\epsilon\lambda^*}{n^*} = \epsilon \lambda^*$, where $\lambda^*$ can be computed by
+$$\frac{\partial F_o(x^*)}{\partial P_T} = \lambda^*$$
+
+\subsection{Geometric interpretation of KKT}
+Consider the minimization problem
+\begin{align*}
+\min \quad & F_0(x)\\
+s.t. \quad & F_i(x)\leq 0\quad i=1,\cdots,m\\
+&h_i(x) = 0\quad i=1,\cdots,p
+\end{align*}
+which is equivalent to 
+\begin{align*}
+\min \quad & F_0(x)\\
+s.t. \quad & F_i(x)= 0,\ \forall i\in\{i | F_i(x^*)=0\}\\
+&h_i(x) = 0\quad i=1,\cdots,p
+\end{align*}
+
+Stacking up the constraints, we may expressed this problem with a linear constraint (in matrix form),
+\begin{align*}
+\min \quad & F_0(x)\\
+s.t. \quad & Ax = b
+\end{align*}
+
+Consider the optimum point $x^*$ and small perturbations about $x^*$, i.e., $x^*+\triangle x$ which perturbations stay feasible (so the point $x^*+\triangle x \in \mathcal{C}$ as well).
+
+By feasibility, we have $A(x^*+\triangle x) = b$, and
+$$Ax^* + A\triangle x = b\Leftrightarrow A\triangle x = 0\Leftrightarrow \triangle x \in N(A)$$
+
+Apply first order condition,
+\begin{align*}
+&L(x,\nu) = F_0(x) +\nu^T(Ax-b)\\
+\Leftrightarrow & \nabla_xL(x,\nu) = \nabla F_0(x) + A^T\nu  = 0\\
+\Leftrightarrow & \nabla F_0(x) = -A^T\nu
+\end{align*}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_3.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_4.png}
+	%\caption{This is an inserted JPG graphic} 
+	%\label{fig:graph} 
+\end{marginfigure}
+
+Because $\nu$ is unconstrained, $-A^{T}\nu$ can by any vector in $R(A^T)$.
+
+Also notice that,
+\begin{align*}
+&\quad \nabla F_0(x) = -A^T\nu\in R(A^T) \\
+&\Rightarrow \nabla F_0(x)\in R(A^T) \\
+&\Leftrightarrow F_0(x^*) \in N(A)^{\perp} \\
+&\Leftrightarrow F_0(x^*) \perp N(A)
+\end{align*}
+
+
+Put together with the condition for optimality of constrained problem, a point $x^*\in\mathcal{C}$ is optimal if and only if 
+$$\langle\nabla F_0(x^*), (y-x^*)\rangle\geq 0,\quad \forall y\in\mathcal{C}$$
+
+In a word, there is no $\Delta_x$ such that has an angle with $\nabla F_0(x^*)$ less than 90 degree, which will leads to a descend of the objective (the above inner produce is non-negative grantees that there is only possible to increase the objective ).
+
+
+
+
+
+
+
+
+
+\subsection{First-order for general problem}
+From the first-order condition,
+$$\nabla_x L(x,\lambda,\nu) = \nabla F_0(x) + \sum^m_{i=1}\lambda_i\nabla F_i(x) + \sum^p_{i=1}\nu_i \nabla h_i(x) = 0$$
+
+We have
+$$\nabla F_0(x) = \sum^m_{i=1}(-\lambda_i)\nabla F_i(x) - \sum^p_{i=1}\nu_i\nabla h_i(x)$$
+
+Let's think about the case $m=1$ and $p=0$, so we have $\nabla F_0(x)=-\lambda_1\nabla F_1(x)$.
+
+However, this method not always work since we require the KKT condition holds, as we show in the following example.
+
+\begin{example}
+	\begin{marginfigure}
+		\centering
+		\includegraphics[width=1.8in,height=1.8in]{figures/ch10/figure1204_5.png}
+		%\caption{This is an inserted JPG graphic} 
+		%\label{fig:graph} 
+	\end{marginfigure}
+Consider the optimization problem,
+\begin{align*}
+\min \quad & x_1+x_2\\
+s.t. \quad & (x_1+1)^2 + x_2^2 \leq 1\\
+&(x_1-2)^2 + x_2^2 \leq 4
+\end{align*}
+
+Note that, this is a convex optimization problem with differentiable objective, and feasible set $\mathcal{C}=\{(0, 0)\}$, a singleton.
+
+
+If we compute the gradients for objective and constraints, and evaluate the gradient at the point $\{(0, 0)\}$ (since $x$ is only feasible at $\{(0, 0)\}$ ), we may find that
+\begin{align*}
+\nabla F_0(x) &=
+\begin{bmatrix}
+1\\
+1
+\end{bmatrix}\\
+\nabla F_1(x) &=
+\begin{bmatrix}
+2(x_1+1)\\
+2x_2
+\end{bmatrix}
+|_{x=x^*=
+	\begin{bmatrix}
+	0\\
+	0
+	\end{bmatrix}
+}=
+\begin{bmatrix}
+2\\
+0
+\end{bmatrix}\\
+\nabla F_2(x) &=
+\begin{bmatrix}
+2(x_1-2)\\
+2x_2
+\end{bmatrix}
+|_{x=x^*=
+	\begin{bmatrix}
+	0\\
+	0
+	\end{bmatrix}
+}=
+\begin{bmatrix}
+-4\\
+0
+\end{bmatrix}\\
+\end{align*}
+
+Apparently, we can not find $\lambda_1$ and $\lambda_2$ such that 
+$$\nabla F_0(x) =-\lambda_1\nabla F_i(x) -\lambda_2 \nabla F_2(x) $$
+
+In other words, the first order condition is not applicable here. The reason for this situation is, the Slater's condition does not hold for this problem.
+
+The feasible set here is $\mathcal{C}=\{(0, 0)\}$, it is a singleton. \textbf{For any finite set $\mathcal{C}\in\reals^{n}$, there is no interior point for such set $\mathcal{C}$, that is, $\text{int}(\mathcal{C}) =\emptyset$, and thus $\text{relint}(\mathcal{C}) =\emptyset$ as well.} Recall that, the Slater's condition requires there exist a relative interior point, so the condition fails here, and thus the strong duality and the KKT condition do not hold.
+
+
+\end{example}
+
+
+\subsection{Extend duality theory to generalized inequality}
+Recall generalized inequalities are defined with respect to proper cones. A cone is proper if it is
+
+	(1) closed
+	
+	(2) convex
+	
+	(3) pointed (if $x\in k$ and $-x\in k$, then $x=0$)
+	
+	(4) Solid
+
+
+\vspace{0.3cm}
+As we want similar properties still hold when we extend to generalized inequality defined a proper cone, recall our previous derivation of weak duality:
+\begin{align*}
+g(\lambda) &= \min_x[F_0(x) + \sum^m_{i=1}\lambda_iF_i(x)]\\
+&\leq F_0(x^*) + \sum^m_{i=1}\lambda_i F_i(x^*) \\
+&\leq F_0(x^*)
+\end{align*}
+
+To accommodate generalized inequalities, we need to identify what set dual variables need to be restricted to keep the following holds (so that the weak duality holds),
+\begin{equation*}
+\langle \lambda, F(x)\rangle\leq 0,\ \forall x \text{ feasible}
+\end{equation*}
+
+Now, we are considering the feasibility inequality constraints are defined by a cone $k$, and we say that the dual variable need to be restricted in the dual cone $k^*$.
+	
+A dual cone $k^*$ is defined as 
+$$k^*=\{y| \langle x,y\rangle \geq 0,\ \forall x\in k \}$$
+and the dual cone $k^*$ is always closed and convex, whether the cone $k$ is convex or not.
+
+Also note that, a cone $k$ is self dual if $k^*=k$. For instance, The non-negative orthant cone ($\reals_+^m$), second order cone and PSD cone ($S^m_+$) are self dual.
+
+With this definition for dual cone, apparently we could keep 
+\begin{equation*}
+\langle \lambda, F(x)\rangle\leq 0,\ \forall x \text{ feasible}
+\end{equation*}
+so that the weak duality holds. Similar conditions, propositions and theorems could also be derived for the general inequality case, please refer to \textit{Convex optimization} for more details.
+
+
+\begin{example}
+Recall the SDP problem,
+\begin{align*}
+\min\quad &c^Tx\\
+s.t.\quad &x_1F_1+x_2F_2+\ldots+x_nF_n+G\leq_k 0
+\end{align*}
+where $x\in\reals^n$, $F_i\in S^m$, $G\in S^m$, the cone $k=S^m_+$.
+
+
+Let $z\in S^m$ be the dual variable.
+
+The Lagrangian function given by
+\begin{align*}
+L(x,z) &= c^Tx + \langle z,x_1F_1+\ldots +x_nF_n+G\rangle \\
+&= c^Tx + \sum^n_{i=1}\langle z,x_iF_i\rangle+\langle z,G\rangle\\
+&= \sum^n_{i=1}x_i(c_i+\langle z, F_i\rangle)+\langle z,G\rangle
+\end{align*}
+is affine in $x$.
+
+If you are confused where this inner product comes from, recall the definition of Frobenius inner product, for any $A, B\in\reals^{m\times n}$, we have the inner product,
+$$\langle A, B\rangle_F = \trace (A^T B)$$
+Furthermore, if $A, B\in S^m$, then
+$$\langle A, B\rangle_F = \trace (A^T B)=\trace (A B) $$
+
+
+The dual function is give by
+\begin{equation*}
+g(z) = \min_x L(x,z)=\left\{
+\begin{aligned}
+-\infty &\quad\text{if}\ \exists i\ \text{s.t.}\ c_i+Tr(zF_i)\neq 0 \\
+Tr(zG) & \quad\text{else}
+\end{aligned}
+\right.
+\end{equation*}
+
+Hence, to maintain the feasibility, the dual optimization problem can be expressed as
+\begin{align*}
+\max_z\quad &tr(zG)\\
+s.t.\quad &tr(zG)=-c_i\quad \forall i=1,\cdots,n\\
+&z\geq 0
+\end{align*}
+where we utilize the fact that $S_+^m$ is self-dual, that is, $(S_+^m)^*= S_+^m$.
+
+In summarize, to formulate the dual problem, what we need to do are
+\begin{enumerate}
+	\item Given a cone $k$, find the dual cone $k^*$.
+	
+	\item Restrict multipliers to be in $k^*$.
+\end{enumerate}
+
+\end{example}
+
+%$g(z)=\min_x L(x,z)$
+%
+%$\min[c^Tx-<z_1-(x_1F_1+...+x_nF_n+G)>]$ where $x\in k^*$. If primal feasible, $(x_1F_1+...+x_nF_n+G)$ is in $k=S^m_+$
+
+
+
+
+
+% Above are notes for Dec 4
