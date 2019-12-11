@@ -323,17 +323,19 @@ Also, remind that in previous QP chapter, we intersect these shapes with polyhed
 
 \vspace{0.4cm}
 \subsection{Cones and generalized inequalities}
-Recall that
-$\mathcal{C}$ is a cone if $\forall x\in \mathcal{C}$ and $\theta \in \reals_{+}$(i,e. $\theta \geq 0$), $\theta x\in \mathcal{C}$.   
-
-Important cones: PSD matrices
+We introduce some important cones here and first recall the following definitions for set of symmetric matrices, set of PSD matrices and set of PD matrices,
 \begin{align*}
 S^n &= \{x\in \reals^{n\times n}\ s.t.\ x = x^T \}\\
 S^n_+ &= \{x\in S^{n}\ s.t.\ v^TXv \geq 0, \forall v\in \reals^n \}\\
 S^n_{++} &= \{x\in S^{n}\ s.t.\ v^TXv > 0 ,\forall v\in \reals^n\}
 \end{align*}
 
-1) $S_+^n$ is a cone since $\forall x \in S_+^n$ and $\forall \theta \geq 0$:
+Sets of PSD and PD matrices are two class of important cones, and recall the definition of cone: Set $\mathcal{C}$ is a cone if $\forall x\in \mathcal{C}$ and $\theta \in \reals_{+}$(i,e. $\theta \geq 0$), $\theta x\in \mathcal{C}$. In particular,  \\ 
+
+\vspace{0.2cm}
+\noindent 1) $S_+^n$ is a cone.
+
+Since $\forall X \in S_+^n$ and $\forall \theta \geq 0$, we have
 $$v^T(\theta X)v = \theta v^TXv  > 0$$
 We write:
 \begin{align*}
@@ -341,39 +343,48 @@ X\in S^n_+ &\Leftrightarrow X\geq 0\\
 X\in S^n_{++} &\Leftrightarrow X> 0
 \end{align*}
 
-2) $S_+^n$ is a convex cone.
+\vspace{0.2cm}
+\noindent 2) $S_+^n$ is a convex cone.
 
-Let $A\in S^n_+$, $B\in S^n_+$, and consider $\lambda A + (1-\lambda)B$ where $\lambda \in [0,1]$
+Let $A\in S^n_+$, $B\in S^n_+$, and consider the combination $\lambda A + (1-\lambda)B$ where $\lambda \in [0,1]$.
 
-$\rightarrow$ First note $(\lambda A + (1-\lambda)B)^T= \lambda A^T + (1-\lambda)B^T = \lambda A + (1-\lambda)B \in S^n$
+First note that $(\lambda A + (1-\lambda)B)^T= \lambda A^T + (1-\lambda)B^T = \lambda A + (1-\lambda)B \in S^n$, so this combination is still a symmetric matrix.
 
-$\rightarrow$ $v^T(\lambda A + (1-\lambda B))v =\lambda(v^TAv) + (1-\lambda)(v^TBv)\geq 0$\\
+Secondly, we show that $v^T(\lambda A + (1-\lambda B))v =\lambda(v^TAv) + (1-\lambda)(v^TBv)\geq 0$, so this combination is still a PSD matrix. 
 
- 
-3) $S^n_{++}$ is also a convex cone. 
+Therefore, $S_+^n$ is convex and thus it is a convex cone.
 
-The proof follows the same as previous case (2) except we replace than $\geq$ with $>$.
+\vspace{0.2cm}
+\noindent 3) $S^n_{++}$ is also a convex cone. 
+
+The proof follows the same as previous case (2) except we replace $\geq$ with $>$.
+
+
 
 \vspace{0.3cm}
 \textbf{Cones lead to "generalized" inequalities.}
 
-We want to extend idea of orderings to $\reals^n$ (i.e., extend the comparison between two real numbers to two real vectors), and let's start with a "proper" cone $K\in \reals^n$. A proper cone $K$ is
+We want to extend idea of orderings to $\reals^n$ (i.e., extend the comparison between two real numbers to two real vectors/matrices), and let's start with a "proper" cone $K\in \reals^n$. 
+
+\begin{definition}[Proper cone]
+A cone $K\in \reals^n$ is called a proper cone if it satisfies the following
 \begin{itemize}
-	\item closed, convex
-	
-	\item non-empty("solid")
-	
-	\item "pointed"(doesn't contain lines)
+	\item $K$ is convex.
+	\item $K$ is closed. 
+	\item $K$ is solid, which means it has nonempty interior.
+	\item $K$ is pointed, which means that it contains no line (or equivalently, $x \in K, -x\in K \Rightarrow x=0$).
 \end{itemize}
+\end{definition}
 
 
-A proper cone $K$ defines a generalized inequality $\leq_K$: "less-than-or-equal to with respect to cone $K$".
+A proper cone $K$ can be used to define a generalized inequality $\leq_K$, says "less-than-or-equal to with respect to cone $K$".
 
-Interpretation of $\leq_K$:
+Interpretation of $\leq_K$ and $< K$:
 \begin{align*}
 x\leq_K y &\Leftrightarrow 0\leq_K (y-x)\Leftrightarrow y - x \in K\\
-x <_K &\Leftrightarrow y-x\in int(K)\ (\text{interior of} K)
+x <_K &\Leftrightarrow y-x\in \text{int}(K)
 \end{align*}
+where the set int$(K)$ denotes the points in the interior of $K$.
 
 \begin{marginfigure}
 	\centering
@@ -385,11 +396,12 @@ x <_K &\Leftrightarrow y-x\in int(K)\ (\text{interior of} K)
 
 \begin{example}
 	Let a proper cone $k = S^n_+$, which denote the ordering of matrices, whose elements of vector space are in $S^n$. So,
-	$$X\leq_k Y\ \text{means}\ Y-X\in S^n_+$$
+	$$X\leq_k Y \Leftrightarrow 0\leq_k Y-X.$$
+	Thus, $Y-X\in S^n_+$.
 	
-	$\rightarrow$ is it true that $v^T(Y-X)v \geq 0$, $\forall v$
+	$\rightarrow$ It true since that $v^T(Y-X)v \geq 0$, $\forall v\in \reals^n$
 	
-	$\rightarrow$ are all eigenvalues non-negative
+	$\rightarrow$ All eigenvalues are non-negative.
 	
 	Note: The interior of $S_+^n$ is $S^n_{++}$.
 	
@@ -398,17 +410,18 @@ x <_K &\Leftrightarrow y-x\in int(K)\ (\text{interior of} K)
 \vspace{0.3cm}
 The following 2 generalized inequalities come up so often, so we assume that they are the default setting.
 \begin{enumerate}
-	\item If compare 2 vectors $x,y\in \reals^n$, we write $x\leq  y\Leftrightarrow x\leq_{\reals^n_{+}}y \Leftrightarrow y-x\in \reals^n_{+}$ 
+	\item If we compare 2 vectors $x,y\in \reals^n$, we write 
+	$$x\leq  y\Leftrightarrow x\leq_{\reals^n_{+}}y \Leftrightarrow y-x\in \reals^n_{+}$$ 
 	
-	\item If compare 2 symmetric matrices, we write:
+	\item If we compare 2 symmetric matrices, we write:
 	\begin{align*}
-	x\leq y &\Leftrightarrow x\leq_{S_+^n} y\Leftrightarrow y - x\in S^n_{++}\\
-	x< y &\Leftrightarrow y - x\in S^n_{+}
+	x\leq y &\Leftrightarrow x\leq_{S_+^n} y\Leftrightarrow y - x\in S^n_{+}\\
+	x< y &\Leftrightarrow y - x\in S^n_{++}
 	\end{align*}
 \end{enumerate}
 
 \begin{example}
-$\{x\in \reals^n | x_1A_1 + x_2A_2 + ... + x_nA_n \leq B\}$, where $A_i\in S^m$ $B\in S^m$. The inequity here is called the "linear matrix inequality", and notice that $F(x) = B - \sum^n_{i=1}x_iA_i$ is an affine function of $x$. 
+Consider the set $\{x\in \reals^n | x_1A_1 + x_2A_2 + ... + x_nA_n \leq B\}$, where $A_i\in S^m$ $B\in S^m$. The inequity here is called the "linear matrix inequality", and notice that $F(x) = B - \sum^n_{i=1}x_iA_i$ is an affine function of $x$. 
 
 Hence,
 \begin{align*}
@@ -417,7 +430,8 @@ Hence,
  &= \{x\in \reals^n | F(x)\in S^n_+ \}\\
  &=F^{-1}(S^n_+)
 \end{align*}
-So, it is a convex set.\\
+
+So, it is a convex set, since the set is the pre-images of a convex set $S_+^n$ under an affine transform.
 \end{example}
 
 \vspace{0.5cm}
@@ -464,7 +478,7 @@ So, it is a convex set.\\
 	\item Supporting hyperplanes:
 
 
-	If $S$ is a convex set, then $\forall x_0\in \delta \mathcal{S}$ (boundary of $S$) and $\forall x\in S$, $\exists a\in \reals^n$ such that 
+	If $S$ is a convex set, then $\exists x_0\in \delta \mathcal{S}$ (boundary of $S$) and $\forall x\in S$, $\exists a\in \reals^n$ such that 
 	$$a^Tx \leq a^Tx_0\Leftrightarrow a^T(x - x_0)\leq 0$$
 
 	
@@ -542,31 +556,34 @@ F(x)       &      & \text{if } x\in dom(F)\\
 \end{array} \right. 
 $$
 
-\textbf{Examples of convex/concave functions:}
+\begin{example}[Examples of convex/concave functions]
 
 Refer to the figures on r.h.s.
 
-	(1)Linear function and affine functions: they are both convex and concave.
+	(1) Linear function and affine functions are both convex and concave.
 	
-	(2) $F(x)=x^2$ is convex, or generally, $F(x) = x^TAx + b^Tx + c$ (quadratic function) is convex.
+	(2) $F(x)=x^2$ is convex.
 	
 	(3) $F(x) = \log x$ with $\text{dom}\ F = \reals_{++}$ is a concave function.
 	
-	(4) The norm function $\Vert x\Vert$ is convex.
+	(4) The norm function $\Vert x\Vert$ is convex. 
+	
+	Since we have
 	\begin{align*}
-	\Vert \lambda x + (1-\lambda)y\Vert &\leq \Vert \lambda x\Vert + \Vert(1-\lambda)y\Vert\\
-	&= \lambda \Vert x \Vert + (1-\lambda)\Vert y \Vert
+	\Vert \lambda x + (1-\lambda)y\Vert 
+	&\leq \Vert \lambda x\Vert + \Vert(1-\lambda)y\Vert\\
+	&=\lambda \Vert x \Vert + (1-\lambda)\Vert y \Vert
 	\end{align*}
 	
 	(5) $F(x)=\frac{1}{x}$ is convex on $\reals_{++}$, and is concave on $\reals_{--}$.
 	
-	
+\end{example}
 	
 \vspace{0.5cm}
 \begin{definition}[Epigraph]
-Recall the epigraph of a function is defined as
+Recall the epigraph of a function is a set of points lying on or above its graph:
 \begin{equation*}
-\text{epi}\ F = \{(x,t)|t\geq F(x), x\in \text{dom}\ F \}
+\text{epi}\ F = \{(x,t)|t\geq F(x), x\in \text{dom}\ F, t\in\reals \}
 \end{equation*}
 \end{definition}
 
@@ -581,9 +598,9 @@ Recall the epigraph of a function is defined as
 	$F$ is a convex function iff $\text{epi}\ F$ is a convex set
 \end{definition}
 
-\begin{definition}[Sublevel sets]
-	$\mathcal{C}(\alpha) = \{x|F(x)\leq \alpha, x\in domF \}$.
-	
+\begin{definition}[Sublevel sets] Recall that, the $\alpha$-sublevel set of a function $F$ is defined as
+	$$\mathcal{C}(\alpha) = \{x|F(x)\leq \alpha, x\in domF \}$$
+	for $\alpha\in\reals$.
 	\begin{marginfigure}
 	\centering
 	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1030_12.png}
@@ -593,7 +610,7 @@ Recall the epigraph of a function is defined as
 \end{definition}
 
 \begin{theorem}
-	If $F$ is convex, its sub-level sets are all convex sets.
+	If $F$ is convex, then its sub-level sets are all convex sets.
 \end{theorem}
 Note: The converse of this theorem is not true. If all sub-level sets of a function are convex sets, the function is "quasi-convex" but not necessarily convex.\\
 
@@ -605,11 +622,13 @@ Note: The converse of this theorem is not true. If all sub-level sets of a funct
 \end{marginfigure}
 
 \vspace{0.3cm}
-\textbf{More examples on convex functions:}
+\noindent \textbf{Three kinds of convex functions:}
 
 1) Non-negative sums of convex functions are convex.
 
-Let $F(x) =\sum^m_{i=1}a_iF_i(x)$, $F_i$ are convex function and $\text{dom}\ F = \cap^m_{i=1}\text{dom}\ F_i$. We show that such $F$ is a convex function
+Let $F(x) =\sum^m_{i=1}a_iF_i(x)$, $F_i$ are convex function and $\text{dom}\ F = \cap^m_{i=1}\text{dom}\ F_i$. 
+
+We show that such $F$ is a convex function,
 \begin{align*}
 F(\lambda x + (1-\lambda)y) 
 &= \sum^m_{i=1}a_iF_i(\lambda x + (1-\lambda)y)\\
@@ -620,12 +639,14 @@ F(\lambda x + (1-\lambda)y)
 
 2) Convex functions of affine transformations of variables is still a convex function.
 
-Let $g(x) =F(Ax + b)$, where $F(\cdot)$ is convex, and thus $\text{dom}\ g = \{x|Ax + b \in\text{dom}\ F \}$. We show that function $g$ is convex in $x$
+Let $g(x) =F(Ax + b)$, where $F(\cdot)$ is convex, and notice that $\text{dom}\ g = \{x|Ax + b \in\text{dom}\ F \}$. 
+
+We show that function $g$ is convex in $x$,
 \begin{align*}
 g(\lambda x + (1-\lambda)y) &= F(A(\lambda x + (1-\lambda)y) + b)\\
-&= F(\lambda(Ax + b) + (1-\lambda)F(Ay+b))\\
+&= F(\lambda(Ax + b) + (1-\lambda)(Ay+b))\\
 &\leq \lambda F(Ax + b) + (1-\lambda)F(Ay+b)\\
-&= \lambda g(\lambda) + (1-\lambda)g(y)
+&= \lambda g(x) + (1-\lambda)g(y)
 \end{align*}
 
 
@@ -648,31 +669,29 @@ g(x) = \max\{F_1(x), F_2(x) \}
 
 %Below are notes for Nov 4
 \subsection{More examples}
-Let's consider following three kinds of functions,
+Let's consider following three kinds of functions we have mentioned above,
 \begin{align*}
 F(x) &=\sum\alpha_iF_i(x), \forall \alpha_i\geq 0\\
 g(x) &= F(Ax + b)\\
 g(x) &= max\{F_1(x), F_2(x) \}
 \end{align*}
 
-\begin{example}
+\begin{example} Consider the function 
 \begin{align*}
 F(x) 
 &= \sum^{n}_{i=1}log(b_i - a_i^Tx)^{-1}\\
 &=\sum^n_{i=1}-log(b_i - a_i^Tx)
 \end{align*}
-where $\lambda \in \reals^n$, $a_i\in \reals^n$, $b_i\in \reals$.
+where $x \in \reals^n$, $a_i\in \reals^n$, $b_i\in \reals$.
 
 1) Note: $-log(\cdot)$ is a convex function, and 
 $$\text{dom}-log(\cdot) = R_{++}$$
 $$\text{dom}F = \{x|b_i - a_i^Tx >0, \forall i\in [m] \} =\{x|b_i - a_i^Tx \in \reals_{++}, \forall i\in [m]\}$$ 
 
-So, the domain of this function is the inverse image of $\reals_{++}$ under an affine transformation, and therefore it is a convex set. 
+So, the domain of this function is the inverse image of $\reals_{++}$(a convex set) under an affine transformation, and therefore it is a convex set. 
 
-2) Each function is a convex function and an affine transformation of $x$, therefore the sum of this functions is still a convex function.
+2) Each function is a convex function of an affine transformation of $x$, therefore the sum of these functions is still a convex function.
 \end{example}
-
-
 
 \begin{example}
 \begin{marginfigure}
@@ -686,14 +705,14 @@ So, the domain of this function is the inverse image of $\reals_{++}$ under an a
 F(x) = \sup_{y\in \mathcal{C}}\Vert y-x\Vert
 \end{equation*}
 
-Note that $\mathcal{C}$ not necessarily to be a convex set. 
+Note that $\mathcal{C}$ is not necessarily to be a convex set. 
 
 \begin{enumerate}
 	\item Function $y-x$ is an affine function w.r.t $x$ and therefore it is a convex function of $x$.
 	
 	\item $\Vert\cdot\Vert$ is a norm function, so it is a convex function of its argument. 
 	
-	\item F(x) = $\sup_{y\in \mathcal{C}}\Vert y-x\Vert$, $y\in \mathcal{C}$ is the basic max of a bunch of convex functions, each indexed by a $y\in \mathcal{C}$
+	\item $F(x) = \sup_{y\in \mathcal{C}}\Vert y-x\Vert$, $y\in \mathcal{C}$ is the basic max of a bunch of convex functions, each indexed by a $y\in \mathcal{C}$
 \end{enumerate}
 \end{example}
 
@@ -731,14 +750,14 @@ Idea: Shine light along $y$-axis, and get the shadow on $x-z$ plane, which is an
 	x\\
 	y
 	\end{bmatrix}
-	\in \text{dom}\ h$,
+	\in \text{dom}\ h$, the epigraph of $h$ is given by 
 	\begin{equation*}
 	\text{epi}\ h = \{(x,y,t)|t\geq h(x,y), \begin{bmatrix}
 	x\\
 	y
 	\end{bmatrix}\in \text{dom}\ h \}
 	\end{equation*}
-	$\rightarrow$ That's the black bowl in the graph. 
+	That's the black bowl in the graph. 
 	
 	Now consider:
 	\begin{equation*}
@@ -759,7 +778,7 @@ Idea: Shine light along $y$-axis, and get the shadow on $x-z$ plane, which is an
 	x\\
 	y
 	\end{bmatrix} 
-	\vert
+	|
 	\begin{bmatrix}
 	x\\
 	y
@@ -776,7 +795,7 @@ Idea: Shine light along $y$-axis, and get the shadow on $x-z$ plane, which is an
 	x&y
 	\end{bmatrix}^T
 }
-\in \text{dom}\ h, x\in \text{dom}\ f \}\\
+\in \text{dom}\ h, x\in \text{dom}\ F \}\\
 &= \{
 \begin{bmatrix}
 1&0&1
@@ -820,7 +839,9 @@ is a convex function if $\mathcal{C}$ is a convex set.
 
 \subsection{Characterizing Convexity by Restricting to a Line}
 
-\begin{theorem} $F: \reals^n \rightarrow \reals$ is convex iff $g:\reals \rightarrow \reals$ is convex (in $t$) where $g(t) =F(x_0 + tv)$. For all choices of $x_0\in \text{dom}\ F$, $v\in \reals^n$, $t\in \reals$ s.t. $x_0+tv\in \text{dom}\ F$
+\begin{theorem} $F: \reals^n \rightarrow \reals$ is convex if and only if $g:\reals \rightarrow \reals$,
+	$$g(t) =F(x_0 + tv), \text{dom}\ g = \{t| x_0 + tv \in \text{dom}\ F\}$$
+	is convex for any $x_0\in\text{dom}\ F$, $v\in\reals^{n}$.
 \end{theorem}
 \begin{itemize}
 	\item $g(t)$ is function restricted to a line/slice
@@ -838,10 +859,9 @@ g(t) = g_{x_0, v}(t) = F(x_0+tv)
 \text{dom}(g_{x_0, v}) = \{t|x_0+tv \in \text{dom}F \}
 \end{equation*}
 
-Therefore $\text{dom}(g_{x_0, v})$ is convex set for all $x_0, v$.\\
+Therefore $\text{dom}(g_{x_0, v})$ is convex set for all $x_0, v$.
 
 \begin{proof}
-	
 First, we show that, if $F$ is convex then $g$ is convex. 
 \begin{align*}
 \forall t_1, t_2\in \text{dom}\ g, \lambda\in [0,1]\\
@@ -878,7 +898,7 @@ Note:
 
 To show this function $F$ is a convex function, we will show it is convex for all "lines".
 
-line in $S^n$: $x_0 + tH$ where $x_0$ is a symmetric PD matrix, $t\in \reals$ and $H$ is symmetric matrix in $S^n$. So $x_0 + tH$ is a family of symmetric matrices.
+The "line" in $S^n$ is $x_0 + tH$, where $x_0$ is a symmetric PD matrix, $t\in \reals$ and $H$ is symmetric matrix in $S^n$. So $x_0 + tH$ is a family of symmetric matrices.
 
 \begin{marginfigure}
 	\centering
@@ -922,13 +942,13 @@ Note:
 \vspace{0.5cm}
 \begin{example}
 Consider the function of finding the max eigenvalue,
-$$F(x) = \lambda_{\max}(x)$$
+$$F(X) = \lambda_{\max}(X)$$
 where $\text{dom}\ F = S^n$, and this function $F$ is convex.
 
 We illustrate this fact by two parts.
 
 (a) First, we have
-$$\lambda_{\max}(x) = \max_{v:\Vert v\Vert = 1}v^TXv$$
+$$\lambda_{\max}(X) = \max_{v:\Vert v\Vert = 1}v^TXv$$
 By eigen-decomposition of symmetric matrices,
 \begin{align*}
 v^TXv 
@@ -940,56 +960,57 @@ v^TXv
 
 (b) Express $x$ as following
 \begin{equation*}
-v^T(\alpha x_1 + \beta x_2)v = \alpha v^Tx_1v + \beta v^Tx_2v
+v^T(\alpha X_1 + \beta X_2)v = \alpha v^TX_1v + \beta v^TX_2v
 \end{equation*}
 
-So $v^TXv$ is linear in $X$, and therefore $F(x)$ is the $\max$ of a bunch of functions that are linear in $X$, and thus it is convex.
+So $v^TXv$ is linear in $X$, and therefore $F(X)$ is the $\max$ of a bunch of functions that are linear in $X$, and thus it is convex.
 \end{example}
 
 \vspace{0.3cm}
-\textbf{Two more examples}
+\noindent\textbf{Two more examples}
 \begin{enumerate}
-	\item $F(x) = \sigma_{\max} (x)$ is convex on $\text{dom}\ F =\reals^{n\times m}$.
+	\item $F(x) = \sigma_{\max} (X)$ is convex on $\text{dom}\ F =\reals^{n\times m}$.
 	
-	\item $F(x) = (\det X)^{\frac{1}{n}}$, is concave on $\text{dom}\ F = S^n_{++}$
+	\item $F(x) = (\det X)^{\frac{1}{n}}$, is concave on $\text{dom}\ F = S^n_{++}.$
 \end{enumerate}
 
 \vspace{0.5cm}
 \subsection{"First-order" condition}
 
 \begin{theorem}
-	A differentiable function $F$ ($\text{dom}\ F$ is open and gradients exist everywhere in domain F is convex if and only if $\forall x,y\in \text{dom}\ F$:
+	A differentiable function $F$ (i.e., $\text{dom}\ F$ is open and gradients exist everywhere in domain F) is convex if and only if $\forall x,y\in \text{dom}\ F$:
 	\begin{equation*}
-	F(y)\geq F(x) + \triangledown F(x)^T(y-x) \,\,\,\,\,  (*)
+	F(y)\geq F(x) + \nabla F(x)^T(y-x) \qquad (*)
 	\end{equation*}
-	and if strictly convex if $(*)$ is a strict inequality for all $x\neq y$.
-	
+	and is strictly convex if $(*)$ is a strict inequality for all $x\neq y$.
+\end{theorem}
 	\begin{marginfigure}
 	\centering
 	\includegraphics[width=1.8in,height=1.8in]{figures/ch08/figure1106_1.png}
 	%\caption{This is an inserted JPG graphic} 
 	%\label{fig:graph} 
 	\end{marginfigure}
+	Note that:
 	
-	$\rightarrow$ First-order Taylor approximation is everywhere an under-estimator of $F$.
+	(1) The affine function of $y$ given by $F(x) + \nabla F(x)^T(y-x)$ the First-order Taylor approximation, and the inequality above states that this approximation is an global underrestimator of $F$.
 	
-	$\rightarrow$ There is a tangent plane that is a supporting hyperplane of epi $F$.
-\end{theorem}
+	(2) There is a tangent plane that is a supporting hyperplane of epi $F$.
 
+\begin{proof}
 First, assume $F$ is convex, and we show that $(*)$ holds. 
 
-Pick $(x,y)$ by define convex function,
+Take any $(x,y)\in \text{dom}\ F$, and by definition of convex function,
 $$F((1-\lambda)x+\lambda y) \leq (1-\lambda)F(x) + \lambda F(y)$$
 
 Rearrange yields
 $$\frac{F(x+\lambda(y-x)) - F(x)}{\lambda} \leq F(y) - F(x)$$
 
 Let $\lambda \rightarrow 0$ and observe that
-$$lim_{\lambda\rightarrow 0} \frac{F(x+\lambda(y-x)) - F(x)}{\lambda} = \triangledown F(x)^T(y-x)$$
-Therefore,
-$$\triangledown F(x)^T(y-x)\leq F(y) - F(x)$$
-(You can also do above procedure in 1-dimension, try it by yourself).
+$$lim_{\lambda\rightarrow 0} \frac{F(x+\lambda(y-x)) - F(x)}{\lambda} = \nabla F(x)^T(y-x)$$
 
+Therefore,
+$$\nabla F(x)^T(y-x)\leq F(y) - F(x)$$
+Hence, the inequality $(*)$ holds (You can also do above procedure in 1-dimension, try it by yourself).
 
 
 Secondly, we assume $(*)$ holds and show that $F$ is convex.
@@ -998,26 +1019,27 @@ Take any $(x,y)\in \text{dom}\ F$, then $\forall \lambda\in[0,1]$, $z= \lambda x
 
 Using $(*)$ for 2 times we get:
 \begin{align*}
-F(x) &\geq F(z) + \triangledown F(x)^T(x-z)\\
-F(y) &\geq F(z) + \triangledown F(x)^T(y-z)
+F(x) &\geq F(z) + \nabla F(x)^T(x-z)\\
+F(y) &\geq F(z) + \nabla F(x)^T(y-z)
 \end{align*} 
+
 Compute
 \begin{align*}
-\lambda F(x)+(1-\lambda)F(y) &\geq F(z) + \triangledown F(z)^T[\lambda (x-z)+(1-\lambda)(y-z)]\\
-&= F(z) + \triangledown F(z)^T[\lambda x - \lambda z + y - z - \lambda y +\lambda z]\\
-&= F(z) + \triangledown F(z)^T[\lambda x + (1-\lambda)y - z]\\
-&= F(z) + \triangledown F(z)^T[z - z]\\
+\lambda F(x)+(1-\lambda)F(y) &\geq F(z) + \nabla F(z)^T[\lambda (x-z)+(1-\lambda)(y-z)]\\
+&= F(z) + \nabla F(z)^T[\lambda x - \lambda z + y - z - \lambda y +\lambda z]\\
+&= F(z) + \nabla F(z)^T[\lambda x + (1-\lambda)y - z]\\
+&= F(z) + \nabla F(z)^T[z - z]\\
 &= F(z)\\
 &= F(\lambda x + (1-\lambda )y)
 \end{align*}
 
+Therefore, the function $F$ is convex given that the inequality $(*)$ holds.
+\end{proof}
 
 \vspace{0.3cm}
-\textbf{Connect $1^{st}-$order condition with $\text{epi}\ F$}
+\noindent\textbf{Connect $1$-st order condition with $\text{epi}\ F$}
 
-Recall $(x,t)\in \text{epi}\ F$ if $t\geq F(x)$
-
-$1^{st}-$order condition: $\forall x,y \in \text{dom}\ F$, $F(y)\geq F(x) + \triangledown F(x)^T(y-x)$
+Recall that $(x,t)\in \text{epi}\ F$ if $t\geq F(x)$, and the $1$-st order condition: $\forall x,y \in \text{dom}\ F$, $F(y)\geq F(x) + \nabla F(x)^T(y-x)$.
 
 \begin{marginfigure}
 	\centering
@@ -1026,22 +1048,27 @@ $1^{st}-$order condition: $\forall x,y \in \text{dom}\ F$, $F(y)\geq F(x) + \tri
 	%\label{fig:graph} 
 \end{marginfigure}
 
-Consider and $(y,t)\in \text{epi}\ F$:
+Consider any $(y,t)\in \text{epi}\ F$:
 \begin{align*}
-t &\geq F(y) \geq F(x) + \triangledown F(x)^T(y-x)\\
-\Leftrightarrow 0 &\geq F(x) - t + \triangledown F(x)^T(y-x)\\
-&= \begin{bmatrix}
-\triangledown F(x)^T & -1
-\end{bmatrix}\begin{bmatrix}
+t 
+&\geq F(y) \geq F(x) + \nabla F(x)^T(y-x)\\
+\Leftrightarrow 0 &\geq F(x) - t + \nabla F(x)^T(y-x)\\
+&= 
+\begin{bmatrix}
+\nabla F(x)^T & -1
+\end{bmatrix}
+\begin{bmatrix}
 y-x\\
 t -F(x)
 \end{bmatrix}\\
-&= \begin{bmatrix}
-\triangledown F(x)^T  & -1
-\end{bmatrix}\begin{bmatrix}
+&= 
+\begin{bmatrix}
+\nabla F(x)^T  & -1
+\end{bmatrix}
+\begin{bmatrix}
 y\\
 t
-\end{bmatrix} + (-\triangledown F(x)^Tx + F(x))
+\end{bmatrix} + (-\nabla F(x)^Tx + F(x))
 \end{align*}
 
 \begin{marginfigure}
@@ -1054,44 +1081,44 @@ t
 \subsection{"Second-order" condition}
 
 \begin{theorem}
-	If $F$ is everywhere twice differentiable, then $F$ is convex if and only if its Hessian $\triangledown^2F(x)\geq 0$ (i.e., PSD) for all $x\in \text{dom}\ F$.
+	If $F$ is everywhere twice differentiable, then $F$ is convex if and only if its Hessian $\nabla^2F(x)\geq 0$ (i.e., PSD) for all $x\in \text{dom}\ F$.
 \end{theorem}
 
 \begin{proof}
 
 Similarly, we prove this theorem in two steps.
 
-Firstly, assume $F$ convex, and we show that $\triangledown^2F(x)\geq 0$.
+Firstly, assume $F$ convex, and we show that $\nabla^2F(x)\geq 0$.
 
 Let $x_o \in \text{dom}\ F$(any point), $v\in \reals^n$(a direction), then $z = x_0 + \lambda v$ is in $\text{dom}\ F$ if $\lambda > 0$ sufficiently small. 
 
 By Taylor approximation, 
-$$F(z) = F(x_0) + \triangledown F(x_))^T(\lambda v) + \frac{1}{2}(\lambda_v)^T\triangledown^2F(x_0)\lambda v + O(\lambda^3)$$
+$$F(z) = F(x_0) + \nabla F(x_0)^T(\lambda v) + \frac{1}{2}(\lambda_v)^T\nabla^2F(x_0)\lambda v + O(\lambda^3)$$
 
 Rearrange yields 
-$$\frac{1}{2}\lambda^2v^T\triangledown^2F(x_0)v+O(\lambda^3) = F(z) - F(x_0) - \triangledown F(x_0)^T(\lambda v)$$
+$$\frac{1}{2}\lambda^2v^T\nabla^2F(x_0)v+O(\lambda^3) = F(z) - F(x_0) - \nabla F(x_0)^T(\lambda v)$$
 
 The right-hand side is $\geq 0$ by first-order-convexity result.
 
 Continuing, divide through by $\lambda^2$ to get:
-$$\frac{1}{2}v^T\triangledown^2F(x_0)v + \frac{O(\lambda^3)}{\lambda^2} \geq 0$$
+$$\frac{1}{2}v^T\nabla^2F(x_0)v + \frac{O(\lambda^3)}{\lambda^2} \geq 0$$
 
 In above equation, $O(\lambda^3)$ means this is $\leq M\lambda^3$ (Big-O notation), so $\frac{O(\lambda^3)}{\lambda^2} \leq M\lambda$.
 
 Letting $\lambda\rightarrow 0$, we get 
-$$\frac{1}{2}v^T\triangledown^2F(x_0)v\geq 0$$
-So $\triangledown^2F(x_0)$ is PSD for all $x_0 \in \text{dom}f$, since $v\in \reals^n$ can be chosen arbitrarily.
+$$\frac{1}{2}v^T\nabla^2F(x_0)v\geq 0$$
+So $\nabla^2F(x_0)$ is PSD for all $x_0 \in \text{dom}f$, since $v\in \reals^n$ can be chosen arbitrarily.
 
 
 \vspace{0.3cm}
-Secondly, assume $\triangledown^2F(x_0)\geq 0, \forall x_0\in \text{dom}\ F$, and show that $F$ is convex.
+Secondly, assume $\nabla^2F(x_0)\geq 0, \forall x_0\in \text{dom}\ F$, and we show that $F$ is convex.
 
 Apply Taylor approximation with remainder $\forall x,y\in \text{dom}\ F$, 
-$$F(y) =F(x) + \triangledown F(x)^T(y-x) + \frac{1}{2}(y-x)^T\triangledown^2F(z)(y-x)$$
+$$F(y) =F(x) + \nabla F(x)^T(y-x) + \frac{1}{2}(y-x)^T\nabla^2F(z)(y-x)$$
 where Hessian is evaluated at some $z$ between $x$ and $y$(Mean value theorem).
 
-Since $\triangledown^2F(z)\geq 0$, we have
-$$F(y) \geq F(x) + \triangledown F(x)^T (y-x)$$
+Since $\nabla^2F(z)\geq 0$, we have
+$$F(y) \geq F(x) + \nabla F(x)^T (y-x)$$
 Then we could go back to $1^{st}-$order-condition, which is true for $\forall x,y$. So $F$ must be convex. 
 \end{proof}
 
@@ -1100,11 +1127,11 @@ Then we could go back to $1^{st}-$order-condition, which is true for $\forall x,
 Here we can give some examples:
 
 \begin{enumerate}
-	\item $F(x) = x^2$, $\text{dom}f = \reals$, $F''(x) = 2 > 0$, $\forall x\in \reals$(strictly convex)
+	\item $F(x) = x^2$, $\text{dom}\ F = \reals$, $F''(x) = 2 > 0$, $\forall x\in \reals$, so $F$ is strictly convex.
 	
-	\item $F(x) = x^3$, $\text{dom}f = \reals$, $F'(x) = 3x^2$, $F''(x) = 6x$, but if set $demf = \reals_+$ then $f$ is convex.
+	\item $F(x) = x^3$, $\text{dom}\ F = \reals$, $F'(x) = 3x^2$, $F''(x) = 6x$, so if we restrict the domain as $\text{dom}\ F = \reals_+$ then $F$ is convex.
 	
-	\item $F(x) = x^{\alpha}$, $\text{dom}f = \reals_+$, $F''(x) = \alpha(\alpha - 1)x^{\alpha - 2}$ where $\alpha(\alpha - 1) > 0$ if $\alpha > 1$ or $\alpha < 0$ and $\alpha(\alpha - 1) < 0$ if $0<\alpha < 1$. $x^{\alpha - 2}\geq 0$ since $\text{dom}f = \reals_+$
+	\item $F(x) = x^{\alpha}$, $\text{dom}\ F = \reals_+$, $F''(x) = \alpha(\alpha - 1)x^{\alpha - 2}$, where $\alpha(\alpha - 1) > 0$ if $\alpha > 1$ or $\alpha < 0$ and $\alpha(\alpha - 1) < 0$ if $0<\alpha < 1$. $x^{\alpha - 2}\geq 0$ since $\text{dom}\ F = \reals_+$.
 	
 	\begin{marginfigure}
 	\centering
@@ -1113,90 +1140,109 @@ Here we can give some examples:
 	%\label{fig:graph} 
 	\end{marginfigure}
 	
-	\item $F(x) = log_ex$, $\text{dom}f = \reals_{++}$, $F'(x) = \frac{1}{x}$, $F''(x) = -\frac{1}{x^2}<0$, concave.
+	\item $F(x) = \log x$, $\text{dom}\ F = \reals_{++}$, $F'(x) = \frac{1}{x}$, $F''(x) = -\frac{1}{x^2}<0$, so it is concave.
 	
-	\item $F(x) = xlog_e(x)$, $\text{dom}f = \reals_{++}$, $\frac{\alpha^2}{\alpha x^2}F(x) = \frac{\alpha}{\alpha x}[log_e(x) + \frac{x}{x}] = \frac{1}{x} > 0$, convex
+	\item $F(x) = x\log x$, $\text{dom}\ F = \reals_{++}$, $\frac{\alpha^2}{\alpha x^2}F(x) = \frac{\alpha}{\alpha x}[log_e(x) + \frac{x}{x}] = \frac{1}{x} > 0$, so it is convex.
 	
-	\item $F(x) = e^{\alpha x}$, $\text{dom}f = \reals$, $F''(x) = \alpha^2 e^{\alpha x}$
+	\item $F(x) = e^{\alpha x}$, $\text{dom}\ F = \reals$, $F''(x) = \alpha^2 e^{\alpha x}$, so it is convex for for $\alpha\neq 0$.
 	
-	\item $F(x) = \frac{1}{2}x^THx + c^Tx + d$, 
+	\item $F(x) = \frac{1}{2}x^THx + c^Tx + d$, the gradient and Hessian of $F$ are given by
 	\begin{align*}
-	\triangledown F(x) &= \frac{1}{2}(H+H^T)x + c = \tilde{H}x + c\\
-	\triangledown^2F(x) &= \tilde{H}
+	\nabla F(x) &= \frac{1}{2}(H+H^T)x + c = \tilde{H}x + c\\
+	\nabla^2F(x) &= \tilde{H}
 	\end{align*}
-	If $\tilde{H}\geq 0$, then convex; If $\tilde{H}\leq 0$, then concave.
+	If $\tilde{H}\geq 0$, then it is convex; If $\tilde{H}\leq 0$, then it is concave.
 	
-	If neither PSD or negative semi-definite, then neither. 
+	If $\tilde{H}$ is neither PSD or negative semi-definite, then $F$ is neither convex or concave.
 \end{enumerate}
 
-\begin{example}
+\begin{example} Consider following quadratic function,
 	\begin{align*}
-	F(x,y) &= x^2 + y^2 + 3xy \\
-	&= \begin{bmatrix}
+	F(x,y) 
+	&= x^2 + y^2 + 3xy \\
+	&= 
+	\begin{bmatrix}
 	x&y
-	\end{bmatrix}\begin{bmatrix}
+	\end{bmatrix}
+	\begin{bmatrix}
 	1&\frac{3}{2}\\
 	\frac{3}{2} & 1
-	\end{bmatrix}\begin{bmatrix}
+	\end{bmatrix}
+	\begin{bmatrix}
 	x\\
 	y
 	\end{bmatrix}\\
-	&=\frac{1}{2}\begin{bmatrix}
+	&=\frac{1}{2}
+	\begin{bmatrix}
 	x&y
-	\end{bmatrix}\begin{bmatrix}
+	\end{bmatrix}
+	\begin{bmatrix}
 	2&3\\
 	3 & 2
-	\end{bmatrix}\begin{bmatrix}
+	\end{bmatrix}
+	\begin{bmatrix}
 	x\\
 	y
-	\end{bmatrix}\\
-	\det(\begin{bmatrix}
+	\end{bmatrix}
+	\end{align*}
+	
+	Compute the eigenvalues of the matrix, 
+	\begin{align*}
+	\det(
+	\begin{bmatrix}
 	2&3\\
 	3&2
-	\end{bmatrix} - \lambda I) &= \det\begin{bmatrix}
+	\end{bmatrix} 
+	- \lambda I) 
+	&= \det
+	\begin{bmatrix}
 	2-\lambda & 3\\
 	3 & 2-\lambda
 	\end{bmatrix}\\
 	&= (2-\lambda)^2 - 9\\
 	&= (\lambda - 5)(\lambda + 1)
 	\end{align*}
-	Try $-45^{\circ}$ line, will see slice is not convex.
 	
-	\begin{equation*}
-	F(x,-x) = x^2 + (-x)^2 + 3x(-x) = 2x^2 - 3x^2 = -x^2
-	\end{equation*}
+	The matrix has one negative eigenvalue and one positive eigenvalue, so it is neither PSD or negative PSD.
+	
+	Also, if we try $-45^{\circ}$ line, we will see slice is not convex,
+	$$F(x,-x) = x^2 + (-x)^2 + 3x(-x) = 2x^2 - 3x^2 = -x^2.$$
 	
 \end{example}
 
 \begin{example}
-	Geometric mean $\sqrt{x_1x_2} = F(x_1x_2)$, $\text{dom}f = \reals_+ \times \reals_+$.
+	Geometric mean $\sqrt{x_1x_2} = F(x_1x_2)$, $\text{dom}\ F = \reals_+ \times \reals_+$, is concave. 
 	
+	The Hessian of $F$ is given by
 	\begin{equation*}
-	\triangledown^2F(x) = -\frac{\sqrt{x_1x_2}}{y}\begin{bmatrix}
+	\nabla^2F(x) = -\frac{\sqrt{x_1x_2}}{y}\begin{bmatrix}
 	\frac{1}{x^2_1} & -\frac{1}{x_1x_2}\\
 	-\frac{1}{x_1x_2} & \frac{1}{x^2_2}
 	\end{bmatrix}
 	\end{equation*}
 	
-	1) Calculate eigenvalues
+	There are two ways to determine the type of the Hessian(e.g., whether it is PSD)
 	
-	2) Use definition
+	1) Calculate eigenvalues as we did in previous example.
+	
+	2) Use definition of negative PSD (or PSD):
 	\begin{align*}
-	v^T\triangledown^2F(x)v &= -\frac{\sqrt{x_1x_2}}{2}[\frac{v_1^2}{x_1^2} - \frac{2v_1v_2}{x_1x_2} + \frac{v_2^2}{x^2_2}]\\
+	v^T\nabla^2F(x)v &= -\frac{\sqrt{x_1x_2}}{2}[\frac{v_1^2}{x_1^2} - \frac{2v_1v_2}{x_1x_2} + \frac{v_2^2}{x^2_2}]\\
 	&= -\frac{\sqrt{x_1x_2}}{2}(\frac{v_1}{x_1} -\frac{v_2}{x_2}) \leq 0
 	\end{align*}
 	
-	Concave in $(x_1, x_2)$, $F(x) = (\prod^n_{i=1}x_i)^{\frac{1}{n}}$ is concave in $x\in \reals^n$
+	So it is concave in $(x_1, x_2)$. More generally, the function $F(x) = (\prod^n_{i=1}x_i)^{\frac{1}{n}}$ is concave in $x\in \reals^n$.
 \end{example}
 
 \subsection{Consequence of convexity conditions for differentiable $F$}
 
-\quad By $1^{st}-$order, if $F$ is convex, then:
-$$F(y)\geq F(x) + \triangledown F(x)^T(y-x), \forall x,y\in \text{dom}\ F$$
+\quad By $1$-st order condition, if $F$ is convex, then we have
+$$F(y)\geq F(x) + \nabla F(x)^T(y-x), \forall x,y\in \text{dom}\ F$$
 
-What if $\triangledown F(x^*) = 0 \in \reals^n$ for some $x^*\in \text{dom}\ F$? We may have
-$$F(y)\geq F(x^*) + \triangledown F(x^*)^T(y-x^*)=F(x^*) $$
-So if you can find an $x^*\in \text{dom}\ F$ s.t. $\triangledown F(x^*) = 0$ then that is a global minimum.
+What if $\nabla F(x^*) = 0 \in \reals^n$ for some $x^*\in \text{dom}\ F$? In this case we may have
+$$F(y)\geq F(x^*) + \nabla F(x^*)^T(y-x^*)=F(x^*),\ \forall y\in \text{dom}\ F$$
+
+Therefore, if we can find an $x^*\in \text{dom}\ F$ such that $\nabla F(x^*) = 0$, then it is also a global minimum.
 
 %Above are notes for Nov 6
 
@@ -1204,7 +1250,7 @@ So if you can find an $x^*\in \text{dom}\ F$ s.t. $\triangledown F(x^*) = 0$ the
 
 %Below are notes for Nov 11
 
-\subsection{Local minima vs Gloal minima}
+\subsection{Local minima vs Global minima}
 
 \begin{marginfigure}
 	\centering
@@ -1214,15 +1260,15 @@ So if you can find an $x^*\in \text{dom}\ F$ s.t. $\triangledown F(x^*) = 0$ the
 \end{marginfigure}
 
 \begin{definition}
-	$x^*$ is a local minimum of $F$ if $\exists \epsilon >0\ s.t. \forall x$, where $|x - x^*| < \epsilon$, $F(x) \geq F(x^*)$
+	$x^*$ is a local minimum of $F$ if $\exists \epsilon >0$ such that for all $x$ satisfying $\Vert x - x^*\Vert < \epsilon$ we will have $F(x) \geq F(x^*)$.
 \end{definition}
 
 \begin{theorem}
 	Suppose $F$ is twice differentiable (not necessarily to be convex), then we have
 	
-	(1) If $x^*$ is a local optimum, then $\triangledown F(x^*) = 0$ and $\triangledown^2F(x^*)\geq 0$.
+	(1) If $x^*$ is a local optimum, then $\nabla F(x^*) = 0$ and $\nabla^2F(x^*)\geq 0$.
 	
-	(2) If $\triangledown F(x^*) = 0$ and $\triangledown^2F(x^*)> 0$, then $x^*$ is a local minimum. 
+	(2) If $\nabla F(x^*) = 0$ and $\nabla^2F(x^*)> 0$, then $x^*$ is a local minimum. 
 \end{theorem}
 
 %Consider:
@@ -1233,60 +1279,63 @@ So if you can find an $x^*\in \text{dom}\ F$ s.t. $\triangledown F(x^*) = 0$ the
 %&F''(x) = 6x \quad \text{at} \quad F''(0) = 0
 %\end{align*}
 
-(1) 
-\begin{proof}
+\begin{proof}[Proof of (1)]
 	Let $x^*$ be a local optimum, consider any $v$:
 	\begin{equation*}
-	lim_{t\rightarrow 0^+}\frac{F(x^* + tv) - F(x^*)}{t} = \triangledown F(x^*)^Tv\geq 0
+	lim_{t\rightarrow 0^+}\frac{F(x^* + tv) - F(x^*)}{t} = \nabla F(x^*)^Tv\geq 0
 	\end{equation*}
-	It's greater than $0$ since $x^*$ is local minimum.
+	It's non-negative since $x^*$ is local minimum.
 	
-	This implies that $\triangledown F(x^*) = 0$ because $v$ is arbitrary. 
+	This implies that $\nabla F(x^*) = 0$ because $v$ is arbitrary. 
 	
-	E.g. If $\triangledown F(x^*) \neq 0$, then take $V = -\triangledown F(x^*)$ and we would get a negative one unless $\triangledown F(x^*) = 0$
+	E.g. If $\nabla F(x^*) \neq 0$, then take $v = -\nabla F(x^*)$ and we would get a negative one unless $\nabla F(x^*) = 0.$
 	
 Consider the second derivative,
 \begin{align*}
-lim_{t\rightarrow 0^+}\frac{F(x^* + tv) - F(x^*)}{t^2} &= lim_{t\rightarrow 0^+} \frac{F(x^*) + \triangledown F(x^*)^T(tv) + \frac{1}{2}(tv)^T\triangledown F(x^*)(tv) + o(t^2) - F(x^*)}{t^2}\\
-&= lim_{t\rightarrow 0^+} \frac{1}{2}v^T\triangledown^2F(x^*)v+\frac{\sigma(t^2)}{t^2}\\
-&= \frac{1}{2}v^T\triangledown^2F(x^*)v \\
+lim_{t\rightarrow 0^+}\frac{F(x^* + tv) - F(x^*)}{t^2} &= lim_{t\rightarrow 0^+} \frac{F(x^*) + \nabla F(x^*)^T(tv) + \frac{1}{2}(tv)^T\nabla F(x^*)(tv) + o(t^2) - F(x^*)}{t^2}\\
+&= lim_{t\rightarrow 0^+} \frac{1}{2}v^T\nabla^2F(x^*)v+\frac{\sigma(t^2)}{t^2}\\
+&= \frac{1}{2}v^T\nabla^2F(x^*)v \\
 &\geq 0
 \end{align*}
 
-Since $v$ is arbitrary and by definition of PSD, $\triangledown^2 F(x^*) \geq 0$
+Since $v$ is arbitrary and by definition of PSD, the Hessian $\nabla^2 F(x^*) \geq 0$
 
 \end{proof}
-For twice differentiable functions, what we are told here is: $x^*$ is a local optimum $\Rightarrow$ $\triangledown F(x^*) = 0$ and $\triangledown^2F(x^*)\geq 0$.\\
+
+For twice differentiable functions, what we are told here is: 
+
+$x^*$ is a local optimum $\Rightarrow$ $\nabla F(x^*) = 0$ and $\nabla^2F(x^*)\geq 0$.
 
 Furthermore, if the function $F$ is convex, we may have
 
-$\Rightarrow$ $\triangledown^2F(x)\geq0, \forall x\in \text{dom}F$
+$\Rightarrow$ $\nabla^2F(x)\geq0, \forall x\in \text{dom}F$
 
-$\Rightarrow$ $\triangledown F(x^*) = 0$ $\Rightarrow$ $x^*$ is global optimum.
+$\Rightarrow$ $\nabla F(x^*) = 0$ $\Rightarrow$ $x^*$ is global optimum.
 
 Put together to say: If $F$ is convex, then the local optimum is also the global optimum.\\
 
 \vspace{0.3cm}
-(2)
-\begin{proof}
-	If $\triangledown F(x^*) = 0$ and $\triangledown^2 F(x^*) > 0$, then $x^*$ is local optimum.
+
+\begin{proof}[Proof of (2)]
+	If $\nabla F(x^*) = 0$ and $\nabla^2 F(x^*) > 0$, then $x^*$ is a local optimum.
 	
 	Again, use Taylor expansion: 
 	\begin{align*}
 	F(x) &= F(x^* + tv) \\
-	&= F(x^*) + \triangledown F(x^*)^T(tv) + \frac{1}{2}(tv)^T\triangledown^2F(x^*)(tv) + o(\Vert v \Vert^2)\\
-	&= F(x^*) + \frac{1}{2}t^2v^T\triangledown^2F(x^*)v + o(\Vert v \Vert^2)
+	&= F(x^*) + \nabla F(x^*)^T(tv) + \frac{1}{2}(tv)^T\nabla^2F(x^*)(tv) + o(\Vert v \Vert^2)\\
+	&= F(x^*) + \frac{1}{2}t^2v^T\nabla^2F(x^*)v + o(\Vert v \Vert^2)
 	\end{align*}
-	$\Rightarrow$ If $t$ is sufficiently small, the quadratic term \text{dom}inates the $o(\Vert tv \Vert^2)$ term.
 	
-	$\Rightarrow$ Any paint in neighborhood sufficiently small (meaning $t$ sufficiently small) has evaluation larger than $F(x^*)$.
+	$\Rightarrow$ If $t$ is sufficiently small, the quadratic term dominates the $o(\Vert v \Vert^2)$ term.
+	
+	$\Rightarrow$ Any point in neighborhood sufficiently small (meaning $t$ sufficiently small) has evaluation larger than $F(x^*)$.
 	
 	$\Rightarrow$ $x^*$ is local optimum. 
 \end{proof}
 
 \textbf{Remarks: }
 \begin{enumerate}
-	\item It is possible that there is no local or global optima.
+	\item It is possible that there is no local or global optimum.
 	
 	\begin{marginfigure}
 	\centering
@@ -1297,7 +1346,7 @@ Put together to say: If $F$ is convex, then the local optimum is also the global
 	
 	This graph is on $\inf\,\, F(x) = 0$ but there is no $x\in \text{dom}F = \reals$ achieves $F(x) = 0$.
 	
-	\item The above story is for unconstrained optimization problem.
+	\item The above story is for unconstrained optimization problem, since we consider the entire domain above.
 	
 	\begin{marginfigure}
 	\centering
@@ -1363,7 +1412,7 @@ F''(x) = h''(g(x))(g'(x))^2 + h'(g(x))g''(x) \geq 0
 
 Can extend to multiple dimensions.
 \begin{align*}
-&g:\reals^n\rightarrow \reals^k, h:\reals^k\rightarrow \reals\\
+&g_i:\reals^n\rightarrow \reals, h:\reals^k\rightarrow \reals\\
 F(x) &= h(g(x))\\
 &= h(g_1(x) g_2(x)...g_k(x)) \text{is convex}
 \end{align*}
@@ -1374,7 +1423,7 @@ $\cdot$ $g$ is convex and $h$ is convex and non-decreasing in each of its argume
 
 \begin{example}
 	
-	Consider $F(x) = \exp(g(x)) = h(g(x))$, where $g(x)$ is convex. 
+	The function $F(x) = \exp(g(x))$ is convex, where $g(x)$ is convex. 
 	
 	Apparently we could let $h(\cdot) = \exp(\cdot)$, and since it is convex and non-decreasing, $F(x)$ is convex. 
 \end{example}
@@ -1382,16 +1431,16 @@ $\cdot$ $g$ is convex and $h$ is convex and non-decreasing in each of its argume
 
 \begin{example}
 	
-	We say that, $F(x) = \frac{1}{g(x)}$ is convex if $g(x)$ is concave and positive, $\forall x$. 
+	The function $F(x) = \frac{1}{g(x)}$ is convex if $g(x)$ is concave and positive, $\forall x$. 
 	
-	$F(x) = h(g(x))$ where $h(x) = \frac{1}{x}$ and $\text{dom}\ h = \reals_{++}$, and thus $h$ is convex.
+	We let $F(x) = h(g(x))$, where $h(x) = \frac{1}{x}$. Since $\text{dom}\ h = \reals_{++}$, $h$ is convex.
 	
 	Note that $h$ is convex and $h(x) = \frac{1}{x}$ is non-increasing on $\reals_{++}$, so if $g(\cdot)$ is concave, then $F$ is a convex function.
 \end{example}
 
 
 \begin{example}
-	We say that, $F(x) = -\sum^k_{i=1}log(-F_i(x))$ is convex on $\{x\vert F_i(x)<0\ \forall i\in \{1,\cdots,k \}  \}$ if the $F_i$ are all convex.
+	The function $F(x) = -\sum^k_{i=1}log(-F_i(x))$ is convex on $\{x\vert F_i(x)<0\ \forall i\in \{1,\cdots,k \}  \}$ if all $F_i$ are convex.
 	
 	Consider the domain of this $F$, note that for each $F_i(x)<0\Leftrightarrow -F_i(x) >0$, so $\text{dom}\ F = \cap^k_{i=1}\{x\vert F_i(x) <0 \}$. It is the intersection of sublevel sets of convex functions, and therefore it is a convex set.
 		
