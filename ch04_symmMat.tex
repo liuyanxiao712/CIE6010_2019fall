@@ -1,15 +1,20 @@
 \section{Symmetric Matrices}
 %Lecture Sep 18
-The set of $n$ by $n$ square matrix is defined as
+\begin{definition}[Set of symmetric matrices]
+The set of $n$ by $n$ square matrices is defined as
 $$S^n = \{A\in \reals^{n\times n} | A = A^{\trans} \}$$
+\end{definition}
 
-\vspace{0.3cm}
-Following are a few examples of symmetric matrix
 
-Example 1: Hessian matrix: A matrix that each element is the 2nd order partial derivative of $F$
-$$[\nabla^2 F]_{ij} = \frac{\sigma}{\sigma x_i}\frac{\sigma}{\sigma x_j}F(x)$$
 
-Example 2: Quadratic Function: $q: \reals^n \rightarrow \reals$
+In the following, we give a few examples of symmetric matrices.
+
+\begin{example}[Hessian matrix]
+A Hessian matrix of a function $F:\reals^n\to \reals$ is a matrix that each element is the 2nd order partial derivative of $F$, i.e.,
+$$[\nabla^2 F]_{ij} = \frac{\partial^2 F(x)}{\partial x_i \partial x_j}$$
+\end{example}
+
+\begin{example}[Quadratic function] Let $q: \reals^n \rightarrow \reals$ be a quadratic function, that is,
 \begin{align*}
 q(x) &= \sum^n_{i=1}\sum^n_{j=1}a_{ij}x_ix_j + \sum^n_{i=1}c_ix_i + d\\
 &= x^{\trans}Ax + c^{\trans}x + d\\
@@ -19,8 +24,8 @@ q(x) &= \sum^n_{i=1}\sum^n_{j=1}a_{ij}x_ix_j + \sum^n_{i=1}c_ix_i + d\\
 x^{\trans}& 1
 \end{bmatrix}
 \begin{bmatrix}%
-A + A^{\trans} & C\\
-C^{\trans} & 2d
+A + A^{\trans} & c\\
+c^{\trans} & 2d
 \end{bmatrix}
 \begin{bmatrix}%
 x\\
@@ -28,39 +33,44 @@ x\\
 \end{bmatrix}
 \end{align*}
 
+The third equality is obtained by realizing that $A$ must be a symmetric matrix here, so $A + A^{\trans} = A + A=2A$.
 
-1) Let $F(x) = C^{\trans}x = \sum^n_{i=1}c_ix_i$:
+
+(1) Let
 \begin{align*}
-\frac{d}{dx_k}F(x) &= \frac{d}{dx_k}(\sum^n_{i=1}c_ix_i) = c_k\\
-\nabla F(x) &= 
+q_1(x) &= x^{\trans}Ax = \sum_{i=1}\sum_{j=1}a_{ij}x_ix_j\\
+&= a_{11}x_1^2 + a_{12}x_1x_2 + \cdots + a_{21}x_2x_1 +\cdots
+\end{align*}
+
+\begin{align*}
+\frac{d}{dx_k}q_1(x) &= \frac{d}{dx_k}\left(a_{kk}x_k^2 + \sum_{l\neq k}x_lx_k(a_{lk}+a_{kl})\right)\\
+&= (a_{kk} + a_{kk})x_k + \sum_{l\neq k}x_l(a_{lk} + a_{kl}) \\
+&= \sum^n_{i=1}(a_{lk} + a_{kl})x_l\\
+&= \sum^n_{i=1}\left([A]_{kl} + [A]_{lk}\right)x_l
+\end{align*}
+
+Hence,
+\begin{align*}
+\nabla q_1(x) &= (A + A^{\trans})x\\
+\left[\nabla^2 q_1(x)\right]_{kj} &= \frac{d}{dx_j}\left(\frac{d}{d x_k}q_1(x)\right)\\
+&= [A]_{kj} + [A]_{jk}\\
+\nabla^2 q_1(x) &= A + A^{\trans}
+\end{align*}
+
+(2) Let $q_2(x) = c^{\trans}x = \sum^n_{i=1}c_ix_i$,
+\begin{align*}
+\frac{d}{dx_k} q_2(x) &= \frac{d}{dx_k}\left(\sum^n_{i=1}c_ix_i\right) = c_k\\
+\nabla q_2(x) &= 
 \begin{bmatrix}%
-\frac{\sigma F(x)}{\sigma x_1}\\
+\frac{\partial q_2(x)}{\partial x_1}\\
 \vdots\\
-\frac{\sigma F(x)}{\sigma x_n}
+\frac{\partial q_2(x)}{\partial x_n}
 \end{bmatrix}=
 \begin{bmatrix}%
 c_1\\
 \vdots\\
 c_n
-\end{bmatrix} = C
-\end{align*}
-
-2) Let
-\begin{align*}
-F(x) &= x^{\trans}Ax = \sum_{i=1}\sum_{j=1}a_{ij}x_ix_j\\
-&= a_{11}x_1^2 + a_{12}x_1x_2 + \cdots + a_{21}x_2x_1 +\cdots\\
-\frac{d}{dx_k}F(x) &= \frac{d}{dx_k}(a_{kk}x_k^2 + \sum_{l\neq k}x_lx_k(a_{lk}+a_{kl}))\\
-&= (a_{kk} + a_{kk})x_k + \sum_{l\neq k}x_l(a_{lk} + a_{kl}) \\
-&= \sum^n_{i=1}(a_{lk} + a_{kl})x_l\\
-&= \sum^n_{i=1}([A]_{kl} + [A]_{lk})x_l
-\end{align*}
-
-Hence,
-\begin{align*}
-\nabla F(x) &= (A + A^{\trans})x\\
-[\nabla^2F(x)]_{kj} &= \frac{d}{dx_j}(\frac{d}{d x_k}F(x))\\
-&= [A]_{kj} + [A]_{jk}\\
-\nabla^2F(x) &= A + A^{\trans}
+\end{bmatrix} = c
 \end{align*}
 
 Combine (1) and (2), and because $q(x) = x^{\trans}Ax + c^{\trans}x + d$, we take Taylor approximation of $q(x)$ up to the second order:
@@ -69,11 +79,14 @@ Combine (1) and (2), and because $q(x) = x^{\trans}Ax + c^{\trans}x + d$, we tak
 &= d + c^{\trans}x + \frac{1}{2}x^{\trans}(A + A^{\trans})x
 \end{align*}
 
-\subsection{Symmetric Matrices and Eigenvectors}
+\end{example}
+
+
+\section{Symmetric Matrices and Eigenvectors}
 
 \begin{theorem}{4.18 \& 4.2 in textbook}
 	
-	For any matrix in $S^n = \{A\in \reals^{n\times n} | A = A^{\trans} \}$:
+	For any matrix in $S^n = \{A\in \reals^{n\times n} | A = A^{\trans} \}$, we have
 	
 	1) All eigenvalues are purely real(so eigenvectors can be picked purely real).
 	
@@ -86,8 +99,8 @@ Combine (1) and (2), and because $q(x) = x^{\trans}Ax + c^{\trans}x + d$, we tak
 
 Implication: We can pick the basis for each eigenspace to be an orthogonal basis(e.g, pick the eigenvectors of this symmetric matrix), because we have "full set" of eigenvectors($n$ linearly independent vectors) and we can always write:\\
 
-\textbf{Spectral Decomposition}:
 
+\begin{theorem} [Spectral Decomposition] For an $n$ by $n$ symmetric matrix $A$, we always have the following spectral decomposition
 \begin{align*}
 A &= U\Lambda U^{-1}\\
 &= U\Lambda U^{T}\\
@@ -105,18 +118,23 @@ u^{(1)^{\trans}}\\
 \vdots\\
 u^{(n)^{\trans}}
 \end{bmatrix}\\
-&= \sum^n_{i=1}\lambda_iU^{(i)}U^{(i)^{\trans}}
+&= \sum^n_{i=1}\lambda_iu^{(i)}u^{(i)^{\trans}}
 \end{align*}
 
-We summarize our results now: An $n$ by $n$ matrix $A$ is diagonalizable iff there are $n$ linearly independent eigenvectors(subject to scaling factors). Furthermore, if $A$ is diagonalizable, that is, $A = U\Lambda U^{-1}$, where $\Lambda$ is diagonal matrix with all its entries are the eigenvalues and $U$ is a collection of all its eigenvectors. 
+\end{theorem}
+To summarize, an $n$ by $n$ matrix $A$ is diagonalizable iff there are $n$ linearly independent eigenvectors(subject to scaling factors). Furthermore, if $A$ is diagonalizable, that is, $A = U\Lambda U^{-1}$, then $\Lambda$ is diagonal matrix with all its entries are the eigenvalues and $U$ is a collection of all its eigenvectors. 
 
-\subsection{Variational Characterization of eigenvalues of $\lambda_i$ where $A\in S^n$} 
 
-We arrange the eigenvalues in a decreasing order, i.e., 
+
+\section{Variational Characterization of eigenvalues of symmetric matrix} 
+
+Let's consider an $n$ by $n$ symmetric matrix $A$, we arrange the eigenvalues of $A$ in a decreasing order, i.e.,
 $$\lambda_{max}(A) = \lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_n =\lambda_{min}(A)$$
 
+\begin{definition}[Rayleigh quotient] Let $A=A^*$ be a $n$ by $n$ a self-joint matrix, the Rayleigh quotient is defined as 
+$$R(x)= \frac{x^{\trans}Ax}{x^{\trans}x}\quad  \forall x\neq 0$$
+\end{definition}
 
-We define the "Rayleigh quotient" as $\frac{x^{\trans}Ax}{x^{\trans}x}$ for $x\neq 0$, and we propose a theorem for this ratio as follows
 
 \begin{theorem}
 For $A\in S^n$, we have 
@@ -143,29 +161,28 @@ where $\bar{x}=U^{\trans}x$, and note that $\Vert \bar{x}\Vert = \Vert {x}\Vert$
 \end{proof}
 
 
-\subsection{Positive (Semi) Definite matrices (PD \& PSD)}
+\subsection{Positive (Semi) Definite matrices (PD and PSD)}
 
 \begin{definition}
-	A symmetric matrix $A\in S^n$ is PD (or PSD) if $x^{\trans}Ax > 0$, $\forall x\in \reals^n$(or $x^{\trans}Ax\geq 0$).
+
+	A symmetric matrix $A\in S^n$ is positive semi-definite definite(PSD) if $x^{\trans}Ax \geq 0$, $\forall x\in \reals^n$ and $x\neq 0$.
+
+	Furthermore, a symmetric matrix $A\in S^n$ is positive definite(PD) if $x^{\trans}Ax > 0$, $\forall x\in \reals^n$ and $x\neq 0$.
+
 \end{definition}
 
-Alternatively, we denote the set of PSD matrix and the set of PD matrix as
+Also, we usually denote the set of PSD matrix and the set of PD matrix as
+$$PSD: S^n_{+} = \{A\in S^n \vert A\succeq 0\}$$
+$$PD: S^n_{++} = \{A\in S^n \vert A\succ 0\}$$
 
-PSD: $S^n_{+} = \{A\in S^n \vert A\succeq 0\}$
+Note: The curled inequality symbol $\succeq$ (and its strict form $\succ$) is used to denote generalized inequality: between vectors, it represents component-wise inequality; between matrices, it represents matrix inequality. We will give an introduction regarding this in later chapter.
 
-PD: $S^n_{++} = \{A\in S^n \vert A\succ 0\}$
+\begin{theorem}[Necessary and sufficient conditions for PSD and PD]
 
-Note: The curled inequality symbol $\succeq$ (and its strict form $\succ$) is used to denote generalized inequality: between vectors, it represents component-wise inequality; between matrices, it represents matrix inequality.
-
-\vspace{0.3cm}
-Necessary and sufficient conditions:
-
-(1) A symmetric matrix is PSD iff all its eigenvalues $\geq 0$, or, all its \textbf{principal minors} are nonnegative.
+(1) A symmetric matrix is PSD iff all its eigenvalues $\geq 0$, or, all its \textbf{principal minors} are non-negative.
 
 (2) A symmetric matrix is PD iff all its eigenvalues $> 0$, or, all its \textbf{leading principal minors} are positive (Sylvester's criterion).
-
-\vspace{0.3cm}
-Now we prove the argument for PD:
+\end{theorem}
 
 \begin{proof}
 	First, assume $A\in S^n$ is PD, we will show that all $\lambda_i > 0$. 
@@ -175,39 +192,41 @@ Now we prove the argument for PD:
 	\end{equation*}
 	Since $A$ is PD and $x\neq 0$, and it is always diagonalizable for a symmetric matrix.
 	
-	To show this implies $\lambda_j \geq 0, \forall j\in [n]$, we set:
+	Since the choice of $x$ is arbitrary, to show this implies $\lambda_j > 0, \forall j\in [n]$, we set:
 	$$\bar{x} = e_j = 
 	\left[
 	\begin{matrix}
 	0\\
-	0\\
 	\vdots\\
+	0\\
 	1\\
 	0\\
+	\vdots\\
 	0\\
-	\vdots
 	\end{matrix}
 	\right]
 	$$
 	where only the $j$th entry is 1.
-	$$0 \leq U^{(i)^{\trans}} U\Lambda U^{\trans}U^{(1)} =e_j^{\trans}\Lambda e_j = \lambda_j$$
+	$$0 < U^{(j)^{\trans}} U\Lambda U^{\trans}U^{(j)} =e_j^{\trans}\Lambda e_j = \lambda_j$$
 	
 	And now we assume all eigenvalues are positive, and we want to show that $A$ is PD:
-	$$x^{\trans}Ax =x^{\trans}U\Lambda U^{\trans}x = \bar{x}^{\trans}\Lambda \bar{x} = \sum^n_{i=1}(\bar{x}_i)^2\lambda_i \geq 0$$
+	$$x^{\trans}Ax =x^{\trans}U\Lambda U^{\trans}x = \bar{x}^{\trans}\Lambda \bar{x} = \sum^n_{i=1}(\bar{x}_i)^2\lambda_i > 0$$
+	
+	The proof for PSD case is similar, simply replacing the strict inequalities with inequalities.
 \end{proof}
 
 
-Recall some previous results and note that:
+Recall some previous results and note that, for $A\in S^n$,
 
 (1) $\det(A) = \prod^n_{i=1}\lambda_i$
 
 (2) $\det(A) = 0$ iff there exist eigenvalue $\lambda_i = 0$:
 
 (3) Combine (1) and (2) and our proof above, we have
-\\ \qquad $\rightarrow$ PD matrices are invertible
-\\ \qquad $\rightarrow$ PSD matrices are invertible only if PD
 
+\qquad $\rightarrow$ PD matrices are invertible
 
+\qquad $\rightarrow$ PSD matrices are invertible only if they are also PD (i.e., no zero eigenvalues)
 
 
 
@@ -248,17 +267,14 @@ Let's look at the set $\xi$, clearly it is centered at $x = x^{(0)}$, and we fur
 
 
 \vspace{0.3cm}
-Example of where symmetric and PSD matrix are important:
+Following are some examples of where symmetric and PSD matrix are important.
 
-\textbf{Sample variance \& PSD matrices}
-
-Dataset $x^{(1)}, x^{(2)}, ..., x^{(m)}$ all $x^{(i)}\in \reals^n$\\
+\begin{example}[Sample variance and PSD matrices] Given the dataset $x^{(1)}, x^{(2)}, ..., x^{(m)}$ all $x^{(i)}\in \reals^n$, recall that
 
 Sample mean: $\mu = \frac{1}{m}\sum^m_{i=1}x^{(i)}$
 
 Sample covariance: $\Sigma = \frac{1}{m}\sum^m_{i=1}(x^{(i)}-\mu)(x^{(i)}-\mu)^{\trans}$, where $(x^{(i)}-\mu)(x^{(i)}-\mu)^{\trans}$ is the outer-product of centered data points.
 
-\vspace{0.3cm}
 Let's consider an example with $m=3$:
 
 $$x^{(1)} =
@@ -337,9 +353,9 @@ sample variance:
 \end{align*}
 
 Hence it is obviously non negative(so it is PSD) for any choice of $w$. The proof is completed.
+\end{example}
 
-
-\subsection{Square-root matrix and Cholesky decomposition}
+\section{Square-root matrix and Cholesky decomposition}
 
 From previous results(spectral decomposition), any PSD(and certainly for any PD) matrix can be written as
 \begin{align*}
@@ -349,14 +365,14 @@ A &= U\Lambda U^{\trans} \\
 \end{align*}
 where $\Lambda^{\frac{1}{2}}=
 \begin{bmatrix}%
-	\sqrt{\lambda_1}&\cdots&\cdots\\
-	\vdots&\ddots&\vdots\\
-	\cdots&\cdots&\sqrt{\lambda_n}
+	\sqrt{\lambda_1}& & \\
+	 &\ddots& \\
+	 & &\sqrt{\lambda_n}
 \end{bmatrix}$,
-and the third equality is obtained since $U^{\trans}U=I$ ($U$ is orthogonal and so $U^{-1}=U^{\trans}$).
+and the third equality is due to $U^{\trans}U=I$ ($U$ is orthogonal and so $U^{-1}=U^{\trans}$).
 
 
-The $A^{\frac{1}{2}} = U\Lambda^{\frac{1}{2}}U^{\trans}$ $\rightarrow$ is called the square root matrix of $A$, and furthermore, $A$ is PSD(PD) iff there exists a unique $A^{\frac{1}{2}}$ is a PSD(PD) matrix.
+The quantity $A^{\frac{1}{2}} = U\Lambda^{\frac{1}{2}}U^{\trans}$ is called the square root matrix of $A$, and furthermore, $A$ is PSD(PD) iff there exists a unique $A^{\frac{1}{2}}$ is a PSD(PD) matrix.
 
 Now, let's see how to obtain the Cholesky decomposition. We rewrite the matrix decomposition as
 \begin{align*}

@@ -6,121 +6,116 @@
 
 
 \section{Least Squares}
- 
+Consider the linear system
 \begin{equation*}
 Ax = y \qquad (*)
 \end{equation*}
-where $A\in \reals^{m\times n}$ is the coefficient data matrix (known), $y\in \reals^m$ are constraints(known) and $x\in \reals^n$ are parameters (need to choose).
+where $A\in \reals^{m\times n}$ is the coefficient data matrix (known), $y\in \reals^m$ are constraints(known) and $x\in \reals^n$ are unknown parameters that we need to figure out.
 
-There are three possibilities:
+There are three possibilities for the solution of this system:
 
-\begin{itemize}
-	\item a) No $x\in \reals^n$ satisfies ($*$)
+a) No $x\in \reals^n$ satisfies ($*$) 
 	
-	\item b) An unique $x\in \reals^n$ satisfies ($*$)
+b) An unique $x\in \reals^n$ satisfies ($*$) 
 	
-	\item c) Many $x\in \reals^n$ satisfies ($*$)
-\end{itemize}
+c) Many $x\in \reals^n$ satisfies ($*$) 
 
-(a) Existence:\\
+\vspace{0.3cm}
+Since $Ax\in R(A)$, a solution $x$ will exist if $y\in R(A)$.
 
-Since $Ax\in R(A)$, a solution will exist if $y\in R(A)$
+There is a simple test based on the ranks of augmented matrix and coefficient matrix:
 
-A simple test based on the ranks of augmented matrix and coefficient matrix:
+1) $\rank(A) = \rank\left([A\ y] \right)$: solution to ($*$) exists
 
-1) $rank(\begin{bmatrix}
-A&y
-\end{bmatrix}) = rank(A)$: solution to ($*$) exists
-
-2) $rank(\begin{bmatrix}
-A&y
-\end{bmatrix}) > rank(A)$: no solution to ($*$) exists\\
+2) $\rank(A) < \rank\left([A\ y] \right)$: no solution to ($*$) exists
 
 \vspace{0.4cm}
-If a solution exists, is it unique?
+Suppose there exist a solution, the next question is, is it unique?
 
-Assume a solution $\bar{x}$ exists s.t. $A\bar{x} = y$, any there may have other solution $x$ also satisfy $Ax = y$. 
-
-So 
+Assume a solution $\bar{x}$ exists such that $A\bar{x} = y$ (i.e., a particular solution), and there may have other solution $x$ also satisfy $Ax = y$. Therefore, we can write
 \begin{align*}
 Ax - A\bar{x} &= A(x -\bar{x}) = 0\\
 x - \bar{x} &\in N(A)
 \end{align*}
 
-Any solution to ($*$) can be expressed as:
+That is, any solution to ($*$) can be expressed as a sum of a particular solution plus a trival solution of, i.e.,
 \begin{equation*}
 x = \bar{x} + (x - \bar{x}) = \bar{x} + e
 \end{equation*}
-where $e\in N(A)$
+where $e\in N(A)$ (i.e., a solution to the homogeneous case $Ax = 0$).
 
-So if there are many solutions to ($*$), we will have a affine sets:
-
+So if there are many solutions to ($*$), we will have a affine sets given by
 \begin{equation*}
 \mathcal{A} = \{x|x = \bar{x} + N(A), A\bar{x} = y \}
 \end{equation*}
-The solution is unique if the elements of $N(A)$ are all zero. $\bar{x}$ is any particular solution for $A\bar{x} =y$
+
+Now, from this point of view, we could say that the solution $\bar{x}$ is unique if the elements of $N(A)$ are all zero(there is only a trival solution $e$ satisfy $Ax=0$, that is, $e$ is a zero vector), and $\bar{x}$ is any particular solution for $A\bar{x} =y$.
 
 \vspace{0.5cm}
-The three cases typically bread down into a question about dimensions of $A\in \reals^{m\times n}$
+The three case regarding the solution of a linear system typically bread down into a question about dimensions of $A\in \reals^{m\times n}$. The results are summarized as follows
 \begin{itemize}
-	\item 1) Overdetermined LS: more constraints than parameters $m>n$. Typically a solution does not exist. 
+	\item 1) Overdetermined linear system: $m>n$, more constraints than unknown parameters. Typically a solution does not exist (holds when $m$ equations are linearly independent).
 	
-	\item 2) Square: Equal \# constraints \& parameters, typically $\exists$ a unique solution.
+	\item 2) Square: $m=n$, equal number of constraints and parameters, and typically there exists a unique solution.
 	
-	\item 3) Underdetermined LS: Fewer constraints than parameters, $m<n$, typically many solutions
+	\item 3) Underdetermined linear system: $m<n$, fewer constraints than parameters, and typically many solutions exists.
 \end{itemize}
 
-1) Overdetermined: $m > n$
+\vspace{0.3cm}
+\subsection{Overdetermined linear system : $m > n$ }
 
-Assume $A$ is full (column) rank, $rank(A) =n$. $A$ is a tall and thin matrix. $dim(R(A)) = n < m$. $y\in \reals^m$.\\
 
-We want to find $x^*$ such that $Ax^*$ is the 'closest' to $y$:
-\begin{align*}
-x^* &= \arg \min_{x\in \reals^n}\Vert Ax - y\Vert_2\\
-\min_{x\in \reals^{n}}||Ax - y\Vert_2 &= \min_{\hat{y}\in R(A)}\Vert \hat{y} - y\Vert_2 =\prod_{R(A)}(y)\\
-\end{align*}
+Assume $A$ is full column rank(i.e., full rank), $\rank(A) =n$. Therefore, $A$ is a tall and thin matrix, and $\dim(R(A)) = n < m$.
 
-\begin{figure}
+Suppose we have $m$ independent equations with $m>n$, and in this case there is no exact solution to $(*)$ (in fact this conclusion holds if there are at least $n+1$ equations are independent). This case is very commonly meet in reality, and thus we want to find a $x^*$ such that $Ax^*$ is the 'closest' to $y$, that is, to solve the following optimization problem
+$$x^* = \arg \min_{x\in \reals^n}\Vert Ax - y\Vert_2$$
+
+Note that $Ax \in R(A)$, and from the perspective of projection, we could rewrite the problem as
+$$\min_{x\in \reals^{n}}||Ax - y\Vert_2 = \min_{\hat{y}\in R(A)}\Vert \hat{y} - y\Vert_2 =\prod_{R(A)}(y)$$
+and this problem becomes find a projection of $y$ in the column space of $A$.
+
+\begin{marginfigure}
 	\centering
 	\includegraphics[width=2.1in,height=2.1in]{figures/ch06/figure1.png}
 	%\caption{This is an inserted JPG graphic} 
 	%\label{fig:graph} 
-\end{figure}
+\end{marginfigure}
 
-From chapter2, 
-
+From chapter2, we know that the projection of $y$, $\hat{y}^*$, can be expressed as
 \begin{equation*}
-y^* = \sum^n_{i=1}x_i^*a^{(i)}
+\hat{y}^* = Ax^*= \sum^n_{i=1}x_i^*a^{(i)}
 \end{equation*}
 where 
-$$ A =   
+$A =   
 \left[
 \begin{matrix}
 a^{(1)} & \cdots & a^{(n)}
 \end{matrix}
 \right]
-$$
+$.
 
-Solve for $x^*$ via
+Recall what we have done before, we could solve for $x^*$ via a bunch of equations(i.e., solve for each $x_i^*$),
 \begin{equation*}
-\sum^n_{i=1}x_i^*\langle a^{(k)}, a^{(i)}\rangle = \langle a^{(k)}, y\rangle, \quad \forall k \in \{1,2,...,m \}
+\sum^n_{i=1}x_i^*\langle a^{(k)}, a^{(i)}\rangle = \langle a^{(k)}, y\rangle, \quad \forall k= 1,2,\cdots,m
 \end{equation*}
 
-Stack up to get 
+For convenience, we could stack up to get what we called the normal equation:
 \begin{equation*}
 A^{\trans}Ax^* = A^{\trans}y
 \end{equation*}
 
-There are 2 possibilities: (1)$A^{\trans}A$ is invertible; (2) $A^{\trans}A$ is not invertible.
+There are 2 possibilities: 
 
-1) When $A^{\trans}A$ is invertible
+(a) $A^{\trans}A$ is invertible (this holds when $A$ has full column rank, which we have assumed in the beginning):
 \begin{align*}
 x^* &= (A^{\trans}A)^{-1}A^{\trans}y\\
 \hat{y}^* &= A(A^{\trans}A)^{-1}A^{\trans}y
 \end{align*}
 
-2) When $A^{\trans}A$ is not invertible
-We apply SVD to $A^{\trans} A$
+
+(b) $A^{\trans}A$ is not invertible (if we do not assume that $A$ has full column rank):
+
+We apply SVD to $A^{\trans}$ and  $A$:
 \begin{align*}
 \hat{y}^* &= A(A^{\trans}A)^{-1}A^{\trans}y\\
 &= A(V
@@ -185,47 +180,46 @@ I_r& \textbf{0}\\
 \end{align*}
 
 
+\subsection{Uniquely determined: $m =n$}
+Given the linear system with $m=n$
+$$Ax = y$$
 
-b) Uniquely determined: ($m =n$)
-\begin{equation*}
-[A]x = y
-\end{equation*}
-So,
-\begin{equation*}
-x^* = A^{-1}y
-\end{equation*}
+The solution is given by
+$$x^* = A^{-1}y$$
 
-\begin{itemize}
-	\item $A$ has full rank (columns \& rows).
+Note that:
+
+(a) There are equal number of constraints and parameters in this case.
+
+(b) We assume that $A$ has full rank (both columns and rows).
 	
-	\item Equal number of constraints and parameters.
+(c) Since $A$ is a square matrix with full rank, $A^{-1}$ exists.
+
+
+
+\subsection{Underdetermined linear system: $m<n$ }
+
+Note that
+
+	(a) Since $m<n$, $A$ is a wide and short matrix.
 	
-	\item $A$ is square matrix with full rank so $A^{-1}$ exists.
-\end{itemize}
-
-c) Underdetermined($m<n$)
-
-\begin{itemize}
-	\item $A$ has full row-rank.
+	(b) In this case, there are more parameters than constraints.
 	
-	\item $\rank(A) = m$.
-	 
-	\item $A$ is a wide and short matrix.
+	(c) We assume that $A$ has full row rank, so $\rank(A) = m$
 	
-	\item More parameters than constraints.
-	
-	\item Hence there are many solutions.
-\end{itemize}
+	(d) Hence, there are many solutions.
 
-Idea: pick solution $x$ that satisfies($*$) with the shortest length in the sense of $L_2$ norm
+\vspace{0.3cm}
 
-\begin{equation*}
-x^* = \arg  \min_{Ax = y, x\in \reals^n}\Vert x\Vert _2
-\end{equation*}
+Since in this case, there are many solutions satisfy the linear equation $Ax=y$, then the idea to pick the optimal one is, we choose a solution $x$  with the shortest length in the sense of $L_2$ norm, that is, solve the following optimization problem
+$$x^* = \arg  \min_{Ax = y, x\in \reals^n}\Vert x\Vert _2$$
 
+Alternatively, we can rephrase the problem from the perspective of projection
 \begin{equation*}
 \min_{Ax = y, x\in \reals^n}\Vert x\Vert  = \min_{x\in \reals^n, x\in \mathcal{A}}\Vert x - 0\Vert  = \prod_{\mathcal{A}}(0)
 \end{equation*}
+since the set $\{x | Ax= y \}$ is an affine space. Therefore, the problem becomes finding the projection of origin from the affine space $\mathcal{A}$.
+
 
 
 \begin{figure}
@@ -241,18 +235,20 @@ e &= x^* - 0 = x^* \perp N(A)\\
 x^* &\in N(A)^{\perp} = R(A^{\trans})
 \end{align*}
 
-So we can write $x^* = A^{\trans}\alpha$ for some $\alpha \in \reals^m$. 
-For $x^*$ to be in $\mathcal{A}$ it must be satisfies that $Ax^* = y$
-
-Substituting in we get 
+So we can write $x^* = A^{\trans}\alpha$ for some $\alpha \in \reals^m$. For $x^*$ to be in $\mathcal{A}$ it must satisfy that $Ax^* = y$, substituting in we get 
 \begin{equation*}
-y = Ax^* = AA^{\trans}\alpha
+Ax^* = y= AA^{\trans}\alpha
 \end{equation*}
 
-By assumption, $A$ is full row rank so $AA^{\trans}$ is invertible.
+By assumption, $A$ is full row rank so $AA^{\trans}$ is invertible, so 
+$$\alpha = (AA^{\trans})^{-1}y$$
+
+and the optimal solution is given by
 $$x^* = A^{\trans} \alpha = A^{\trans}(AA^{\trans})^{-1}y$$
 
-Furthermore, we apply SVD to $AA^{\trans}$,
+In addition, $A^{+} =A^{\trans}(AA^{\trans})^{-1}$ is  what we called the Moore–Penrose pseudo inverse of $A$ (and it is also the right inverse of $A$ provided $A$ has full row rank).
+
+Furthermore, we apply SVD to $A$ and $A^{\trans}$,
 \begin{align*}
 x^* &= A^{\trans}(AA^{\trans})^{-1}y\\
 &= A^{\trans}\left[\mathcal{U}
@@ -286,7 +282,7 @@ V^{\trans}V
 \end{bmatrix}
 \begin{bmatrix}
 \langle u^{(1)}, y\rangle\\
-...\\
+\vdots\\
 \langle u^{(n)}, y\rangle
 \end{bmatrix}\\
 &= \sum^r_{i=1}\frac{1}{\sigma_i}\langle u^{(i)}, y\rangle v^{(i)}
@@ -295,27 +291,10 @@ V^{\trans}V
 
 
 
-%last time
 
-%solving linear system of equations Ax=y
-
-%1. over determined
-%
-%$A^{\trans}Ax=A^{\trans}y$
-
-
-%2. under determined m<n
-
-%$X^* \in R(A^{\trans})  $ 
-
-%3. invertible
-
-
-
-
-
-\textbf{Interpretation of $x^*= \arg \min_x \Vert y-Ax\Vert_2$}:
 \vspace{0.3cm}
+\subsection{Interpretation of $x^*= \arg \min_x \Vert y-Ax\Vert_2$}
+
 
 \quad\ (1). Approximated solution to $y=Ax$
 
@@ -332,19 +311,19 @@ $y^*=Ax^*$ is the 'best' approximated solution in the sense of $L_2$ norm, which
 
 (3). Perturb both $y$ and $A$ to get 'feasibility'
 
-'Total least square'
-$$\min_{\delta y,  \delta A} \Vert \begin{bmatrix}
-\delta A & \delta y
-\end{bmatrix} \Vert_F$$
+"Total least square"
 
-where $\delta A$ is $m$ by $n$ matrix and thus $\begin{bmatrix}
-\delta A & \delta y
-\end{bmatrix}$ is $m$ by $n+1$, $y+\delta y\in R(A+\delta A)$.
+Suppose there are only pertubation for $y$ but also pertubation of $A$, formally we want to solve the following optimization problem
+\begin{align*}
+\min_{\delta y,  \delta A} & \left\Vert [\delta A\ \delta y] \right\Vert_F \\
+s.t.\quad& y +\delta y = (A + \delta A) x
+\end{align*}
+where $\delta A\in \reals^{m\times n}$, $\delta y \in\reals^m$,  and also $[\delta A\ \delta y]$ is a $m$ by $n+1$ matrix, $y+\delta y\in R(A+\delta A)$. To solve this problem, we may utilize SVD.
 
 
 (4). Linear regression
 $$\Vert y-Ax\Vert ^2_2 = \sum_{i=1}^{m} ( y_i - \langle a^{(i)} , x\rangle )^2 = \sum_{i=1}^{m} r_i^2$$
-where $r_i$ defined as the residual.
+where $r_i$ defined as the residual, and thus the standard least square problem can also be interpreted as a problem of minimizing the sum of square of residuals.
 
 \begin{figure}
 	\centering
@@ -354,14 +333,11 @@ where $r_i$ defined as the residual.
 \end{figure}
 
 
-
-\vspace{0.5cm}
-Example
+\begin{example}
 
 Let's consider fitting a line to $\{(0,6),(1,0),(2,0) \}={(a_i,y_i)}.$
 
-The approximation takes the form of $y=x_1+ax_2$, and we want to choose a vector x to minimize $\sum_{i=1}[y_i-(x_1+a_ix_2)]^2 = \sum_{i=1} r_i^2$,
-
+The approximation takes the form of $y=x_1+ax_2$, and we want to choose a vector $x$ to minimize $\sum_{i=1}[y_i-(x_1+a_ix_2)]^2 = \sum_{i=1} r_i^2$, that is, we want to minimize the following
 \begin{align*}
 \Vert y- Ax\Vert_2^2 
 &=
@@ -386,35 +362,43 @@ x_2
 &=6
 \end{align*}
 
-Solve for $x^*$, we have
+To solve for $x^*$, we have
 $x^*=(A^{\trans}A)^{-1}A^{\trans}y=[5 , -3]^{\trans}$
 
 Thus, the equation for this line is
-$$\hat{y}=x_1^*+ax_2^*=5-3a$$            %so x1 and x2 are parameters
+$$\hat{y}^*=x_1^*+ax_2^*=5-3a$$            %so x1 and x2 are parameters
+
+This example also illustrates that, if we would like to add an intercept term in the linear model, we could just let the first column of $A$ be an vector will all entries are $1$.
+\end{example}
 
 
+\section{Variants of least square}
 
-
-\subsection{Variants of least square}
-
+\subsection{Weighted least square}
 In the previous classical least square method, we do not consider the weights for each square of the residual(i.e., all of them are equally weighted), however, some residuals might be more important than the others. A very natural approach is to assign different weights to different $r_i^2$.
 
-\vspace{0.3cm}
-Weighted least square:
+Formally, we formulate the optimization problem as
 \begin{align*}
 \min \sum_{i=1}^{n} w_i^2 r_i^2
 &=\Vert W (y-Ax)\Vert ^2_2\\
 &=\Vert Wy-WAx)\Vert ^2_2\\
 &=\Vert \bar{y}-\bar{A}x \Vert ^2_2
 \end{align*}
+where $W=\diag(w_1, w_2, \cdots, w_m)$ and each $w_i\geq 0$, $\bar{y} \triangleq Wy$ and $\bar{A} \triangleq WA$. 
 
-where $W=\diag(w_1, w_2, \cdots, w_m)$ and each $w_i\geq 0$, $\bar{y} \triangleq Wy$ and $\bar{A} \triangleq WA$. From the last two equities, we may find that this is very similar with the classic one but now we need to solve for $x$ in a transformed coordinate system.
+From the last two equities, we may find that this is very similar with the classic one but now we need to solve for $x$ in a transformed coordinate system.
 
-In fact, we can use a more general transform with PSD:
+To solve for $x^*$, we analogy to the solution of standard least square, and we have the normal equation
+$$\bar{A}^{\trans} \bar{A} x=\bar{A}^{\trans} \bar{y}$$
+so the solution is given by
+$$x^*=(A^{\trans} W^{\trans} W A)^{-1} A^{\trans} W^{\trans} W y$$
+
+
+In fact, if $W$ is positive definite(and thus $W^T W$ is positive definite), we can use a more general transform with PD, 
 $$\Vert W (y-Ax)\Vert ^2_2 = (y-Ax)^{\trans}W^{\trans}W(y-Ax)=r^{\trans}W^{\trans}Wr$$
-Note that $r$ is the residual in the original coordinate system. Solve for $x^*$, we have 
-$$x^*=(A^{\trans} W W^{\trans} A)^{-1} A^{\trans} W W^{\trans} y$$
+where $r$ is the residual in the original coordinate system, and we recognize that this objective is indeed an ellipsoid.
 
+\newpage
 \vspace{0.3cm}
 Standard LS
 \begin{figure}
@@ -446,27 +430,29 @@ Weighted LS with $W$ is PSD (rotation)
 
 \subsection{$L_2$- regularization least square}
 
-
-In the original least square, 
-$$x^*=\arg_{x\in\reals_{n}} \min \Vert y-Ax\Vert ^2_2$$
-
-we do not have preference for any specific $x$ over any other, and often $x$ is a vector of resources consumed.
+In the standard least square, we do not have preference for any specific $x$ over any other, and often $x$ is a vector of resources consumed.
 
 
-Regularized least square
+The $L_2$ regularized least square problem is formulated as
 $$x^*=\arg_{x\in\reals_{n}} \min \Vert y-Ax\Vert ^2_2 + \gamma \Vert x\Vert ^2_2$$
-where $\gamma$ is a non negative scalar(so if $\gamma = 0$ we retrieve the original LS)
+where $\gamma\geq 0$ is a scalar (so if $\gamma = 0$ we retrieve the standard LS), and the term $\gamma \Vert x\Vert ^2_2$ is called the regularization or penalty term.
 
 
-To solve regularized least square, first note that if we have
-$$u\in\reals^{n}, v\in\reals^{m}$$
+To solve regularized least square, we first recall a basic result regarding the $L_2$ norm, for any vectors $a$ and $b$, we have
+$$\left\Vert 
+\begin{bmatrix}
+a\\
+b
+\end{bmatrix}
+\right\Vert_2^2
+=\Vert a \Vert_2^2 + \Vert b \Vert_2^2$$
 
-We can define 
+With this useful result(can be proved easily by utilizing the definition of $L_2$ norm), we could rewrite the objective function by first define
 $$
 \bar{A}=
 \begin{bmatrix}
 A\\
-\gamma I
+\sqrt{\gamma} I_n
 \end{bmatrix}
 ,
 \bar{y}=
@@ -475,35 +461,37 @@ y\\
 0_n
 \end{bmatrix}
 $$
-
-
+and therefore the objective can be written as
 $$\Vert Ax - y\Vert ^2_2 + \gamma \Vert x\Vert ^2_2=\Vert \bar{A}x-\bar{y}\Vert^2_2$$
 
-$$x^*=(\bar{A}^{\trans} A)^{-1} \bar{A}^{\trans} \bar{y}=(A^{\trans} A+\gamma I)^{-1} A^{\trans} y$$
+Similar with the standard least square, we can solve for $x^*$ by the following
+$$x^*=(\bar{A}^{\trans} \bar{A})^{-1} \bar{A}^{\trans} \bar{y}=(A^{\trans} A+\gamma I)^{-1} A^{\trans} y$$
 
-
-\vspace{0.5cm}
-'Tikhanov' regularization (also known as ridge regression)
-$$\min_x \Vert W_1 (Ax - y)\Vert^2_2 - \Vert W_2 (x - x^{(0)})\Vert^2_2 = \min_x \Vert \bar{A}x-\bar{y}\Vert^2_2 $$
-where $\bar{A} = 
+\subsection{Tikhonov regularization(ridge regression)}
+A more general format for regularized LS allows for the introduction of weighting matrices on the
+output matching residuals and on the deviation of the input term from a nominal value, resulting in the following generalize regularized problem,
+$$\min_x \Vert W_1 (Ax - y)\Vert^2_2 + \Vert W_2 (x - x^{(0)})\Vert^2_2 = \min_x \Vert \bar{A}x-\bar{y}\Vert^2_2 $$
+where $\bar{A} := 
 \begin{bmatrix}
 W_1 A\\
 W_2
 \end{bmatrix}
 ,
-\bar{y} = 
+\bar{y} := 
 \begin{bmatrix}
 	W_1 y\\
 	W_2 x^{(0)}
 \end{bmatrix}
 $
-, and $W_1$ and $W_2$ are PSD.
+, and $W_1$ and $W_2$ are PD.
 
+Clearly, this is a special case of our previous $L_2$ regularization, with $W_1 = I_m$, $W_2 = \sqrt{\gamma} I_n$, $x^{(0)}= 0_n$.
 
-\vspace{0.8cm}
-Visualize regularized LS: $\min \Vert Ax-y\Vert_2^2 +\gamma \Vert x\Vert^2_2$
+\subsection{Visulaize regularized least square}
+Consider the regularized least square problem: 
+$$\min \Vert Ax-y\Vert_2^2 +\gamma \Vert x\Vert^2_2$$
 
-Recall our previous example, 
+and recall our previous example, 
 $$x^*= \arg_{x\in \reals^n} \min =
 \left\Vert
 \begin{bmatrix}
@@ -528,7 +516,7 @@ x_2
 -3
 \end{bmatrix}
 $$
-and $\Vert Ax^*-y\Vert_2^2 = 6$.
+and we have obtained that $\Vert Ax^*-y\Vert_2^2 = 6$.
 
 
 \begin{figure}
@@ -591,16 +579,14 @@ $$
 x^* = \arg \min_{x\in \reals^n}\Vert y-Ax\Vert_2^2 \qquad (*)
 \end{equation*}
 
-	(1) Standard LS variant in ($*$) weights all elements of error vector equally.(weighted LS)
+	(1) Standard LS variant in ($*$) weights all elements of error vector equally (variant: weighted LS).
 	
-	(2) Standard LS measures error along standard coordinate system.(change coordinate system)
+	(2) Standard LS measures error along standard coordinate system (change coordinate system).
 	
-	(3) Standard LS ignores that certain elements of $x$ may "cost" more than others.(regularization)
+	(3) Standard LS ignores that certain elements of $x$ may "cost" more than others (variant: regularization).
 
-\subsection{"Tikhanov regularization"}
-$$x^* =\arg\min_{x\in \reals^n}\Vert w_1(y-Ax)\Vert_2^2 + \Vert w_2(x - x^{(0)})\Vert_2^2$$
-
-We do a simple example:
+\subsection{More on "Tikhanov regularization"}
+We do a simple example here, as a special case of "Tikhanov regularization, 
 \begin{equation*}
 x^* = \arg\min_{x\in \reals^n}\Vert y-Ax\Vert_2^2 + \gamma\Vert x\Vert_2^2
 \end{equation*}
@@ -612,18 +598,21 @@ x^* = \arg\min_{x\in \reals^n}\Vert y-Ax\Vert_2^2 + \gamma\Vert x\Vert_2^2
 	%\label{fig:graph} 
 \end{marginfigure}
 
-Look at form of optional solution to 
+Look at the form of optimal solution 
 \begin{align*}
-x^* &= \arg\min_{x\in \reals^n}\Vert y-Ax\Vert_2^2 + \gamma\Vert x\Vert^2_2\\
+x^* 
+&= \arg\min_{x\in \reals^n}\Vert y-Ax\Vert_2^2 + \gamma\Vert x\Vert^2_2\\
 &= (A^{\trans}A + \gamma I)^{-1}A^{\trans}y\\
-\hat{y}&= Ax^* = A(A^{\trans}A + \gamma I)^{-1}A^{\trans}y\\
+\hat{y}^*&= Ax^* = A(A^{\trans}A + \gamma I)^{-1}A^{\trans}y\\
 \end{align*}
-Apply SVD to A,
+
+We apply SVD to $A$,
 $$A = \mathcal{U}\tilde{\Sigma}V^{\trans}$$
 
-First thing is to analyze $(A^{\trans}A + \gamma I)^{-1}$:
+And utilize this to analyze $(A^{\trans}A + \gamma I)^{-1}$:
 \begin{align*}
-(A^{\trans}A + \gamma I)^{-1} &= (V\tilde{\Sigma}^{\trans}\mathcal{U}^{\trans}\mathcal{U}\tilde{\Sigma}V^{\trans} + \gamma I)^{-1}\\
+(A^{\trans}A + \gamma I)^{-1} 
+&= (V\tilde{\Sigma}^{\trans}\mathcal{U}^{\trans}\mathcal{U}\tilde{\Sigma}V^{\trans} + \gamma I)^{-1}\\
 &= (V
 \begin{bmatrix}
 \Sigma^{\trans} & 0\\
@@ -651,7 +640,7 @@ V^{\trans} + \gamma VV^{\trans}
 \left[
 \begin{array}{c|c}
 \Sigma^2+\gamma I_r&  \\ \hline 
-& I_{n-r}
+& \gamma I_{n-r}
 \end{array}
 \right]
 V^{\trans}\\
@@ -660,7 +649,7 @@ V
 \left[
 \begin{array}{c|c}
 (\Sigma^2+\gamma I_r)^{-1}&  \\ \hline 
-& (I_{n-r})^{-1}
+& ( \gamma I_{n-r})^{-1}
 \end{array}
 \right]
 V^{\trans}\\
@@ -722,7 +711,7 @@ y^* &= Ax^* = A(A^{\trans}A + \gamma I)^{-1}A^{\trans}y\\
 \end{matrix}
 \end{array}
 \right]
-V^{\trans}\right)V\tilde{\Sigma}\mathcal{U}^{\trans}y\\
+V^{\trans}\right)V\tilde{\Sigma}^{\trans}\mathcal{U}^{\trans}y\\
 &= \mathcal{U}
 \begin{bmatrix}
 \Sigma & 0\\
